@@ -1,0 +1,19 @@
+{
+  "name": "2021-eusociality",
+  "version": "1.0.0",
+  "description": "Theme site for LG 2021",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lunar-gala/2021-eusociality.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lunar-gala/2021-eusociality/issues"
+  },
+  "homepage": "https://github.com/lunar-gala/2021-eusociality#readme"
+}
