@@ -8,6 +8,9 @@ Theme site for LG 2021.
 
 ## Setup
 
+You will need [Node](https://nodejs.org/en/), along with `npm`, which comes
+installed with it, so please install these before continuing.
+
 After cloning this repo, first install the necessary packages (will take a while)
 
 ```sh
