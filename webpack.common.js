@@ -12,7 +12,8 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: './public/robots.txt' }
+        { from: './public/robots.txt' },
+        { from: './public/CNAME' }
       ]
     })
   ],
