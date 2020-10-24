@@ -2,9 +2,14 @@
 
 Theme site for LG 2021.
 
+- [Design](#design)
 - [Setup](#setup)
 - [Deploying](#deploying)
 - [Best Practices](#best-practices)
+
+## Design
+
+- [Figma (Web Exploration)](https://www.figma.com/file/IYJ6IpSwQ1Qn5WIsuWFIAc/Web-Team-Exploration?node-id=37%3A2)
 
 ## Setup
 
