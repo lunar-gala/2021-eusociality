@@ -1,0 +1,16 @@
+/**
+ * Landing page navbar
+ */
+
+.navbar {
+  width: 1039px;
+  display: flex;
+  flex-direction: row;
+  border: 1px white solid;
+  justify-content: space-around;
+  padding: 12px 0 12px 0;
+
+  // Put this navbar at the bottom
+  position: fixed;
+  bottom: 48px;
+}

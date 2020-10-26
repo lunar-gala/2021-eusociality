@@ -1,3 +1,22 @@
 /**
- * Styles for index
+ * Styles for the main site
  */
+
+body {
+  margin: 0;
+  color: white;
+  background-color: black;
+}
+
+.landing-page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-theme {
+  font-size: 48px;
+}
