@@ -1,6 +1,12 @@
 import React from 'react';
 import * as CONSTANTS from '../constants';
 
+function create_navbar_item (name) {
+  return <div className='navbar-item'>
+    {name}
+  </div>;
+}
+
 /**
  * Navbar for selecting lines
  */
