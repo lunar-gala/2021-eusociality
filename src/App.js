@@ -1,8 +1,11 @@
 import React from 'react';
+import LandingPageModel from './components/LandingPageModel';
 
 class App extends React.Component {
   render () {
-    return <div>Lunar Gala</div>;
+    return <div>
+      <LandingPageModel />
+    </div>;
   }
 }
 
