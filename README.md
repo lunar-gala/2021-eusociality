@@ -40,6 +40,19 @@ Our live site will be hosted on the `gh-pages` branch, to separate the developme
 npm run deploy
 ```
 
+## Repo Organization
+
+- `assets/`: any sort of binary should go here, images, fonts, 3d models
+- `public/`: any file we want copied to our final webpage
+- `src/`: all of the code lives here
+  - `components/`: js components used by the page
+  - `styles/`: where all the css (we are using SASS) lives
+  - `App.js`: the main js entrypoint (besides `index.js`)
+  - `constants.js`: constants for the project
+  - `index.js`: don't touch this unless you have a good reason to
+- `.babelrc`: transpiling definitions
+- `.eslintrc`: styling definitions
+
 ## Best Practices
 
 - `git` is **not** a drive and doesn't perform well with big files, so if
