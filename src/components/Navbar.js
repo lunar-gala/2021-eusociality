@@ -1,7 +1,6 @@
 import React from 'react';
 import * as CONSTANTS from '../constants';
 
-
 /**
  * Navbar for selecting lines
  */
