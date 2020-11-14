@@ -7,7 +7,7 @@ import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import cube_frag from '../../assets/models/cube_frag/cube_frag.obj';
+import cube_frag from '../../assets/models/cube_frag/cube_frag_compressed.obj';
 import cube_frag_skin from '../../assets/models/cube_frag/cube_frag.mtl';
 // import cube_frag from '../../assets/models/fractured_cube/fracturedCube.obj';
 // import cube_frag_skin from '../../assets/models/fractured_cube/fracturedCube.mtl';
