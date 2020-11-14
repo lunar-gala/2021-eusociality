@@ -5,6 +5,7 @@ Theme site for LG 2021.
 - [Design](#design)
 - [Setup](#setup)
 - [Deploying](#deploying)
+- [Organization](#repo-organization)
 - [Best Practices](#best-practices)
 
 ## Design
