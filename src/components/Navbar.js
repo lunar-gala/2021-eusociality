@@ -5,26 +5,51 @@ import * as CONSTANTS from '../constants';
  * Navbar for selecting lines
  */
 class Navbar extends React.Component {
-  render () {
-    return <div className='navbar'>
-      {
-        CONSTANTS.LINE_NAMES.map( item => create_navbar_item(item.toUpperCase()) )
-      }
-    </div>;
-  }
-}
+	constructor(props) {
+		super(props);
+		this.state = { curSelected: null };
+		this.handler = this.handler.bind(this);
+	}
 
+	handler(index) {
+		this.setState({
+			curSelected: index,
+		});
+	}
+
+	render() {
+		const items = [];
+
+		for (const [index, name] of CONSTANTS.LINE_NAMES.entries()) {
+			console.log(index);
+			items.push(<NavItem name={name} handler={this.handler} index={index} selected={this.state.curSelected} />);
+		}
+
+		return <div className="navbar">{items}</div>;
+	}
+}
 /**
  * This is the circle for each line.
  *
  * When the user hovers over a circle, the line name should appear
- *
- * @param {string} name Name of the line
  */
-function create_navbar_item (name) {
-  return <div className='navbar-item' key={name}>
-    item
-  </div>;
+class NavItem extends React.Component {
+	render() {
+		var circleClass = 'nav-circle';
+		if (this.props.selected == this.props.index) {
+			circleClass += '-selected';
+		}
+		return (
+			<div className="navbar-item" key={this.props.name}>
+				<div
+					class={circleClass}
+					onMouseEnter={() => {
+						this.props.handler(this.props.index);
+					}}
+				></div>
+			</div>
+		);
+	}
 }
 
 export default Navbar;

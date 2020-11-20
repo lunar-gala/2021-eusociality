@@ -12,4 +12,23 @@
   // Put this navbar at the bottom
   position: fixed;
   bottom: 141px;
+
+  .nav-circle {
+    background-color: white;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 2px solid black;
+    transition: .2s;
+
+  }
+
+  .nav-circle-selected {
+    background-color: black;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    border: 2px solid white;
+    transition: .2s;
+  }
 }
