@@ -9,8 +9,7 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import cube_frag from '../../assets/models/cube_frag/cube_frag_compressed.obj';
 import cube_frag_skin from '../../assets/models/cube_frag/cube_frag.mtl';
-// import cube_frag from '../../assets/models/fractured_cube/fracturedCube.obj';
-// import cube_frag_skin from '../../assets/models/fractured_cube/fracturedCube.mtl';
+// import ThinFilmFresnelMap from '../lib/ThinFilmFresnelMap';
 
 class LandingPageModel extends React.Component {
   componentDidMount() {
@@ -21,12 +20,10 @@ class LandingPageModel extends React.Component {
     const fov = 75;
     const aspect = canvas.clientWidth / canvas.clientHeight;
     const near = 0.1;
-    const far = 50000;
+    const far = 1000;
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
-    camera.position.x = 300;
-    camera.position.y = 300;
-    camera.position.z = 300;
+    camera.position.set(300, 300, 300);
 
     const scene = new THREE.Scene();
 
@@ -52,6 +49,8 @@ class LandingPageModel extends React.Component {
     /* Add object */
     const obj_loader = new OBJLoader();
     const mtl_loader = new MTLLoader();
+    // let tex = new ThinFilmFresnelMap(380, 2, 3, 64);
+    // let iridescenceMaterial = new IridescentMaterial(irradiance, radiance, iridescenceLookUp);
 
     mtl_loader.load(
       cube_frag_skin,
