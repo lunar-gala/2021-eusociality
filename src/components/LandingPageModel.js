@@ -12,7 +12,47 @@ import cube_frag_skin from '../../assets/models/cube_frag/cube_frag.mtl';
 // import ThinFilmFresnelMap from '../lib/ThinFilmFresnelMap';
 
 class LandingPageModel extends React.Component {
+  constructor(props) {
+    super(props);
+
+    /*** Initialization ***/
+    this.state = {
+      /** @brief Mouse position x */
+      x: 0,
+      /** @brief Mouse position y */
+      y: 0,
+      /** @brief Window width, including resizing */
+      width: 0,
+      /** @brief Window height, including resizing */
+      height: 0,
+      /** @brief 3D camera */
+      camera: null,
+    };
+
+    // Keep track of window width
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
+  /**
+   * Triggered every time the mouse moves.
+   *
+   * We do this for:
+   * - Moving the camera on the 3d asset in the back
+   *
+   * @param {MouseEvent} e The mouse movement event
+   */
+  _onMouseMove(e) {
+    this.setState({ x: e.screenX, y: e.screenY });
+
+    // TODO: animate this movement so it is smoother
+    this.state.camera.position.set(300 + this.state.x/10, 300 + this.state.y/10, 300);
+  }
+
+
   componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+
     const canvas = document.querySelector('#landing-page-cube');
     const renderer = new THREE.WebGLRenderer({ canvas });
 
@@ -24,6 +64,8 @@ class LandingPageModel extends React.Component {
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
     camera.position.set(300, 300, 300);
+
+    this.setState({camera : camera});
 
     const scene = new THREE.Scene();
 
@@ -111,8 +153,16 @@ class LandingPageModel extends React.Component {
     requestAnimationFrame(render_cube);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  }
+
   render () {
-    return <div className='landing-page-background'>
+    return <div className='landing-page-background' onMouseMove={this._onMouseMove.bind(this)}>
       <canvas id='landing-page-cube' />
     </div>;
   }
