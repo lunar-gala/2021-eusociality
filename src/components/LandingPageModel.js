@@ -6,10 +6,10 @@ import React from 'react';
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import cube_frag from '../../assets/models/cube_frag/cube_frag_compressed.obj';
 import cube_frag_skin from '../../assets/models/cube_frag/cube_frag.mtl';
 // import ThinFilmFresnelMap from '../lib/ThinFilmFresnelMap';
+import * as CONSTANTS from '../constants';
 
 class LandingPageModel extends React.Component {
   constructor(props) {
@@ -42,10 +42,23 @@ class LandingPageModel extends React.Component {
    * @param {MouseEvent} e The mouse movement event
    */
   _onMouseMove(e) {
-    this.setState({ x: e.screenX, y: e.screenY });
+    let x = e.screenX;
+    let y = e.screenY;
+    let width = this.state.width;
+    let height= this.state.height;
+
+    // Offset for the camera
+    let offset_x = (x - width/2)/(width/2);
+    let offset_y = -(y - height/2)/(height/2);
+
+    this.setState({ x: offset_x, y: offset_y });
 
     // TODO: animate this movement so it is smoother
-    this.state.camera.position.set(300 + this.state.x/10, 300 + this.state.y/10, 300);
+    this.state.camera.position.set(
+      CONSTANTS.CAMERA_POSITION.x + offset_x*CONSTANTS.CAMERA_PAN_X_FACTOR,
+      CONSTANTS.CAMERA_POSITION.x + offset_y*CONSTANTS.CAMERA_PAN_Y_FACTOR,
+      300
+    );
   }
 
 
@@ -68,8 +81,6 @@ class LandingPageModel extends React.Component {
     this.setState({camera : camera});
 
     const scene = new THREE.Scene();
-
-    const controls = new OrbitControls(camera, renderer.domElement);
 
     // Add a light
     const color = 0xFFFFFF;
@@ -142,8 +153,6 @@ class LandingPageModel extends React.Component {
       const canvas = renderer.domElement;
       camera.aspect = canvas.clientWidth / canvas.clientHeight;
       camera.updateProjectionMatrix();
-
-      controls.update();
 
       renderer.render(scene, camera);
 
