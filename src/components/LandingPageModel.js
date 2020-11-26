@@ -39,6 +39,9 @@ class LandingPageModel extends React.Component {
    * We do this for:
    * - Moving the camera on the 3d asset in the back
    *
+   * TODO: implement gyroscope check for mobile, and make sure that we disable
+   * mouse move detection on mobile
+   *
    * @param {MouseEvent} e The mouse movement event
    */
   _onMouseMove(e) {
@@ -56,9 +59,11 @@ class LandingPageModel extends React.Component {
     // TODO: animate this movement so it is smoother
     this.state.camera.position.set(
       CONSTANTS.CAMERA_POSITION.x + offset_x*CONSTANTS.CAMERA_PAN_X_FACTOR,
-      CONSTANTS.CAMERA_POSITION.x + offset_y*CONSTANTS.CAMERA_PAN_Y_FACTOR,
-      300
+      CONSTANTS.CAMERA_POSITION.y + offset_y*CONSTANTS.CAMERA_PAN_Y_FACTOR,
+      CONSTANTS.CAMERA_POSITION.z + Math.sqrt(offset_x**2 + offset_y**2)*CONSTANTS.CAMERA_PAN_Z_FACTOR
     );
+
+    this.state.camera.lookAt(0, 0, 0);
   }
 
 
@@ -67,7 +72,7 @@ class LandingPageModel extends React.Component {
     window.addEventListener('resize', this.updateWindowDimensions);
 
     const canvas = document.querySelector('#landing-page-cube');
-    const renderer = new THREE.WebGLRenderer({ canvas });
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 
     /* Set up camera */
     const fov = 75;
@@ -76,7 +81,11 @@ class LandingPageModel extends React.Component {
     const far = 1000;
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
-    camera.position.set(300, 300, 300);
+    camera.position.set(
+      CONSTANTS.CAMERA_POSITION.x,
+      CONSTANTS.CAMERA_POSITION.y,
+      CONSTANTS.CAMERA_POSITION.z
+    );
 
     this.setState({camera : camera});
 
@@ -105,6 +114,8 @@ class LandingPageModel extends React.Component {
     // let tex = new ThinFilmFresnelMap(380, 2, 3, 64);
     // let iridescenceMaterial = new IridescentMaterial(irradiance, radiance, iridescenceLookUp);
 
+    let cube_obj = null;
+
     mtl_loader.load(
       cube_frag_skin,
       (materials) => {
@@ -117,6 +128,7 @@ class LandingPageModel extends React.Component {
           (object) => {
             console.log(object);
             scene.add(object);
+            cube_obj = object;
           },
           // called when loading is in progresses
           (xhr) => {
@@ -143,7 +155,7 @@ class LandingPageModel extends React.Component {
     }
 
     // requestAnimationFrame passes time in as seconds
-    function render_cube () {
+    function render_cube (time) {
       if (resizeRendererToDisplaySize(renderer)) {
         const canvas = renderer.domElement;
         camera.aspect = canvas.clientWidth / canvas.clientHeight;
@@ -153,6 +165,10 @@ class LandingPageModel extends React.Component {
       const canvas = renderer.domElement;
       camera.aspect = canvas.clientWidth / canvas.clientHeight;
       camera.updateProjectionMatrix();
+
+      if (cube_obj !== null) {
+        cube_obj.rotation.y = time*0.0001;
+      }
 
       renderer.render(scene, camera);
 
