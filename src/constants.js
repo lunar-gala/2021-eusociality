@@ -37,11 +37,12 @@ export const NAVBAR_LIST = [
 
 /** @brief Default camera position */
 export const CAMERA_POSITION = {
-  x: 300,
-  y: 300,
-  z: 300
+  x: 0,
+  y: 30,
+  z: 400
 };
 
 /** @brief */
-export const CAMERA_PAN_X_FACTOR = 30;
-export const CAMERA_PAN_Y_FACTOR = 30;
+export const CAMERA_PAN_X_FACTOR = 10;
+export const CAMERA_PAN_Y_FACTOR = 10;
+export const CAMERA_PAN_Z_FACTOR = 10;
