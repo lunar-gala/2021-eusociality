@@ -8,6 +8,9 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import cube_frag from '../../assets/models/cube_frag/cube_frag_compressed.obj';
 import cube_frag_skin from '../../assets/models/cube_frag/cube_frag.mtl';
+
+import * as TWEEN from '@tweenjs/tween.js';
+
 // import ThinFilmFresnelMap from '../lib/ThinFilmFresnelMap';
 import * as CONSTANTS from '../constants';
 
@@ -134,6 +137,7 @@ class LandingPageModel extends React.Component {
             // Set the cube object so it can be used in the render
             cube_obj = object;
 
+            // TODO: Random colors for now, for debugging
             let colors = [
               0xf8d8f8,
               0x7e87bb,
@@ -163,15 +167,49 @@ class LandingPageModel extends React.Component {
 
               i++;
 
+              // Set material
               child.material = material;
+
+              // Tween animation
+              let position_bottom = { x: 0, y: 0 };
+              let position_top = { x: 0, y: 200 };
+              let position_current = { x: 0, y: 0 };
+              let tween_forward = new TWEEN.Tween(position_current).to(position_top, 1000);
+              let tween_backward = new TWEEN.Tween(position_current).to(position_bottom, 1000);
+              tween_forward.easing(TWEEN.Easing.Cubic.InOut);
+              tween_backward.easing(TWEEN.Easing.Cubic.In);
 
               let bbox = new THREE.Box3().setFromObject(child);
               cube_children.push({
                 obj: child,
                 bbox: bbox,
-                vector: bbox.max
+                vector: bbox.max,
+                animation_forward: tween_forward,
+                animation_backward: tween_backward,
+                position: position_current
               });
+
+              tween_forward.onUpdate(() => {
+                child.position.x = position_current.x;
+                child.position.y = position_current.y;
+              })
+
+              tween_backward.onUpdate(() => {
+                child.position.x = position_current.x;
+                child.position.y = position_current.y;
+              })
             });
+
+            // chain animations in a loop
+            for (let j = 0; j < cube_children.length; j++) {
+              if (j < cube_children.length - 1) {
+                cube_children[j].animation_backward.chain(cube_children[j+1].animation_forward);
+              } else {
+                cube_children[j].animation_backward.chain(cube_children[0].animation_forward);
+              }
+
+              cube_children[j].animation_forward.chain(cube_children[j].animation_backward);
+            }
 
             // Center vectors
             let centroid = new THREE.Vector3(0, 0, 0);
@@ -181,6 +219,9 @@ class LandingPageModel extends React.Component {
             centroid = centroid.divideScalar(cube_children.length);
 
             cube_children.map(e => e.vector.sub(centroid));
+
+            // Start animation
+            cube_children[0].animation_forward.start();
           },
           // called when loading is in progresses
           (xhr) => {
@@ -225,6 +266,8 @@ class LandingPageModel extends React.Component {
       renderer.render(scene, camera);
 
       requestAnimationFrame(render_cube);
+
+      TWEEN.update(time);
     }
 
     requestAnimationFrame(render_cube);
