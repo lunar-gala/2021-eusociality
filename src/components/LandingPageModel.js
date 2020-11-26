@@ -103,7 +103,7 @@ class LandingPageModel extends React.Component {
     light_dir_2.position.set(300, 300, 300);
     light_dir_3.position.set(0, 1000, 0);
     light_dir_4.position.set(-300, 300, -300);
-    scene.add(light_amb);
+    // scene.add(light_amb);
     scene.add(light_dir);
     scene.add(light_dir_2);
     scene.add(light_dir_3);
@@ -116,6 +116,7 @@ class LandingPageModel extends React.Component {
     // let iridescenceMaterial = new IridescentMaterial(irradiance, radiance, iridescenceLookUp);
 
     let cube_obj = null;
+    let cube_children = [];
 
     mtl_loader.load(
       cube_frag_skin,
@@ -129,7 +130,57 @@ class LandingPageModel extends React.Component {
           (object) => {
             console.log(object);
             scene.add(object);
+
+            // Set the cube object so it can be used in the render
             cube_obj = object;
+
+            let colors = [
+              0xf8d8f8,
+              0x7e87bb,
+              0xe1d33c,
+              0xb2aebc,
+              0x691f1c,
+              0x9578c2,
+              0xf7a290,
+              0xdbb266,
+              0x2f85b2,
+              0x19a00d,
+              0x8d33b3,
+              0xffffff,
+              0x946c29,
+              0x3f2004,
+              0x93747a,
+              0x954ff3
+            ];
+
+            let i = 0
+
+            object.traverse( child => {
+              const material = new THREE.MeshPhongMaterial({
+                color: colors[i],    // red (can also use a CSS color string here)
+                flatShading: true,
+              });
+
+              i++;
+
+              child.material = material;
+
+              let bbox = new THREE.Box3().setFromObject(child);
+              cube_children.push({
+                obj: child,
+                bbox: bbox,
+                vector: bbox.max
+              });
+            });
+
+            // Center vectors
+            let centroid = new THREE.Vector3(0, 0, 0);
+
+            cube_children.map(e => centroid.add(e.vector));
+
+            centroid = centroid.divideScalar(cube_children.length);
+
+            cube_children.map(e => e.vector.sub(centroid));
           },
           // called when loading is in progresses
           (xhr) => {
