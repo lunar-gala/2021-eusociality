@@ -14,21 +14,22 @@
   bottom: 141px;
 
   .nav-circle {
-    background-color: white;
-    height: 20px;
-    width: 20px;
+    background-color: rgba(255, 255, 255, .3);
+    height: 16px;
+    width: 16px;
     border-radius: 50%;
-    border: 2px solid black;
-    transition: .2s;
-
+    border: 1px solid white;
+    transition: .5s;
+    cursor: pointer;
   }
 
   .nav-circle-selected {
-    background-color: black;
+    background-color: white;
     border-radius: 50%;
-    height: 20px;
-    width: 20px;
-    border: 2px solid white;
-    transition: .2s;
+    height: 16px;
+    width: 16px;
+    border: 1px solid white;
+    transition: .5s;
+    cursor: pointer;
   }
 }

@@ -14,6 +14,13 @@ class LandingPage extends React.Component {
       // Which line is currently being hovered
       selected_line_idx: null
     };
+    this.handler = this.handler.bind(this);
+  }
+
+  handler(index) {
+    this.setState({
+      selected_line_idx: index,
+    });
   }
 
   render() {
@@ -22,9 +29,9 @@ class LandingPage extends React.Component {
           <TitleTheme/>
           <Link className='link' id='about' to='/about'>About</Link>
           <Link className='link' id='people' to='/people'>People</Link>
-          <Navbar selected_line_idx={this.state.selected_line_idx}/>
+          <Navbar handler={this.handler}/>
           <div id='curr_line'>
-            {`${this.state.selected_line_idx} | ${CONSTANTS.LINE_NAMES[this.state.selected_line_idx]}`}
+            {`${this.state.selected_line_idx+1} | ${CONSTANTS.LINE_NAMES[this.state.selected_line_idx]}`}
           </div>
         </div>
     );
