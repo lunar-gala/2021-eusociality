@@ -8,6 +8,16 @@ body {
   background-color: black;
 }
 
+.background-main {
+  background: url('../img/main.png') no-repeat center fixed;
+  transition: .3s;
+}
+
+.background-1 {
+  background: url('../img/1.png') no-repeat center fixed;
+  transition: .3s;
+}
+
 .landing-page {
   height: 100vh;
   width: 100vw;
@@ -15,6 +25,38 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  .link {
+    color: white;
+    text-decoration: none;
+    font-size: 50px;
+  }
+
+  #about {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+
+  }
+
+  #people {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+  }
+
+  #curr_line {
+    position: absolute;
+    font-size: 100px;
+    left: 20vw;
+  }
+
+  #label {
+    position: absolute;
+    font-size: 25px;
+    right: 50px;
+    bottom: 50px;
+  }
 }
 
 .title-theme {

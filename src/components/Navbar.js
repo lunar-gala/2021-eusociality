@@ -14,22 +14,21 @@ class Navbar extends React.Component {
 	handler(index) {
 		this.setState({
 			curSelected: index,
-    });
-    this.props.handler(index);
+		});
+		this.props.handler(index);
 	}
 
 	render() {
 		const items = [];
 		for (const [index, name] of CONSTANTS.LINE_NAMES.entries()) {
-			console.log(index);
 			items.push(<NavItem name={name} handler={this.handler} index={index} selected={this.state.curSelected} />);
 		}
 		return (
-    <div className="navbar">
-      {items}
-      {this.state.curSelected+1}/16
-    </div>
-    );
+			<div className="navbar">
+				{items}
+				<div className="lineLabel">{this.state.curSelected + 1}/16</div>
+			</div>
+		);
 	}
 }
 /**
