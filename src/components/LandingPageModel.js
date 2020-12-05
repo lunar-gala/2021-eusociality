@@ -6,6 +6,7 @@ import React from 'react';
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import cube_frag from '../../assets/models/cube_frag/cube_frag_compressed.obj';
 import cube_frag_skin from '../../assets/models/cube_frag/cube_frag.mtl';
 
@@ -94,10 +95,10 @@ class LandingPageModel extends React.Component {
     this.setState({camera : camera});
 
     const scene = new THREE.Scene();
+    const controls = new OrbitControls(camera, renderer.domElement);
 
     // Add a light
     const color = 0xFFFFFF;
-    const light_amb = new THREE.AmbientLight(color, 0.5);
     const light_dir = new THREE.DirectionalLight(color, 0.75);
     const light_dir_2 = new THREE.DirectionalLight(color, 0.75);
     const light_dir_3 = new THREE.DirectionalLight(color, 0.75);
@@ -157,33 +158,49 @@ class LandingPageModel extends React.Component {
               0x954ff3
             ];
 
-            let i = 0
+            /** @brief Paths for exploding cube elements */
+            let animations = [
+              { x: -100, y: 0, z: 0 },
+              { x: 0, y: 0, z: 0 },
+              { x: 0, y: 100, z: 0 },
+              { x: 0, y: 0, z: -200 },
+              { x: 100, y: 0, z: 0 },
+              { x: 0, y: 0, z: -200 },
+              { x: 0, y: -100, z: 0 },
+              { x: 0, y: 0, z: 200 },
+              { x: -200, y: 0, z: 0 },
+              { x: 0, y: 0, z: 200 },
+              { x: 0, y: 0, z: -100 },
+              { x: 0, y: -200, z: 0},
+              { x: 0, y: 200, z: 0},
+              { x: 0, y: 0, z: 200},
+              { x: 200, y: 0, z: 0},
+              { x: 0, y: -100, z: 0}
+            ]
 
-            object.traverse( child => {
+            // Set colors for components and add animation
+            for (let i = 0; i < object.children.length; i++) {
+              let child = object.children[i];
+
               const material = new THREE.MeshPhongMaterial({
-                color: colors[i],    // red (can also use a CSS color string here)
+                color: colors[i],
                 flatShading: true,
               });
-
-              i++;
 
               // Set material
               child.material = material;
 
               // Tween animation
-              let position_bottom = { x: 0, y: 0 };
-              let position_top = { x: 0, y: 200 };
-              let position_current = { x: 0, y: 0 };
-              let tween_forward = new TWEEN.Tween(position_current).to(position_top, 1000);
-              let tween_backward = new TWEEN.Tween(position_current).to(position_bottom, 1000);
+              let position_current = { x: 0, y: 0, z: 0 };
+              let position_bottom = { x: 0, y: 0, z: 0 };
+              let position_top = animations[i];
+              let tween_forward = new TWEEN.Tween(position_current).to(position_top, CONSTANTS.ANIMATION_DURATION);
+              let tween_backward = new TWEEN.Tween(position_current).to(position_bottom, CONSTANTS.ANIMATION_DURATION);
               tween_forward.easing(TWEEN.Easing.Cubic.InOut);
-              tween_backward.easing(TWEEN.Easing.Cubic.In);
+              tween_backward.easing(TWEEN.Easing.Cubic.InOut);
 
-              let bbox = new THREE.Box3().setFromObject(child);
               cube_children.push({
                 obj: child,
-                bbox: bbox,
-                vector: bbox.max,
                 animation_forward: tween_forward,
                 animation_backward: tween_backward,
                 position: position_current
@@ -192,36 +209,26 @@ class LandingPageModel extends React.Component {
               tween_forward.onUpdate(() => {
                 child.position.x = position_current.x;
                 child.position.y = position_current.y;
+                child.position.z = position_current.z;
               })
 
               tween_backward.onUpdate(() => {
                 child.position.x = position_current.x;
                 child.position.y = position_current.y;
+                child.position.z = position_current.z;
               })
-            });
+            }
 
             // chain animations in a loop
             for (let j = 0; j < cube_children.length; j++) {
-              if (j < cube_children.length - 1) {
-                cube_children[j].animation_backward.chain(cube_children[j+1].animation_forward);
-              } else {
-                cube_children[j].animation_backward.chain(cube_children[0].animation_forward);
-              }
-
               cube_children[j].animation_forward.chain(cube_children[j].animation_backward);
+              cube_children[j].animation_backward.chain(cube_children[j].animation_forward);
             }
 
-            // Center vectors
-            let centroid = new THREE.Vector3(0, 0, 0);
-
-            cube_children.map(e => centroid.add(e.vector));
-
-            centroid = centroid.divideScalar(cube_children.length);
-
-            cube_children.map(e => e.vector.sub(centroid));
-
             // Start animation
-            cube_children[0].animation_forward.start();
+            for (let i = 0; i < cube_children.length; i++) {
+              cube_children[i].animation_forward.start();
+            }
           },
           // called when loading is in progresses
           (xhr) => {
@@ -259,9 +266,7 @@ class LandingPageModel extends React.Component {
       camera.aspect = canvas.clientWidth / canvas.clientHeight;
       camera.updateProjectionMatrix();
 
-      if (cube_obj !== null) {
-        cube_obj.rotation.y = time*0.0001;
-      }
+      controls.update();
 
       renderer.render(scene, camera);
 

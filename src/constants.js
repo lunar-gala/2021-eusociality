@@ -46,3 +46,6 @@ export const CAMERA_POSITION = {
 export const CAMERA_PAN_X_FACTOR = 10;
 export const CAMERA_PAN_Y_FACTOR = 10;
 export const CAMERA_PAN_Z_FACTOR = 10;
+
+/** @brief Animation duration in ms for the landing page exploding cube */
+export const ANIMATION_DURATION = 3000;
