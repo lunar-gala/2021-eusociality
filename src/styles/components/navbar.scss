@@ -1,5 +1,6 @@
 /**
  * Landing page navbar
+ https://github.com/EthanNakache/Sprat-type
  */
 
 .navbar {
@@ -15,8 +16,8 @@
 
   .nav-circle {
     background-color: rgba(255, 255, 255, .3);
-    height: 16px;
-    width: 16px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
     border: 1px solid white;
     transition: .5s;
@@ -26,8 +27,8 @@
   .nav-circle-selected {
     background-color: white;
     border-radius: 50%;
-    height: 16px;
-    width: 16px;
+    height: 20px;
+    width: 20px;
     border: 1px solid white;
     transition: .5s;
     cursor: pointer;
@@ -35,5 +36,6 @@
 
   .lineLabel{
     width: 50px;
+    font-size: 25px;
   }
 }
