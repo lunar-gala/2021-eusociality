@@ -4,16 +4,29 @@
 
 import React from 'react';
 import * as THREE from 'three';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import cube_frag from '../../assets/models/cube_frag/cube_frag_compressed.obj';
-import cube_frag_skin from '../../assets/models/cube_frag/cube_frag.mtl';
+import cube_frag from '../../assets/models/cube_frag/reducedpoly_mat_noAnim.gltf'
 
 import * as TWEEN from '@tweenjs/tween.js';
 
-// import ThinFilmFresnelMap from '../lib/ThinFilmFresnelMap';
+import ThinFilmFresnelMap from '../lib/ThinFilmFresnelMap';
+import IridescentMaterial from '../lib/IridescentMaterial';
 import * as CONSTANTS from '../constants';
+
+// Import HDR map
+import irradiance_negX from '../../assets/models/skybox/irradiance/negX.jpg';
+import irradiance_negY from '../../assets/models/skybox/irradiance/negY.jpg';
+import irradiance_negZ from '../../assets/models/skybox/irradiance/negZ.jpg';
+import irradiance_posX from '../../assets/models/skybox/irradiance/posX.jpg';
+import irradiance_posY from '../../assets/models/skybox/irradiance/posY.jpg';
+import irradiance_posZ from '../../assets/models/skybox/irradiance/posZ.jpg';
+import radiance_negX from '../../assets/models/skybox/radiance/negX.jpg';
+import radiance_negY from '../../assets/models/skybox/radiance/negY.jpg';
+import radiance_negZ from '../../assets/models/skybox/radiance/negZ.jpg';
+import radiance_posX from '../../assets/models/skybox/radiance/posX.jpg';
+import radiance_posY from '../../assets/models/skybox/radiance/posY.jpg';
+import radiance_posZ from '../../assets/models/skybox/radiance/posZ.jpg';
 
 class LandingPageModel extends React.Component {
   constructor(props) {
@@ -70,6 +83,30 @@ class LandingPageModel extends React.Component {
     this.state.camera.lookAt(0, 0, 0);
   }
 
+  loadCubeMap (map) {
+    let files = [
+      radiance_negX,
+      radiance_negY,
+      radiance_negZ,
+      radiance_posX,
+      radiance_posY,
+      radiance_posZ
+    ];
+
+    if (map === 'irradiance') {
+      files = [
+        irradiance_negX,
+        irradiance_negY,
+        irradiance_negZ,
+        irradiance_posX,
+        irradiance_posY,
+        irradiance_posZ
+      ];
+    }
+
+    var loader = new THREE.CubeTextureLoader();
+    return loader.load(files);
+  }
 
   componentDidMount() {
     this.updateWindowDimensions();
@@ -84,7 +121,7 @@ class LandingPageModel extends React.Component {
     const aspect = canvas.clientWidth / canvas.clientHeight;
     const near = 0.1;
     const far = 1000;
-    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    let camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
     camera.position.set(
       CONSTANTS.CAMERA_POSITION.x,
@@ -96,6 +133,8 @@ class LandingPageModel extends React.Component {
 
     const scene = new THREE.Scene();
     const controls = new OrbitControls(camera, renderer.domElement);
+    const clock = new THREE.Clock();
+    let mixer = null;
 
     // Add a light
     const color = 0xFFFFFF;
@@ -114,131 +153,48 @@ class LandingPageModel extends React.Component {
     scene.add(light_dir_4);
 
     /* Add object */
-    const obj_loader = new OBJLoader();
-    const mtl_loader = new MTLLoader();
-    // let tex = new ThinFilmFresnelMap(380, 2, 3, 64);
-    // let iridescenceMaterial = new IridescentMaterial(irradiance, radiance, iridescenceLookUp);
+    const gltf_loader = new GLTFLoader();
+    let radiance = this.loadCubeMap('radiance');
+    let irradiance = this.loadCubeMap('irradiance');
+    let iridescence_texture = new ThinFilmFresnelMap(
+      CONSTANTS.IRIDESCENCE_FILM_THICKNESS,
+      CONSTANTS.IRIDESCENCE_REFRACTIVE_INDEX_FILM,
+      CONSTANTS.IRIDESCENCE_REFRACTIVE_INDEX_BASE,
+      CONSTANTS.IRIDESCENCE_FILM_SIZE
+    );
+    let iridescence_material = new IridescentMaterial(irradiance, radiance, iridescence_texture);
 
-    let cube_obj = null;
-    let cube_children = [];
+    gltf_loader.load(
+      cube_frag,
+      // called when resource is loaded
+      (object) => {
+        let object_children = object.scene.children[0].children[0].children;
 
-    mtl_loader.load(
-      cube_frag_skin,
-      (materials) => {
-        materials.preload();
-        obj_loader.setMaterials(materials);
+        for (let i = 0; i < object_children.length; i++) {
+          object_children[i].material = iridescence_material;
+        }
 
-        obj_loader.load(
-          cube_frag,
-          // called when resource is loaded
-          (object) => {
-            console.log(object);
-            scene.add(object);
+        console.log(object);
 
-            // Set the cube object so it can be used in the render
-            cube_obj = object;
 
-            // TODO: Random colors for now, for debugging
-            let colors = [
-              0xf8d8f8,
-              0x7e87bb,
-              0xe1d33c,
-              0xb2aebc,
-              0x691f1c,
-              0x9578c2,
-              0xf7a290,
-              0xdbb266,
-              0x2f85b2,
-              0x19a00d,
-              0x8d33b3,
-              0xffffff,
-              0x946c29,
-              0x3f2004,
-              0x93747a,
-              0x954ff3
-            ];
+        scene.add(object.scene);
 
-            /** @brief Paths for exploding cube elements */
-            let animations = [
-              { x: -100, y: 0, z: 0 },
-              { x: 0, y: 0, z: 0 },
-              { x: 0, y: 100, z: 0 },
-              { x: 0, y: 0, z: -200 },
-              { x: 100, y: 0, z: 0 },
-              { x: 0, y: 0, z: -200 },
-              { x: 0, y: -100, z: 0 },
-              { x: 0, y: 0, z: 200 },
-              { x: -200, y: 0, z: 0 },
-              { x: 0, y: 0, z: 200 },
-              { x: 0, y: 0, z: -100 },
-              { x: 0, y: -200, z: 0},
-              { x: 0, y: 200, z: 0},
-              { x: 0, y: 0, z: 200},
-              { x: 200, y: 0, z: 0},
-              { x: 0, y: -100, z: 0}
-            ]
+        // TODO: set to the scene camera
+        // camera = object.cameras[0];
 
-            // Set colors for components and add animation
-            for (let i = 0; i < object.children.length; i++) {
-              let child = object.children[i];
-
-              const material = new THREE.MeshPhongMaterial({
-                color: colors[i],
-                flatShading: true,
-              });
-
-              // Set material
-              child.material = material;
-
-              // Tween animation
-              let position_current = { x: 0, y: 0, z: 0 };
-              let position_bottom = { x: 0, y: 0, z: 0 };
-              let position_top = animations[i];
-              let tween_forward = new TWEEN.Tween(position_current).to(position_top, CONSTANTS.ANIMATION_DURATION);
-              let tween_backward = new TWEEN.Tween(position_current).to(position_bottom, CONSTANTS.ANIMATION_DURATION);
-              tween_forward.easing(TWEEN.Easing.Cubic.InOut);
-              tween_backward.easing(TWEEN.Easing.Cubic.InOut);
-
-              cube_children.push({
-                obj: child,
-                animation_forward: tween_forward,
-                animation_backward: tween_backward,
-                position: position_current
-              });
-
-              tween_forward.onUpdate(() => {
-                child.position.x = position_current.x;
-                child.position.y = position_current.y;
-                child.position.z = position_current.z;
-              })
-
-              tween_backward.onUpdate(() => {
-                child.position.x = position_current.x;
-                child.position.y = position_current.y;
-                child.position.z = position_current.z;
-              })
-            }
-
-            // chain animations in a loop
-            for (let j = 0; j < cube_children.length; j++) {
-              cube_children[j].animation_forward.chain(cube_children[j].animation_backward);
-              cube_children[j].animation_backward.chain(cube_children[j].animation_forward);
-            }
-
-            // Start animation
-            for (let i = 0; i < cube_children.length; i++) {
-              cube_children[i].animation_forward.start();
-            }
-          },
-          // called when loading is in progresses
-          (xhr) => {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-          },
-          // called when loading has errors
-          (error) => {
-            console.log('An error happened', error);
-          }
-        );
+        /*
+        mixer = new THREE.AnimationMixer( object.scene );
+        let action = mixer.clipAction( object.animations[0] );
+        action.play();
+        */
+      },
+      // called when loading is in progresses
+      (xhr) => {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+      },
+      // called when loading has errors
+      (error) => {
+        console.log('An error happened', error);
       }
     );
 
@@ -271,6 +227,10 @@ class LandingPageModel extends React.Component {
       renderer.render(scene, camera);
 
       requestAnimationFrame(render_cube);
+
+      var delta = clock.getDelta();
+
+				if ( mixer ) mixer.update( delta );
 
       TWEEN.update(time);
     }
