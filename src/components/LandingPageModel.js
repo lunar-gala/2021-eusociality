@@ -138,6 +138,7 @@ class LandingPageModel extends React.Component {
 
     // Add a light
     const color = 0xFFFFFF;
+    const light_amb = new THREE.AmbientLight(color, 0.5);
     const light_dir = new THREE.DirectionalLight(color, 0.75);
     const light_dir_2 = new THREE.DirectionalLight(color, 0.75);
     const light_dir_3 = new THREE.DirectionalLight(color, 0.75);
@@ -146,11 +147,11 @@ class LandingPageModel extends React.Component {
     light_dir_2.position.set(300, 300, 300);
     light_dir_3.position.set(0, 1000, 0);
     light_dir_4.position.set(-300, 300, -300);
-    // scene.add(light_amb);
-    scene.add(light_dir);
-    scene.add(light_dir_2);
-    scene.add(light_dir_3);
-    scene.add(light_dir_4);
+    scene.add(light_amb);
+    // scene.add(light_dir);
+    // scene.add(light_dir_2);
+    // scene.add(light_dir_3);
+    // scene.add(light_dir_4);
 
     /* Add object */
     const gltf_loader = new GLTFLoader();
