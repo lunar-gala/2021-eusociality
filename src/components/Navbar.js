@@ -1,11 +1,6 @@
 import React from 'react';
 import * as CONSTANTS from '../constants';
-
-function create_navbar_item (name) {
-  return <div className='navbar-item'>
-    {name}
-  </div>;
-}
+import PropTypes from 'prop-types';
 
 /**
  * Navbar for selecting lines
@@ -13,30 +8,28 @@ function create_navbar_item (name) {
 class Navbar extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { curSelected: null };
-		this.handler = this.handler.bind(this);
-	}
-
-	handler(index) {
-		this.setState({
-			curSelected: index,
-		});
-		this.props.handler(index);
 	}
 
 	render() {
 		const items = [];
 		for (const [index, name] of CONSTANTS.LINE_NAMES.entries()) {
-			items.push(<NavItem name={name} handler={this.handler} index={index} selected={this.state.curSelected} />);
+			items.push(
+				<NavItem
+					handlerSelectedLineIdx={this.props.handlerSelectedLineIdx}
+					lineIdx={index}
+					lineName={name}
+					selectedLineIdx={this.props.selectedLineIdx}
+				/>);
 		}
 		return (
 			<div className="navbar">
 				{items}
-				<div className="lineLabel">{this.state.curSelected + 1}/16</div>
+				<div className="lineLabel">{`${this.props.selectedLineIdx + 1}/16`}</div>
 			</div>
 		);
 	}
 }
+
 /**
  * This is the circle for each line.
  *
@@ -44,21 +37,35 @@ class Navbar extends React.Component {
  */
 class NavItem extends React.Component {
 	render() {
-		var circleClass = 'nav-circle';
-		if (this.props.selected == this.props.index) {
-			circleClass += '-selected';
-		}
 		return (
-			<div className="navbar-item" key={this.props.name}>
+			<div className="navbar-item" key={this.props.lineName}>
 				<div
-					class={circleClass}
+					className={`nav-circle ${this.props.selectedLineIdx === this.props.lineIdx ? 'selected' : ''}`}
 					onMouseEnter={() => {
-						this.props.handler(this.props.index);
+						this.props.handlerSelectedLineIdx(this.props.lineIdx);
 					}}
 				></div>
 			</div>
 		);
 	}
+}
+
+Navbar.propTypes = {
+	/** @brief Handles updating the line index when a NavItem is hovered over */
+	handlerSelectedLineIdx: PropTypes.func.isRequired,
+	/** @brief The currently selected line index on the navbar */
+	selectedLineIdx: PropTypes.number.isRequired
+}
+
+NavItem.propTypes = {
+	/** @brief Handles updating the line index when a NavItem is hovered over */
+	handlerSelectedLineIdx: PropTypes.func.isRequired,
+	/** @brief Line index associated with this NavItem circle */
+	lineIdx: PropTypes.number.isRequired,
+	/** @brief Line name associated with NavItem circle */
+	lineName: PropTypes.string.isRequired,
+	/** @brief The currently selected line index on the navbar */
+	selectedLineIdx: PropTypes.number.isRequired
 }
 
 export default Navbar;

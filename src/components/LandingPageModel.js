@@ -14,7 +14,12 @@ import ThinFilmFresnelMap from '../lib/ThinFilmFresnelMap';
 import IridescentMaterial from '../lib/IridescentMaterial';
 import * as CONSTANTS from '../constants';
 
-// Import HDR map
+/**
+ * Import HDR map
+ *
+ * This defines a 6-faced cube that is the "world" around the object. This is
+ * used in iridescence texture to calculate light diffusion.
+ */
 import irradiance_negX from '../../assets/models/skybox/irradiance/negX.jpg';
 import irradiance_negY from '../../assets/models/skybox/irradiance/negY.jpg';
 import irradiance_negZ from '../../assets/models/skybox/irradiance/negZ.jpg';
@@ -219,10 +224,6 @@ class LandingPageModel extends React.Component {
         camera.updateProjectionMatrix();
       }
 
-      const canvas = renderer.domElement;
-      camera.aspect = canvas.clientWidth / canvas.clientHeight;
-      camera.updateProjectionMatrix();
-
       controls.update();
 
       renderer.render(scene, camera);
@@ -248,6 +249,11 @@ class LandingPageModel extends React.Component {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
 
+  /**
+   * Used to provide a tilting effect from a phone
+   *
+   * @param {*} event From the phone tilting event
+   */
   handleOrientation(event) {
     /*
     var absolute = event.absolute;
