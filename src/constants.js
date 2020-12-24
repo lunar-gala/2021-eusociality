@@ -12,7 +12,7 @@ export const NAVBAR_LIST = [
 export const CAMERA_POSITION = {
   x: 0,
   y: 30,
-  z: 400
+  z: 300
 };
 
 /** @brief */
