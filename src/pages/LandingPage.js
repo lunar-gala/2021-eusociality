@@ -12,34 +12,39 @@ class LandingPage extends React.Component {
     super(props);
     this.state = {
       // Which line is currently being hovered
-      selected_line_idx: null,
+      // Defaults to -1 when nothing is selected
+      selectedLineIdx: -1,
     };
-    this.handler = this.handler.bind(this);
+    this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
   }
 
-  handler(index) {
+  handlerSelectedLineIdx(index) {
     this.setState({
-      selected_line_idx: index,
+      selectedLineIdx: index,
     });
   }
 
   render() {
-    var curLine = `${this.state.selected_line_idx+1} | ${CONSTANTS.LINE_NAMES[this.state.selected_line_idx]}`;
-    var imgClass = `background-${this.state.selected_line_idx+1}`;
-    if (this.state.selected_line_idx == null || this.state.selected_line_idx == 15) {
-      curLine = "";
-      imgClass = "background-main";
-    }
     return (
-        <div className={"landing-page " + imgClass}>
+        <div className={'landing-page'}>
           <TitleTheme/>
           <Link className='link' id='about' to='/about'>About</Link>
           <Link className='link' id='people' to='/people'>People</Link>
-          <div id="label">Click image to see more</div>
-          <div id='curr_line'>
-            {curLine}
+          <div id='label'>
+            {(this.state.selectedLineIdx >= 0) ? 'Click image to see more' : ''}
           </div>
-          <Navbar handler={this.handler}/>
+          <div id='curr_line'>
+            {
+              // Only show the line name and number if we have hovered over a NavItem
+              (this.state.selectedLineIdx >= 0)  ?
+                `${this.state.selectedLineIdx < 9 ? '0' : ''}${this.state.selectedLineIdx+1} | ${CONSTANTS.LINE_NAMES[this.state.selectedLineIdx]}` :
+                ''
+            }
+          </div>
+          <Navbar
+            handlerSelectedLineIdx={this.handlerSelectedLineIdx}
+            selectedLineIdx={this.state.selectedLineIdx}
+          />
         </div>
     );
   }

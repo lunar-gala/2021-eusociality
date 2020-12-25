@@ -1,0 +1,27 @@
+/**
+ * Import all the fonts used in this project.
+ */
+
+@font-face {
+    font-family: "Sprat Type";
+    src: url("../../assets/fonts/sprat-type/Sprat-Regular.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Sprat Type";
+    src: url("../../assets/fonts/sprat-type/Sprat-RegularBold.otf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Sprat Type";
+    src: url("../../assets/fonts/sprat-type/Sprat-RegularLight.otf");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Sprat Type";
+    src: url("../../assets/fonts/sprat-type/Sprat-RegularThin.otf");
+    font-weight: 100;
+}

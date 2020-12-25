@@ -97,3 +97,7 @@ This is because `git` doesn't want to override your changes. What you want to do
 2. Update your repo: `git pull`
 3. Reapply your "stashed away" changes: `git stash pop`
 4. You might get some merge conflicts, so make sure to fix those before you commit.
+
+## Acknowledgments
+
+- [https://github.com/DerSchmale/threejs-thin-film-iridescence] for iridescence texture
