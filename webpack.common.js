@@ -54,6 +54,13 @@ module.exports = {
         use: [
           'file-loader'
         ]
+      },
+      // 3D Assets
+      {
+        test: /\.(mtl|obj|gltf)$/,
+        use: [
+          'file-loader'
+        ]
       }
     ]
   }

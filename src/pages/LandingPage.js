@@ -12,20 +12,39 @@ class LandingPage extends React.Component {
     super(props);
     this.state = {
       // Which line is currently being hovered
-      selected_line_idx: null
+      // Defaults to -1 when nothing is selected
+      selectedLineIdx: -1,
     };
+    this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
+  }
+
+  handlerSelectedLineIdx(index) {
+    this.setState({
+      selectedLineIdx: index,
+    });
   }
 
   render() {
     return (
-        <div className="landing-page">
+        <div className={'landing-page'}>
           <TitleTheme/>
           <Link className='link' id='about' to='/about'>About</Link>
           <Link className='link' id='people' to='/people'>People</Link>
-          <Navbar selected_line_idx={this.state.selected_line_idx}/>
-          <div id='curr_line'>
-            {`${this.state.selected_line_idx} | ${CONSTANTS.LINE_NAMES[this.state.selected_line_idx]}`}
+          <div id='label'>
+            {(this.state.selectedLineIdx >= 0) ? 'Click image to see more' : ''}
           </div>
+          <div id='curr_line'>
+            {
+              // Only show the line name and number if we have hovered over a NavItem
+              (this.state.selectedLineIdx >= 0)  ?
+                `${this.state.selectedLineIdx < 9 ? '0' : ''}${this.state.selectedLineIdx+1} | ${CONSTANTS.LINE_NAMES[this.state.selectedLineIdx]}` :
+                ''
+            }
+          </div>
+          <Navbar
+            handlerSelectedLineIdx={this.handlerSelectedLineIdx}
+            selectedLineIdx={this.state.selectedLineIdx}
+          />
         </div>
     );
   }
