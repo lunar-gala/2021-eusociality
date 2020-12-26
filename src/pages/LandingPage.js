@@ -29,17 +29,24 @@ class LandingPage extends React.Component {
         <div className={'landing-page'}>
           <TitleTheme/>
           <Link className='link' id='about' to='/about'>About</Link>
-          <Link className='link' id='people' to='/people'>People</Link>
-          <div id='label'>
-            {(this.state.selectedLineIdx >= 0) ? 'Click image to see more' : ''}
-          </div>
+
           <div id='curr_line'>
-            {
-              // Only show the line name and number if we have hovered over a NavItem
-              (this.state.selectedLineIdx >= 0)  ?
-                `${this.state.selectedLineIdx < 9 ? '0' : ''}${this.state.selectedLineIdx+1} | ${CONSTANTS.LINE_NAMES[this.state.selectedLineIdx]}` :
-                ''
-            }
+            <div id='line_name'>
+              {
+                // Only show the line name if we have hovered over a NavItem
+                (this.state.selectedLineIdx >= 0) ?
+                  `${CONSTANTS.LINE_NAMES[this.state.selectedLineIdx]}` :
+                  ''
+              }
+            </div>
+            <div id='designers_name'>
+              {
+                // Only show the designers names if we have hovered over a NavItem
+                (this.state.selectedLineIdx >= 0) ?
+                  `${CONSTANTS.DESIGNERS_NAMES[this.state.selectedLineIdx]}` :
+                  ''
+              }
+            </div>
           </div>
           <Navbar
             handlerSelectedLineIdx={this.handlerSelectedLineIdx}

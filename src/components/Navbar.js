@@ -24,7 +24,9 @@ class Navbar extends React.Component {
 		return (
 			<div className="navbar">
 				{items}
-				<div className="lineLabel">{`${this.props.selectedLineIdx + 1}/16`}</div>
+        {
+          //<div className="lineLabel">{`${this.props.selectedLineIdx + 1}/16`}</div>
+        }
 			</div>
 		);
 	}
@@ -38,14 +40,15 @@ class Navbar extends React.Component {
 class NavItem extends React.Component {
 	render() {
 		return (
-			<div className="navbar-item" key={this.props.lineName}>
-				<div
-					className={`nav-circle ${this.props.selectedLineIdx === this.props.lineIdx ? 'selected' : ''}`}
-					onMouseEnter={() => {
-						this.props.handlerSelectedLineIdx(this.props.lineIdx);
-					}}
-				></div>
-			</div>
+      <div
+        className={`navbar_item ${this.props.selectedLineIdx === this.props.lineIdx ? 'selected' : ''}`}
+        key={this.props.lineName}
+        onMouseEnter={() => {
+          this.props.handlerSelectedLineIdx(this.props.lineIdx);
+        }}
+      >
+        {this.props.lineIdx+1}
+      </div>
 		);
 	}
 }

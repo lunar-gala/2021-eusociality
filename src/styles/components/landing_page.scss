@@ -40,17 +40,22 @@ $FONT_SIZE_TITLE: 60px;
 
   }
 
-  #people {
-    position: absolute;
-    bottom: 25px;
-    left: 25px;
-  }
 
   #curr_line {
     position: absolute;
-    font-size: 100px;
-    left: 20vw;
+    left: 5vw;
     bottom: 45%;
+    display: block;
+
+
+    #line_name {
+      font-size: 110px;
+    }
+
+    #designers_name {
+      font-size: 40px;
+    }
+
   }
 
   #label {

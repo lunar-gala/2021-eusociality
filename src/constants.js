@@ -25,6 +25,26 @@ export const LINE_NAMES = [
   'Somatic'
 ];
 
+// Name for all the lines
+export const DESIGNERS_NAMES = [
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurunus',
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurun',
+  'Arushi Bandi, Maya Pandagurun'
+];
+
 /** @brief Default camera position */
 export const CAMERA_POSITION = {
   x: 0,
