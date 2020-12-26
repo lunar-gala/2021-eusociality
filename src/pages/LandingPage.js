@@ -35,8 +35,8 @@ class LandingPage extends React.Component {
             <Link className='link' to='/people'>People</Link>
           </div>
 
-          <div id='curr_line'>
-            <div id='line_name'>
+          <div id='curr-line'>
+            <div id='line-name'>
               {
                 // Only show the line name if we have hovered over a NavItem
                 (this.state.selectedLineIdx >= 0) ?
@@ -44,7 +44,7 @@ class LandingPage extends React.Component {
                   ''
               }
             </div>
-            <div id='designers_name'>
+            <div id='designers-name'>
               {
                 // Only show the designers names if we have hovered over a NavItem
                 (this.state.selectedLineIdx >= 0) ?
