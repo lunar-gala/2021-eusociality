@@ -41,7 +41,7 @@ class NavItem extends React.Component {
 	render() {
 		return (
       <div
-        className={`navbar_item ${this.props.selectedLineIdx === this.props.lineIdx ? 'selected' : ''}`}
+        className={`navbar-item ${this.props.selectedLineIdx === this.props.lineIdx ? 'selected' : ''}`}
         key={this.props.lineName}
         onMouseEnter={() => {
           this.props.handlerSelectedLineIdx(this.props.lineIdx);
