@@ -28,7 +28,12 @@ class LandingPage extends React.Component {
     return (
         <div className={'landing-page'}>
           <TitleTheme/>
-          <Link className='link' id='about' to='/about'>About</Link>
+
+          <div className="links">
+            <Link className='link' to='/about'>Livestream</Link>
+            <Link className='link' to='/about'>About</Link>
+            <Link className='link' to='/people'>People</Link>
+          </div>
 
           <div id='curr_line'>
             <div id='line_name'>

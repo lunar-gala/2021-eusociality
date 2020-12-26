@@ -3,8 +3,10 @@
  * https://github.com/EthanNakache/Sprat-type
  */
 
+ @import "../constants.scss";
+
 .navbar {
-  width: 90vw;
+  width: 100vw - $X_MARGIN;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
