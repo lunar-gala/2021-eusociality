@@ -5,10 +5,10 @@
  */
 
 // Constants
-$FONT_SIZE_LINK: 48px;
+@import "../constants.scss";
+$FONT_SIZE_LINK: 24px;
 $FONT_SIZE_LABEL: 26px;
 $FONT_SIZE_TITLE: 60px;
-
 
 .landing-page-background {
   background-color: black;
@@ -27,23 +27,23 @@ $FONT_SIZE_TITLE: 60px;
   align-items: center;
   justify-content: center;
 
-  .link {
-    color: white;
-    text-decoration: none;
-    font-size: $FONT_SIZE_LINK;
-  }
-
-  #about {
+  .links {
     position: absolute;
-    top: 25px;
-    left: 25px;
+    top: 24px;
+    left: $X_MARGIN/2;
 
+    .link {
+      display: block;
+      color: white;
+      text-decoration: none;
+      font-size: $FONT_SIZE_LINK;
+      padding-bottom: 10px;
+    }
   }
-
 
   #curr_line {
     position: absolute;
-    left: 5vw;
+    left: $X_MARGIN/2;
     bottom: 45%;
     display: block;
 
