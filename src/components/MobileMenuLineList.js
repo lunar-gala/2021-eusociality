@@ -18,7 +18,7 @@ class MobileMenuLineList extends React.Component {
    * }
    */
   generateLineElement (line_info_element, index) {
-    return <div className='line-element'>
+    return <div className='line-element' key={index}>
       <div className='bullet'></div>
       <div className='line-element-body'>
         <div className='title'>
