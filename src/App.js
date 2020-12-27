@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import AboutPage from './pages/AboutPage';
 import PeoplePage from './pages/PeoplePage';
