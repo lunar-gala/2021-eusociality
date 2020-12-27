@@ -4,6 +4,7 @@ import * as CONSTANTS from '../constants';
 import Navbar from '../components/Navbar';
 import TitleTheme from '../components/TitleTheme';
 import Logo from '../components/Logo';
+import MobileOpenMenu from '../components/MobileOpenMenu';
 
 /**
  * Navbar for selecting lines
@@ -30,6 +31,7 @@ class LandingPage extends React.Component {
         <div className={'landing-page'}>
           <TitleTheme/>
           <Logo/>
+          <MobileOpenMenu/>
           <Link className='link' id='about' to='/about'>About</Link>
           <Link className='link' id='people' to='/people'>People</Link>
           <div id='label'>

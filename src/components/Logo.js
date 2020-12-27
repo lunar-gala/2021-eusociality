@@ -9,7 +9,7 @@ import LG_LOGO from '../../assets/logo/LGLogo_white.svg';
 
 class Logo extends React.Component {
   render() {
-    return <div className="logo">
+    return <div className='logo'>
       <img src={LG_LOGO}/>
     </div>;
   }
