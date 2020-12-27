@@ -2,8 +2,23 @@
  * Constants for project
  */
 
-// Shown at the top of the landing page
+/** @brief Title shown on the landing screen */
 export const LANDING_PAGE_TITLE = 'COLLECTIVA';
+
+/**
+ * @brief State management for the landing page.
+ *
+ * I think for now, we can keep _all_ of the states here, desktop, iPad,
+ * mobile, etc.
+ *
+ * NOTE: Javascript doesn't have enums, but this is supposed to behave like
+ * one. This means to make all the states have distinct values.
+ */
+export const LANDING_PAGE_STATES = {
+  DEFAULT: 'default',
+  MOBILE_LINE_MENU_OPEN: 'mobile_line_menu_open',
+  MOBILE_NAV_MENU_OPEN: 'mobile_nav_menu_open',
+}
 
 // Name for all the lines
 // TODO: maybe deprecate this in favor of the more stacked LINE_INFO
@@ -26,9 +41,7 @@ export const LINE_NAMES = [
   'Somatic'
 ];
 
-/**
- * Line names in order, with their respective designers
- */
+/** @brief Line names in order, with their respective designers */
 export const LINE_INFO = [
   {
     name: 'Gossamer Idle',

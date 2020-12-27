@@ -33,7 +33,10 @@ class MobileMenuLineList extends React.Component {
   }
 
   render() {
-    return <div id='mobile-menu-line-list' className={`mobile${this.props.isOpen ? ' open' : ''}`}>
+    return <div id='mobile-menu-line-list'
+      className={`mobile${
+        (this.props.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) ?
+        ' open' : ''}`}>
       {CONSTANTS.LINE_INFO.map((line_info, index) => this.generateLineElement(line_info, index))}
     </div>;
   }
@@ -41,7 +44,7 @@ class MobileMenuLineList extends React.Component {
 
 MobileMenuLineList.propTypes = {
   /** @brief Indicates if the menu is open or not, controlled by the parent */
-  isOpen: PropTypes.bool.isRequired
+  landing_page_state: PropTypes.string.isRequired
 }
 
 export default MobileMenuLineList;

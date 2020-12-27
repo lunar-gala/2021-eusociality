@@ -20,8 +20,12 @@ class LandingPage extends React.Component {
       selectedLineIdx: -1,
       first_touch: [],
       current_touch: [],
-      is_mobile_line_menu_open: false,
-      is_mobile_nav_menu_open: false
+      /**
+       * We have an FSM-like organization for states. We do a Moore-type
+       * machine, where we perform actions and change states based on which
+       * state we are in.
+       */
+      landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT
     };
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
     this.touchStart = this.touchStart.bind(this);
@@ -53,20 +57,61 @@ class LandingPage extends React.Component {
       this.state.first_touch[0].y,
       this.state.current_touch[0].y);
 
-    // TODO: these cases need some work for opening and closing the menu
-    if (gesture === 'Up') {
-      this.setState({
-        is_mobile_line_menu_open: true
-      });
-    } else if (gesture == 'Tap' && this.state.current_touch[0].y > 100) {
-      this.setState({
-        is_mobile_line_menu_open: true
-      });
-    } else if (gesture == 'Tap' && this.state.current_touch[0].y <= 100) {
-      this.setState({
-        is_mobile_nav_menu_open: !this.state.is_mobile_nav_menu_open
-      });
+    if (gesture === 'Tap') {
+      console.log('[DEBUG] Tap', this.state.current_touch[0].y);
     }
+
+    /**
+     * To prevent extra scrolling from touch, we are adding a timeout here to
+     * wait for the touch event to end. This is _very_ hacky and I'm not sure
+     * if this is a good idea at all...seems to work though and 25ms to be good
+     * enough to not be too noticeable for humans.
+     */
+    setTimeout(() => {
+      if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) {
+        // Has to be a swipe down *and* the mobile line menu has to be at the top
+        if (gesture === 'Down') {
+          this.setState({
+            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+          });
+        } else if (gesture === 'Tap' && this.state.current_touch[0].y <= 256) {
+          this.setState({
+            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+          });
+        }
+      } else if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN) {
+        if (gesture === 'Tap' && (
+          this.state.current_touch[0].y >= 256 ||
+          this.state.current_touch[0].y <= 256
+        )) {
+          this.setState({
+            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+          });
+        }
+      } else {
+        // Swiping up on the default landing page opens the line menu
+        if (gesture === 'Up') {
+          this.setState({
+            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN
+          });
+        }
+        // Tapping the top of the default landing page opens the nav menu
+        else if (gesture === 'Tap' && this.state.current_touch[0].y < 90) {
+          this.setState({
+            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
+          });
+        }
+        // Tapping the lower part of the default landing page opens the line menu
+        else if (gesture === 'Tap' && this.state.current_touch[0].y >= 90) {
+          this.setState({
+            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN
+          });
+        }
+      }
+
+      console.log('[DEBUG] State:', this.state.landing_page_state);
+    }, 25);
+
   }
 
   handlerSelectedLineIdx (index) {
@@ -77,19 +122,24 @@ class LandingPage extends React.Component {
 
   render() {
     return (
-        <div className='landing-page'
+        <div className={`landing-page${
+          (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) ?
+          ' mobile-line-menu-open' : ''
+        }`}
           onTouchStart={this.touchStart}
           onTouchMove={this.touchMove}
           onTouchEnd={this.touchEnd}
           onScroll={e => e.preventDefault()}
         >
           { /* Common Elements */ }
-          <TitleTheme/>
+          <TitleTheme
+            landing_page_state={this.state.landing_page_state}
+          />
           <Logo/>
           { /* Mobile Elements */ }
           <MobileOpenMenu/>
           <MobileMenuLineList
-            isOpen={this.state.is_mobile_line_menu_open}
+            landing_page_state={this.state.landing_page_state}
           />
           { /* Desktop Elements */ }
           <Link className='link' id='about' to='/about'>About</Link>
