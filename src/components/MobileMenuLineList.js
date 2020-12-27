@@ -35,9 +35,7 @@ class MobileMenuLineList extends React.Component {
   render() {
     return <div
       id='mobile-menu-line-list'
-      className={`mobile${
-        (this.props.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) ?
-        ' open' : ''}`}>
+      className={`mobile ${this.props.landing_page_state}`}>
       {CONSTANTS.LINE_INFO.map((line_info, index) => this.generateLineElement(line_info, index))}
     </div>;
   }

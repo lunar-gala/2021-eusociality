@@ -4,9 +4,7 @@ import * as CONSTANTS from '../constants';
 
 class TitleTheme extends React.Component {
   render() {
-    return <div className={`title-theme${
-        (this.props.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) ?
-        ' mobile-line-menu-open' : ''}`}>
+    return <div className={`title-theme ${this.props.landing_page_state}`}>
       {CONSTANTS.LANDING_PAGE_TITLE}
     </div>;
   }

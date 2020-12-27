@@ -168,7 +168,9 @@ class LandingPage extends React.Component {
           />
           <Logo/>
           { /* Mobile Elements */ }
-          <MobileOpenMenu/>
+          <MobileOpenMenu
+            landing_page_state={this.state.landing_page_state}
+          />
           <MobileMenuLineList
             landing_page_state={this.state.landing_page_state}
           />
