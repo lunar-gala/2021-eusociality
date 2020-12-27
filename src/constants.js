@@ -143,7 +143,7 @@ export const LINE_INFO = [
 export const CAMERA_POSITION = {
   x: 0,
   y: 30,
-  z: 300
+  z: 400
 };
 
 /** @brief */

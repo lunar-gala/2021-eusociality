@@ -13,5 +13,6 @@
 }
 
 @media (max-width: $DESKTOP_WIDTH - 1) {
-
+  @import './mobile/index.scss';
+  @import './mobile/components/landing_page.scss';
 }
