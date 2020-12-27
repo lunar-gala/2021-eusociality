@@ -8,6 +8,7 @@ import MobileOpenMenu from '../components/MobileOpenMenu';
 import MobileMenuLineList from '../components/MobileMenuLineList';
 import MobileMenuNavList from '../components/MobileMenuNavList';
 import * as GESTURE from '../lib/Gesture';
+import LandingPageModel from '../components/LandingPageModel';
 
 /**
  * Navbar for selecting lines
@@ -164,6 +165,9 @@ class LandingPage extends React.Component {
           onScroll={e => e.preventDefault()}
         >
           { /* Common Elements */ }
+          <LandingPageModel
+            landing_page_state={this.state.landing_page_state}
+          />
           <TitleTheme
             landing_page_state={this.state.landing_page_state}
           />
