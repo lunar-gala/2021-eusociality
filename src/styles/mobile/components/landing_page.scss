@@ -37,14 +37,8 @@ $FONT_SIZE_TITLE: 48px;
 
   .logo {
     position: absolute;
-
-    // Gonna be totally honest I don't think this is _quite_ accurate to get 21px under the logo
+    width: 69px;
+    height: 90px;
     bottom: 21px;
-    margin-bottom: 21px;
-
-    img {
-      width: 69px;
-      height: 90px;
-    }
   }
 }
