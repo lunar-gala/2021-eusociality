@@ -31,11 +31,15 @@ $FONT_SIZE_TITLE: 48px;
   .title-theme {
     position: fixed;
     font-size: $FONT_SIZE_TITLE;
+    // Vertically stretch the font
+    transform: scale(1, 1.5);
     transition-duration: 1s;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 
     &.mobile-line-menu-open {
-      transform: translateY(-246px);
+      // Title becomes a bit smaller on the mobile menu open
+      font-size: $FONT_SIZE_TITLE * 0.8;
+      transform: translateY(-246px) scale(1, 1.5);
     }
   }
 

@@ -25,7 +25,8 @@ class LandingPage extends React.Component {
        * machine, where we perform actions and change states based on which
        * state we are in.
        */
-      landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+      landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
+      mobile_line_menu_y_offset: 0
     };
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
     this.touchStart = this.touchStart.bind(this);
@@ -59,6 +60,13 @@ class LandingPage extends React.Component {
 
     if (gesture === 'Tap') {
       console.log('[DEBUG] Tap', this.state.current_touch[0].y);
+    } else if (
+      this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN &&
+      (gesture === 'Up')) {
+      this.setState({
+        mobile_line_menu_y_offset: this.state.mobile_line_menu_y_offset +
+          this.state.first_touch[0].y - this.state.current_touch[0].y
+      });
     }
 
     /**
@@ -66,17 +74,24 @@ class LandingPage extends React.Component {
      * wait for the touch event to end. This is _very_ hacky and I'm not sure
      * if this is a good idea at all...seems to work though and 25ms to be good
      * enough to not be too noticeable for humans.
+     *
+     * TODO: I haven't figured out a good way to detect if the user touches
+     * "outside" of the nav and line menus. I'm hard coding rn, but I don't
+     * think this is good bc of different platforms and such
      */
     setTimeout(() => {
       if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) {
         // Has to be a swipe down *and* the mobile line menu has to be at the top
-        if (gesture === 'Down') {
+        if (gesture === 'Down' && this.state.mobile_line_menu_y_offset < 10) {
           this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
+            mobile_line_menu_y_offset: 0
           });
-        } else if (gesture === 'Tap' && this.state.current_touch[0].y <= 256) {
+        }
+        else if (gesture === 'Tap' && this.state.current_touch[0].y <= 256) {
           this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
+            mobile_line_menu_y_offset: 0
           });
         }
       } else if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN) {
@@ -109,7 +124,16 @@ class LandingPage extends React.Component {
         }
       }
 
+      // Happens after the delayed handle
       console.log('[DEBUG] State:', this.state.landing_page_state);
+      if (
+        this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN &&
+        (gesture === 'Down')) {
+        this.setState({
+          mobile_line_menu_y_offset: this.state.mobile_line_menu_y_offset +
+            this.state.first_touch[0].y - this.state.current_touch[0].y
+        });
+      }
     }, 25);
 
   }
