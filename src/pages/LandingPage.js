@@ -18,7 +18,9 @@ class LandingPage extends React.Component {
       // Which line is currently being hovered
       // Defaults to -1 when nothing is selected
       selectedLineIdx: -1,
+      /** @brief First touch recorded by `touchStart` handler */
       first_touch: [],
+      /** @brief Current touch recorded by `touchMove` handler */
       current_touch: [],
       /**
        * We have an FSM-like organization for states. We do a Moore-type
@@ -26,6 +28,12 @@ class LandingPage extends React.Component {
        * state we are in.
        */
       landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
+      /**
+       * @brief Keeps track of how far we have scrolled in the mobile line menu.
+       * We use this to figure out if we should close the mobile menu or not.
+       * If we swipe down and we aren't at the top of the list yet, then we
+       * don't close the bottom sheet yet.
+       */
       mobile_line_menu_y_offset: 0
     };
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
@@ -135,7 +143,6 @@ class LandingPage extends React.Component {
         });
       }
     }, 25);
-
   }
 
   handlerSelectedLineIdx (index) {
