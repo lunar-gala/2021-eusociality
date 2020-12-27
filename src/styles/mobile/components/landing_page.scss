@@ -41,6 +41,12 @@ $FONT_SIZE_TITLE: 48px;
       font-size: $FONT_SIZE_TITLE * 0.8;
       transform: translateY(-246px) scale(1, 1.5);
     }
+
+    &.mobile-nav-menu-open {
+      // Title becomes a bit smaller on the mobile menu open
+      font-size: $FONT_SIZE_TITLE * 0.8;
+      bottom: 108px;
+    }
   }
 
   // Hide desktop elements
@@ -65,5 +71,13 @@ $FONT_SIZE_TITLE: 48px;
     bottom: 21px;
     width: 69px;
     height: 90px;
+
+    &.mobile-line-menu-open {
+      display: none;
+    }
+
+    &.mobile-nav-menu-open {
+      display: none;
+    }
   }
 }

@@ -6,6 +6,7 @@ import TitleTheme from '../components/TitleTheme';
 import Logo from '../components/Logo';
 import MobileOpenMenu from '../components/MobileOpenMenu';
 import MobileMenuLineList from '../components/MobileMenuLineList';
+import MobileMenuNavList from '../components/MobileMenuNavList';
 import * as GESTURE from '../lib/Gesture';
 
 /**
@@ -166,12 +167,17 @@ class LandingPage extends React.Component {
           <TitleTheme
             landing_page_state={this.state.landing_page_state}
           />
-          <Logo/>
+          <Logo
+            landing_page_state={this.state.landing_page_state}
+          />
           { /* Mobile Elements */ }
           <MobileOpenMenu
             landing_page_state={this.state.landing_page_state}
           />
           <MobileMenuLineList
+            landing_page_state={this.state.landing_page_state}
+          />
+          <MobileMenuNavList
             landing_page_state={this.state.landing_page_state}
           />
           { /* Desktop Elements */ }

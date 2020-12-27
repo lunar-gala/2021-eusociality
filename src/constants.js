@@ -21,7 +21,13 @@ export const LANDING_PAGE_STATES = {
   DEFAULT: 'default',
   MOBILE_LINE_MENU_OPEN: 'mobile-line-menu-open',
   MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open',
-}
+};
+
+export const NAV_LINK_NAMES = [
+  'LIVESTREAM',
+  'ABOUT',
+  'PEOPLE'
+];
 
 // Name for all the lines
 // TODO: maybe deprecate this in favor of the more stacked LINE_INFO

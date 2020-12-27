@@ -1,28 +1,33 @@
 /**
- * Styles for the menu that shows all the lines in the show
+ * Styles for the menu that shows all the nav links
  */
 
-#mobile-menu-line-list {
-  position: absolute;
+#mobile-menu-nav-list {
+  position: fixed;
+  width: 100%;
   transition-duration: 1s;
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 
   // Initially, the line menu is hidden and below
-  transform: translateY($LINE_ELEMENT_HEIGHT*11);
+  opacity: 0;
 
-  &.mobile-line-menu-open {
-    transform: translateY($LINE_ELEMENT_HEIGHT*7);
+  &.mobile-nav-menu-open {
+    opacity: 1;
   }
 
-  .line-element {
+  .nav-element {
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: $LINE_ELEMENT_HEIGHT;
+    height: $NAV_ELEMENT_HEIGHT;
     width: 100%;
     border-top: 1px solid white;
     background-color: black;
     cursor: pointer;
+
+    &.end {
+      border-bottom: 1px solid white;
+    }
 
     .bullet {
       width: 8px;
@@ -32,18 +37,10 @@
       transform: rotate(45deg);
     }
 
-    .line-element-body {
-      margin-top: 32px;
-
+    .nav-element-body {
       .title {
         font-size: 36px;
         transform: scale(1, 1.2);
-      }
-
-      .designers {
-        height: 16px;
-        margin-top: 16px;
-        font-size: 16px;
       }
     }
   }
