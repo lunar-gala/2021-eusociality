@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import * as CONSTANTS from '../constants';
 import Navbar from '../components/Navbar';
 import TitleTheme from '../components/TitleTheme';
+import Logo from '../components/Logo';
 
 /**
  * Navbar for selecting lines
@@ -28,6 +29,7 @@ class LandingPage extends React.Component {
     return (
         <div className={'landing-page'}>
           <TitleTheme/>
+          <Logo/>
           <Link className='link' id='about' to='/about'>About</Link>
           <Link className='link' id='people' to='/people'>People</Link>
           <div id='label'>
