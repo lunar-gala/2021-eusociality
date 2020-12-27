@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import TitleTheme from '../components/TitleTheme';
 import Logo from '../components/Logo';
 import MobileOpenMenu from '../components/MobileOpenMenu';
+import MobileMenuLineList from '../components/MobileMenuLineList';
 
 /**
  * Navbar for selecting lines
@@ -29,9 +30,13 @@ class LandingPage extends React.Component {
   render() {
     return (
         <div className={'landing-page'}>
+          { /* Common Elements */ }
           <TitleTheme/>
           <Logo/>
+          { /* Mobile Elements */ }
           <MobileOpenMenu/>
+          <MobileMenuLineList/>
+          { /* Desktop Elements */ }
           <Link className='link' id='about' to='/about'>About</Link>
           <Link className='link' id='people' to='/people'>People</Link>
           <div id='label'>
