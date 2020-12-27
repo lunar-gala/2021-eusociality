@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as UTIL from '../util';
 import * as CONSTANTS from '../constants';
 
@@ -32,10 +33,15 @@ class MobileMenuLineList extends React.Component {
   }
 
   render() {
-    return <div id='mobile-menu-line-list' className='mobile'>
+    return <div id='mobile-menu-line-list' className={`mobile${this.props.isOpen ? ' open' : ''}`}>
       {CONSTANTS.LINE_INFO.map((line_info, index) => this.generateLineElement(line_info, index))}
     </div>;
   }
+}
+
+MobileMenuLineList.propTypes = {
+  /** @brief Indicates if the menu is open or not, controlled by the parent */
+  isOpen: PropTypes.bool.isRequired
 }
 
 export default MobileMenuLineList;

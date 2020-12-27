@@ -19,7 +19,9 @@ class LandingPage extends React.Component {
       // Defaults to -1 when nothing is selected
       selectedLineIdx: -1,
       first_touch: [],
-      current_touch: []
+      current_touch: [],
+      is_mobile_line_menu_open: false,
+      is_mobile_nav_menu_open: false
     };
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
     this.touchStart = this.touchStart.bind(this);
@@ -51,10 +53,19 @@ class LandingPage extends React.Component {
       this.state.first_touch[0].y,
       this.state.current_touch[0].y);
 
+    // TODO: these cases need some work for opening and closing the menu
     if (gesture === 'Up') {
-      console.log('up');
-    } else if (gesture == 'Tap') {
-      console.log('tap', this.state.current_touch);
+      this.setState({
+        is_mobile_line_menu_open: true
+      });
+    } else if (gesture == 'Tap' && this.state.current_touch[0].y > 100) {
+      this.setState({
+        is_mobile_line_menu_open: true
+      });
+    } else if (gesture == 'Tap' && this.state.current_touch[0].y <= 100) {
+      this.setState({
+        is_mobile_nav_menu_open: !this.state.is_mobile_nav_menu_open
+      });
     }
   }
 
@@ -70,13 +81,16 @@ class LandingPage extends React.Component {
           onTouchStart={this.touchStart}
           onTouchMove={this.touchMove}
           onTouchEnd={this.touchEnd}
+          onScroll={e => e.preventDefault()}
         >
           { /* Common Elements */ }
           <TitleTheme/>
           <Logo/>
           { /* Mobile Elements */ }
           <MobileOpenMenu/>
-          <MobileMenuLineList/>
+          <MobileMenuLineList
+            isOpen={this.state.is_mobile_line_menu_open}
+          />
           { /* Desktop Elements */ }
           <Link className='link' id='about' to='/about'>About</Link>
           <Link className='link' id='people' to='/people'>People</Link>
