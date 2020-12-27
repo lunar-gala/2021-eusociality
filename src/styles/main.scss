@@ -2,8 +2,16 @@
  * Compiles all the styles together
  */
 
+// Shared between desktop and mobile
 @import './constants.scss';
 @import './fonts.scss';
-@import './index.scss';
-@import './components/navbar.scss';
-@import './components/landing_page.scss';
+
+@media (min-width: $DESKTOP_WIDTH) {
+  @import './desktop/index.scss';
+  @import './desktop/components/navbar.scss';
+  @import './desktop/components/landing_page.scss';
+}
+
+@media (max-width: $DESKTOP_WIDTH - 1) {
+
+}
