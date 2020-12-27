@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link} from 'react-router-dom';
 import * as CONSTANTS from '../constants';
 import Navbar from '../components/Navbar';
 import TitleTheme from '../components/TitleTheme';

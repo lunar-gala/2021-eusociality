@@ -23,10 +23,19 @@ export const LANDING_PAGE_STATES = {
   MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open',
 };
 
-export const NAV_LINK_NAMES = [
-  'LIVESTREAM',
-  'ABOUT',
-  'PEOPLE'
+export const NAV_LINK_INFO = [
+  {
+    name: 'LIVESTREAM',
+    link_name: 'about'
+  },
+  {
+    name: 'ABOUT',
+    link_name: 'about'
+  },
+  {
+    name: 'PEOPLE',
+    link_name: 'people'
+  }
 ];
 
 // Name for all the lines
