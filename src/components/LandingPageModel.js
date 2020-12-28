@@ -82,7 +82,7 @@ class LandingPageModel extends React.Component {
     this.state.camera.position.set(
       CONSTANTS.CAMERA_POSITION.x + offset_x*CONSTANTS.CAMERA_PAN_X_FACTOR,
       CONSTANTS.CAMERA_POSITION.y + offset_y*CONSTANTS.CAMERA_PAN_Y_FACTOR,
-      CONSTANTS.CAMERA_POSITION.z + Math.sqrt(offset_x**2 + offset_y**2)*CONSTANTS.CAMERA_PAN_Z_FACTOR
+      CONSTANTS.CAMERA_POSITION.z - Math.sqrt(offset_x**2 + offset_y**2)*CONSTANTS.CAMERA_PAN_Z_FACTOR
     );
 
     this.state.camera.lookAt(0, 0, 0);
