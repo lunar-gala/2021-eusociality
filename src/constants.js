@@ -27,7 +27,6 @@ export const LINE_NAMES = [
   'Icarus'
 ];
 
-<<<<<<< HEAD
 /**
  * Line names in order, with their respective designers
  */
@@ -139,27 +138,6 @@ export const LINE_INFO = [
       'Tyng Peck'
     ]
   }
-=======
-// Name for all the lines
-export const DESIGNERS_NAMES = [
-  'Elise Chapman & Jessica Lai',
-  'Lena Li & Linda Lin',
-  'Annalisa Pao',
-  'Iz Horgan',
-  'Khushi Nandgoankar & Kathy Zhang',
-  'Lily Oberman & Skylar McAuliffe',
-  'Arushi Bandi & Maya Pandagurun',
-  'Patricia Yu',
-  // intermission
-  'Natalie Waldram & Amal Jafrani',
-  'Aadya Bhartia',
-  'Owen Haft & Carmen Yu',
-  'Olivia Luk',
-  'Jessa Westheimer',
-  'Kwins Yang & Jacky Tian',
-  'Cassie Scheirer & Madi Davis',
-  'Vincent Derienzo, Leah Kendrick & Tyng Peck'
->>>>>>> updated scss constants
 ];
 
 /** @brief Default camera position */
