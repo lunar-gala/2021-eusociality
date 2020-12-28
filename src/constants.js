@@ -7,42 +7,44 @@ export const LANDING_PAGE_TITLE = 'COLLECTIVA';
 
 // Name for all the lines
 export const LINE_NAMES = [
-  'Bloom',
-  'Bound',
-  'Chrysophyta',
-  'Digital Warfare',
-  'Duration',
   'Gossamer Idle',
-  'Icarus',
-  'Invasion',
   'Heroine',
-  'The Marianas Trench',
-  'Mirror',
   'Nexus',
+  'Chrysophyta',
+  'Mirror',
+  'The Marianas Trench',
   'Obfuscate',
-  'Relinquo',
+  'Savlos (Duration)',
+  // intermission
+  'Bloom',
   'Rensaci',
-  'Somatic'
+  'Bound',
+  'Invasion',
+  'Somatic',
+  'Relinquo',
+  'Digital Warfare',
+  'Icarus'
 ];
 
 // Name for all the lines
 export const DESIGNERS_NAMES = [
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurunus',
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurun',
-  'Arushi Bandi, Maya Pandagurun'
+  'Elise Chapman & Jessica Lai',
+  'Lena Li & Linda Lin',
+  'Annalisa Pao',
+  'Iz Horgan',
+  'Khushi Nandgoankar & Kathy Zhang',
+  'Lily Oberman & Skylar McAuliffe',
+  'Arushi Bandi & Maya Pandagurun',
+  'Patricia Yu',
+  // intermission
+  'Natalie Waldram & Amal Jafrani',
+  'Aadya Bhartia',
+  'Owen Haft & Carmen Yu',
+  'Olivia Luk',
+  'Jessa Westheimer',
+  'Kwins Yang & Jacky Tian',
+  'Cassie Scheirer & Madi Davis',
+  'Vincent Derienzo, Leah Kendrick & Tyng Peck'
 ];
 
 /** @brief Default camera position */
