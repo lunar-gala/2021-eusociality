@@ -25,3 +25,23 @@
     src: url("../../assets/fonts/sprat-type/Sprat-RegularThin.otf");
     font-weight: 100;
 }
+
+@font-face {
+    font-family: 'spratcondensed_light';
+    src: url('../../assets/fonts/sprat-type/sprat-condensedlight.woff2') format('woff2'),
+         url('../../assets/fonts/sprat-type/sprat-condensedlight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'spratcondensed_regular';
+    src: url('../../assets/fonts/sprat-type/sprat-condensedregular.woff2') format('woff2'),
+         url('../../assets/fonts/sprat-type/sprat-condensedregular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital@0;1&display=swap');
+
