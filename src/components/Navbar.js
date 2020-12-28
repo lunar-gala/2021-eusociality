@@ -1,6 +1,7 @@
 import React from 'react';
-import * as CONSTANTS from '../constants';
 import PropTypes from 'prop-types';
+import * as CONSTANTS from '../constants';
+import * as UTIL from '../util';
 
 /**
  * Navbar for selecting lines
@@ -12,15 +13,16 @@ class Navbar extends React.Component {
 
 	render() {
 		const items = [];
-		for (const [index, name] of CONSTANTS.LINE_NAMES.entries()) {
+		for (const [index, line_info] of CONSTANTS.LINE_INFO.entries()) {
 			items.push(
 				<NavItem
 					handlerSelectedLineIdx={this.props.handlerSelectedLineIdx}
 					lineIdx={index}
-					lineName={name}
+					lineName={line_info.name}
 					selectedLineIdx={this.props.selectedLineIdx}
 				/>);
 		}
+
 		return (
 			<div className="navbar">
 				{items}
@@ -29,13 +31,6 @@ class Navbar extends React.Component {
 	}
 }
 
-function pad_with_zeroes(number, length) {
-  var str = '' + number;
-  while (str.length < length) {
-      str = '0' + str;
-  }
-  return str;
-}
 
 /**
  * This is the circle for each line.
@@ -53,8 +48,7 @@ class NavItem extends React.Component {
         }}
       >
         {
-          // padding with 0's
-          pad_with_zeroes(this.props.lineIdx+1, 2)
+			UTIL.line_number_formatter(this.props.lineIdx)
         }
       </div>
 		);

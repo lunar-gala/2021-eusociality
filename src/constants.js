@@ -24,7 +24,7 @@ export const LINE_NAMES = [
   'Relinquo',
   'Rensaci',
   'Somatic'
-];
+]
 
 /**
  * Line names in order, with their respective designers

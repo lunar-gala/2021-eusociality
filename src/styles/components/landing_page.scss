@@ -65,12 +65,12 @@
       text-transform: uppercase;
     }
   }
-}
 
-.title-theme {
-  position: absolute;
-  top: 24px;
-  font-size: $FONT_SIZE_TITLE;
-  transform: $FONT_SPRAT_STRETCH;
-  font-weight: $FONT_SPRAT_WEIGHT;
+  .title-theme {
+    position: absolute;
+    top: 24px;
+    font-size: $FONT_SIZE_TITLE;
+    transform: $FONT_SPRAT_STRETCH;
+    font-weight: $FONT_SPRAT_WEIGHT;
+  }
 }
