@@ -1,4 +1,19 @@
 /**
  * Constants for stylesheet
  */
- $X_MARGIN: 10vw;
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@200;300;400&family=Overpass+Mono:wght@300;400;600;700&display=swap');
+
+$X_MARGIN: 10vw;
+
+// font families
+$FONT_SUBHEAD: 'Overpass Mono', monospace;
+$FONT_BODY: 'Libre Franklin', sans-serif;
+
+// font sizes
+$FONT_SIZE_NAV: 36px;
+$FONT_SIZE_LINK: 26px;
+$FONT_SIZE_LINE: 110px; // changed from 144px
+$FONT_SIZE_DESIGNER: 36px;
+$FONT_SIZE_TITLE: 48px;
+$FONT_SIZE_BODY: 26px;

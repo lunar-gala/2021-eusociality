@@ -24,12 +24,17 @@ class Navbar extends React.Component {
 		return (
 			<div className="navbar">
 				{items}
-        {
-          //<div className="lineLabel">{`${this.props.selectedLineIdx + 1}/16`}</div>
-        }
 			</div>
 		);
 	}
+}
+
+function pad_with_zeroes(number, length) {
+  var str = '' + number;
+  while (str.length < length) {
+      str = '0' + str;
+  }
+  return str;
 }
 
 /**
@@ -47,7 +52,10 @@ class NavItem extends React.Component {
           this.props.handlerSelectedLineIdx(this.props.lineIdx);
         }}
       >
-        {this.props.lineIdx+1}
+        {
+          // padding with 0's
+          pad_with_zeroes(this.props.lineIdx+1, 2)
+        }
       </div>
 		);
 	}

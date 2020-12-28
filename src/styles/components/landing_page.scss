@@ -6,9 +6,6 @@
 
 // Constants
 @import "../constants.scss";
-$FONT_SIZE_LINK: 24px;
-$FONT_SIZE_LABEL: 26px;
-$FONT_SIZE_TITLE: 60px;
 
 .landing-page-background {
   background-color: black;
@@ -33,10 +30,11 @@ $FONT_SIZE_TITLE: 60px;
     left: $X_MARGIN/2;
 
     .link {
+      font-family: $FONT_BODY;
+      font-size: $FONT_SIZE_LINK;
       display: block;
       color: white;
       text-decoration: none;
-      font-size: $FONT_SIZE_LINK;
       padding-bottom: 10px;
     }
   }
@@ -44,25 +42,17 @@ $FONT_SIZE_TITLE: 60px;
   #curr-line {
     position: absolute;
     left: $X_MARGIN/2;
-    bottom: 45%;
+    bottom: 40%;
     display: block;
 
-
     #line-name {
-      font-size: 110px;
+      font-size: $FONT_SIZE_LINE;
     }
 
     #designers-name {
-      font-size: 40px;
+      font-size: $FONT_SIZE_DESIGNER;
+      font-family: $FONT_SUBHEAD;
     }
-
-  }
-
-  #label {
-    position: absolute;
-    font-size: $FONT_SIZE_LABEL;
-    right: 50px;
-    bottom: 50px;
   }
 }
 
