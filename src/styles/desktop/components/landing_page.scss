@@ -73,4 +73,20 @@
     transform: $FONT_SPRAT_STRETCH;
     font-weight: $FONT_SPRAT_WEIGHT;
   }
+
+  .logo {
+    position: absolute;
+
+    // Gonna be totally honest I don't think this is _quite_ accurate to get 21px under the logo
+    top: 24px;
+    right: 24px;
+    width: 61px;
+    height: 80px;
+  }
+}
+
+.title-theme {
+  position: absolute;
+  top: 24px;
+  font-size: $FONT_SIZE_TITLE;
 }
