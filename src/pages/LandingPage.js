@@ -1,9 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-<<<<<<< HEAD
-=======
 import * as CONSTANTS from '../constants';
->>>>>>> 05c0d10cc6b1afabb9106feb811b6b4c565a185b
 import * as UTIL from '../util';
 import Navbar from '../components/Navbar';
 import TitleTheme from '../components/TitleTheme';
@@ -33,16 +30,10 @@ class LandingPage extends React.Component {
         <div className={'landing-page'}>
           <TitleTheme/>
 
-<<<<<<< HEAD
-          <img className="logo" src='img/1.png'></img>
-
-          <div className='links'>
-=======
           <div className="links">
->>>>>>> 05c0d10cc6b1afabb9106feb811b6b4c565a185b
-            <Link className='link' to='/'>LIVESTREAM</Link>
-            <Link className='link' to='/about'>ABOUT</Link>
-            <Link className='link' to='/people'>PEOPLE</Link>
+            <Link className='link' to='/'>Livestream</Link>
+            <Link className='link' to='/about'>About</Link>
+            <Link className='link' to='/people'>People</Link>
           </div>
 
           <div id='curr-line'>
@@ -50,11 +41,7 @@ class LandingPage extends React.Component {
               {
                 // Only show the line name if we have hovered over a NavItem
                 (this.state.selectedLineIdx >= 0) ?
-<<<<<<< HEAD
-                  UTIL.get_line_name(this.state.selectedLineIdx) :
-=======
-                  `${CONSTANTS.LINE_INFO[this.state.selectedLineIdx].name.toUpperCase()}` :
->>>>>>> 05c0d10cc6b1afabb9106feb811b6b4c565a185b
+                  `${CONSTANTS.LINE_INFO[this.state.selectedLineIdx].name}` :
                   ''
               }
             </div>
@@ -62,11 +49,7 @@ class LandingPage extends React.Component {
               {
                 // Only show the designers names if we have hovered over a NavItem
                 (this.state.selectedLineIdx >= 0) ?
-<<<<<<< HEAD
-                  UTIL.get_designer_name(this.state.selectedLineIdx) :
-=======
-                  `${UTIL.name_list_formatter(CONSTANTS.LINE_INFO[this.state.selectedLineIdx].designers).toUpperCase()}` :
->>>>>>> 05c0d10cc6b1afabb9106feb811b6b4c565a185b
+                  `${UTIL.name_list_formatter(CONSTANTS.LINE_INFO[this.state.selectedLineIdx].designers)}` :
                   ''
               }
             </div>

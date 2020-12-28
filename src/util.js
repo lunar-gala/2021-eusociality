@@ -2,8 +2,8 @@
  * Utility functions
  */
 
-import * as CONSTANTS from "./constants";
-/**
+
+ /**
  * Formats the line numbers in the way we want in the site.
  *
  * E.g.
@@ -51,12 +51,4 @@ export function name_list_formatter(name_list) {
 
   // List is empty
   return "";
-}
-
-export function get_line_name(i) {
-  return CONSTANTS.LINE_INFO[i].name;
-}
-
-export function get_designer_name(i) {
-  return name_list_formatter(CONSTANTS.LINE_INFO[i].designers);
 }
