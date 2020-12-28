@@ -49,7 +49,7 @@ class LandingPage extends React.Component {
               {
                 // Only show the designers names if we have hovered over a NavItem
                 (this.state.selectedLineIdx >= 0) ?
-                  `${UTIL.name_list_formatter(CONSTANTS.LINE_INFO[this.state.selectedLineIdx].designers)}` :
+                  `${UTIL.name_list_formatter(CONSTANTS.LINE_INFO[this.state.selectedLineIdx].designers).toUpperCase()}` :
                   ''
               }
             </div>
