@@ -3,6 +3,29 @@
  */
 
 /**
+ * Formats the line numbers in the way we want in the site.
+ *
+ * E.g.
+ *
+ * 0  => 01
+ * 3  => 03
+ * 9  => 10
+ * 10 => 11
+ *
+ * Doesn't support anything above 98, but we only have 16 lines in the show
+ * anyway.
+ *
+ * @param {Int} index Raw index in the array. E.g. 0 for the 1st line.
+ */
+export function line_number_formatter (index) {
+  if (index < 9) {
+    return `0${index + 1}`;
+  } else {
+    return `${index + 1}`;
+  }
+}
+
+/**
  * Takes a list of names and formats them in the following format:
  *
  * 1. <First> <Last>

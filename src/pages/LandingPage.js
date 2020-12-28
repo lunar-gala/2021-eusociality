@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import * as CONSTANTS from '../constants';
+import * as UTIL from '../util';
 import Navbar from '../components/Navbar';
 import TitleTheme from '../components/TitleTheme';
 
@@ -40,7 +41,7 @@ class LandingPage extends React.Component {
               {
                 // Only show the line name if we have hovered over a NavItem
                 (this.state.selectedLineIdx >= 0) ?
-                  `${CONSTANTS.LINE_NAMES[this.state.selectedLineIdx]}` :
+                  `${CONSTANTS.LINE_INFO[this.state.selectedLineIdx].name.toUpperCase()}` :
                   ''
               }
             </div>
@@ -48,7 +49,7 @@ class LandingPage extends React.Component {
               {
                 // Only show the designers names if we have hovered over a NavItem
                 (this.state.selectedLineIdx >= 0) ?
-                  `${CONSTANTS.DESIGNERS_NAMES[this.state.selectedLineIdx]}` :
+                  `${UTIL.name_list_formatter(CONSTANTS.LINE_INFO[this.state.selectedLineIdx].designers)}` :
                   ''
               }
             </div>

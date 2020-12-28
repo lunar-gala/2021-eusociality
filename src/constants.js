@@ -5,28 +5,6 @@
 // Shown at the top of the landing page
 export const LANDING_PAGE_TITLE = 'COLLECTIVA';
 
-// Name for all the lines
-// TODO: maybe deprecate this in favor of the more stacked LINE_INFO
-export const LINE_NAMES = [
-  'Gossamer Idle',
-  'Heroine',
-  'Nexus',
-  'Chrysophyta',
-  'Mirror',
-  'The Marianas Trench',
-  'Obfuscate',
-  'Savlos (Duration)',
-  // intermission
-  'Bloom',
-  'Rensaci',
-  'Bound',
-  'Invasion',
-  'Somatic',
-  'Relinquo',
-  'Digital Warfare',
-  'Icarus'
-];
-
 /**
  * Line names in order, with their respective designers
  */
