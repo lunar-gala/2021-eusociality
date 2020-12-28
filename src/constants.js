@@ -6,6 +6,7 @@
 export const LANDING_PAGE_TITLE = 'COLLECTIVA';
 
 // Name for all the lines
+// TODO: maybe deprecate this in favor of the more stacked LINE_INFO
 export const LINE_NAMES = [
   'Bloom',
   'Bound',
@@ -23,6 +24,119 @@ export const LINE_NAMES = [
   'Relinquo',
   'Rensaci',
   'Somatic'
+];
+
+/**
+ * Line names in order, with their respective designers
+ */
+export const LINE_INFO = [
+  {
+    name: 'Gossamer Idle',
+    designers: [
+      'Elise Chapman',
+      'Jessica Lai'
+    ]
+  },
+  {
+    name: 'Heroine',
+    designers: [
+      'Lena Li',
+      'Linda Lin'
+    ]
+  },
+  {
+    name: 'Nexus',
+    designers: [
+      'Annalisa Pao'
+    ]
+  },
+  {
+    name: 'Chrysophyta',
+    designers: [
+      'Iz Horgan'
+    ]
+  },
+  {
+    name: 'Mirror',
+    designers: [
+      'Khushi Nandgoankar',
+      'Kathy Zhang'
+    ]
+  },
+  {
+    name: 'The Marianas Trench',
+    designers: [
+      'Lily Oberman',
+      'Skylar McAuliffe'
+    ]
+  },
+  {
+    name: 'Obfuscate',
+    designers: [
+      'Arushi Bandi',
+      'Maya Pandagurun'
+    ]
+  },
+  {
+    name: 'Salvos',
+    designers: [
+      'Patricia Yu'
+    ]
+  },
+  {
+    name: 'Bloom',
+    designers: [
+      'Natalie Waldram',
+      'Amal Jafrani'
+    ]
+  },
+  {
+    name: 'Rensaci',
+    designers: [
+      'Aadya Bhartia',
+    ]
+  },
+  {
+    name: 'Bound',
+    designers: [
+      'Owen Haft',
+      'Carmen Yu',
+    ]
+  },
+  {
+    name: 'Invasion',
+    designers: [
+      'Olivia Luk',
+    ]
+  },
+  {
+    name: 'Somatic',
+    designers: [
+      'Jessa Westheimer'
+    ]
+  },
+  {
+    name: 'Relinquo',
+    designers: [
+      'Kwins Yang',
+      'Jacky Tian'
+    ]
+  },
+  {
+    name: 'Digital Warfare',
+    designers: [
+      'Cassie Scheirer',
+      'Madi Davis'
+    ]
+  },
+  {
+    name: 'Icarus',
+    designers: [
+      'Vincent Derienzo',
+      'Leah Kendrick',
+      'Tyng Peck'
+    ]
+  }
 ];
 
 /** @brief Default camera position */
