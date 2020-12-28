@@ -38,26 +38,6 @@ export const NAV_LINK_INFO = [
   }
 ];
 
-// Name for all the lines
-// TODO: maybe deprecate this in favor of the more stacked LINE_INFO
-export const LINE_NAMES = [
-  'Bloom',
-  'Bound',
-  'Chrysophyta',
-  'Digital Warfare',
-  'Duration',
-  'Gossamer Idle',
-  'Icarus',
-  'Invasion',
-  'Heroine',
-  'The Marianas Trench',
-  'Mirror',
-  'Nexus',
-  'Obfuscate',
-  'Relinquo',
-  'Rensaci',
-  'Somatic'
-]
 
 /** @brief Line names in order, with their respective designers */
 export const LINE_INFO = [
