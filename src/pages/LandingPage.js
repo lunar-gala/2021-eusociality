@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import * as CONSTANTS from '../constants';
+import * as UTIL from '../util';
 import Navbar from '../components/Navbar';
 import TitleTheme from '../components/TitleTheme';
 
@@ -17,7 +17,6 @@ class LandingPage extends React.Component {
     };
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
   }
-
   handlerSelectedLineIdx(index) {
     this.setState({
       selectedLineIdx: index,
@@ -25,11 +24,14 @@ class LandingPage extends React.Component {
   }
 
   render() {
+    console.log(process.cwd());
     return (
         <div className={'landing-page'}>
           <TitleTheme/>
 
-          <div className="links">
+          <img className="logo" src='img/1.png'></img>
+
+          <div className='links'>
             <Link className='link' to='/'>LIVESTREAM</Link>
             <Link className='link' to='/about'>ABOUT</Link>
             <Link className='link' to='/people'>PEOPLE</Link>
@@ -40,7 +42,7 @@ class LandingPage extends React.Component {
               {
                 // Only show the line name if we have hovered over a NavItem
                 (this.state.selectedLineIdx >= 0) ?
-                  `${CONSTANTS.LINE_NAMES[this.state.selectedLineIdx]}` :
+                  UTIL.get_line_name(this.state.selectedLineIdx) :
                   ''
               }
             </div>
@@ -48,7 +50,7 @@ class LandingPage extends React.Component {
               {
                 // Only show the designers names if we have hovered over a NavItem
                 (this.state.selectedLineIdx >= 0) ?
-                  `${CONSTANTS.DESIGNERS_NAMES[this.state.selectedLineIdx]}` :
+                  UTIL.get_designer_name(this.state.selectedLineIdx) :
                   ''
               }
             </div>

@@ -6,45 +6,137 @@
 export const LANDING_PAGE_TITLE = 'COLLECTIVA';
 
 // Name for all the lines
+// TODO: maybe deprecate this in favor of the more stacked LINE_INFO
 export const LINE_NAMES = [
-  'Gossamer Idle',
-  'Heroine',
-  'Nexus',
-  'Chrysophyta',
-  'Mirror',
-  'The Marianas Trench',
-  'Obfuscate',
-  'Savlos (Duration)',
-  // intermission
   'Bloom',
-  'Rensaci',
   'Bound',
-  'Invasion',
-  'Somatic',
-  'Relinquo',
+  'Chrysophyta',
   'Digital Warfare',
-  'Icarus'
+  'Duration',
+  'Gossamer Idle',
+  'Icarus',
+  'Invasion',
+  'Heroine',
+  'The Marianas Trench',
+  'Mirror',
+  'Nexus',
+  'Obfuscate',
+  'Relinquo',
+  'Rensaci',
+  'Somatic'
 ];
 
-// Name for all the lines
-export const DESIGNERS_NAMES = [
-  'Elise Chapman & Jessica Lai',
-  'Lena Li & Linda Lin',
-  'Annalisa Pao',
-  'Iz Horgan',
-  'Khushi Nandgoankar & Kathy Zhang',
-  'Lily Oberman & Skylar McAuliffe',
-  'Arushi Bandi & Maya Pandagurun',
-  'Patricia Yu',
-  // intermission
-  'Natalie Waldram & Amal Jafrani',
-  'Aadya Bhartia',
-  'Owen Haft & Carmen Yu',
-  'Olivia Luk',
-  'Jessa Westheimer',
-  'Kwins Yang & Jacky Tian',
-  'Cassie Scheirer & Madi Davis',
-  'Vincent Derienzo, Leah Kendrick & Tyng Peck'
+/**
+ * Line names in order, with their respective designers
+ */
+export const LINE_INFO = [
+  {
+    name: 'Gossamer Idle',
+    designers: [
+      'Elise Chapman',
+      'Jessica Lai'
+    ]
+  },
+  {
+    name: 'Heroine',
+    designers: [
+      'Lena Li',
+      'Linda Lin'
+    ]
+  },
+  {
+    name: 'Nexus',
+    designers: [
+      'Annalisa Pao'
+    ]
+  },
+  {
+    name: 'Chrysophyta',
+    designers: [
+      'Iz Horgan'
+    ]
+  },
+  {
+    name: 'Mirror',
+    designers: [
+      'Khushi Nandgoankar',
+      'Kathy Zhang'
+    ]
+  },
+  {
+    name: 'The Marianas Trench',
+    designers: [
+      'Lily Oberman',
+      'Skylar McAuliffe'
+    ]
+  },
+  {
+    name: 'Obfuscate',
+    designers: [
+      'Arushi Bandi',
+      'Maya Pandagurun'
+    ]
+  },
+  {
+    name: 'Salvos',
+    designers: [
+      'Patricia Yu'
+    ]
+  },
+  {
+    name: 'Bloom',
+    designers: [
+      'Natalie Waldram',
+      'Amal Jafrani'
+    ]
+  },
+  {
+    name: 'Rensaci',
+    designers: [
+      'Aadya Bhartia',
+    ]
+  },
+  {
+    name: 'Bound',
+    designers: [
+      'Owen Haft',
+      'Carmen Yu',
+    ]
+  },
+  {
+    name: 'Invasion',
+    designers: [
+      'Olivia Luk',
+    ]
+  },
+  {
+    name: 'Somatic',
+    designers: [
+      'Jessa Westheimer'
+    ]
+  },
+  {
+    name: 'Relinquo',
+    designers: [
+      'Kwins Yang',
+      'Jacky Tian'
+    ]
+  },
+  {
+    name: 'Digital Warfare',
+    designers: [
+      'Cassie Scheirer',
+      'Madi Davis'
+    ]
+  },
+  {
+    name: 'Icarus',
+    designers: [
+      'Vincent Derienzo',
+      'Leah Kendrick',
+      'Tyng Peck'
+    ]
+  }
 ];
 
 /** @brief Default camera position */

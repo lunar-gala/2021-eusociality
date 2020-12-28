@@ -21,6 +21,14 @@
   align-items: center;
   justify-content: center;
 
+  .logo {
+    position:absolute;
+    top: 24px;
+    right: $X_MARGIN/2;
+    height: 50px;
+    width: 50px;
+  }
+
   .links {
     position: absolute;
     top: 24px;
@@ -29,6 +37,8 @@
     .link {
       font-family: $FONT_BODY;
       font-size: $FONT_SIZE_LINK;
+      text-transform: uppercase;
+      font-weight: 200;
       display: block;
       color: white;
       text-decoration: none;
@@ -44,11 +54,15 @@
 
     #line-name {
       font-size: $FONT_SIZE_LINE;
+      text-transform: uppercase;
+      transform: $FONT_SPRAT_STRETCH;
+      font-weight: $FONT_SPRAT_WEIGHT;
     }
 
     #designers-name {
       font-size: $FONT_SIZE_DESIGNER;
       font-family: $FONT_SUBHEAD;
+      text-transform: uppercase;
     }
   }
 }
@@ -57,4 +71,6 @@
   position: absolute;
   top: 24px;
   font-size: $FONT_SIZE_TITLE;
+  transform: $FONT_SPRAT_STRETCH;
+  font-weight: $FONT_SPRAT_WEIGHT;
 }

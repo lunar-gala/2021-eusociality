@@ -20,6 +20,8 @@
     cursor: pointer;
     text-decoration: none;
     transition: .3s;
+    transform: $FONT_SPRAT_STRETCH;
+    font-weight: $FONT_SPRAT_WEIGHT;
 
     &.selected {
       text-decoration: underline;
