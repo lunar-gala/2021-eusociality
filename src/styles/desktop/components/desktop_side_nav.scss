@@ -1,0 +1,24 @@
+/**
+ * Navigation sidebar on desktop
+ */
+
+.links {
+  position: absolute;
+  top: 24px;
+  left: $X_MARGIN/2;
+
+  .link {
+    font-family: $FONT_BODY;
+    font-size: $FONT_SIZE_LINK;
+    text-transform: uppercase;
+    font-weight: $FONT_LINK_WEIGHT;
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding-bottom: 10px;
+  }
+
+  .linkNum {
+      font-size: $FONT_SIZE_SUPERSCRIPT;
+  }
+}

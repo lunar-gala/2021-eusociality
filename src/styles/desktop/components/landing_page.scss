@@ -29,23 +29,6 @@
     width: 50px;
   }
 
-  .links {
-    position: absolute;
-    top: 24px;
-    left: $X_MARGIN/2;
-
-    .link {
-      font-family: $FONT_BODY;
-      font-size: $FONT_SIZE_LINK;
-      text-transform: uppercase;
-      font-weight: 200;
-      display: block;
-      color: white;
-      text-decoration: none;
-      padding-bottom: 10px;
-    }
-  }
-
   #curr-line {
     position: absolute;
     left: $X_MARGIN/2;
@@ -57,12 +40,14 @@
       text-transform: uppercase;
       transform: $FONT_SPRAT_STRETCH;
       font-weight: $FONT_SPRAT_WEIGHT;
+      letter-spacing: $HEADER_TRACKING;
     }
 
     #designers-name {
       font-size: $FONT_SIZE_DESIGNER;
       font-family: $FONT_SUBHEAD;
       text-transform: uppercase;
+      letter-spacing: $SUBHEAD_TRACKING;
     }
   }
 
@@ -71,7 +56,8 @@
     top: 24px;
     font-size: $FONT_SIZE_TITLE;
     transform: $FONT_SPRAT_STRETCH;
-    font-weight: $FONT_SPRAT_WEIGHT;
+    font-weight: $FONT_TITLE_WEIGHT;
+    letter-spacing: $TITLE_TRACKING;
   }
 
   .logo {
@@ -83,10 +69,4 @@
     width: 61px;
     height: 80px;
   }
-}
-
-.title-theme {
-  position: absolute;
-  top: 24px;
-  font-size: $FONT_SIZE_TITLE;
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import * as CONSTANTS from '../constants';
 import * as UTIL from '../util';
 import Navbar from '../components/Navbar';
@@ -10,6 +9,7 @@ import MobileMenuLineList from '../components/MobileMenuLineList';
 import MobileMenuNavList from '../components/MobileMenuNavList';
 import * as GESTURE from '../lib/Gesture';
 import LandingPageModel from '../components/LandingPageModel';
+import DesktopSideNav from '../components/DesktopSideNav';
 
 /**
  * Navbar for selecting lines
@@ -188,11 +188,8 @@ class LandingPage extends React.Component {
             landing_page_state={this.state.landing_page_state}
           />
           { /* Desktop Elements */ }
-          <div className="links">
-            <Link className='link' to='/'>Livestream</Link>
-            <Link className='link' to='/about'>About</Link>
-            <Link className='link' to='/people'>People</Link>
-          </div>
+
+          <DesktopSideNav />
 
           <div id='curr-line'>
             <div id='line-name'>
