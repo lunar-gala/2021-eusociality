@@ -19,6 +19,7 @@ class Navbar extends React.Component {
 					lineIdx={index}
 					lineName={name}
 					selectedLineIdx={this.props.selectedLineIdx}
+					key={index}
 				/>);
 		}
 		return (
