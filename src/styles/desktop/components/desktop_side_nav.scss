@@ -4,7 +4,7 @@
 
 .links {
   position: absolute;
-  top: 24px;
+  top: $TOP_MARGIN;
   left: .65*$X_MARGIN/2; // an aprox guess to get the actual links aligned with the rest of the page
 
   .link {

@@ -6,11 +6,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 import LG_LOGO from '../../assets/logo/LGLogo_white.svg';
 
 class Logo extends React.Component {
   render() {
-    return <LG_LOGO className={`logo ${this.props.landing_page_state}`}/>;
+    return <Link to="/">
+      <LG_LOGO className={`logo ${this.props.landing_page_state}`}/>
+    </Link>
   }
 }
 

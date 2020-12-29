@@ -15,17 +15,30 @@
   position: fixed;
   bottom: 5vh;
 
+  .diamond {
+    margin: auto;
+    width: 8.8px;
+    height: 8.8px;
+    background-color: white;
+    transform: rotate(45deg);
+    margin-bottom: 10px;
+    visibility: hidden;
+
+    &.selected {
+      visibility: visible;
+    }
+  }
+
   .navbar-item {
     font-size: $FONT_SIZE_NAV;
     cursor: pointer;
     text-decoration: none;
-    transition: .3s;
     transform: $FONT_SPRAT_STRETCH;
     font-weight: $FONT_SPRAT_WEIGHT;
+    text-underline-offset: 20px;
 
     &.selected {
       text-decoration: underline;
-      transition: .3s;
     }
   }
 
