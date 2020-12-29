@@ -1,6 +1,7 @@
 import React from 'react';
 import * as CONSTANTS from '../constants';
 import * as UTIL from '../util';
+import { Link } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import TitleTheme from '../components/TitleTheme';
 import Logo from '../components/Logo';
@@ -191,24 +192,27 @@ class LandingPage extends React.Component {
 
           <DesktopSideNav />
 
-          <div id='curr-line'>
-            <div id='line-name'>
-              {
-                // Only show the line name if we have hovered over a NavItem
-                (this.state.selectedLineIdx >= 0) ?
-                  `${CONSTANTS.LINE_INFO[this.state.selectedLineIdx].name}` :
-                  ''
-              }
+          <Link to='/'> {/* Link to each individual page, based on index */}
+            <div id='curr-line'>
+              <div id='line-name'>
+                {
+                  // Only show the line name if we have hovered over a NavItem
+                  (this.state.selectedLineIdx >= 0) ?
+                    `${CONSTANTS.LINE_INFO[this.state.selectedLineIdx].name}` :
+                    ''
+                }
+              </div>
+              <div id='designers-name'>
+                {
+                  // Only show the designers names if we have hovered over a NavItem
+                  (this.state.selectedLineIdx >= 0) ?
+                    `${UTIL.name_list_formatter(CONSTANTS.LINE_INFO[this.state.selectedLineIdx].designers)}` :
+                    ''
+                }
+              </div>
             </div>
-            <div id='designers-name'>
-              {
-                // Only show the designers names if we have hovered over a NavItem
-                (this.state.selectedLineIdx >= 0) ?
-                  `${UTIL.name_list_formatter(CONSTANTS.LINE_INFO[this.state.selectedLineIdx].designers)}` :
-                  ''
-              }
-            </div>
-          </div>
+          </Link>
+
           <Navbar
             handlerSelectedLineIdx={this.handlerSelectedLineIdx}
             selectedLineIdx={this.state.selectedLineIdx}

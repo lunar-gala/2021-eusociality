@@ -1,3 +1,7 @@
+/**
+ * Navigation sidebar on desktop
+ */
+
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -8,11 +12,11 @@ class DesktopSideNav extends React.Component {
         <Link className="link" to="/">
           <sup className="linkNum">01</sup> Livestream
         </Link>
-        <Link className="link" to="/about">
-          <sup className="linkNum">02</sup> About
-        </Link>
         <Link className="link" to="/people">
-          <sup className="linkNum">03</sup> People
+          <sup className="linkNum">02</sup> People
+        </Link>
+        <Link className="link" to="/about">
+          <sup className="linkNum">03</sup> About
         </Link>
       </div>
     );
