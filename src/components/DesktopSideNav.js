@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 class DesktopSideNav extends React.Component {
   render() {
     return (
-      <div className="links">
+      <div className="links desktop">
         <Link className="link" to="/">
           <sup className="linkNum">01</sup> Livestream
         </Link>

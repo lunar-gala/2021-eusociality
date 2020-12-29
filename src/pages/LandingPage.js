@@ -192,7 +192,7 @@ class LandingPage extends React.Component {
 
           <DesktopSideNav />
 
-          <Link to='/'> {/* Link to each individual page, based on index */}
+          <Link to='/' className='desktop'> {/* Link to each individual page, based on index */}
             <div id='curr-line'>
               <div id='line-name'>
                 {

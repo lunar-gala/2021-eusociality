@@ -25,7 +25,7 @@ class Navbar extends React.Component {
       );
     }
 
-    return <div className="navbar">{items}</div>;
+    return <div className="navbar desktop">{items}</div>;
   }
 }
 
