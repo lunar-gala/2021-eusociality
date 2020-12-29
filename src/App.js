@@ -1,8 +1,9 @@
 import React from 'react';
-import {HashRouter as Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import AboutPage from './pages/AboutPage';
 import PeoplePage from './pages/PeoplePage';
+import LandingPageModel from './components/LandingPageModel';
 
 /**
  * This is the highest level of the web app.
@@ -23,6 +24,7 @@ class App extends React.Component {
             <PeoplePage />
           </Route>
           <Route path='/'>
+            <LandingPageModel />
             <LandingPage />
           </Route>
         </Switch>

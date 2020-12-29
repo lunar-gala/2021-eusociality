@@ -9,6 +9,7 @@ $FONT_SIZE_LINK: 48px;
 $FONT_SIZE_LABEL: 26px;
 $FONT_SIZE_TITLE: 60px;
 
+
 .landing-page-background {
   background-color: black;
   width: 100%;
@@ -57,16 +58,6 @@ $FONT_SIZE_TITLE: 60px;
     font-size: $FONT_SIZE_LABEL;
     right: 50px;
     bottom: 50px;
-  }
-
-  .logo {
-    position: absolute;
-
-    // Gonna be totally honest I don't think this is _quite_ accurate to get 21px under the logo
-    top: 24px;
-    right: 24px;
-    width: 61px;
-    height: 80px;
   }
 }
 
