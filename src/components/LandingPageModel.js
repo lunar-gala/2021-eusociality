@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -265,17 +264,10 @@ class LandingPageModel extends React.Component {
   }
 
   render () {
-    return <div
-      className={`landing-page-background ${this.props.landing_page_state}`}
-      onMouseMove={this._onMouseMove.bind(this)}>
+    return <div className='landing-page-background' onMouseMove={this._onMouseMove.bind(this)}>
       <canvas id='landing-page-cube' />
     </div>;
   }
-}
-
-LandingPageModel.propTypes = {
-  /** @brief Indicates if the menu is open or not, controlled by the parent */
-  landing_page_state: PropTypes.string.isRequired
 }
 
 export default LandingPageModel;
