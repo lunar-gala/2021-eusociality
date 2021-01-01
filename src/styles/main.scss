@@ -26,12 +26,11 @@
 
 // Tablet styles
 @media (min-width: $TABLET_WIDTH) and (max-width: $DESKTOP_WIDTH - 1) {
-  // Landscape orientation: copy desktop and overrides
+  // Landscape orientation: slight adjustments from desktop
   @media (orientation: landscape) {
     @import './desktop/index.scss';
-    @import './tablet/index.scss';
-    @import './desktop/components/navbar.scss';
-    @import './desktop/components/landing_page.scss';
+    @import './tablet/components/navbar.scss';
+    @import './tablet/components/landing_page.scss';
   }
   // Portrait orientation: copy mobile
   @media (orientation: portrait) {
