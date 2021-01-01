@@ -1,0 +1,64 @@
+/**
+ * First page the user sees, the landing page.
+ *
+ * Contains a 3D asset in the back.
+ */
+
+.landing-page-background {
+  background-color: black;
+  width: 100%;
+  height: 100vh;
+
+  #landing-page-cube {
+    width: 100%;
+    height: 100vh;
+  }
+}
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  #curr-line {
+    position: absolute;
+    left: $X_MARGIN/2;
+    bottom: 40%;
+    display: block;
+
+    #line-name {
+      font-size: $FONT_SIZE_LINE;
+      text-transform: uppercase;
+      transform: $FONT_SPRAT_STRETCH;
+      font-weight: $FONT_SPRAT_WEIGHT;
+      letter-spacing: $HEADER_TRACKING;
+    }
+
+    #designers-name {
+      font-size: $FONT_SIZE_DESIGNER;
+      font-family: $FONT_SUBHEAD;
+      text-transform: uppercase;
+      letter-spacing: $SUBHEAD_TRACKING;
+    }
+  }
+
+  .title-theme {
+    position: absolute;
+    top: $TOP_MARGIN;
+    font-size: $FONT_SIZE_TITLE;
+    transform: $FONT_SPRAT_STRETCH;
+    font-weight: $FONT_TITLE_WEIGHT;
+    letter-spacing: $TITLE_TRACKING;
+  }
+
+  .logo {
+    position: absolute;
+
+    // Gonna be totally honest I don't think this is _quite_ accurate to get 21px under the logo
+    top: $TOP_MARGIN;
+    right: 24px;
+    width: 61px;
+    height: 80px;
+  }
+}

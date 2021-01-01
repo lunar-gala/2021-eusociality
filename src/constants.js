@@ -2,33 +2,44 @@
  * Constants for project
  */
 
-// Shown at the top of the landing page
+/** @brief Title shown on the landing screen */
 export const LANDING_PAGE_TITLE = 'COLLECTIVA';
 
-// Name for all the lines
-// TODO: maybe deprecate this in favor of the more stacked LINE_INFO
-export const LINE_NAMES = [
-  'Bloom',
-  'Bound',
-  'Chrysophyta',
-  'Digital Warfare',
-  'Duration',
-  'Gossamer Idle',
-  'Icarus',
-  'Invasion',
-  'Heroine',
-  'The Marianas Trench',
-  'Mirror',
-  'Nexus',
-  'Obfuscate',
-  'Relinquo',
-  'Rensaci',
-  'Somatic'
+/**
+ * @brief State management for the landing page.
+ *
+ * I think for now, we can keep _all_ of the states here, desktop, iPad,
+ * mobile, etc.
+ *
+ * These will also double as class names, so you can reference these in the
+ * styles.
+ *
+ * NOTE: Javascript doesn't have enums, but this is supposed to behave like
+ * one. This means to make all the states have distinct values.
+ */
+export const LANDING_PAGE_STATES = {
+  DEFAULT: 'default',
+  MOBILE_LINE_MENU_OPEN: 'mobile-line-menu-open',
+  MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open',
+};
+
+export const NAV_LINK_INFO = [
+  {
+    name: 'LIVESTREAM',
+    link_name: 'about'
+  },
+  {
+    name: 'ABOUT',
+    link_name: 'about'
+  },
+  {
+    name: 'PEOPLE',
+    link_name: 'people'
+  }
 ];
 
-/**
- * Line names in order, with their respective designers
- */
+
+/** @brief Line names in order, with their respective designers */
 export const LINE_INFO = [
   {
     name: 'Gossamer Idle',
@@ -143,7 +154,7 @@ export const LINE_INFO = [
 export const CAMERA_POSITION = {
   x: 0,
   y: 30,
-  z: 300
+  z: 400
 };
 
 /** @brief */
