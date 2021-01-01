@@ -8,7 +8,7 @@
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 
   // Initially, the line menu is hidden and below
-  transform: translateY($LINE_ELEMENT_HEIGHT*11);
+  transform: translateY(-100%);
 
   &.mobile-line-menu-open {
     position: absolute;

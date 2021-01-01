@@ -16,10 +16,29 @@
 }
 
 // Mobile styles
-@media (max-width: $DESKTOP_WIDTH - 1) {
+@media (max-width: $TABLET_WIDTH - 1) {
   @import './mobile/index.scss';
   @import './mobile/components/landing_page.scss';
   @import './mobile/components/mobile_open_menu.scss';
   @import './mobile/components/mobile_menu_line_list.scss';
   @import './mobile/components/mobile_menu_nav_list.scss';
+}
+
+// Tablet styles
+@media (min-width: $TABLET_WIDTH) and (max-width: $DESKTOP_WIDTH - 1) {
+  // Landscape orientation: copy desktop and overrides
+  @media (orientation: landscape) {
+    @import './desktop/index.scss';
+    @import './tablet/index.scss';
+    @import './desktop/components/navbar.scss';
+    @import './desktop/components/landing_page.scss';
+  }
+  // Portrait orientation: copy mobile
+  @media (orientation: portrait) {
+    @import './mobile/index.scss';
+    @import './mobile/components/landing_page.scss';
+    @import './mobile/components/mobile_open_menu.scss';
+    @import './mobile/components/mobile_menu_line_list.scss';
+    @import './mobile/components/mobile_menu_nav_list.scss';
+  }
 }

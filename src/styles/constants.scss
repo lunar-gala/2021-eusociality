@@ -5,7 +5,14 @@
 // sizing
 $X_MARGIN: 10vw;
 $TOP_MARGIN: 36px;
-$DESKTOP_WIDTH: 768px;
+$DESKTOP_WIDTH: 1240px;
+/**
+ * NOTE: this is completely arbitrary and loosely based upon values at
+ * https://www.kylejlarson.com/blog/ipad-screen-size-guide-web-design-tips/.
+ * - Desktop readjusted to 1240 since the navbar starts looking a bit squished
+ * - Tablet set to 720 to be below minimum iPad browser width
+ */
+$TABLET_WIDTH: 672px;
 $LINE_ELEMENT_HEIGHT: 142px;
 $NAV_ELEMENT_HEIGHT: 126px;
 
