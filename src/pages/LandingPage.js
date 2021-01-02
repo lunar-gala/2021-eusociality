@@ -156,7 +156,6 @@ class LandingPage extends React.Component {
   }
 
   render() {
-    console.log(process.cwd());
     return (
 
         <div className={`landing-page${

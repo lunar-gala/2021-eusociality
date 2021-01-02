@@ -150,6 +150,9 @@ export const LINE_INFO = [
   }
 ];
 
+/** @brief Three.js environment settings */
+export const LANDING_PAGE_BACKGROUND_COLOR = 0x141414;
+
 /** @brief Default camera position */
 export const CAMERA_POSITION = {
   x: 0,

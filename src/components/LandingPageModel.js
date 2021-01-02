@@ -142,7 +142,8 @@ class LandingPageModel extends React.Component {
     const clock = new THREE.Clock();
     let mixer = null;
 
-    // Add a light
+    // Add a light and background
+    scene.background = new THREE.Color( CONSTANTS.LANDING_PAGE_BACKGROUND_COLOR );
     const color = 0xFFFFFF;
     const light_amb = new THREE.AmbientLight(color, 0.5);
     const light_dir = new THREE.DirectionalLight(color, 0.75);
