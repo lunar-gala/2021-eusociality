@@ -15,18 +15,17 @@
   position: fixed;
   bottom: 20%;
 
-  .nav-circle {
-    background-color: rgba(255, 255, 255, .3);
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    border: 1px solid white;
-    transition: .5s;
-    cursor: pointer;
-
-    // When a nav circle is selected, we fill it in
-    &.selected {
+  .diamond {
+    margin: auto;
+    width: 8.8px;
+    height: 8.8px;
     background-color: white;
+    transform: rotate(45deg);
+    margin-bottom: 10px;
+    visibility: hidden;
+
+    &.selected {
+      visibility: visible;
     }
   }
 
