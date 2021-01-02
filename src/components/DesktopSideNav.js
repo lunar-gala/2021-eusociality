@@ -10,13 +10,13 @@ class DesktopSideNav extends React.Component {
     return (
       <div className="links desktop">
         <Link className="link" to="/">
-          <sup className="linkNum">01</sup> Livestream
+          Livestream
         </Link>
         <Link className="link" to="/people">
-          <sup className="linkNum">02</sup> People
+          People
         </Link>
         <Link className="link" to="/about">
-          <sup className="linkNum">03</sup> About
+          About
         </Link>
       </div>
     );
