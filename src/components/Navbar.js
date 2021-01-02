@@ -45,6 +45,9 @@ class NavItem extends React.Component {
         onMouseEnter={() => {
           this.props.handlerSelectedLineIdx(this.props.lineIdx);
         }}
+					onTouchStart={() => {
+						this.props.handlerSelectedLineIdx(this.props.lineIdx);
+					}}
       >
         <div className={`diamond ${
           this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""
