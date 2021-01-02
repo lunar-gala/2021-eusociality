@@ -42,11 +42,11 @@ export function name_list_formatter(name_list) {
   } else if (len >= 2) {
     let format = "";
 
-    for (let i = 0; i < len - 2; i++) {
+    for (let i = 0; i < len - 1; i++) {
       format += `${name_list[i]}, `;
     }
 
-    return `${format}${name_list[len - 2]} & ${name_list[len - 1]}`;
+    return `${format} ${name_list[len - 1]}`;
   }
 
   // List is empty
