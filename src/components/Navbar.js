@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as CONSTANTS from "../constants";
 import * as UTIL from "../util";
+import NavBall from '../../assets/img/navBall.svg'
 
 /**
  * Navbar for selecting lines
@@ -36,6 +37,7 @@ class Navbar extends React.Component {
  */
 class NavItem extends React.Component {
   render() {
+    console.log(this.props.selectedLineIdx, this.props.lineIdx, this.props.selectedLineIdx === this.props.lineIdx)
     return (
       <div
         className={`navbar-item ${
@@ -46,11 +48,7 @@ class NavItem extends React.Component {
           this.props.handlerSelectedLineIdx(this.props.lineIdx);
         }}
       >
-        <div
-          className={`diamond ${
-            this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""
-          }`}
-        />
+        <NavBall className={`navBall ${this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""}`}/>
         {UTIL.line_number_formatter(this.props.lineIdx)}
       </div>
     );

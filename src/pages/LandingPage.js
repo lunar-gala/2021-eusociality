@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as CONSTANTS from '../constants';
 import * as UTIL from '../util';
 import Navbar from '../components/Navbar';
@@ -37,7 +37,8 @@ class LandingPage extends React.Component {
        * If we swipe down and we aren't at the top of the list yet, then we
        * don't close the bottom sheet yet.
        */
-      mobile_line_menu_y_offset: 0
+      mobile_line_menu_y_offset: 0,
+      fading: false,
     };
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
     this.touchStart = this.touchStart.bind(this);
@@ -149,14 +150,17 @@ class LandingPage extends React.Component {
   }
 
   handlerSelectedLineIdx (index) {
-    this.setState({
-      selectedLineIdx: index,
-    });
+    this.setState({fading: true}); // fade out
+    this.timer = setTimeout(_ => {
+      this.setState({selectedLineIdx: index});
+      this.setState({fading: false}); // fade back in
+  }, 200); // animation timing offset
   }
 
   render() {
-    return (
+    const {fading} = this.state;
 
+    return (
         <div className={`landing-page${
           (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) ?
           ' mobile-line-menu-open' : ''
@@ -190,7 +194,7 @@ class LandingPage extends React.Component {
 
           <DesktopSideNav />
           <div id="main-screen">
-            <div id='curr-line'>
+            <div className={`${fading ? 'faded' : 'notFaded'}`} id='curr-line'>
               <div id='line-name'>
                 {
                   (this.state.selectedLineIdx >= 0) ?
@@ -210,9 +214,9 @@ class LandingPage extends React.Component {
               See more &gt;
             </div>
 
+            { /* Various line and dot elements */ }
             <div id="see-more-line" />
             <div className="dot" id="see-more-dot" />
-
             <div className="vertical-line" id="outer-lines" />
             <div className="vertical-line" id="inner-lines" />
             <div className="horizontal-line lower" />

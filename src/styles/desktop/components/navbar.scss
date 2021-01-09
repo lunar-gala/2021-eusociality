@@ -11,31 +11,34 @@
   align-items: center;
   // Put this navbar at the bottom
   position: fixed;
-  bottom: $BOTTOM_MARGIN;
+  bottom: $BOTTOM_MARGIN*.8;
 
-  .diamond {
+  .navBall {
     margin: auto;
-    width: 8.8px;
-    height: 8.8px;
-    background-color: white;
-    border-radius: 100%;
-    visibility: hidden;
+    display: block;
+    transform: scale(.9, .8);
+    opacity: 0;
+    transition: .5s;
 
     &.selected {
-      visibility: visible;
+      opacity: 100;
+      transition: .5s;
     }
   }
 
   .navbar-item {
     font-size: $FONT_SIZE_NAV;
     cursor: pointer;
-    text-decoration: none;
     transform: $FONT_SPRAT_STRETCH;
     font-weight: $FONT_SPRAT_WEIGHT;
-    text-underline-offset: 10px;
+    transition: .5s;
+    border-bottom: 2px solid;
+    border-color: rgba(255, 255, 255, 0);
+    padding-bottom: $BOTTOM_MARGIN*.2;
 
     &.selected {
-      text-decoration: underline;
+      transition: .5s;
+      border-color: rgba(255, 255, 255, 1);
     }
   }
 

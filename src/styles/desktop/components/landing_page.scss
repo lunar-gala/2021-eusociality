@@ -28,6 +28,16 @@
   justify-content: center;
   overflow: hidden;
 
+  .faded {
+    opacity: 0;
+    transition: .2s;
+  }
+
+  .notFaded {
+    opacity: 1;
+    transition: .3s;
+  }
+
   #main-screen {
     flex-direction: row;
 
@@ -84,6 +94,7 @@
       position: absolute;
       border-left: 1px solid white;
       border-right: 1px solid white;
+      pointer-events: none;
     }
 
     #outer-lines {
