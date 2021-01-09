@@ -215,13 +215,12 @@ class LandingPage extends React.Component {
 
             <div className="vertical-line" id="outer-lines" />
             <div className="vertical-line" id="inner-lines" />
-            <div className="horizontal-line" id="lower-line" />
-            <div className="horizontal-line" id="upper-line" />
-            <div className="dot" id="left-dot-1" />
-            <div className="dot" id="left-dot-2" />
-            <div className="dot" id="right-dot-1" />
-            <div className="dot" id="right-dot-2" />
-
+            <div className="horizontal-line lower" />
+            <div className="horizontal-line upper" />
+            <div className="dot left-dot lower"/>
+            <div className="dot left-dot upper" />
+            <div className="dot right-dot lower"/>
+            <div className="dot right-dot upper" />
 
           </div>
 

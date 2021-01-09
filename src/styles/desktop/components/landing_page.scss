@@ -5,6 +5,9 @@
  */
 
  $CIRCLE_RAD : 12px;
+ $OUTER : $X_MARGIN/8;
+ $LOWER : $BOTTOM_MARGIN/4;
+ $UPPER : $BOTTOM_MARGIN*2.2;
 
 .landing-page-background {
   background-color: black;
@@ -64,10 +67,15 @@
 
     #see-more-line {
       position: absolute;
-      right: $X_MARGIN/8;
+      right: $OUTER;
       bottom: 35vh;
       width: 60vw;
       border-top: 1px solid white;
+    }
+
+    #see-more-dot {
+      bottom: 35vh;
+      right: 60vw + $OUTER;
     }
 
     .vertical-line {
@@ -79,8 +87,8 @@
     }
 
     #outer-lines {
-      left: $X_MARGIN/8;
-      right: $X_MARGIN/8;
+      left: $OUTER;
+      right: $OUTER;
     }
 
     #inner-lines {
@@ -88,19 +96,19 @@
       right: $X_MARGIN/4;
     }
 
+    .lower {
+      bottom: $LOWER;
+    }
+
+    .upper {
+      bottom: $UPPER;
+    }
+
     .horizontal-line {
       left: 0;
       width: 100vw;
       position: absolute;
       border-bottom: 1px solid white;
-    }
-
-    #lower-line {
-      bottom: $BOTTOM_MARGIN/2;
-    }
-
-    #upper-line {
-      bottom: $BOTTOM_MARGIN*2;
     }
 
     .dot {
@@ -112,33 +120,14 @@
       margin-bottom: -$CIRCLE_RAD/2;
     }
 
-    #left-dot-1 {
+    .left-dot {
       margin-left: -$CIRCLE_RAD/2;
-      bottom: $BOTTOM_MARGIN/2;
-      left: $X_MARGIN/8;
+      left: $OUTER;
     }
 
-    #left-dot-2 {
-      margin-left: -$CIRCLE_RAD/2;
-      bottom: $BOTTOM_MARGIN*2;
-      left: $X_MARGIN/8;
-    }
-
-    #right-dot-1 {
+    .right-dot {
       margin-right: -$CIRCLE_RAD/2;
-      bottom: $BOTTOM_MARGIN/2;
-      right: $X_MARGIN/8;
-    }
-
-    #right-dot-2 {
-      margin-right: -$CIRCLE_RAD/2;
-      bottom: $BOTTOM_MARGIN*2;
-      right: $X_MARGIN/8;
-    }
-
-    #see-more-dot {
-      bottom: 35vh;
-      right: 60vw + $X_MARGIN/8;
+      right: $OUTER;
     }
 
   }
