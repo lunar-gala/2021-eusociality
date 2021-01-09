@@ -153,18 +153,6 @@ export const LINE_INFO = [
 /** @brief Three.js environment settings */
 export const LANDING_PAGE_BACKGROUND_COLOR = 0x141414;
 
-/** @brief Default camera position */
-export const CAMERA_POSITION = {
-  x: 0,
-  y: 30,
-  z: 400
-};
-
-/** @brief */
-export const CAMERA_PAN_X_FACTOR = 10;
-export const CAMERA_PAN_Y_FACTOR = 10;
-export const CAMERA_PAN_Z_FACTOR = 10;
-
 /** @brief Animation duration in ms for the landing page exploding cube */
 export const ANIMATION_DURATION = 3000;
 

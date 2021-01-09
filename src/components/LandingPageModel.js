@@ -34,10 +34,25 @@ import radiance_posX from '../../assets/models/skybox/radiance/posX.jpg';
 import radiance_posY from '../../assets/models/skybox/radiance/posY.jpg';
 import radiance_posZ from '../../assets/models/skybox/radiance/posZ.jpg';
 
+/*** CAMERA PARAMETERS ***/
 const CAMERA_POSITION = {
   x: 0,
   y: 30,
-  z: 100
+  z: 400
+};
+
+/** @brief Starting position of the object */
+const OBJECT_POSITION = {
+  x: 200,
+  y: 0,
+  z: 0
+}
+
+/** @brief How much the camera tilts on mouse move */
+const CAMERA_PAN_FACTOR = {
+  x: 10,
+  y: 10,
+  z: 10
 };
 
 class LandingPageModel extends React.Component {
@@ -87,12 +102,12 @@ class LandingPageModel extends React.Component {
 
     // TODO: animate this movement so it is smoother
     this.state.camera.position.set(
-      CONSTANTS.CAMERA_POSITION.x + offset_x*CONSTANTS.CAMERA_PAN_X_FACTOR,
-      CONSTANTS.CAMERA_POSITION.y + offset_y*CONSTANTS.CAMERA_PAN_Y_FACTOR,
-      CONSTANTS.CAMERA_POSITION.z - Math.sqrt(offset_x**2 + offset_y**2)*CONSTANTS.CAMERA_PAN_Z_FACTOR
+      CAMERA_POSITION.x + offset_x*CAMERA_PAN_FACTOR.x,
+      CAMERA_POSITION.y + offset_y*CAMERA_PAN_FACTOR.y,
+      CAMERA_POSITION.z - Math.sqrt(offset_x**2 + offset_y**2)*CAMERA_PAN_FACTOR.z
     );
 
-    this.state.camera.lookAt(0, 0, 0);
+    // this.state.camera.lookAt(0, 0, 0);
   }
 
   loadCubeMap (map) {
@@ -150,21 +165,10 @@ class LandingPageModel extends React.Component {
 
     // Add a light and background
     scene.background = new THREE.Color( CONSTANTS.LANDING_PAGE_BACKGROUND_COLOR );
-    const color = 0xFFFFFF;
-    const light_amb = new THREE.AmbientLight(color, 0.5);
-    const light_dir = new THREE.DirectionalLight(color, 0.75);
-    const light_dir_2 = new THREE.DirectionalLight(color, 0.75);
-    const light_dir_3 = new THREE.DirectionalLight(color, 0.75);
-    const light_dir_4 = new THREE.DirectionalLight(color, 0.75);
-    light_dir.position.set(-300, 300, 300);
-    light_dir_2.position.set(300, 300, 300);
-    light_dir_3.position.set(0, 1000, 0);
-    light_dir_4.position.set(-300, 300, -300);
+    const light_color = 0xFFFFFF;
+    const light_intensity = 0.5;
+    const light_amb = new THREE.AmbientLight(light_color, light_intensity);
     scene.add(light_amb);
-    // scene.add(light_dir);
-    // scene.add(light_dir_2);
-    // scene.add(light_dir_3);
-    // scene.add(light_dir_4);
 
     /* Add object */
     const gltf_loader = new GLTFLoader();
@@ -193,14 +197,20 @@ class LandingPageModel extends React.Component {
 
         scene.add(object.scene);
 
+        // Starting position of the 3d asset. We want to offset it to the right.
+        object.scene.position.set(
+          OBJECT_POSITION.x,
+          OBJECT_POSITION.y,
+          OBJECT_POSITION.z
+        );
+
         // TODO: set to the scene camera
         // camera = object.cameras[0];
 
-        /*
         mixer = new THREE.AnimationMixer( object.scene );
         let action = mixer.clipAction( object.animations[0] );
+        action.setLoop(THREE.LoopOnce);
         action.play();
-        */
       },
       // called when loading is in progresses
       (xhr) => {
@@ -240,7 +250,7 @@ class LandingPageModel extends React.Component {
 
       var delta = clock.getDelta();
 
-				if ( mixer ) mixer.update( delta );
+      if ( mixer ) mixer.update( delta );
 
       TWEEN.update(time);
     }
