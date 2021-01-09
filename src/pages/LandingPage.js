@@ -255,6 +255,8 @@ class LandingPage extends React.Component {
    * @param {MouseEvent} e The mouse movement event
    */
   _onMouseMove(e) {
+    return;
+
     let x = e.screenX;
     let y = e.screenY;
     let width = this.state.width;

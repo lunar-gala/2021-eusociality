@@ -50,6 +50,19 @@ class NavItem extends React.Component {
       >
         <NavBall className={`navBall ${this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""}`}/>
         {UTIL.line_number_formatter(this.props.lineIdx)}
+        <div
+          className='underline-animation'
+        >
+          <div
+            className='underline'
+          />
+          <div
+            className='underline-circle left'
+          />
+          <div
+            className='underline-circle right'
+          />
+        </div>
       </div>
     );
   }

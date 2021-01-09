@@ -3,6 +3,30 @@
  * https://github.com/EthanNakache/Sprat-type
  */
 
+@keyframes underline-animation {
+  from {
+    width: 0px;
+  } to {
+    width: 24px;
+  }
+}
+
+@keyframes underline-circle-left-animation {
+  from {
+    transform: translateX(0);
+  } to {
+    transform: translateX(-12px);
+  }
+}
+
+@keyframes underline-circle-right-animation {
+  from {
+    transform: translateX(0);
+  } to {
+    transform: translateX(12px);
+  }
+}
+
 .navbar {
   width: 100vw - $X_MARGIN;
   display: flex;
@@ -19,14 +43,27 @@
     transform: scale(.9, .8);
     opacity: 0;
     transition: .5s;
+  }
 
-    &.selected {
-      opacity: 100;
-      transition: .5s;
-    }
+  .underline-circle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 100%;
+  }
+
+  .underline {
+    position: absolute;
+    width: 0px;
+    height: 1px;
+    background-color: white;
   }
 
   .navbar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-size: $FONT_SIZE_NAV;
     cursor: pointer;
     transform: $FONT_SPRAT_STRETCH;
@@ -34,12 +71,40 @@
     transition: .5s;
     border-bottom: 2px solid;
     border-color: rgba(255, 255, 255, 0);
-    padding-bottom: $BOTTOM_MARGIN*.2;
+    padding-bottom: $BOTTOM_MARGIN*0.05;
+    transition: .5s;
+
+    .underline-animation {
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 12px;
+      opacity: 0;
+      transition: 0.5s;
+    }
 
     &.selected {
-      transition: .5s;
-      border-color: rgba(255, 255, 255, 1);
+      .navBall {
+        opacity: 1;
+      }
+
+      .underline-animation {
+        opacity: 1;
+
+        .left {
+          animation: 1s ease-in-out underline-circle-left-animation forwards;
+        }
+
+        .right {
+          animation: 1s ease-in-out underline-circle-right-animation forwards;
+        }
+
+        .underline {
+          animation: 1s ease-in-out underline-animation forwards;
+        }
+      }
     }
   }
-
 }
