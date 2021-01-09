@@ -157,8 +157,8 @@ export const LANDING_PAGE_BACKGROUND_COLOR = 0x141414;
 export const ANIMATION_DURATION = 3000;
 
 /** @brief Iridescence texture constants */
-export const IRIDESCENCE_FILM_THICKNESS = 225;
+export const IRIDESCENCE_FILM_THICKNESS = 254;
 export const IRIDESCENCE_REFRACTIVE_INDEX_FILM = 1.7;
-export const IRIDESCENCE_REFRACTIVE_INDEX_BASE = 4.3;
-export const IRIDESCENCE_BOOST = 3;
+export const IRIDESCENCE_REFRACTIVE_INDEX_BASE = 3.7;
+export const IRIDESCENCE_BOOST = 2;
 export const IRIDESCENCE_FILM_SIZE = 64;
