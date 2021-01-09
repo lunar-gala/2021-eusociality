@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import cube_frag from '../../assets/models/cube_frag/reducedpoly_mat_noAnim.gltf'
+import cube_frag from '../../assets/models/cube_frag/reducedpoly_partial.gltf'
 
 import * as TWEEN from '@tweenjs/tween.js';
 
@@ -33,6 +33,12 @@ import radiance_negZ from '../../assets/models/skybox/radiance/negZ.jpg';
 import radiance_posX from '../../assets/models/skybox/radiance/posX.jpg';
 import radiance_posY from '../../assets/models/skybox/radiance/posY.jpg';
 import radiance_posZ from '../../assets/models/skybox/radiance/posZ.jpg';
+
+const CAMERA_POSITION = {
+  x: 0,
+  y: 30,
+  z: 100
+};
 
 class LandingPageModel extends React.Component {
   constructor(props) {
@@ -130,9 +136,9 @@ class LandingPageModel extends React.Component {
     let camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
     camera.position.set(
-      CONSTANTS.CAMERA_POSITION.x,
-      CONSTANTS.CAMERA_POSITION.y,
-      CONSTANTS.CAMERA_POSITION.z
+      CAMERA_POSITION.x,
+      CAMERA_POSITION.y,
+      CAMERA_POSITION.z
     );
 
     this.setState({camera : camera});
@@ -176,10 +182,10 @@ class LandingPageModel extends React.Component {
       cube_frag,
       // called when resource is loaded
       (object) => {
-        let object_children = object.scene.children[0].children[0].children;
+        let object_children = object.scene.children[0].children;
 
         for (let i = 0; i < object_children.length; i++) {
-          object_children[i].material = iridescence_material;
+          object_children[i].children[1].material = iridescence_material;
         }
 
         console.log(object);
