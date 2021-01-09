@@ -1,5 +1,8 @@
 /**
  * Landing page 3D asset.
+ *
+ * NOTE: this is most likely deprecated since we have lifted this to the parent
+ * LandingPage
  */
 
 import React from 'react';

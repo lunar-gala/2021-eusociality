@@ -96,7 +96,8 @@ class LandingPage extends React.Component {
       /** @brief Window height, including resizing */
       height: 0,
       /** @brief 3D camera */
-      camera: null
+      camera: null,
+      camera_positions: []
     };
 
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
@@ -215,6 +216,27 @@ class LandingPage extends React.Component {
     this.setState({
       selectedLineIdx: index,
     });
+
+    // TODO: add more camera angles, also this is just for demo. These are not
+    // the accurate camera angles. Also todo is to correspond the correct line
+    // number to the correct camera.
+    if (index % 2 === 0) {
+      new TWEEN.Tween(this.state.camera.position).to({
+        x: this.state.camera_positions[0].position.x,
+        y: this.state.camera_positions[0].position.y,
+        z: this.state.camera_positions[0].position.z
+      }, 2000)
+      .easing(TWEEN.Easing.Cubic.InOut)
+      .start();
+    } else {
+      new TWEEN.Tween(this.state.camera.position).to({
+        x: this.state.camera_positions[1].position.x,
+        y: this.state.camera_positions[1].position.y,
+        z: this.state.camera_positions[1].position.z
+      }, 2000)
+      .easing(TWEEN.Easing.Cubic.InOut)
+      .start();
+    }
   }
 
   /**
@@ -345,7 +367,9 @@ class LandingPage extends React.Component {
         );
 
         // TODO: set to the scene camera
-        // camera = object.cameras[0];
+        this.setState({
+          camera_positions: object.cameras
+        });
 
         mixer = new THREE.AnimationMixer( object.scene );
         let action = mixer.clipAction( object.animations[0] );
