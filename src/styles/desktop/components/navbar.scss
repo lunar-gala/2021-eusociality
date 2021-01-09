@@ -9,19 +9,17 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0 12px 0;
-
+  
   // Put this navbar at the bottom
   position: fixed;
-  bottom: 5vh;
+  bottom: $BOTTOM_MARGIN;
 
   .diamond {
     margin: auto;
     width: 8.8px;
     height: 8.8px;
     background-color: white;
-    transform: rotate(45deg);
-    margin-bottom: 10px;
+    border-radius: 100%;
     visibility: hidden;
 
     &.selected {
@@ -35,7 +33,7 @@
     text-decoration: none;
     transform: $FONT_SPRAT_STRETCH;
     font-weight: $FONT_SPRAT_WEIGHT;
-    text-underline-offset: 20px;
+    text-underline-offset: 10px;
 
     &.selected {
       text-decoration: underline;

@@ -5,7 +5,7 @@
 .links {
   position: absolute;
   top: $TOP_MARGIN;
-  left: .65*$X_MARGIN/2; // an aprox guess to get the actual links aligned with the rest of the page
+  left: $X_MARGIN/2; // an aprox guess to get the actual links aligned with the rest of the page
 
   .link {
     font-family: $FONT_BODY;
@@ -15,6 +15,6 @@
     display: block;
     color: white;
     text-decoration: none;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
   }
 }

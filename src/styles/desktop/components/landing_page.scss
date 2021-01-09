@@ -4,10 +4,13 @@
  * Contains a 3D asset in the back.
  */
 
+ $CIRCLE_RAD : 12px;
+
 .landing-page-background {
   background-color: black;
   width: 100%;
   height: 100vh;
+
 
   #landing-page-cube {
     width: 100%;
@@ -20,27 +23,124 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 
-  #curr-line {
-    position: absolute;
-    left: $X_MARGIN/2;
-    bottom: 40%;
-    display: block;
+  #main-screen {
+    flex-direction: row;
 
-    #line-name {
-      font-size: $FONT_SIZE_LINE;
+    #curr-line {
+      position: absolute;
+      left: $X_MARGIN/2;
+      bottom: 40%;
+      display: block;
+  
+      #line-name {
+        font-size: $FONT_SIZE_LINE;
+        text-transform: uppercase;
+        transform: $FONT_SPRAT_STRETCH;
+        font-weight: $FONT_SPRAT_WEIGHT;
+        letter-spacing: $HEADER_TRACKING;
+      }
+  
+      #designers-name {
+        font-size: $FONT_SIZE_DESIGNER;
+        font-family: $FONT_SUBHEAD;
+        text-transform: uppercase;
+        letter-spacing: $SUBHEAD_TRACKING;
+      }
+    }  
+
+    #more-info {
+      font-family: $FONT_BODY;
       text-transform: uppercase;
-      transform: $FONT_SPRAT_STRETCH;
-      font-weight: $FONT_SPRAT_WEIGHT;
-      letter-spacing: $HEADER_TRACKING;
+      font-size: $FONT_SIZE_LABEL;
+      position: absolute;
+      right: $X_MARGIN/2;
+      bottom: 37vh;
+      text-decoration: underline;
+      font-weight: $FONT_LABEL_WEIGHT;
+      text-underline-offset: 6px;
     }
 
-    #designers-name {
-      font-size: $FONT_SIZE_DESIGNER;
-      font-family: $FONT_SUBHEAD;
-      text-transform: uppercase;
-      letter-spacing: $SUBHEAD_TRACKING;
+    #see-more-line {
+      position: absolute;
+      right: $X_MARGIN/8;
+      bottom: 35vh;
+      width: 60vw;
+      border-top: 1px solid white;
     }
+
+    .vertical-line {
+      height: 100vh;
+      top: 0;
+      position: absolute;
+      border-left: 1px solid white;
+      border-right: 1px solid white;
+    }
+
+    #outer-lines {
+      left: $X_MARGIN/8;
+      right: $X_MARGIN/8;
+    }
+
+    #inner-lines {
+      left: $X_MARGIN/4;
+      right: $X_MARGIN/4;
+    }
+
+    .horizontal-line {
+      left: 0;
+      width: 100vw;
+      position: absolute;
+      border-bottom: 1px solid white;
+    }
+
+    #lower-line {
+      bottom: $BOTTOM_MARGIN/2;
+    }
+
+    #upper-line {
+      bottom: $BOTTOM_MARGIN*2;
+    }
+
+    .dot {
+      width: $CIRCLE_RAD;
+      height: $CIRCLE_RAD;
+      background-color: white;
+      border-radius: 100%;
+      position: absolute;
+      margin-bottom: -$CIRCLE_RAD/2;
+    }
+
+    #left-dot-1 {
+      margin-left: -$CIRCLE_RAD/2;
+      bottom: $BOTTOM_MARGIN/2;
+      left: $X_MARGIN/8;
+    }
+
+    #left-dot-2 {
+      margin-left: -$CIRCLE_RAD/2;
+      bottom: $BOTTOM_MARGIN*2;
+      left: $X_MARGIN/8;
+    }
+
+    #right-dot-1 {
+      margin-right: -$CIRCLE_RAD/2;
+      bottom: $BOTTOM_MARGIN/2;
+      right: $X_MARGIN/8;
+    }
+
+    #right-dot-2 {
+      margin-right: -$CIRCLE_RAD/2;
+      bottom: $BOTTOM_MARGIN*2;
+      right: $X_MARGIN/8;
+    }
+
+    #see-more-dot {
+      bottom: 35vh;
+      right: 60vw + $X_MARGIN/8;
+    }
+
   }
 
   .title-theme {
@@ -57,7 +157,7 @@
 
     // Gonna be totally honest I don't think this is _quite_ accurate to get 21px under the logo
     top: $TOP_MARGIN;
-    right: 24px;
+    right: $X_MARGIN/2;
     width: 61px;
     height: 80px;
   }

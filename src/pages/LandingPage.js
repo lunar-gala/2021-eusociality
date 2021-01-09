@@ -1,7 +1,6 @@
 import React from 'react';
 import * as CONSTANTS from '../constants';
 import * as UTIL from '../util';
-import { Link } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import TitleTheme from '../components/TitleTheme';
 import Logo from '../components/Logo';
@@ -190,27 +189,41 @@ class LandingPage extends React.Component {
           { /* Desktop Elements */ }
 
           <DesktopSideNav />
-
-          <Link to='/' className='desktop'> {/* Link to each individual page, based on index */}
+          <div id="main-screen">
             <div id='curr-line'>
               <div id='line-name'>
                 {
-                  // Only show the line name if we have hovered over a NavItem
                   (this.state.selectedLineIdx >= 0) ?
                     `${CONSTANTS.LINE_INFO[this.state.selectedLineIdx].name}` :
-                    ''
+                    'COLLECTIVA'
                 }
               </div>
               <div id='designers-name'>
                 {
-                  // Only show the designers names if we have hovered over a NavItem
                   (this.state.selectedLineIdx >= 0) ?
                     `${UTIL.name_list_formatter(CONSTANTS.LINE_INFO[this.state.selectedLineIdx].designers)}` :
                     ''
                 }
               </div>
             </div>
-          </Link>
+            <div id="more-info">
+              See more &gt;
+            </div>
+
+            <div id="see-more-line" />
+            <div className="dot" id="see-more-dot" />
+
+            <div className="vertical-line" id="outer-lines" />
+            <div className="vertical-line" id="inner-lines" />
+            <div className="horizontal-line" id="lower-line" />
+            <div className="horizontal-line" id="upper-line" />
+            <div className="dot" id="left-dot-1" />
+            <div className="dot" id="left-dot-2" />
+            <div className="dot" id="right-dot-1" />
+            <div className="dot" id="right-dot-2" />
+
+
+          </div>
 
           <Navbar
             handlerSelectedLineIdx={this.handlerSelectedLineIdx}

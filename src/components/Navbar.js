@@ -42,16 +42,15 @@ class NavItem extends React.Component {
           this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""
         }`}
         key={this.props.lineName}
-        onMouseEnter={() => {
+        onClick={() => {
           this.props.handlerSelectedLineIdx(this.props.lineIdx);
         }}
-					onTouchStart={() => {
-						this.props.handlerSelectedLineIdx(this.props.lineIdx);
-					}}
       >
-        <div className={`diamond ${
-          this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""
-        }`}/>
+        <div
+          className={`diamond ${
+            this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""
+          }`}
+        />
         {UTIL.line_number_formatter(this.props.lineIdx)}
       </div>
     );
