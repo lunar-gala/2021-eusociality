@@ -18,6 +18,13 @@ body {
   display: none;
 }
 
+.main-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
 /* Display font */
 h1{
   font-family: 'Sprat Type Condensed';
@@ -59,3 +66,10 @@ p {
 	font-size: 1em;
 	margin-top: 0.5em;
 }
+
+
+// lines and accents
+$CIRCLE_RAD : 12px;
+$OUTER : $X_MARGIN/8; // outer margin for vertical lines
+$LOWER : $BOTTOM_MARGIN/4;
+$UPPER : $BOTTOM_MARGIN*2.2;

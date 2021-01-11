@@ -1,0 +1,43 @@
+/**
+ * The people page
+ */
+
+.main-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  #team-acordion {
+		position: absolute;
+		left: $X_MARGIN/2;
+		display: block;	
+		top: 25%;	
+
+		.team-title {
+			font-family: $FONT_DISPLAY;
+			text-transform: uppercase;
+			transform: $FONT_SPRAT_STRETCH;
+			font-weight: $FONT_SPRAT_WEIGHT;
+			font-size: 72;
+			margin: 0;
+			padding: 0;
+		}
+
+		.tab-main {
+			background-color: $BACKGROUND_COLOR;
+			color: white;
+			padding: 0;
+		}
+
+		.tab-header {
+			font-family: $FONT_DISPLAY;
+			font-size: 72;
+			padding: 0;
+		}
+
+		.tab-body {
+			padding: 0;
+		}
+  }
+}
