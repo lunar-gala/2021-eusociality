@@ -151,7 +151,7 @@ export const LINE_INFO = [
 ];
 
 /** @brief Three.js environment settings */
-export const LANDING_PAGE_BACKGROUND_COLOR = 0x141414;
+export const LANDING_PAGE_BACKGROUND_COLOR = 0x000000;
 
 /** @brief Animation duration in ms for the landing page exploding cube */
 export const ANIMATION_DURATION = 3000;

@@ -98,13 +98,21 @@ class LandingPage extends React.Component {
       height: 0,
       /** @brief 3D camera */
       camera: null,
-      camera_positions: []
+      camera_positions: [],
+      animation_done: false,
+      renderer: null,
+      controls: null,
+      clock: null,
+      scene: null,
+      object: null,
+      mixer: null
     };
 
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
     this.touchStart = this.touchStart.bind(this);
     this.touchMove = this.touchMove.bind(this);
     this.touchEnd = this.touchEnd.bind(this);
+    this.render_cube = this.render_cube.bind(this);
 
     // Keep track of window width
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -311,6 +319,10 @@ class LandingPage extends React.Component {
     const canvas = document.querySelector('#landing-page-cube');
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 
+    this.setState({
+      renderer: renderer
+    });
+
     /* Set up camera */
     const fov = 75;
     const aspect = canvas.clientWidth / canvas.clientHeight;
@@ -327,9 +339,12 @@ class LandingPage extends React.Component {
     this.setState({camera : camera});
 
     const scene = new THREE.Scene();
-    const controls = new OrbitControls(camera, renderer.domElement);
-    const clock = new THREE.Clock();
-    let mixer = null;
+
+    this.setState({
+      controls: new OrbitControls(camera, renderer.domElement),
+      clock: new THREE.Clock(),
+      scene: scene
+    });
 
     // Add a light and background
     scene.background = new THREE.Color( CONSTANTS.LANDING_PAGE_BACKGROUND_COLOR );
@@ -354,6 +369,10 @@ class LandingPage extends React.Component {
       cube_frag,
       // called when resource is loaded
       (object) => {
+        this.setState({
+          object: object.scene
+        });
+
         let object_children = object.scene.children[0].children;
 
         for (let i = 0; i < object_children.length; i++) {
@@ -372,15 +391,26 @@ class LandingPage extends React.Component {
           OBJECT_POSITION.z
         );
 
+        // Should set the pieces of the object to be in the initial stages of the animation
+
         // TODO: set to the scene camera
         this.setState({
           camera_positions: object.cameras
         });
 
-        mixer = new THREE.AnimationMixer( object.scene );
+        let mixer = new THREE.AnimationMixer( object.scene );
+        this.setState({
+          mixer: mixer
+        });
         let action = mixer.clipAction( object.animations[0] );
         action.setLoop(THREE.LoopOnce);
         action.play();
+
+        mixer.addEventListener('finished', () => {
+          this.setState({
+            animation_done: true
+          });
+        });
       },
       // called when loading is in progresses
       (xhr) => {
@@ -392,40 +422,49 @@ class LandingPage extends React.Component {
       }
     );
 
-    // Resize if needed
-    function resizeRendererToDisplaySize(renderer) {
+    requestAnimationFrame(this.render_cube);
+  }
+
+  // Resize if needed
+  resizeRendererToDisplaySize(renderer) {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+      renderer.setSize(width, height, false);
+    }
+    return needResize;
+  }
+
+  // requestAnimationFrame passes time in as seconds
+  render_cube (time) {
+    let camera = this.state.camera;
+    let renderer = this.state.renderer;
+    let mixer = this.state.mixer;
+    let cube_obj = this.state.object;
+
+    if (this.resizeRendererToDisplaySize(renderer)) {
       const canvas = renderer.domElement;
-      const width = canvas.clientWidth;
-      const height = canvas.clientHeight;
-      const needResize = canvas.width !== width || canvas.height !== height;
-      if (needResize) {
-        renderer.setSize(width, height, false);
-      }
-      return needResize;
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
     }
 
-    // requestAnimationFrame passes time in as seconds
-    function render_cube (time) {
-      if (resizeRendererToDisplaySize(renderer)) {
-        const canvas = renderer.domElement;
-        camera.aspect = canvas.clientWidth / canvas.clientHeight;
-        camera.updateProjectionMatrix();
-      }
+    this.state.controls.update();
 
-      controls.update();
+    renderer.render(this.state.scene, camera);
 
-      renderer.render(scene, camera);
+    var delta = this.state.clock.getDelta();
 
-      requestAnimationFrame(render_cube);
+    if ( mixer ) mixer.update( delta );
 
-      var delta = clock.getDelta();
+    TWEEN.update(time);
 
-      if ( mixer ) mixer.update( delta );
-
-      TWEEN.update(time);
+    if (cube_obj && !this.state.animation_done) {
+      cube_obj.rotation.y = time/10000;
     }
 
-    requestAnimationFrame(render_cube);
+    requestAnimationFrame(this.render_cube);
   }
 
   componentWillUnmount() {

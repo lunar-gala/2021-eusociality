@@ -37,7 +37,6 @@ class Navbar extends React.Component {
  */
 class NavItem extends React.Component {
   render() {
-    console.log(this.props.selectedLineIdx, this.props.lineIdx, this.props.selectedLineIdx === this.props.lineIdx)
     return (
       <div
         className={`navbar-item ${
