@@ -19,6 +19,11 @@
 
 import * as THREE from 'three';
 
+/**
+ * Import additional cube textures.
+ */
+import cube_texture_image from '../../assets/models/cube_frag/cube_texture.jpg';
+
 export default function IridescentMaterial(irradianceProbe, radianceProbe, boost, iridescenceLookUp) {
   var materialUniforms =
     {
@@ -36,14 +41,20 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
       },
       boost: {
         value: boost
+      },
+      baseTexture: {
+        type: 't',
+        value: new THREE.TextureLoader().load(cube_texture_image)
       }
     };
 
   const vertexShader = `
     varying vec3 vWorldPosition;
     varying vec3 vWorldNormal;
+    varying vec2 vUv;
 
     void main() {
+        vUv = uv;
         vWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
         vec4 viewPos = modelViewMatrix * vec4(position,1.0);
         vWorldNormal = mat3(modelMatrix) * normalize(normal);
@@ -53,12 +64,14 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
   const fragmentShader = `
     varying vec3 vWorldPosition;
     varying vec3 vWorldNormal;
+    varying vec2 vUv;
 
     uniform vec3 color;
     uniform float boost;
     uniform samplerCube radianceProbe;
     uniform samplerCube irradianceProbe;
     uniform sampler2D iridescenceLookUp;
+    uniform sampler2D baseTexture;
 
     void main() {
         vec3 viewWorldDir = normalize(vWorldPosition - cameraPosition);
@@ -82,8 +95,16 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
         diffuseLight = diffuseSample.xyz * diffuseSample.xyz;
 
         vec3 final = albedo * diffuseLight + specularLight;
+        final = sqrt(final);
 
-        gl_FragColor = vec4(sqrt(final), 1.0);
+        // Add in additional base texture
+        vec4 baseTexture = texture2D(baseTexture, vUv);
+
+        // Blend in the two textures
+        float blendRatio = 0.25;
+        vec3 finalTexture = (baseTexture.rgb + final.rgb) * 0.7;
+
+        gl_FragColor = vec4(finalTexture, 1.0);
     }`;
 
   THREE.ShaderMaterial.call(this,
@@ -139,6 +160,15 @@ IridescentMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype, {
 
     set: function(value) {
       this.uniforms.boost.value = value;
+    }
+  },
+  baseTexture: {
+    get: function() {
+      return this.uniforms.baseTexture.value;
+    },
+
+    set: function(value) {
+      this.uniforms.baseTexture.value = value;
     }
   }
 });

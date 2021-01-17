@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import * as CONSTANTS from '../constants';
 import * as UTIL from '../util';
 import Navbar from '../components/Navbar';
@@ -38,6 +38,11 @@ import radiance_negZ from '../../assets/models/skybox/radiance/negZ.jpg';
 import radiance_posX from '../../assets/models/skybox/radiance/posX.jpg';
 import radiance_posY from '../../assets/models/skybox/radiance/posY.jpg';
 import radiance_posZ from '../../assets/models/skybox/radiance/posZ.jpg';
+
+/**
+ * Import additional cube textures.
+ */
+import cube_texture_image from '../../assets/models/cube_frag/cube_texture.jpg';
 
 /*** CAMERA PARAMETERS ***/
 const CAMERA_POSITION = {
@@ -396,6 +401,11 @@ class LandingPage extends React.Component {
       iridescence_texture_outline
     );
 
+    const cube_texture_base = new THREE.TextureLoader().load(cube_texture_image);
+    const cube_texture_material = new THREE.MeshBasicMaterial({
+      map: cube_texture_base
+    });
+
     gltf_loader.load(
       cube_frag,
       // called when resource is loaded
@@ -409,6 +419,7 @@ class LandingPage extends React.Component {
         for (let i = 0; i < object_children.length; i++) {
           // Set iridescence texture for the main object
           object_children[i].children[1].material = iridescence_material_main;
+          // object_children[i].children[1].material = cube_texture_material;
 
           // Set iridescence texture for the outline on the main object
           let atom_array = object_children[i].children[0].children;
