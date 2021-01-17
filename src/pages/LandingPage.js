@@ -355,15 +355,46 @@ class LandingPage extends React.Component {
 
     /* Add object */
     const gltf_loader = new GLTFLoader();
+
+    /**
+     * HDR, or "world view" of the object. Think of this as the world in a cube
+     * as seen from the object. This is 6 sides in the X, Y, Z directions.
+     */
     let radiance = this.loadCubeMap('radiance');
     let irradiance = this.loadCubeMap('irradiance');
-    let iridescence_texture = new ThinFilmFresnelMap(
+
+    // Texture for the main cube
+    let iridescence_texture_main = new ThinFilmFresnelMap(
       CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.THICKNESS,
       CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.REFRACTIVE_INDEX_FILM,
       CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.REFRACTIVE_INDEX_BASE,
       CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.SIZE
     );
-    let iridescence_material = new IridescentMaterial(irradiance, radiance, CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.BOOST, iridescence_texture);
+    let iridescence_material_main = new IridescentMaterial(
+      irradiance,
+      radiance,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.BOOST,
+      iridescence_texture_main
+    );
+
+    /**
+     * Texture for the outline on the cube. It's technically just a bright,
+     * glowing white, but boost on iridescence does that well so I'm just going
+     * to use that.
+     */
+    let iridescence_texture_outline = new ThinFilmFresnelMap(
+      CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.THICKNESS,
+      CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.REFRACTIVE_INDEX_FILM,
+      CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.REFRACTIVE_INDEX_BASE,
+      CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.SIZE
+    );
+
+    let iridescence_material_outline = new IridescentMaterial(
+      irradiance,
+      radiance,
+      CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.BOOST,
+      iridescence_texture_outline
+    );
 
     gltf_loader.load(
       cube_frag,
@@ -376,7 +407,15 @@ class LandingPage extends React.Component {
         let object_children = object.scene.children[0].children;
 
         for (let i = 0; i < object_children.length; i++) {
-          object_children[i].children[1].material = iridescence_material;
+          // Set iridescence texture for the main object
+          object_children[i].children[1].material = iridescence_material_main;
+
+          // Set iridescence texture for the outline on the main object
+          let atom_array = object_children[i].children[0].children;
+
+          for (let j = 0; j < atom_array.length; j++) {
+            atom_array[j].material = iridescence_material_outline;
+          }
         }
 
         console.log(object);
