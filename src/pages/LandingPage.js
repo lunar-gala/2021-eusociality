@@ -515,7 +515,7 @@ class LandingPage extends React.Component {
 
     var delta = this.state.clock.getDelta();
 
-    if ( mixer ) mixer.update( delta );
+    if ( mixer ) mixer.update( 3*delta );
 
     TWEEN.update(time);
 
