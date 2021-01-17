@@ -358,12 +358,12 @@ class LandingPage extends React.Component {
     let radiance = this.loadCubeMap('radiance');
     let irradiance = this.loadCubeMap('irradiance');
     let iridescence_texture = new ThinFilmFresnelMap(
-      CONSTANTS.IRIDESCENCE_FILM_THICKNESS,
-      CONSTANTS.IRIDESCENCE_REFRACTIVE_INDEX_FILM,
-      CONSTANTS.IRIDESCENCE_REFRACTIVE_INDEX_BASE,
-      CONSTANTS.IRIDESCENCE_FILM_SIZE
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.THICKNESS,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.REFRACTIVE_INDEX_FILM,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.REFRACTIVE_INDEX_BASE,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.SIZE
     );
-    let iridescence_material = new IridescentMaterial(irradiance, radiance, iridescence_texture);
+    let iridescence_material = new IridescentMaterial(irradiance, radiance, CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.BOOST, iridescence_texture);
 
     gltf_loader.load(
       cube_frag,

@@ -17,9 +17,8 @@
  */
 
 import * as THREE from 'three';
-import * as CONSTANTS from '../constants';
 
-export default function IridescentMaterial(irradianceProbe, radianceProbe, iridescenceLookUp) {
+export default function IridescentMaterial(irradianceProbe, radianceProbe, boost, iridescenceLookUp) {
   var materialUniforms =
     {
       irradianceProbe: {
@@ -35,7 +34,7 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, iride
         value: new THREE.Color(1.0, 1.0, 1.0)
       },
       boost: {
-        value: CONSTANTS.IRIDESCENCE_BOOST
+        value: boost
       }
     };
 
