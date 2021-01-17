@@ -23,6 +23,9 @@ export const LANDING_PAGE_STATES = {
   MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open',
 };
 
+/** @brief Width of screen we consider to be a desktop */
+export const DESKTOP_WIDTH = 768;
+
 export const NAV_LINK_INFO = [
   {
     name: 'LIVESTREAM',

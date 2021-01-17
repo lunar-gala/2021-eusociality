@@ -68,6 +68,8 @@ class LandingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      /** @brief If we are detecting mobile styles or not */
+      isMobile: window.innerWidth < CONSTANTS.DESKTOP_WIDTH,
       // Which line is currently being hovered
       // Defaults to -1 when nothing is selected
       selectedLineIdx: -1,
@@ -445,7 +447,7 @@ class LandingPage extends React.Component {
 
         // Starting position of the 3d asset. We want to offset it to the right.
         object.scene.position.set(
-          OBJECT_POSITION.x,
+          this.state.isMobile ? 0 : OBJECT_POSITION.x,
           OBJECT_POSITION.y,
           OBJECT_POSITION.z
         );
@@ -532,7 +534,11 @@ class LandingPage extends React.Component {
   }
 
   updateWindowDimensions() {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      isMobile: window.innerWidth < CONSTANTS.DESKTOP_WIDTH
+    });
   }
 
   /**
