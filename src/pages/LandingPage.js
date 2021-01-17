@@ -380,13 +380,16 @@ class LandingPage extends React.Component {
       irradiance,
       radiance,
       CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.BOOST,
-      iridescence_texture_main
+      iridescence_texture_main,
+      0.52,
+      0.75,
+      1.2
     );
 
     /**
      * Texture for the outline on the cube. It's technically just a bright,
      * glowing white, but boost on iridescence does that well so I'm just going
-     * to use that.
+     * to use that. I achieved a glow by using a high boost value.
      */
     let iridescence_texture_outline = new ThinFilmFresnelMap(
       CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.THICKNESS,
@@ -412,7 +415,8 @@ class LandingPage extends React.Component {
     gui.add(iridescence_texture_main, 'refractiveIndexFilm').min(1).max(5);
     gui.add(iridescence_texture_main, 'refractiveIndexBase').min(1).max(5);
     gui.add(iridescence_material_main, 'boost').min(1).max(50);
-    gui.add(iridescence_material_main, 'iridescenceRatio').min(0).max(1);
+    gui.add(iridescence_material_main, 'iridescenceRatio').min(0).max(10);
+    gui.add(iridescence_material_main, 'baseTextureRatio').min(0).max(10);
     gui.add(iridescence_material_main, 'brightness').min(0).max(10);
 
     gltf_loader.load(

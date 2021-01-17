@@ -24,7 +24,7 @@ import * as THREE from 'three';
  */
 import cube_texture_image from '../../assets/models/cube_frag/cube_texture.jpg';
 
-export default function IridescentMaterial(irradianceProbe, radianceProbe, boost, iridescenceLookUp) {
+export default function IridescentMaterial(irradianceProbe, radianceProbe, boost, iridescenceLookUp, baseTextureRatio = 0, iridescenceRatio = 1, brightness = 1) {
   var materialUniforms =
     {
       irradianceProbe: {
@@ -46,11 +46,14 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
         type: 't',
         value: new THREE.TextureLoader().load(cube_texture_image)
       },
+      baseTextureRatio: {
+        value: baseTextureRatio
+      },
       iridescenceRatio: {
-        value: 0.5
+        value: iridescenceRatio
       },
       brightness: {
-        value: 0.5
+        value: brightness
       }
     };
 
@@ -75,6 +78,7 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
     uniform vec3 color;
     uniform float boost;
     uniform float iridescenceRatio;
+    uniform float baseTextureRatio;
     uniform float brightness;
     uniform samplerCube radianceProbe;
     uniform samplerCube irradianceProbe;
@@ -109,7 +113,7 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
         vec4 baseTexture = texture2D(baseTexture, vUv);
 
         // Blend in the two textures
-        vec3 finalTexture = (final_iridescence.rgb * iridescenceRatio + baseTexture.rgb * (1.0 - iridescenceRatio)) * brightness;
+        vec3 finalTexture = (final_iridescence.rgb * iridescenceRatio + baseTexture.rgb * baseTextureRatio) * brightness;
 
         gl_FragColor = vec4(finalTexture, 1.0);
     }`;
@@ -185,6 +189,15 @@ IridescentMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype, {
 
     set: function(value) {
       this.uniforms.iridescenceRatio.value = value;
+    }
+  },
+  baseTextureRatio: {
+    get: function() {
+      return this.uniforms.baseTextureRatio.value;
+    },
+
+    set: function(value) {
+      this.uniforms.baseTextureRatio.value = value;
     }
   },
   brightness: {
