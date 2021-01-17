@@ -24,7 +24,16 @@ import * as THREE from 'three';
  */
 import cube_texture_image from '../../assets/models/cube_frag/cube_texture.jpg';
 
-export default function IridescentMaterial(irradianceProbe, radianceProbe, boost, iridescenceLookUp, baseTextureRatio = 0, iridescenceRatio = 1, brightness = 1) {
+export default function IridescentMaterial(
+  irradianceProbe,
+  radianceProbe,
+  boost,
+  iridescenceLookUp,
+  baseTextureRatio = 0,
+  iridescenceRatio = 1,
+  brightness = 1,
+  textureZoom = 1
+) {
   var materialUniforms =
     {
       irradianceProbe: {
@@ -54,6 +63,9 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
       },
       brightness: {
         value: brightness
+      },
+      textureZoom: {
+        value: textureZoom
       }
     };
 
@@ -80,6 +92,7 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
     uniform float iridescenceRatio;
     uniform float baseTextureRatio;
     uniform float brightness;
+    uniform float textureZoom;
     uniform samplerCube radianceProbe;
     uniform samplerCube irradianceProbe;
     uniform sampler2D iridescenceLookUp;
@@ -110,7 +123,8 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
         vec3 final_iridescence = sqrt(final);
 
         // Add in additional base texture
-        vec4 baseTexture = texture2D(baseTexture, vUv);
+        vec2 zoom = vec2(textureZoom, textureZoom);
+        vec4 baseTexture = texture2D(baseTexture, vUv * zoom);
 
         // Blend in the two textures
         vec3 finalTexture = (final_iridescence.rgb * iridescenceRatio + baseTexture.rgb * baseTextureRatio) * brightness;
@@ -207,6 +221,15 @@ IridescentMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype, {
 
     set: function(value) {
       this.uniforms.brightness.value = value;
+    }
+  },
+  textureZoom: {
+    get: function() {
+      return this.uniforms.textureZoom.value;
+    },
+
+    set: function(value) {
+      this.uniforms.textureZoom.value = value;
     }
   }
 });

@@ -40,11 +40,6 @@ import radiance_posX from '../../assets/models/skybox/radiance/posX.jpg';
 import radiance_posY from '../../assets/models/skybox/radiance/posY.jpg';
 import radiance_posZ from '../../assets/models/skybox/radiance/posZ.jpg';
 
-/**
- * Import additional cube textures.
- */
-import cube_texture_image from '../../assets/models/cube_frag/cube_texture.jpg';
-
 /*** CAMERA PARAMETERS ***/
 const CAMERA_POSITION = {
   x: 0,
@@ -383,7 +378,8 @@ class LandingPage extends React.Component {
       iridescence_texture_main,
       0.52,
       0.75,
-      1.2
+      1.2,
+      0.4
     );
 
     /**
@@ -418,6 +414,7 @@ class LandingPage extends React.Component {
     gui.add(iridescence_material_main, 'iridescenceRatio').min(0).max(10);
     gui.add(iridescence_material_main, 'baseTextureRatio').min(0).max(10);
     gui.add(iridescence_material_main, 'brightness').min(0).max(10);
+    gui.add(iridescence_material_main, 'textureZoom').min(0).max(2);
 
     gltf_loader.load(
       cube_frag,
@@ -606,13 +603,22 @@ class LandingPage extends React.Component {
                 }
               </div>
             </div>
-            <div id="more-info">
-              See more &gt;
-            </div>
 
             { /* Various line and dot elements */ }
-            <div id="see-more-line" />
-            <div className="dot" id="see-more-dot" />
+            <div id='see-more-wrapper' className={this.state.selectedLineIdx >= 0 ? 'show' : ''}>
+              <div id="more-info">
+                <span id='more-info-text'>
+                  See more
+                </span>
+                <div id='more-info-arrow'>
+                  <div id='arrow'/>
+                </div>
+              </div>
+              <div id='see-more-line-wrapper'>
+                <div id="see-more-line" />
+                <div className="dot" id="see-more-dot" />
+              </div>
+            </div>
             <div className="vertical-line" id="outer-lines" />
             <div className="vertical-line" id="inner-lines" />
             <div className="horizontal-line lower" />

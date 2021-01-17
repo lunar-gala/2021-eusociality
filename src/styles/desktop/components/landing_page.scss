@@ -4,10 +4,14 @@
  * Contains a 3D asset in the back.
  */
 
- $CIRCLE_RAD : 12px;
- $OUTER : $X_MARGIN/8;
- $LOWER : $BOTTOM_MARGIN/4;
- $UPPER : $BOTTOM_MARGIN*2.2;
+$CIRCLE_RAD : 12px;
+$OUTER : $X_MARGIN/8;
+$LOWER : $BOTTOM_MARGIN/4;
+$UPPER : $BOTTOM_MARGIN*2.2;
+$DESIGNERS_NAME_HEIGHT: 46px;
+$SEE_MORE_WRAPPER_MARGIN: 1.25vw;
+$ARROW_WIDTH: 14px;
+$SEE_MORE_BOTTOM_MARGIN: 12px;
 
 .landing-page-background {
   background-color: black;
@@ -44,9 +48,9 @@
     #curr-line {
       position: absolute;
       left: $X_MARGIN/2;
-      bottom: 40%;
+      bottom: 40vh;
       display: block;
-  
+
       #line-name {
         font-size: $FONT_SIZE_LINE;
         text-transform: uppercase;
@@ -54,38 +58,71 @@
         font-weight: $FONT_SPRAT_WEIGHT;
         letter-spacing: $HEADER_TRACKING;
       }
-  
+
       #designers-name {
+        height: $DESIGNERS_NAME_HEIGHT;
         font-size: $FONT_SIZE_DESIGNER;
         font-family: $FONT_SUBHEAD;
         text-transform: uppercase;
         letter-spacing: $SUBHEAD_TRACKING;
       }
-    }  
-
-    #more-info {
-      font-family: $FONT_BODY;
-      text-transform: uppercase;
-      font-size: $FONT_SIZE_LABEL;
-      position: absolute;
-      right: $X_MARGIN/2;
-      bottom: 37vh;
-      text-decoration: underline;
-      font-weight: $FONT_LABEL_WEIGHT;
-      text-underline-offset: 6px;
     }
 
-    #see-more-line {
+    #see-more-wrapper {
       position: absolute;
-      right: $OUTER;
-      bottom: 35vh;
-      width: 60vw;
-      border-top: 1px solid white;
-    }
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      bottom: 40vh;
+      padding-bottom: $SEE_MORE_BOTTOM_MARGIN;
+      right: $SEE_MORE_WRAPPER_MARGIN;
 
-    #see-more-dot {
-      bottom: 35vh;
-      right: 60vw + $OUTER;
+      opacity: 0;
+      transition-duration: 1s;
+      transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+      &.show {
+        opacity: 1;
+      }
+
+      #more-info {
+        display: flex;
+        flex-direction: row;
+        margin-right: $X_MARGIN/2 - $SEE_MORE_WRAPPER_MARGIN;
+        margin-bottom: $SEE_MORE_BOTTOM_MARGIN;
+        cursor: pointer;
+
+        #more-info-text {
+          font-family: $FONT_BODY;
+          text-transform: uppercase;
+          font-size: $FONT_SIZE_LABEL;
+          font-weight: $FONT_LABEL_WEIGHT;
+          border-bottom: 2px solid white;
+          margin-right: 8px;
+        }
+
+        #arrow {
+          width: $ARROW_WIDTH;
+          height: $ARROW_WIDTH;
+          margin-top: $ARROW_WIDTH - 3px;
+          border-right: 2px solid white;
+          border-bottom: 2px solid white;
+          transform: rotate(-45deg);
+        }
+      }
+
+      #see-more-line-wrapper {
+        #see-more-line {
+          right: $OUTER;
+          width: 50vw;
+          border-bottom: 1px solid white;
+        }
+
+        #see-more-dot {
+          right: 50vw;
+          bottom: $SEE_MORE_BOTTOM_MARGIN;
+        }
+      }
     }
 
     .vertical-line {
