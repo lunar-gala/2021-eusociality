@@ -11,6 +11,7 @@
  * @constructor
  * @param irradianceProbe A cube map containing diffuse lighting information.
  * @param radianceProbe A cube map containing specular lighting information.
+ * @param boost How much glow the iridescence texture will have.
  * @param iridescenceLookUp An instance of ThinFilmFresnelMap.
  *
  * @author David Lenaerts <http://www.derschmale.com>
