@@ -507,7 +507,7 @@ class LandingPage extends React.Component {
             className={`landing-page-background ${this.state.landing_page_state}`}
             onMouseMove={this._onMouseMove.bind(this)}>
             <canvas id='landing-page-cube' />
-          </div>;
+          </div>
           <TitleTheme
             landing_page_state={this.state.landing_page_state}
           />
