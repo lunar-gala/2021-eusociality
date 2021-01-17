@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import * as CONSTANTS from '../constants';
 import * as UTIL from '../util';
 import Navbar from '../components/Navbar';
@@ -13,6 +13,7 @@ import DesktopSideNav from '../components/DesktopSideNav';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 import cube_frag from '../../assets/models/cube_frag/reducedpoly_partial.gltf'
 
 import * as TWEEN from '@tweenjs/tween.js';
@@ -374,13 +375,17 @@ class LandingPage extends React.Component {
       irradiance,
       radiance,
       CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.BOOST,
-      iridescence_texture_main
+      iridescence_texture_main,
+      0.52,
+      0.75,
+      1.2,
+      0.4
     );
 
     /**
      * Texture for the outline on the cube. It's technically just a bright,
      * glowing white, but boost on iridescence does that well so I'm just going
-     * to use that.
+     * to use that. I achieved a glow by using a high boost value.
      */
     let iridescence_texture_outline = new ThinFilmFresnelMap(
       CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.THICKNESS,
@@ -395,6 +400,21 @@ class LandingPage extends React.Component {
       CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.BOOST,
       iridescence_texture_outline
     );
+
+    /**
+     * Add controls so we can tweak the asset
+     */
+    const gui = new GUI();
+    gui.remember(iridescence_texture_main);
+    gui.remember(iridescence_material_main);
+    gui.add(iridescence_texture_main, 'filmThickness').min(100).max(1000);
+    gui.add(iridescence_texture_main, 'refractiveIndexFilm').min(1).max(5);
+    gui.add(iridescence_texture_main, 'refractiveIndexBase').min(1).max(5);
+    gui.add(iridescence_material_main, 'boost').min(1).max(50);
+    gui.add(iridescence_material_main, 'iridescenceRatio').min(0).max(10);
+    gui.add(iridescence_material_main, 'baseTextureRatio').min(0).max(10);
+    gui.add(iridescence_material_main, 'brightness').min(0).max(10);
+    gui.add(iridescence_material_main, 'textureZoom').min(0).max(2);
 
     gltf_loader.load(
       cube_frag,
@@ -583,13 +603,22 @@ class LandingPage extends React.Component {
                 }
               </div>
             </div>
-            <div id="more-info">
-              See more &gt;
-            </div>
 
             { /* Various line and dot elements */ }
-            <div id="see-more-line" />
-            <div className="dot" id="see-more-dot" />
+            <div id='see-more-wrapper' className={this.state.selectedLineIdx >= 0 ? 'show' : ''}>
+              <div id="more-info">
+                <span id='more-info-text'>
+                  See more
+                </span>
+                <div id='more-info-arrow'>
+                  <div id='arrow'/>
+                </div>
+              </div>
+              <div id='see-more-line-wrapper'>
+                <div id="see-more-line" />
+                <div className="dot" id="see-more-dot" />
+              </div>
+            </div>
             <div className="vertical-line" id="outer-lines" />
             <div className="vertical-line" id="inner-lines" />
             <div className="horizontal-line lower" />

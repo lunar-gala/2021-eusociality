@@ -19,7 +19,21 @@
 
 import * as THREE from 'three';
 
-export default function IridescentMaterial(irradianceProbe, radianceProbe, boost, iridescenceLookUp) {
+/**
+ * Import additional cube textures.
+ */
+import cube_texture_image from '../../assets/models/cube_frag/cube_texture.jpg';
+
+export default function IridescentMaterial(
+  irradianceProbe,
+  radianceProbe,
+  boost,
+  iridescenceLookUp,
+  baseTextureRatio = 0,
+  iridescenceRatio = 1,
+  brightness = 1,
+  textureZoom = 1
+) {
   var materialUniforms =
     {
       irradianceProbe: {
@@ -36,14 +50,32 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
       },
       boost: {
         value: boost
+      },
+      baseTexture: {
+        type: 't',
+        value: new THREE.TextureLoader().load(cube_texture_image)
+      },
+      baseTextureRatio: {
+        value: baseTextureRatio
+      },
+      iridescenceRatio: {
+        value: iridescenceRatio
+      },
+      brightness: {
+        value: brightness
+      },
+      textureZoom: {
+        value: textureZoom
       }
     };
 
   const vertexShader = `
     varying vec3 vWorldPosition;
     varying vec3 vWorldNormal;
+    varying vec2 vUv;
 
     void main() {
+        vUv = uv;
         vWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
         vec4 viewPos = modelViewMatrix * vec4(position,1.0);
         vWorldNormal = mat3(modelMatrix) * normalize(normal);
@@ -53,12 +85,18 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
   const fragmentShader = `
     varying vec3 vWorldPosition;
     varying vec3 vWorldNormal;
+    varying vec2 vUv;
 
     uniform vec3 color;
     uniform float boost;
+    uniform float iridescenceRatio;
+    uniform float baseTextureRatio;
+    uniform float brightness;
+    uniform float textureZoom;
     uniform samplerCube radianceProbe;
     uniform samplerCube irradianceProbe;
     uniform sampler2D iridescenceLookUp;
+    uniform sampler2D baseTexture;
 
     void main() {
         vec3 viewWorldDir = normalize(vWorldPosition - cameraPosition);
@@ -82,8 +120,16 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
         diffuseLight = diffuseSample.xyz * diffuseSample.xyz;
 
         vec3 final = albedo * diffuseLight + specularLight;
+        vec3 final_iridescence = sqrt(final);
 
-        gl_FragColor = vec4(sqrt(final), 1.0);
+        // Add in additional base texture
+        vec2 zoom = vec2(textureZoom, textureZoom);
+        vec4 baseTexture = texture2D(baseTexture, vUv * zoom);
+
+        // Blend in the two textures
+        vec3 finalTexture = (final_iridescence.rgb * iridescenceRatio + baseTexture.rgb * baseTextureRatio) * brightness;
+
+        gl_FragColor = vec4(finalTexture, 1.0);
     }`;
 
   THREE.ShaderMaterial.call(this,
@@ -139,6 +185,51 @@ IridescentMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype, {
 
     set: function(value) {
       this.uniforms.boost.value = value;
+    }
+  },
+  baseTexture: {
+    get: function() {
+      return this.uniforms.baseTexture.value;
+    },
+
+    set: function(value) {
+      this.uniforms.baseTexture.value = value;
+    }
+  },
+  iridescenceRatio: {
+    get: function() {
+      return this.uniforms.iridescenceRatio.value;
+    },
+
+    set: function(value) {
+      this.uniforms.iridescenceRatio.value = value;
+    }
+  },
+  baseTextureRatio: {
+    get: function() {
+      return this.uniforms.baseTextureRatio.value;
+    },
+
+    set: function(value) {
+      this.uniforms.baseTextureRatio.value = value;
+    }
+  },
+  brightness: {
+    get: function() {
+      return this.uniforms.brightness.value;
+    },
+
+    set: function(value) {
+      this.uniforms.brightness.value = value;
+    }
+  },
+  textureZoom: {
+    get: function() {
+      return this.uniforms.textureZoom.value;
+    },
+
+    set: function(value) {
+      this.uniforms.textureZoom.value = value;
     }
   }
 });
