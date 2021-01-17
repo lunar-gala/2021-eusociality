@@ -193,9 +193,11 @@ class LandingPage extends React.Component {
       } else {
         // Swiping up on the default landing page opens the line menu
         if (gesture === 'Up') {
+          /*
           this.setState({
             landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN
           });
+          */
         }
         // Tapping the top of the default landing page opens the nav menu
         else if (gesture === 'Tap' && this.state.current_touch[0].y < 90) {
@@ -203,12 +205,14 @@ class LandingPage extends React.Component {
             landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
           });
         }
+        /*
         // Tapping the lower part of the default landing page opens the line menu
         else if (gesture === 'Tap' && this.state.current_touch[0].y >= 90) {
           this.setState({
             landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN
           });
         }
+        */
       }
 
       // Happens after the delayed handle
@@ -336,7 +340,7 @@ class LandingPage extends React.Component {
     camera.position.set(
       CAMERA_POSITION.x,
       CAMERA_POSITION.y,
-      CAMERA_POSITION.z
+      this.state.isMobile ? 500 : CAMERA_POSITION.z
     );
 
     this.setState({camera : camera});
@@ -417,6 +421,7 @@ class LandingPage extends React.Component {
     gui.add(iridescence_material_main, 'baseTextureRatio').min(0).max(10);
     gui.add(iridescence_material_main, 'brightness').min(0).max(10);
     gui.add(iridescence_material_main, 'textureZoom').min(0).max(2);
+    gui.close();
 
     gltf_loader.load(
       cube_frag,
@@ -592,7 +597,7 @@ class LandingPage extends React.Component {
           { /* Desktop Elements */ }
 
           <DesktopSideNav />
-          <div id="main-screen">
+          <div id="main-screen" className='desktop'>
             <div className={`${fading ? 'faded' : 'notFaded'}`} id='curr-line'>
               <div id='line-name'>
                 {

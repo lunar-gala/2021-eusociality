@@ -2,25 +2,35 @@
  * Component on mobile that opens the menu
  */
 
-#mobile-open-menu {
+$MOBILE_MENU_OPEN_SIZE: 30px;
+
+#mobile-open-menu-wrapper {
   position: fixed;
   top: 34px;
-  width: 37px;
-  height: 37px;
+  left: 30px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100vw;
 
-  #mobile-open-menu-sign {
-    font-size: 40px;
-    margin-bottom: 10px;
-  }
+  #mobile-open-menu {
+    width: $MOBILE_MENU_OPEN_SIZE;
+    height: $MOBILE_MENU_OPEN_SIZE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  #mobile-open-menu-border {
-    position: absolute;
-    border: 1px solid white;
-    transform: rotate(45deg);
-    width: 100%;
-    height: 100%;
+    #mobile-open-menu-sign {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    #mobile-open-menu-border {
+      position: absolute;
+      border: 1px solid white;
+      transform: rotate(45deg);
+      width: $MOBILE_MENU_OPEN_SIZE;
+      height: $MOBILE_MENU_OPEN_SIZE;
+    }
   }
 }
