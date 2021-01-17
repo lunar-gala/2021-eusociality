@@ -13,6 +13,7 @@ import DesktopSideNav from '../components/DesktopSideNav';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 import cube_frag from '../../assets/models/cube_frag/reducedpoly_partial.gltf'
 
 import * as TWEEN from '@tweenjs/tween.js';
@@ -401,10 +402,18 @@ class LandingPage extends React.Component {
       iridescence_texture_outline
     );
 
-    const cube_texture_base = new THREE.TextureLoader().load(cube_texture_image);
-    const cube_texture_material = new THREE.MeshBasicMaterial({
-      map: cube_texture_base
-    });
+    /**
+     * Add controls so we can tweak the asset
+     */
+    const gui = new GUI();
+    gui.remember(iridescence_texture_main);
+    gui.remember(iridescence_material_main);
+    gui.add(iridescence_texture_main, 'filmThickness').min(100).max(1000);
+    gui.add(iridescence_texture_main, 'refractiveIndexFilm').min(1).max(5);
+    gui.add(iridescence_texture_main, 'refractiveIndexBase').min(1).max(5);
+    gui.add(iridescence_material_main, 'boost').min(1).max(50);
+    gui.add(iridescence_material_main, 'iridescenceRatio').min(0).max(1);
+    gui.add(iridescence_material_main, 'brightness').min(0).max(10);
 
     gltf_loader.load(
       cube_frag,
@@ -419,7 +428,6 @@ class LandingPage extends React.Component {
         for (let i = 0; i < object_children.length; i++) {
           // Set iridescence texture for the main object
           object_children[i].children[1].material = iridescence_material_main;
-          // object_children[i].children[1].material = cube_texture_material;
 
           // Set iridescence texture for the outline on the main object
           let atom_array = object_children[i].children[0].children;

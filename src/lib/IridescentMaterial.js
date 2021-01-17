@@ -45,6 +45,12 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
       baseTexture: {
         type: 't',
         value: new THREE.TextureLoader().load(cube_texture_image)
+      },
+      iridescenceRatio: {
+        value: 0.5
+      },
+      brightness: {
+        value: 0.5
       }
     };
 
@@ -68,6 +74,8 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
 
     uniform vec3 color;
     uniform float boost;
+    uniform float iridescenceRatio;
+    uniform float brightness;
     uniform samplerCube radianceProbe;
     uniform samplerCube irradianceProbe;
     uniform sampler2D iridescenceLookUp;
@@ -95,14 +103,13 @@ export default function IridescentMaterial(irradianceProbe, radianceProbe, boost
         diffuseLight = diffuseSample.xyz * diffuseSample.xyz;
 
         vec3 final = albedo * diffuseLight + specularLight;
-        final = sqrt(final);
+        vec3 final_iridescence = sqrt(final);
 
         // Add in additional base texture
         vec4 baseTexture = texture2D(baseTexture, vUv);
 
         // Blend in the two textures
-        float blendRatio = 0.25;
-        vec3 finalTexture = (baseTexture.rgb + final.rgb) * 0.7;
+        vec3 finalTexture = (final_iridescence.rgb * iridescenceRatio + baseTexture.rgb * (1.0 - iridescenceRatio)) * brightness;
 
         gl_FragColor = vec4(finalTexture, 1.0);
     }`;
@@ -169,6 +176,24 @@ IridescentMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype, {
 
     set: function(value) {
       this.uniforms.baseTexture.value = value;
+    }
+  },
+  iridescenceRatio: {
+    get: function() {
+      return this.uniforms.iridescenceRatio.value;
+    },
+
+    set: function(value) {
+      this.uniforms.iridescenceRatio.value = value;
+    }
+  },
+  brightness: {
+    get: function() {
+      return this.uniforms.brightness.value;
+    },
+
+    set: function(value) {
+      this.uniforms.brightness.value = value;
     }
   }
 });
