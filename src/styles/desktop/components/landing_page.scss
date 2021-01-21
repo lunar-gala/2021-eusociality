@@ -48,6 +48,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     #curr-line {
       position: absolute;
       left: $X_MARGIN/2;
+      width: 100vw - $X_MARGIN/2;
       bottom: 40vh;
       display: block;
 
@@ -60,71 +61,81 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
         word-spacing: $HEADER_WORD_SPACING;
       }
 
-      #designers-name {
-        height: $DESIGNERS_NAME_HEIGHT;
-        font-size: $FONT_SIZE_DESIGNER;
-        font-family: $FONT_SUBHEAD;
-        text-transform: uppercase;
-        letter-spacing: $SUBHEAD_TRACKING;
-      }
-    }
-
-    #see-more-wrapper {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      bottom: 40vh;
-      padding-bottom: $SEE_MORE_BOTTOM_MARGIN;
-      right: $SEE_MORE_WRAPPER_MARGIN;
-
-      opacity: 0;
-      transition-duration: 1s;
-      transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-
-      &.show {
-        opacity: 1;
-      }
-
-      #more-info {
+      #below-line-name {
         display: flex;
         flex-direction: row;
-        margin-right: $X_MARGIN/2 - $SEE_MORE_WRAPPER_MARGIN;
-        margin-bottom: $SEE_MORE_BOTTOM_MARGIN;
-        cursor: pointer;
 
-        #more-info-text {
-          font-family: $FONT_BODY;
+        #designers-name {
+          display: flex;
+          height: $DESIGNERS_NAME_HEIGHT;
+          font-size: $FONT_SIZE_DESIGNER;
+          font-family: $FONT_SUBHEAD;
           text-transform: uppercase;
-          font-size: $FONT_SIZE_LABEL;
-          font-weight: $FONT_LABEL_WEIGHT;
-          border-bottom: 2px solid white;
-          margin-right: 8px;
+          letter-spacing: $SUBHEAD_TRACKING;
         }
 
-        #arrow {
-          width: $ARROW_WIDTH;
-          height: $ARROW_WIDTH;
-          margin-top: $ARROW_WIDTH - 3px;
-          border-right: 2px solid white;
-          border-bottom: 2px solid white;
-          transform: rotate(-45deg);
-        }
-      }
+        #see-more-wrapper {
+          display: flex;
+          flex-grow: 1;
+          flex-direction: column;
+          align-items: flex-end;
+          padding-bottom: $SEE_MORE_BOTTOM_MARGIN;
+          right: $SEE_MORE_WRAPPER_MARGIN;
 
-      #see-more-line-wrapper {
-        #see-more-line {
-          right: $OUTER;
-          width: 50vw;
-          border-bottom: 1px solid white;
-        }
+          opacity: 0;
+          transition-duration: 1s;
+          transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 
-        #see-more-dot {
-          right: 50vw;
-          bottom: $SEE_MORE_BOTTOM_MARGIN;
+          &.show {
+            opacity: 1;
+          }
+
+          #more-info {
+            display: flex;
+            flex-direction: row;
+            margin-right: $X_MARGIN/2 - $SEE_MORE_WRAPPER_MARGIN;
+            margin-bottom: $SEE_MORE_BOTTOM_MARGIN;
+            cursor: pointer;
+
+            #more-info-text {
+              font-family: $FONT_BODY;
+              text-transform: uppercase;
+              font-size: $FONT_SIZE_LABEL;
+              font-weight: $FONT_LABEL_WEIGHT;
+              border-bottom: 2px solid white;
+              margin-right: 8px;
+            }
+
+            #arrow {
+              width: $ARROW_WIDTH;
+              height: $ARROW_WIDTH;
+              margin-top: $ARROW_WIDTH - 3px;
+              border-right: 2px solid white;
+              border-bottom: 2px solid white;
+              transform: rotate(-45deg);
+            }
+          }
+
+          #see-more-line-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+
+            #see-more-line {
+              display: flex;
+              right: $OUTER;
+              border-bottom: 1px solid white;
+              flex-grow: 1;
+            }
+
+            #see-more-dot {
+              bottom: $SEE_MORE_BOTTOM_MARGIN;
+            }
+          }
         }
       }
     }
+
 
     .vertical-line {
       height: 100vh;
