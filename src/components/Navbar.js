@@ -26,7 +26,13 @@ class Navbar extends React.Component {
       );
     }
 
-    return <div className="navbar desktop">{items}</div>;
+    return <div className='navbar desktop'>
+      <div className="dot left-dot lower"/>
+      <div className="dot left-dot upper" />
+      <div className="dot right-dot lower"/>
+      <div className="dot right-dot upper" />
+      <div className='navbar-container'>{items}</div>
+    </div>;
   }
 }
 

@@ -150,61 +150,6 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
         }
       }
     }
-
-
-    .vertical-line {
-      height: 100vh;
-      top: 0;
-      position: absolute;
-      border-left: 1px solid white;
-      border-right: 1px solid white;
-      pointer-events: none;
-    }
-
-    #outer-lines {
-      left: $OUTER;
-      right: $OUTER;
-    }
-
-    #inner-lines {
-      left: $X_MARGIN/4;
-      right: $X_MARGIN/4;
-    }
-
-    .lower {
-      bottom: $LOWER;
-    }
-
-    .upper {
-      bottom: $UPPER;
-    }
-
-    .horizontal-line {
-      left: 0;
-      width: 100vw;
-      position: absolute;
-      border-bottom: 1px solid white;
-    }
-
-    .dot {
-      width: $CIRCLE_RAD;
-      height: $CIRCLE_RAD;
-      background-color: white;
-      border-radius: 100%;
-      position: absolute;
-      margin-bottom: -$CIRCLE_RAD/2;
-    }
-
-    .left-dot {
-      margin-left: -$CIRCLE_RAD/2;
-      left: $OUTER;
-    }
-
-    .right-dot {
-      margin-right: -$CIRCLE_RAD/2;
-      right: $OUTER;
-    }
-
   }
 
   .title-theme {

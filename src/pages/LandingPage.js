@@ -634,12 +634,6 @@ class LandingPage extends React.Component {
             { /* Various line and dot elements */ }
             <div className="vertical-line" id="outer-lines" />
             <div className="vertical-line" id="inner-lines" />
-            <div className="horizontal-line lower" />
-            <div className="horizontal-line upper" />
-            <div className="dot left-dot lower"/>
-            <div className="dot left-dot upper" />
-            <div className="dot right-dot lower"/>
-            <div className="dot right-dot upper" />
 
           </div>
 
