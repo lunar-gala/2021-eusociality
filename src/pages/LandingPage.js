@@ -1,5 +1,6 @@
 import React from 'react';
 import * as CONSTANTS from '../constants';
+import * as LINE_DATA from '../data/line_data';
 import * as UTIL from '../util';
 import Navbar from '../components/Navbar';
 import TitleTheme from '../components/TitleTheme';
@@ -602,7 +603,7 @@ class LandingPage extends React.Component {
               <div id='line-name'>
                 {
                   (this.state.selectedLineIdx >= 0) ?
-                    `${CONSTANTS.LINE_INFO[this.state.selectedLineIdx].name}` :
+                    `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}` :
                     'COLLECTIVA'
                 }
               </div>
@@ -610,7 +611,7 @@ class LandingPage extends React.Component {
                 <div id='designers-name'>
                   {
                     (this.state.selectedLineIdx >= 0) ?
-                      `${UTIL.name_list_formatter(CONSTANTS.LINE_INFO[this.state.selectedLineIdx].designers)}` :
+                      `${UTIL.name_list_formatter(LINE_DATA.LINE_INFO[this.state.selectedLineIdx].designers)}` :
                       ''
                   }
                 </div>

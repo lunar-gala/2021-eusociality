@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import * as CONSTANTS from "../constants";
+import * as LINE_DATA from "../data/line_data";
 import * as UTIL from "../util";
 import NavBall from '../../assets/img/navBall.svg'
 
@@ -14,7 +14,7 @@ class Navbar extends React.Component {
 
   render() {
     const items = [];
-    for (const [index, line_info] of CONSTANTS.LINE_INFO.entries()) {
+    for (const [index, line_info] of LINE_DATA.LINE_INFO.entries()) {
       items.push(
         <NavItem
           handlerSelectedLineIdx={this.props.handlerSelectedLineIdx}
