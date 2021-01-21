@@ -97,6 +97,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
             flex-direction: row;
             margin-right: $X_MARGIN/2 - $SEE_MORE_WRAPPER_MARGIN;
             bottom: $FONT_SIZE_DESIGNER;
+            text-decoration: none;
             cursor: pointer;
 
             #more-info-text {

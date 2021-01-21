@@ -17,8 +17,7 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route path='/lines/1'>
-            <LinePage />
+          <Route path='/lines/([1-9]|10|11|12|13|14|15|16)' component={LinePage}>
           </Route>
           <Route path='/about'>
             <AboutPage />
