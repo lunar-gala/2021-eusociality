@@ -64,6 +64,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
       #below-line-name {
         display: flex;
         flex-direction: row;
+        padding-left: 24px;
 
         #designers-name {
           display: flex;
@@ -120,6 +121,9 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
             display: flex;
             flex-direction: row;
             align-items: stretch;
+            flex-grow: 1;
+            margin-right: $SEE_MORE_WRAPPER_MARGIN;
+            width: 100%;
 
             #see-more-line {
               display: flex;
