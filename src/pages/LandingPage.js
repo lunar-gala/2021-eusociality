@@ -356,7 +356,7 @@ class LandingPage extends React.Component {
     // Add a light and background
     scene.background = new THREE.Color( CONSTANTS.LANDING_PAGE_BACKGROUND_COLOR );
     const light_color = 0xFFFFFF;
-    const light_intensity = 0.5;
+    const light_intensity = 1;
     const light_amb = new THREE.AmbientLight(light_color, light_intensity);
     scene.add(light_amb);
 
@@ -382,10 +382,10 @@ class LandingPage extends React.Component {
       radiance,
       CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.BOOST,
       iridescence_texture_main,
-      0.52,
-      0.75,
-      1.2,
-      0.4
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.BASE_TEXTURE_RATIO,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.IRIDESCENT_TEXTURE_RATIO,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.BRIGHTNESS,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.TEXTURE_ZOOM
     );
 
     /**
