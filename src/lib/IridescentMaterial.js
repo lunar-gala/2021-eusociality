@@ -13,6 +13,10 @@
  * @param radianceProbe A cube map containing specular lighting information.
  * @param boost How much glow the iridescence texture will have.
  * @param iridescenceLookUp An instance of ThinFilmFresnelMap.
+ * @param baseTextureRatio How much weight to give the base cube texture.
+ * @param iridescenceRatio How much weight to give the iridescence texture.
+ * @param brightness An instance of ThinFilmFresnelMap.
+ * @param textureZoom How much to zoom into the texture.
  *
  * @author David Lenaerts <http://www.derschmale.com>
  */
