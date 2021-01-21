@@ -616,7 +616,7 @@ class LandingPage extends React.Component {
             </div>
 
             { /* Various line and dot elements */ }
-            <div id='see-more-wrapper' className={this.state.selectedLineIdx >= 0 ? 'show' : ''}>
+            <div id='see-more-wrapper' className={(this.state.selectedLineIdx >= 0 ? 'show' : '') + ' desktop'}>
               <div id="more-info">
                 <span id='more-info-text'>
                   See more
