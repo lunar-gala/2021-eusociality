@@ -3,11 +3,15 @@
  * https://github.com/EthanNakache/Sprat-type
  */
 
+$UNDERLINE_CIRCLE_WIDTH: 8px;
+$UNDERLINE_WIDTH: 32px + 2*$UNDERLINE_CIRCLE_WIDTH;
+$UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
+
 @keyframes underline-animation {
   from {
     width: 0px;
   } to {
-    width: 24px;
+    width: $UNDERLINE_WIDTH;
   }
 }
 
@@ -15,7 +19,7 @@
   from {
     transform: translateX(0);
   } to {
-    transform: translateX(-12px);
+    transform: translateX(-$UNDERLINE_CIRCLE_TRANSLATE_X);
   }
 }
 
@@ -23,7 +27,7 @@
   from {
     transform: translateX(0);
   } to {
-    transform: translateX(12px);
+    transform: translateX($UNDERLINE_CIRCLE_TRANSLATE_X);
   }
 }
 
@@ -47,8 +51,8 @@
 
   .underline-circle {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: $UNDERLINE_CIRCLE_WIDTH;
+    height: $UNDERLINE_CIRCLE_WIDTH;
     background-color: white;
     border-radius: 100%;
   }
