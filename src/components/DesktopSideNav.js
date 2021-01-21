@@ -16,7 +16,7 @@ class DesktopSideNav extends React.Component {
           People
         </Link>
         <Link className="link" to="/">
-          Livestream
+          Watch
         </Link>
       </div>
     );

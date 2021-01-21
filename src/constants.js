@@ -26,9 +26,10 @@ export const LANDING_PAGE_STATES = {
 /** @brief Width of screen we consider to be a desktop */
 export const DESKTOP_WIDTH = 768;
 
+// TODO: is this being used?
 export const NAV_LINK_INFO = [
   {
-    name: 'LIVESTREAM',
+    name: 'WATCH',
     link_name: 'about'
   },
   {
@@ -165,9 +166,17 @@ export const IRIDESCENCE_SETTINGS_MAIN = {
   REFRACTIVE_INDEX_FILM: 1.5,
   REFRACTIVE_INDEX_BASE: 2.3,
   BOOST: 2,
+  BASE_TEXTURE_RATIO: 0.52,
+  IRIDESCENT_TEXTURE_RATIO: 0.75,
+  BRIGHTNESS: 1.2,
+  TEXTURE_ZOOM: 0.3,
   SIZE: 64
 };
 
+/**
+ * @brief Iridescence texture for the atom outline elements. These are supposed
+ * to be bright white, so I just turned up the boost a ton.
+ */
 export const IRIDESCENCE_SETTINGS_OUTLINE = {
   THICKNESS: 100,
   REFRACTIVE_INDEX_FILM: 5,

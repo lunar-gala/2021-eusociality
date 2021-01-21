@@ -356,7 +356,7 @@ class LandingPage extends React.Component {
     // Add a light and background
     scene.background = new THREE.Color( CONSTANTS.LANDING_PAGE_BACKGROUND_COLOR );
     const light_color = 0xFFFFFF;
-    const light_intensity = 0.5;
+    const light_intensity = 1;
     const light_amb = new THREE.AmbientLight(light_color, light_intensity);
     scene.add(light_amb);
 
@@ -382,10 +382,10 @@ class LandingPage extends React.Component {
       radiance,
       CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.BOOST,
       iridescence_texture_main,
-      0.52,
-      0.75,
-      1.2,
-      0.4
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.BASE_TEXTURE_RATIO,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.IRIDESCENT_TEXTURE_RATIO,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.BRIGHTNESS,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.TEXTURE_ZOOM
     );
 
     /**
@@ -606,38 +606,34 @@ class LandingPage extends React.Component {
                     'COLLECTIVA'
                 }
               </div>
-              <div id='designers-name'>
-                {
-                  (this.state.selectedLineIdx >= 0) ?
-                    `${UTIL.name_list_formatter(CONSTANTS.LINE_INFO[this.state.selectedLineIdx].designers)}` :
-                    ''
-                }
+              <div id='below-line-name'>
+                <div id='designers-name'>
+                  {
+                    (this.state.selectedLineIdx >= 0) ?
+                      `${UTIL.name_list_formatter(CONSTANTS.LINE_INFO[this.state.selectedLineIdx].designers)}` :
+                      ''
+                  }
+                </div>
+                <div id='see-more-wrapper' className={(this.state.selectedLineIdx >= 0 ? 'show' : '') + ' desktop'}>
+                  <div id="more-info">
+                    <span id='more-info-text'>
+                      See more
+                    </span>
+                    <div id='more-info-arrow'>
+                      <div id='arrow'/>
+                    </div>
+                  </div>
+                  <div id='see-more-line-wrapper'>
+                    <div id="see-more-dot" />
+                    <div id="see-more-line" />
+                  </div>
+                </div>
               </div>
             </div>
 
             { /* Various line and dot elements */ }
-            <div id='see-more-wrapper' className={this.state.selectedLineIdx >= 0 ? 'show' : ''}>
-              <div id="more-info">
-                <span id='more-info-text'>
-                  See more
-                </span>
-                <div id='more-info-arrow'>
-                  <div id='arrow'/>
-                </div>
-              </div>
-              <div id='see-more-line-wrapper'>
-                <div id="see-more-line" />
-                <div className="dot" id="see-more-dot" />
-              </div>
-            </div>
             <div className="vertical-line" id="outer-lines" />
             <div className="vertical-line" id="inner-lines" />
-            <div className="horizontal-line lower" />
-            <div className="horizontal-line upper" />
-            <div className="dot left-dot lower"/>
-            <div className="dot left-dot upper" />
-            <div className="dot right-dot lower"/>
-            <div className="dot right-dot upper" />
 
           </div>
 

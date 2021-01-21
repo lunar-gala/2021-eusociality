@@ -3,11 +3,15 @@
  * https://github.com/EthanNakache/Sprat-type
  */
 
+$UNDERLINE_CIRCLE_WIDTH: 8px;
+$UNDERLINE_WIDTH: 32px + 2*$UNDERLINE_CIRCLE_WIDTH;
+$UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
+
 @keyframes underline-animation {
   from {
     width: 0px;
   } to {
-    width: 24px;
+    width: $UNDERLINE_WIDTH;
   }
 }
 
@@ -15,7 +19,7 @@
   from {
     transform: translateX(0);
   } to {
-    transform: translateX(-12px);
+    transform: translateX(-$UNDERLINE_CIRCLE_TRANSLATE_X);
   }
 }
 
@@ -23,19 +27,32 @@
   from {
     transform: translateX(0);
   } to {
-    transform: translateX(12px);
+    transform: translateX($UNDERLINE_CIRCLE_TRANSLATE_X);
   }
 }
 
 .navbar {
-  width: 100vw - $X_MARGIN;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  width: 100vw;
   // Put this navbar at the bottom
   position: fixed;
-  bottom: $BOTTOM_MARGIN*.8;
+  bottom: $OUTER;
+
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  padding-top: 2.5vh;
+  padding-bottom: 2.5vh;
+
+  .navbar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw - 2*3*$OUTER;
+  }
 
   .navBall {
     margin: auto;
@@ -47,8 +64,8 @@
 
   .underline-circle {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: $UNDERLINE_CIRCLE_WIDTH;
+    height: $UNDERLINE_CIRCLE_WIDTH;
     background-color: white;
     border-radius: 100%;
   }
