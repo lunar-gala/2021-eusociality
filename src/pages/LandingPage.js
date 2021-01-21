@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import * as CONSTANTS from '../constants';
 import * as UTIL from '../util';
 import Navbar from '../components/Navbar';
@@ -13,6 +13,7 @@ import DesktopSideNav from '../components/DesktopSideNav';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 import cube_frag from '../../assets/models/cube_frag/reducedpoly_partial.gltf'
 
 import * as TWEEN from '@tweenjs/tween.js';
@@ -67,6 +68,8 @@ class LandingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      /** @brief If we are detecting mobile styles or not */
+      isMobile: window.innerWidth < CONSTANTS.DESKTOP_WIDTH,
       // Which line is currently being hovered
       // Defaults to -1 when nothing is selected
       selectedLineIdx: -1,
@@ -190,9 +193,11 @@ class LandingPage extends React.Component {
       } else {
         // Swiping up on the default landing page opens the line menu
         if (gesture === 'Up') {
+          /*
           this.setState({
             landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN
           });
+          */
         }
         // Tapping the top of the default landing page opens the nav menu
         else if (gesture === 'Tap' && this.state.current_touch[0].y < 90) {
@@ -200,12 +205,14 @@ class LandingPage extends React.Component {
             landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
           });
         }
+        /*
         // Tapping the lower part of the default landing page opens the line menu
         else if (gesture === 'Tap' && this.state.current_touch[0].y >= 90) {
           this.setState({
             landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN
           });
         }
+        */
       }
 
       // Happens after the delayed handle
@@ -333,7 +340,7 @@ class LandingPage extends React.Component {
     camera.position.set(
       CAMERA_POSITION.x,
       CAMERA_POSITION.y,
-      CAMERA_POSITION.z
+      this.state.isMobile ? 500 : CAMERA_POSITION.z
     );
 
     this.setState({camera : camera});
@@ -355,15 +362,66 @@ class LandingPage extends React.Component {
 
     /* Add object */
     const gltf_loader = new GLTFLoader();
+
+    /**
+     * HDR, or "world view" of the object. Think of this as the world in a cube
+     * as seen from the object. This is 6 sides in the X, Y, Z directions.
+     */
     let radiance = this.loadCubeMap('radiance');
     let irradiance = this.loadCubeMap('irradiance');
-    let iridescence_texture = new ThinFilmFresnelMap(
-      CONSTANTS.IRIDESCENCE_FILM_THICKNESS,
-      CONSTANTS.IRIDESCENCE_REFRACTIVE_INDEX_FILM,
-      CONSTANTS.IRIDESCENCE_REFRACTIVE_INDEX_BASE,
-      CONSTANTS.IRIDESCENCE_FILM_SIZE
+
+    // Texture for the main cube
+    let iridescence_texture_main = new ThinFilmFresnelMap(
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.THICKNESS,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.REFRACTIVE_INDEX_FILM,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.REFRACTIVE_INDEX_BASE,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.SIZE
     );
-    let iridescence_material = new IridescentMaterial(irradiance, radiance, iridescence_texture);
+    let iridescence_material_main = new IridescentMaterial(
+      irradiance,
+      radiance,
+      CONSTANTS.IRIDESCENCE_SETTINGS_MAIN.BOOST,
+      iridescence_texture_main,
+      0.52,
+      0.75,
+      1.2,
+      0.4
+    );
+
+    /**
+     * Texture for the outline on the cube. It's technically just a bright,
+     * glowing white, but boost on iridescence does that well so I'm just going
+     * to use that. I achieved a glow by using a high boost value.
+     */
+    let iridescence_texture_outline = new ThinFilmFresnelMap(
+      CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.THICKNESS,
+      CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.REFRACTIVE_INDEX_FILM,
+      CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.REFRACTIVE_INDEX_BASE,
+      CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.SIZE
+    );
+
+    let iridescence_material_outline = new IridescentMaterial(
+      irradiance,
+      radiance,
+      CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.BOOST,
+      iridescence_texture_outline
+    );
+
+    /**
+     * Add controls so we can tweak the asset
+     */
+    const gui = new GUI();
+    gui.remember(iridescence_texture_main);
+    gui.remember(iridescence_material_main);
+    gui.add(iridescence_texture_main, 'filmThickness').min(100).max(1000);
+    gui.add(iridescence_texture_main, 'refractiveIndexFilm').min(1).max(5);
+    gui.add(iridescence_texture_main, 'refractiveIndexBase').min(1).max(5);
+    gui.add(iridescence_material_main, 'boost').min(1).max(50);
+    gui.add(iridescence_material_main, 'iridescenceRatio').min(0).max(10);
+    gui.add(iridescence_material_main, 'baseTextureRatio').min(0).max(10);
+    gui.add(iridescence_material_main, 'brightness').min(0).max(10);
+    gui.add(iridescence_material_main, 'textureZoom').min(0).max(2);
+    gui.close();
 
     gltf_loader.load(
       cube_frag,
@@ -376,7 +434,15 @@ class LandingPage extends React.Component {
         let object_children = object.scene.children[0].children;
 
         for (let i = 0; i < object_children.length; i++) {
-          object_children[i].children[1].material = iridescence_material;
+          // Set iridescence texture for the main object
+          object_children[i].children[1].material = iridescence_material_main;
+
+          // Set iridescence texture for the outline on the main object
+          let atom_array = object_children[i].children[0].children;
+
+          for (let j = 0; j < atom_array.length; j++) {
+            atom_array[j].material = iridescence_material_outline;
+          }
         }
 
         console.log(object);
@@ -386,7 +452,7 @@ class LandingPage extends React.Component {
 
         // Starting position of the 3d asset. We want to offset it to the right.
         object.scene.position.set(
-          OBJECT_POSITION.x,
+          this.state.isMobile ? 0 : OBJECT_POSITION.x,
           OBJECT_POSITION.y,
           OBJECT_POSITION.z
         );
@@ -456,7 +522,7 @@ class LandingPage extends React.Component {
 
     var delta = this.state.clock.getDelta();
 
-    if ( mixer ) mixer.update( delta );
+    if ( mixer ) mixer.update( 3*delta );
 
     TWEEN.update(time);
 
@@ -473,7 +539,11 @@ class LandingPage extends React.Component {
   }
 
   updateWindowDimensions() {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      isMobile: window.innerWidth < CONSTANTS.DESKTOP_WIDTH
+    });
   }
 
   /**
@@ -507,7 +577,7 @@ class LandingPage extends React.Component {
             className={`landing-page-background ${this.state.landing_page_state}`}
             onMouseMove={this._onMouseMove.bind(this)}>
             <canvas id='landing-page-cube' />
-          </div>;
+          </div>
           <TitleTheme
             landing_page_state={this.state.landing_page_state}
           />
@@ -527,7 +597,7 @@ class LandingPage extends React.Component {
           { /* Desktop Elements */ }
 
           <DesktopSideNav />
-          <div id="main-screen">
+          <div id="main-screen" className='desktop'>
             <div className={`${fading ? 'faded' : 'notFaded'}`} id='curr-line'>
               <div id='line-name'>
                 {
@@ -544,13 +614,22 @@ class LandingPage extends React.Component {
                 }
               </div>
             </div>
-            <div id="more-info">
-              See more &gt;
-            </div>
 
             { /* Various line and dot elements */ }
-            <div id="see-more-line" />
-            <div className="dot" id="see-more-dot" />
+            <div id='see-more-wrapper' className={this.state.selectedLineIdx >= 0 ? 'show' : ''}>
+              <div id="more-info">
+                <span id='more-info-text'>
+                  See more
+                </span>
+                <div id='more-info-arrow'>
+                  <div id='arrow'/>
+                </div>
+              </div>
+              <div id='see-more-line-wrapper'>
+                <div id="see-more-line" />
+                <div className="dot" id="see-more-dot" />
+              </div>
+            </div>
             <div className="vertical-line" id="outer-lines" />
             <div className="vertical-line" id="inner-lines" />
             <div className="horizontal-line lower" />

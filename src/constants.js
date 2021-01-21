@@ -23,6 +23,9 @@ export const LANDING_PAGE_STATES = {
   MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open',
 };
 
+/** @brief Width of screen we consider to be a desktop */
+export const DESKTOP_WIDTH = 768;
+
 export const NAV_LINK_INFO = [
   {
     name: 'LIVESTREAM',
@@ -157,8 +160,18 @@ export const LANDING_PAGE_BACKGROUND_COLOR = 0x000000;
 export const ANIMATION_DURATION = 3000;
 
 /** @brief Iridescence texture constants */
-export const IRIDESCENCE_FILM_THICKNESS = 254;
-export const IRIDESCENCE_REFRACTIVE_INDEX_FILM = 1.7;
-export const IRIDESCENCE_REFRACTIVE_INDEX_BASE = 3.7;
-export const IRIDESCENCE_BOOST = 2;
-export const IRIDESCENCE_FILM_SIZE = 64;
+export const IRIDESCENCE_SETTINGS_MAIN = {
+  THICKNESS: 293,
+  REFRACTIVE_INDEX_FILM: 1.5,
+  REFRACTIVE_INDEX_BASE: 2.3,
+  BOOST: 2,
+  SIZE: 64
+};
+
+export const IRIDESCENCE_SETTINGS_OUTLINE = {
+  THICKNESS: 100,
+  REFRACTIVE_INDEX_FILM: 5,
+  REFRACTIVE_INDEX_BASE: 1,
+  BOOST: 50,
+  SIZE: 64
+};
