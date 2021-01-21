@@ -624,8 +624,8 @@ class LandingPage extends React.Component {
                     </div>
                   </div>
                   <div id='see-more-line-wrapper'>
+                    <div id="see-more-dot" />
                     <div id="see-more-line" />
-                    <div className="dot" id="see-more-dot" />
                   </div>
                 </div>
               </div>

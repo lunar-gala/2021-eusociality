@@ -92,10 +92,11 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
           }
 
           #more-info {
+            position: absolute;
             display: flex;
             flex-direction: row;
             margin-right: $X_MARGIN/2 - $SEE_MORE_WRAPPER_MARGIN;
-            margin-bottom: $SEE_MORE_BOTTOM_MARGIN;
+            bottom: $FONT_SIZE_DESIGNER;
             cursor: pointer;
 
             #more-info-text {
@@ -120,20 +121,30 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
           #see-more-line-wrapper {
             display: flex;
             flex-direction: row;
-            align-items: stretch;
+            align-items: center;
             flex-grow: 1;
             margin-right: $SEE_MORE_WRAPPER_MARGIN;
-            width: 100%;
+            // Give a little space between the designer name and the circle
+            width: 99%;
+            // The font has some bottom spacing built-in, this centers the line
+            padding-top: 5px;
 
             #see-more-line {
               display: flex;
               right: $OUTER;
               border-bottom: 1px solid white;
               flex-grow: 1;
+              height: 1px;
+              top: 1px;
             }
 
+            // A bit different from other dots, so not going to use their styles
             #see-more-dot {
               bottom: $SEE_MORE_BOTTOM_MARGIN;
+              width: $CIRCLE_RAD;
+              height: $CIRCLE_RAD;
+              background-color: white;
+              border-radius: 100%;
             }
           }
         }
