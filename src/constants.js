@@ -26,9 +26,10 @@ export const LANDING_PAGE_STATES = {
 /** @brief Width of screen we consider to be a desktop */
 export const DESKTOP_WIDTH = 768;
 
+// TODO: is this being used?
 export const NAV_LINK_INFO = [
   {
-    name: 'LIVESTREAM',
+    name: 'WATCH',
     link_name: 'about'
   },
   {
