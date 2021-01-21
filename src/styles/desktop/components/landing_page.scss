@@ -64,7 +64,6 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
       #below-line-name {
         display: flex;
         flex-direction: row;
-        padding-left: 24px;
 
         #designers-name {
           display: flex;
@@ -81,6 +80,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
           flex-direction: column;
           align-items: flex-end;
           padding-bottom: $SEE_MORE_BOTTOM_MARGIN;
+          margin-left: 24px;
           right: $SEE_MORE_WRAPPER_MARGIN;
 
           opacity: 0;
