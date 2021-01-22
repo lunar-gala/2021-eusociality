@@ -4,8 +4,68 @@
 
 $LEFT_MARGIN: 25vw;
 
+$SLIDE_AMOUNT_A: 6.66vw;
+$SLIDE_AMOUNT_B: -2.8vw;
+$SLIDE_AMOUNT_C: 6.4vw;
+$SLIDE_AMOUNT_D: 16.6vw;
+
+// Animations
+@keyframes slide-image-a {
+  from {
+    transform: translateY(0);
+  } to {
+    transform: translateY($SLIDE_AMOUNT_A);
+  }
+}
+
+@keyframes slide-image-b {
+  from {
+    transform: translateY(0);
+  } to {
+    transform: translateY($SLIDE_AMOUNT_B);
+  }
+}
+
+@keyframes slide-image-c {
+  from {
+    transform: translateY(0);
+  } to {
+    transform: translateY($SLIDE_AMOUNT_C);
+  }
+}
+
+@keyframes slide-image-d {
+  from {
+    transform: translateY(0);
+  } to {
+    transform: translateY($SLIDE_AMOUNT_D);
+  }
+}
+
 #line-page {
   width: 100vw;
+
+  #background {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+
+    .background-picture {
+      opacity: 0.6;
+    }
+
+    #first {
+      width: 100vw;
+    }
+
+    #second {
+      width: 80vw;
+      margin-top: 14px;
+    }
+  }
 
   #top-title {
     display: flex;
@@ -13,9 +73,10 @@ $LEFT_MARGIN: 25vw;
     align-items: center;
     width: 100vw;
     margin-top: $TOP_MARGIN;
-    font-family: 'Sprat Type';
+    font-family: 'Sprat Type Condensed';
     font-size: $FONT_SIZE_TITLE;
-    font-weight: $FONT_TITLE_WEIGHT;
+    font-weight: 100;
+    letter-spacing: -0.05em;
   }
 
   .main-content {
@@ -69,11 +130,56 @@ $LEFT_MARGIN: 25vw;
 
     #pictures-top {
       margin-top: 141px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+
+      .sliding-image {
+        width: 16vw;
+        height: 23.8vw;
+        // overflow: hidden;
+
+        .frame {
+          width: calc(100% - 4px);
+          height: calc(100% - 2px);
+          border: 2px solid white;
+        }
+
+        .image {
+          width: 16vw;
+          height: 23.8vw;
+          z-index: -1;
+          position: absolute;
+          object-fit: none;
+
+          animation-delay: 500ms;
+          animation-duration: 1s;
+          animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+          animation-fill-mode: forwards;
+
+          &#a{
+            animation-name: slide-image-a;
+          }
+
+          &#b{
+            animation-name: slide-image-b;
+          }
+
+          &#c{
+            animation-name: slide-image-c;
+          }
+
+          &#d{
+            animation-name: slide-image-d;
+          }
+        }
+      }
     }
 
     #description {
       width: 36vw;
-      margin-top: 110px;
+      margin-top: 12.5vw;
       font-family: $FONT_BODY;
       font-size: $FONT_SIZE_BODY;
     }

@@ -9,18 +9,38 @@ import * as UTIL from '../util';
 import DesktopSideNav from '../components/DesktopSideNav';
 import BackButton from '../components/BackButton';
 
+// Images
+// TODO: there will be a lot of these, so probably a good idea to move this into a file and import everything in that file
+import BACKGROUND_FIRST from '../../assets/img/examples/bg1.jpg';
+import BACKGROUND_SECOND from '../../assets/img/examples/bg2.jpg';
+import MODEL_1 from '../../assets/img/examples/girl1.jpg';
+import MODEL_2 from '../../assets/img/examples/girl2.jpg';
+import MODEL_3 from '../../assets/img/examples/girl3.jpg';
+import MODEL_4 from '../../assets/img/examples/girl4.jpg';
+
 class LinePage extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  render() {
+  slidingImage (image, id) {
+    return <div className='sliding-image'>
+      <img src={image} className='image' id={id}/>
+      <div className='frame' />
+    </div>
+  }
+
+  render () {
     const regexFindLineIndex = /\/lines\/(\d+)/;
     const currLineIdx = regexFindLineIndex.exec(this.props.location.pathname)[1];
     const line_info = LINE_DATA.LINE_INFO[currLineIdx - 1];
 
     return (
       <div id='line-page'>
+        <div id='background'>
+          <img src={BACKGROUND_FIRST} id='first' className='background-picture' />
+          <img src={BACKGROUND_SECOND} id='second' className='background-picture' />
+        </div>
         <div id='top-title'>
           {CONSTANTS.LANDING_PAGE_TITLE}
         </div>
@@ -38,7 +58,10 @@ class LinePage extends React.Component {
             </div>
           </div>
           <div id='pictures-top'>
-            Top pictures go here
+            { this.slidingImage(MODEL_2, 'a') }
+            { this.slidingImage(MODEL_4, 'b') }
+            { this.slidingImage(MODEL_1, 'c') }
+            { this.slidingImage(MODEL_3, 'd') }
           </div>
           <div id='description'>
             {line_info.description}
