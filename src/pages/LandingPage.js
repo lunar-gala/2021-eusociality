@@ -193,28 +193,12 @@ class LandingPage extends React.Component {
           });
         }
       } else {
-        // Swiping up on the default landing page opens the line menu
-        if (gesture === 'Up') {
-          /*
-          this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN
-          });
-          */
-        }
         // Tapping the top of the default landing page opens the nav menu
-        else if (gesture === 'Tap' && this.state.current_touch[0].y < 90) {
+        if (gesture === 'Tap' && this.state.current_touch[0].y < 90) {
           this.setState({
             landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
           });
         }
-        /*
-        // Tapping the lower part of the default landing page opens the line menu
-        else if (gesture === 'Tap' && this.state.current_touch[0].y >= 90) {
-          this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN
-          });
-        }
-        */
       }
 
       // Happens after the delayed handle

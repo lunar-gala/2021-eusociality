@@ -29,8 +29,8 @@ export const DESKTOP_WIDTH = 768;
 // TODO: is this being used?
 export const NAV_LINK_INFO = [
   {
-    name: 'WATCH',
-    link_name: 'about'
+    name: 'LINES',
+    link_name: 'lines'
   },
   {
     name: 'ABOUT',
@@ -39,6 +39,10 @@ export const NAV_LINK_INFO = [
   {
     name: 'PEOPLE',
     link_name: 'people'
+  },
+  {
+    name: 'WATCH',
+    link_name: 'about'
   }
 ];
 

@@ -3,10 +3,12 @@
  */
 
 #mobile-menu-nav-list {
-  position: relative;
+  position: absolute;
   width: 100%;
   transition-duration: 1s;
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  margin-left: 50px;
+  top: 73px;
 
   // Initially, the line menu is hidden and below
   opacity: 0;
@@ -21,16 +23,11 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: $NAV_ELEMENT_HEIGHT;
     width: 100%;
-    border-top: 1px solid white;
     background-color: black;
     cursor: pointer;
     text-decoration: none;
-
-    &.end {
-      border-bottom: 1px solid white;
-    }
+    margin-top: 33px;
 
     .bullet {
       width: 8px;
@@ -41,10 +38,38 @@
     }
 
     .nav-element-body {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      width: 100%;
+
       .title {
+        display: flex;
+        margin-right: 30px;
+
         color: white;
-        font-size: 36px;
+        font-size: 48px;
         transform: scale(1, 1.2);
+
+        opacity: 0.65;
+
+        &.selected {
+          opacity: 1;
+        }
+      }
+
+      .right-bar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-grow: 1;
+
+        .line {
+          border-bottom: 1px solid white;
+          height: 1px;
+          width: 100%;
+          margin-bottom: 1px;
+        }
       }
     }
   }

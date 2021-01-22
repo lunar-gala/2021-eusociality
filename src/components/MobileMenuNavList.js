@@ -23,10 +23,13 @@ class MobileMenuNavList extends React.Component {
       className={`nav-element mobile-link ${(index === CONSTANTS.NAV_LINK_INFO.length - 1) ? 'end' : ''}`}
       to={`/${nav_link_info.link_name}`}
       key={index}>
-      <div className='bullet'></div>
       <div className='nav-element-body'>
         <div className='title'>
           {nav_link_info.name}
+        </div>
+        <div className='right-bar'>
+          <div className='dot-basic'/>
+          <div className='line'/>
         </div>
       </div>
     </Link>;
