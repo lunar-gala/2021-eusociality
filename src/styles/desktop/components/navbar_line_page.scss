@@ -1,10 +1,11 @@
 /**
- * Landing page navbar
+ * Line page navbar
  */
 
 $UNDERLINE_CIRCLE_WIDTH: 8px;
 $UNDERLINE_WIDTH: 32px + 2*$UNDERLINE_CIRCLE_WIDTH;
 $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
+$TOOLTIP_TICK_LENGTH: 27px;
 
 @keyframes underline-animation {
   from {
@@ -30,15 +31,15 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
   }
 }
 
-.navbar {
+.navbar-line-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;
   // Put this navbar at the bottom
-  position: fixed;
-  bottom: $OUTER;
+  margin-bottom: 2.5vh;
+  margin-top: 6.66vw;
 
   border-top: 1px solid white;
   border-bottom: 1px solid white;
@@ -120,6 +121,81 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
         .underline {
           animation: 1s ease-in-out underline-animation forwards;
         }
+      }
+    }
+
+    &:hover .tooltip {
+      opacity: 1;
+    }
+
+    // Special margin rule for the first line since it doesn't fit
+    &#line-0 .tooltip .wrapper {
+      margin-left: 82px;
+
+      #left-top {
+        margin-left: 82px;
+      }
+    }
+
+    .tooltip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      bottom: 62px;
+      opacity: 0;
+      transition-duration: 200ms;
+      transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+      .vertical-tick {
+        width: 1px;
+        height: $TOOLTIP_TICK_LENGTH;
+        border-right: 1px solid white;
+      }
+
+      .wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        border: 1px solid white;
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: $LANDING_PAGE_BACKGROUND_COLOR;
+
+        .label {
+          border-left: 1px solid white;
+          border-right: 1px solid white;
+          font-family: $FONT_SUBHEAD;
+          font-weight: 400;
+          font-size: 18px;
+          text-transform: uppercase;
+          white-space: nowrap;
+
+          padding-top: 8px;
+          padding-bottom: 6px;
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+
+        .dot-basic {
+          width: $UNDERLINE_CIRCLE_WIDTH;
+          height: $UNDERLINE_CIRCLE_WIDTH;
+          position: absolute;
+        }
+
+        #left-top {
+          top: -$UNDERLINE_CIRCLE_WIDTH/2;
+          left: $UNDERLINE_CIRCLE_WIDTH;
+        }
+
+        #right-bottom {
+          right: $UNDERLINE_CIRCLE_WIDTH;
+          bottom: $TOOLTIP_TICK_LENGTH - $UNDERLINE_CIRCLE_WIDTH/2;
+        }
+      }
+
+      &.inactive {
+        opacity: 0;
       }
     }
   }

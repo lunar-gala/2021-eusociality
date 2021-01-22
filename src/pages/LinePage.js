@@ -17,10 +17,18 @@ import MODEL_1 from '../../assets/img/examples/girl1.jpg';
 import MODEL_2 from '../../assets/img/examples/girl2.jpg';
 import MODEL_3 from '../../assets/img/examples/girl3.jpg';
 import MODEL_4 from '../../assets/img/examples/girl4.jpg';
+import NavbarLinePage from '../components/NavbarLinePage';
 
 class LinePage extends React.Component {
   constructor(props) {
     super(props);
+
+    const regexFindLineIndex = /\/lines\/(\d+)/;
+    const currLineNumber = regexFindLineIndex.exec(this.props.location.pathname)[1];
+
+    this.state = {
+      selectedLineIdx: currLineNumber - 1
+    };
   }
 
   slidingImage (image, id) {
@@ -31,9 +39,7 @@ class LinePage extends React.Component {
   }
 
   render () {
-    const regexFindLineIndex = /\/lines\/(\d+)/;
-    const currLineIdx = regexFindLineIndex.exec(this.props.location.pathname)[1];
-    const line_info = LINE_DATA.LINE_INFO[currLineIdx - 1];
+    const line_info = LINE_DATA.LINE_INFO[this.state.selectedLineIdx];
 
     return (
       <div id='line-page'>
@@ -64,7 +70,7 @@ class LinePage extends React.Component {
             { this.slidingImage(MODEL_3, 'd') }
           </div>
           <div id='description'>
-            {line_info.description}
+            {line_info.description ? line_info.description : LINE_DATA.LINE_INFO[0].description }
           </div>
           <div id='left-bar'>
             <div className='line'/>
@@ -75,6 +81,7 @@ class LinePage extends React.Component {
             <img src={MODEL_3} id='right' />
           </div>
         </div>
+        <NavbarLinePage selectedLineIdx={this.state.selectedLineIdx} />
         { /* Navbar goes here */ }
 
         {/* Additional overlay components */}
