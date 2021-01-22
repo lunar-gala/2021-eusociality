@@ -68,8 +68,12 @@ class LinePage extends React.Component {
     return (
       <div id='line-page'>
         <div id='background'>
-          <img src={BACKGROUND_FIRST} id='first' className='background-picture' />
-          <img src={BACKGROUND_SECOND} id='second' className='background-picture' />
+          <div style={{
+            backgroundImage: `url(${BACKGROUND_FIRST})`
+          }} id='first' className='background-picture' />
+          <div style={{
+            backgroundImage: `url(${BACKGROUND_SECOND})`
+          }} id='second' className='background-picture' />
         </div>
         <div id='top-title'>
           {CONSTANTS.LANDING_PAGE_TITLE}

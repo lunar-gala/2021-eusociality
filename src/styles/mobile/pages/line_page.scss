@@ -32,16 +32,21 @@ $SLIDE_AMOUNT_B: -14.38vw;
   padding-bottom: 34vw;
 
   #background {
-    displaY: flex;
+    display: flex;
     flex-direction: column;
     position: absolute;
     top: 0;
     z-index: -1;
-    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 
     // TODO: did we want to do a gradual opacity fade for the background?
     #first {
       opacity: 0.9;
+      height: 100%;
+      width: 100%;
     }
 
     #second {
