@@ -49,6 +49,7 @@ class NavLinePageItem extends React.Component {
         id={`line-${this.props.lineIdx}`}
         key={this.props.lineName}
         to={`/lines/${this.props.lineIdx + 1}`}
+        replace={true}
         onClick={() => {
           this.props.handlerSelectedLineIdx(this.props.lineIdx);
         }}

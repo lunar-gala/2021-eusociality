@@ -1,5 +1,5 @@
 /**
- * Goes back to the previous location
+ * Goes back to the previous url, react router
  */
 
 import React from 'react';

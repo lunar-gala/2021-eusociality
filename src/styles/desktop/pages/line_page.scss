@@ -219,4 +219,36 @@ $SLIDE_AMOUNT_D: 16.6vw;
       }
     }
   }
+
+  .fixed-overlay {
+    position: fixed;
+    top: $TOP_MARGIN;
+    left: $X_MARGIN/2;
+
+    .links {
+      position: static;
+      top: 0;
+      left: 0;
+    }
+
+    #back-button {
+      margin-top: 8.6vw;
+      left: $X_MARGIN/2;
+
+      width: 32px;
+      height: 32px;
+      border-left: 4px solid white;
+      border-bottom: 4px solid white;
+      transform: rotate(45deg);
+
+      cursor: pointer;
+
+      opacity: 0;
+      transition-duration: 1s;
+
+      &.show {
+        opacity: 1;
+      }
+    }
+  }
 }

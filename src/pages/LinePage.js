@@ -27,10 +27,28 @@ class LinePage extends React.Component {
     const currLineNumber = regexFindLineIndex.exec(this.props.location.pathname)[1];
 
     this.state = {
-      selectedLineIdx: currLineNumber - 1
+      selectedLineIdx: currLineNumber - 1,
+      showBackButton: true
     };
 
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  componentDidMount () {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll (event) {
+    let currentScrollPos = window.pageYOffset;
+
+    this.setState({
+      showBackButton: currentScrollPos < window.innerHeight
+    });
   }
 
   handlerSelectedLineIdx (index) {
@@ -92,15 +110,20 @@ class LinePage extends React.Component {
 
         {/* Additional overlay components */}
         { /* TODO: make the desktop side nav fixable so it moves with scroll */ }
-        <DesktopSideNav />
-        <BackButton />
+        <div className='fixed-overlay'>
+          <DesktopSideNav />
+          <div id='back-button' className={this.state.showBackButton ? 'show' : ''} onClick={
+            () => this.props.history.goBack()
+          } />
+        </div>
       </div>
     );
   }
 }
 
 LinePage.propTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
+  history: PropTypes.object
 };
 
 export default LinePage;
