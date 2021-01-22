@@ -39,7 +39,7 @@ class LinePage extends React.Component {
 
   slidingImage (image, id) {
     return <div className='sliding-image'>
-      <img src={image} className='image' id={id}/>
+      <img src={image} className={`image`} key={this.state.selectedLineIdx} id={id}/>
       <div className='frame' />
     </div>
   }
