@@ -144,7 +144,6 @@ $TOOLTIP_TICK_LENGTH: 27px;
       bottom: 62px;
       opacity: 0;
       transition-duration: 200ms;
-      transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 
       .vertical-tick {
         width: 1px;
