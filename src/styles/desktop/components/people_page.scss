@@ -5,14 +5,38 @@
 .main-page {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+	align-items: center;
+	
+	.wrapper {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 30vh;
+		background: linear-gradient(180deg, rgba(20,20,20,1) 40%, rgba(20,20,20,0) 100%);
+		z-index: 100;
+		padding: 0;
+
+		.header {
+			padding: 0;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	}
 
   #team-acordion {
 		position: absolute;
 		left: $X_MARGIN/2;
 		display: block;	
 		top: 25%;	
+
+		.Mui-expanded {
+			margin: 0;
+			//margin-top: 5px;
+			padding: 0;
+		}
 
 		.team-title {
 			font-family: $FONT_DISPLAY;
@@ -37,7 +61,36 @@
 		}
 
 		.tab-body {
+			width: 100vw - $X_MARGIN;
 			padding: 0;
+			padding-top: 40px;
+			flex-direction: row;
+			justify-content: space-between;
+			flex-wrap: wrap;
+
+			.teamBio {
+				margin-top: 30px;
+				margin-bottom: 30px;
+				display: block;
+				width: 20ww;
+				justify-self: space-between;
+
+				.name {
+					text-transform: uppercase;
+					font-weight: 400;
+					font-size: 18px;
+					margin: 0;
+				}
+
+				.title {
+					text-transform: uppercase;
+					font-size: 18px;
+					margin: 0;
+				}
+
+			}
+
+
 		}
   }
 }

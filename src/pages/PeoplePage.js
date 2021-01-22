@@ -3,7 +3,7 @@ import * as CONSTANTS from "../constants";
 import TitleTheme from "../components/TitleTheme";
 import Logo from "../components/Logo";
 import DesktopSideNav from "../components/DesktopSideNav";
-import CustomizedAccordions from '../components/PeopleAccordion';
+import PeopleAccordion from "../components/PeopleAccordion";
 
 class PeoplePage extends React.Component {
   constructor(props) {
@@ -16,14 +16,19 @@ class PeoplePage extends React.Component {
   render() {
     return (
       <div className="main-page">
-        {/* Common Elements */}
-        <TitleTheme landing_page_state={this.state.landing_page_state} />
-        <Logo landing_page_state={this.state.landing_page_state} />
-        <DesktopSideNav />
+
+        <div className="wrapper">
+          <div className="header">
+            {/* Common Elements */}
+            <TitleTheme landing_page_state={this.state.landing_page_state} />
+            {/*<Logo landing_page_state={this.state.landing_page_state} />*/}
+            <DesktopSideNav/>
+          </div>
+
+        </div>
 
         <div id="team-acordion">
-          <CustomizedAccordions />
-
+          <PeopleAccordion />
         </div>
 
         {/* Various line and dot elements */}

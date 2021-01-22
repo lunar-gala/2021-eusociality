@@ -5,7 +5,6 @@
 .links {
   position: absolute;
   top: $TOP_MARGIN;
-  // left: $X_MARGIN/2; // an aprox guess to get the actual links aligned with the rest of the page
   left: 0;
 
   .link-wrapper {
@@ -46,5 +45,4 @@
       text-decoration: none;
     }
   }
-
 }

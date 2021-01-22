@@ -3,12 +3,13 @@
  */
 
 .vertical-line {
-    height: 100vh;
+    position: fixed;
+    bottom: 0;
     top: 0;
-    position: absolute;
     border-left: 1px solid white;
     border-right: 1px solid white;
     pointer-events: none;
+    z-index: 1000;
   }
 
   #outer-lines {
