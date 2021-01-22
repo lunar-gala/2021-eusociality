@@ -37,8 +37,6 @@ $TOOLTIP_TICK_LENGTH: 27px;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  // Put this navbar at the bottom
-  margin-bottom: 2.5vh;
   margin-top: 6.66vw;
 
   border-top: 1px solid white;
@@ -90,6 +88,7 @@ $TOOLTIP_TICK_LENGTH: 27px;
     border-color: rgba(255, 255, 255, 0);
     padding-bottom: $BOTTOM_MARGIN*0.05;
     transition: .5s;
+    text-decoration: none;
 
     .underline-animation {
       margin-top: 4px;

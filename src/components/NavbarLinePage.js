@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import * as LINE_DATA from "../data/line_data";
 import * as UTIL from "../util";
@@ -40,12 +41,13 @@ class NavLinePageItem extends React.Component {
   render() {
     let is_selected = this.props.selectedLineIdx === this.props.lineIdx;
     return (
-      <div
+      <Link
         className={`navbar-item ${
           is_selected ? 'selected' : ''
         }`}
         id={`line-${this.props.lineIdx}`}
         key={this.props.lineName}
+        to={`/lines/${this.props.lineIdx + 1}`}
       >
         <NavBall className={`navBall ${this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""}`}/>
         {UTIL.line_number_formatter(this.props.lineIdx)}
@@ -72,7 +74,7 @@ class NavLinePageItem extends React.Component {
           </div>
           <div className='vertical-tick' />
         </div>
-      </div>
+      </Link>
     );
   }
 }
