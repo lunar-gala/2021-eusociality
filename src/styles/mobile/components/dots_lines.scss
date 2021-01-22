@@ -1,0 +1,12 @@
+/**
+ * Style definitions for overlayed lines and dots.
+ */
+
+$CIRCLE_RAD: 12px;
+
+.dot-basic {
+  width: $CIRCLE_RAD;
+  height: $CIRCLE_RAD;
+  background-color: white;
+  border-radius: 100%;
+}

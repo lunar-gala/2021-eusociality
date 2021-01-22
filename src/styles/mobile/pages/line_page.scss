@@ -1,0 +1,222 @@
+/**
+ * Line page styles for mobile
+ */
+$LEFT_MARGIN: $X_MARGIN/2;
+$RIGHT_MARGIN: $X_MARGIN/2;
+
+
+$SLIDE_IMG_WIDTH: 41.3vw;
+$SLIDE_IMG_HEIGHT: 61vw;
+$SLIDE_AMOUNT_A: 9.86vw;
+$SLIDE_AMOUNT_B: -14.38vw;
+
+// Animations
+@keyframes slide-image-a {
+  from {
+    transform: translateY(0);
+  } to {
+    transform: translateY($SLIDE_AMOUNT_A);
+  }
+}
+
+@keyframes slide-image-b {
+  from {
+    transform: translateY(0);
+  } to {
+    transform: translateY($SLIDE_AMOUNT_B);
+  }
+}
+
+#line-page {
+  width: 100vw;
+
+  #background {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    object-fit: cover;
+
+    // TODO: did we want to do a gradual opacity fade for the background?
+    #first {
+      opacity: 0.9;
+      height: 100vh;
+    }
+
+    #second {
+      display: none;
+    }
+  }
+
+  #top-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    margin-top: $TOP_MARGIN_MOBILE;
+    font-family: 'Sprat Type Condensed';
+    font-size: 24px;
+    font-weight: 100;
+    letter-spacing: -0.05em;
+  }
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: $LEFT_MARGIN;
+    margin-right: $RIGHT_MARGIN;
+
+    #name {
+      // TODO: this is really bad style for font sizes and letter spacing. Not
+      // scalable
+      margin-top: 38px;
+      font-family: 'Sprat Type Condensed';
+      font-size: 48px;
+      font-weight: 100;
+      letter-spacing: -0.12em;
+      text-transform: uppercase;
+      word-spacing: $HEADER_WORD_SPACING;
+    }
+
+    #designers {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      margin-top: 10px;
+      width: 100%;
+
+      #designers-text {
+        display: flex;
+        font-family: $FONT_SUBHEAD;
+        font-weight: normal;
+        font-size: 20px;
+        letter-spacing: -0.05em;
+        text-transform: uppercase;
+      }
+
+      #right-bar {
+        display: none;
+      }
+    }
+
+    #pictures-top {
+      margin-top: 18.5vw;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+
+      .sliding-image {
+        width: $SLIDE_IMG_WIDTH;
+        height: $SLIDE_IMG_HEIGHT;
+
+        &#c{
+          display: none;
+        }
+
+        &#d{
+          display: none;
+        }
+
+        .frame {
+          width: calc(100% - 4px);
+          height: calc(100% - 2px);
+          border: 2px solid white;
+        }
+
+        .image {
+          width: $SLIDE_IMG_WIDTH;
+          height: $SLIDE_IMG_HEIGHT;
+          z-index: -1;
+          position: absolute;
+          object-fit: none;
+
+          animation-delay: 1s;
+          animation-duration: 2s;
+          animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+          animation-fill-mode: forwards;
+
+          &#a{
+            animation-name: slide-image-a;
+          }
+
+          &#b{
+            animation-name: slide-image-b;
+          }
+        }
+      }
+    }
+
+    #description {
+      width: 100%;
+      margin-top: 16.2vw;
+      font-family: $FONT_BODY;
+      font-weight: 400;
+      font-size: $FONT_SIZE_BODY;
+    }
+
+    #left-bar {
+      margin-top: 6.26vw;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-grow: 1;
+      margin-left: -25vw;
+
+      .dot-basic {
+        margin-left: -1px;
+      }
+
+      .line {
+        width: 60vw;
+        flex-grow: 1;
+        border-bottom: 2px solid white;
+        height: 1px;
+      }
+    }
+
+    #pictures-bottom {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 5.5vw;
+
+      img {
+        height: 60vw;
+      }
+
+      #left {
+        margin-right: 3.61vw;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .fixed-overlay {
+    position: fixed;
+    top: $TOP_MARGIN_MOBILE;
+    left: $X_MARGIN/2;
+
+    #back-button {
+      width: 20px;
+      height: 20px;
+      margin-top: 10px;
+      border-left: 2px solid white;
+      border-bottom: 2px solid white;
+      transform: rotate(45deg);
+
+      cursor: pointer;
+
+      opacity: 0;
+      transition-duration: 1s;
+
+      &.show {
+        opacity: 1;
+      }
+    }
+  }
+}

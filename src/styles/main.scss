@@ -22,6 +22,8 @@
 @media (max-width: $DESKTOP_WIDTH - 1) {
   @import './mobile/index.scss';
   @import './mobile/components/landing_page.scss';
+  @import './mobile/pages/line_page.scss';
+  @import './mobile/components/dots_lines.scss';
   @import './mobile/components/mobile_open_menu.scss';
   @import './mobile/components/mobile_menu_line_list.scss';
   @import './mobile/components/mobile_menu_nav_list.scss';

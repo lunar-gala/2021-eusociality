@@ -5,6 +5,8 @@
 $UNDERLINE_CIRCLE_WIDTH: 8px;
 $UNDERLINE_WIDTH: 32px + 2*$UNDERLINE_CIRCLE_WIDTH;
 $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
+$TOOLTIP_CIRCLE_WIDTH: 10px;
+$TOOLTIP_MARGIN: 10px;
 $TOOLTIP_TICK_LENGTH: 27px;
 
 @keyframes underline-animation {
@@ -171,24 +173,24 @@ $TOOLTIP_TICK_LENGTH: 27px;
 
           padding-top: 8px;
           padding-bottom: 6px;
-          padding-left: 10px;
-          padding-right: 10px;
+          padding-left: $TOOLTIP_MARGIN;
+          padding-right: $TOOLTIP_MARGIN;
         }
 
         .dot-basic {
-          width: $UNDERLINE_CIRCLE_WIDTH;
-          height: $UNDERLINE_CIRCLE_WIDTH;
+          width: $TOOLTIP_CIRCLE_WIDTH;
+          height: $TOOLTIP_CIRCLE_WIDTH;
           position: absolute;
         }
 
         #left-top {
-          top: -$UNDERLINE_CIRCLE_WIDTH/2;
-          left: $UNDERLINE_CIRCLE_WIDTH;
+          top: -$TOOLTIP_CIRCLE_WIDTH/2;
+          left: $TOOLTIP_CIRCLE_WIDTH;
         }
 
         #right-bottom {
-          right: $UNDERLINE_CIRCLE_WIDTH;
-          bottom: $TOOLTIP_TICK_LENGTH - $UNDERLINE_CIRCLE_WIDTH/2;
+          right: $TOOLTIP_CIRCLE_WIDTH;
+          bottom: $TOOLTIP_TICK_LENGTH - $TOOLTIP_CIRCLE_WIDTH/2;
         }
       }
 
