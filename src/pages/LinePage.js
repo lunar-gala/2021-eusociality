@@ -29,6 +29,12 @@ class LinePage extends React.Component {
     this.state = {
       selectedLineIdx: currLineNumber - 1
     };
+
+    this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
+  }
+
+  handlerSelectedLineIdx (index) {
+    this.setState({selectedLineIdx: index});
   }
 
   slidingImage (image, id) {
@@ -81,7 +87,7 @@ class LinePage extends React.Component {
             <img src={MODEL_3} id='right' />
           </div>
         </div>
-        <NavbarLinePage selectedLineIdx={this.state.selectedLineIdx} />
+        <NavbarLinePage selectedLineIdx={this.state.selectedLineIdx} handlerSelectedLineIdx={this.handlerSelectedLineIdx} />
         { /* Navbar goes here */ }
 
         {/* Additional overlay components */}

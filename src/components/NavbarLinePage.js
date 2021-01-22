@@ -18,6 +18,7 @@ class NavbarLinePage extends React.Component {
     for (const [index, line_info] of LINE_DATA.LINE_INFO.entries()) {
       items.push(
         <NavLinePageItem
+          handlerSelectedLineIdx={this.props.handlerSelectedLineIdx}
           selectedLineIdx={this.props.selectedLineIdx}
           lineIdx={index}
           lineName={line_info.name}
@@ -48,6 +49,9 @@ class NavLinePageItem extends React.Component {
         id={`line-${this.props.lineIdx}`}
         key={this.props.lineName}
         to={`/lines/${this.props.lineIdx + 1}`}
+        onClick={() => {
+          this.props.handlerSelectedLineIdx(this.props.lineIdx);
+        }}
       >
         <NavBall className={`navBall ${this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""}`}/>
         {UTIL.line_number_formatter(this.props.lineIdx)}
@@ -80,11 +84,15 @@ class NavLinePageItem extends React.Component {
 }
 
 NavbarLinePage.propTypes = {
+  /** @brief Handles updating the line index when a NavItem is hovered over */
+  handlerSelectedLineIdx: PropTypes.func.isRequired,
   /** @brief The currently selected line index on the navbar */
   selectedLineIdx: PropTypes.number.isRequired,
 };
 
 NavLinePageItem.propTypes = {
+  /** @brief Handles updating the line index when a NavItem is hovered over */
+  handlerSelectedLineIdx: PropTypes.func.isRequired,
   /** @brief Line index associated with this NavLinePageItem circle */
   lineIdx: PropTypes.number.isRequired,
   /** @brief Line name associated with NavLinePageItem circle */
