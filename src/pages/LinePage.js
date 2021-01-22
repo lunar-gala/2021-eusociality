@@ -56,7 +56,7 @@ class LinePage extends React.Component {
   }
 
   slidingImage (image, id) {
-    return <div className='sliding-image'>
+    return <div className='sliding-image' id={id}>
       <img src={image} className={`image`} key={this.state.selectedLineIdx} id={id}/>
       <div className='frame' />
     </div>
@@ -68,8 +68,12 @@ class LinePage extends React.Component {
     return (
       <div id='line-page'>
         <div id='background'>
-          <img src={BACKGROUND_FIRST} id='first' className='background-picture' />
-          <img src={BACKGROUND_SECOND} id='second' className='background-picture' />
+          <div style={{
+            backgroundImage: `url(${BACKGROUND_FIRST})`
+          }} id='first' className='background-picture' />
+          <div style={{
+            backgroundImage: `url(${BACKGROUND_SECOND})`
+          }} id='second' className='background-picture' />
         </div>
         <div id='top-title'>
           {CONSTANTS.LANDING_PAGE_TITLE}
@@ -106,8 +110,6 @@ class LinePage extends React.Component {
           </div>
         </div>
         <NavbarLinePage selectedLineIdx={this.state.selectedLineIdx} handlerSelectedLineIdx={this.handlerSelectedLineIdx} />
-        { /* Navbar goes here */ }
-
         {/* Additional overlay components */}
         { /* TODO: make the desktop side nav fixable so it moves with scroll */ }
         <div className='fixed-overlay'>

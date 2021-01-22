@@ -1,13 +1,14 @@
 /**
- * Styles for the page showing each individual line
+ * Line page styles for mobile
  */
+$LEFT_MARGIN: $X_MARGIN/2;
+$RIGHT_MARGIN: $X_MARGIN/2;
 
-$LEFT_MARGIN: 25vw;
 
-$SLIDE_AMOUNT_A: 6.66vw;
-$SLIDE_AMOUNT_B: -2.8vw;
-$SLIDE_AMOUNT_C: 6.4vw;
-$SLIDE_AMOUNT_D: 16.6vw;
+$SLIDE_IMG_WIDTH: 41.3vw;
+$SLIDE_IMG_HEIGHT: 61vw;
+$SLIDE_AMOUNT_A: 9.86vw;
+$SLIDE_AMOUNT_B: -14.38vw;
 
 // Animations
 @keyframes slide-image-a {
@@ -26,48 +27,30 @@ $SLIDE_AMOUNT_D: 16.6vw;
   }
 }
 
-@keyframes slide-image-c {
-  from {
-    transform: translateY(0);
-  } to {
-    transform: translateY($SLIDE_AMOUNT_C);
-  }
-}
-
-@keyframes slide-image-d {
-  from {
-    transform: translateY(0);
-  } to {
-    transform: translateY($SLIDE_AMOUNT_D);
-  }
-}
-
 #line-page {
   width: 100vw;
-  padding-bottom: 2.5vh;
+  padding-bottom: 34vw;
 
   #background {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     position: absolute;
     top: 0;
     z-index: -1;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 
     // TODO: did we want to do a gradual opacity fade for the background?
     #first {
-      background-size: cover;
-      height: 63vh;
-      width: 100vw;
       opacity: 0.9;
+      height: 100%;
+      width: 100%;
     }
 
     #second {
-      background-size: cover;
-      height: 46vw;
-      width: 80vw;
-      margin-top: 14px;
-      opacity: 0.6;
+      display: none;
     }
   }
 
@@ -76,9 +59,9 @@ $SLIDE_AMOUNT_D: 16.6vw;
     flex-direction: column;
     align-items: center;
     width: 100vw;
-    margin-top: $TOP_MARGIN;
+    margin-top: $TOP_MARGIN_MOBILE;
     font-family: 'Sprat Type Condensed';
-    font-size: $FONT_SIZE_TITLE;
+    font-size: 24px;
     font-weight: 100;
     letter-spacing: -0.05em;
   }
@@ -88,13 +71,14 @@ $SLIDE_AMOUNT_D: 16.6vw;
     flex-direction: column;
     align-items: flex-start;
     margin-left: $LEFT_MARGIN;
+    margin-right: $RIGHT_MARGIN;
 
     #name {
       // TODO: this is really bad style for font sizes and letter spacing. Not
       // scalable
-      margin-top: 123px;
+      margin-top: 38px;
       font-family: 'Sprat Type Condensed';
-      font-size: $FONT_SIZE_LINE_PAGE_NAME;
+      font-size: 48px;
       font-weight: 100;
       letter-spacing: -0.12em;
       text-transform: uppercase;
@@ -111,38 +95,35 @@ $SLIDE_AMOUNT_D: 16.6vw;
       #designers-text {
         display: flex;
         font-family: $FONT_SUBHEAD;
-        font-weight: 400;
-        font-size: 24px;
+        font-weight: normal;
+        font-size: 20px;
+        letter-spacing: -0.05em;
         text-transform: uppercase;
       }
 
       #right-bar {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        flex-grow: 1;
-        margin-left: 12px;
-        margin-bottom: 4px;
-
-        .line {
-          flex-grow: 1;
-          border-bottom: 1px solid white;
-          height: 1px;
-        }
+        display: none;
       }
     }
 
     #pictures-top {
-      margin-top: 9.4vw;
+      margin-top: 18.5vw;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       width: 100%;
 
       .sliding-image {
-        width: 16vw;
-        height: 23.8vw;
-        // overflow: hidden;
+        width: $SLIDE_IMG_WIDTH;
+        height: $SLIDE_IMG_HEIGHT;
+
+        &#c{
+          display: none;
+        }
+
+        &#d{
+          display: none;
+        }
 
         .frame {
           width: calc(100% - 4px);
@@ -151,8 +132,8 @@ $SLIDE_AMOUNT_D: 16.6vw;
         }
 
         .image {
-          width: 16vw;
-          height: 23.8vw;
+          width: $SLIDE_IMG_WIDTH;
+          height: $SLIDE_IMG_HEIGHT;
           z-index: -1;
           position: absolute;
           object-fit: none;
@@ -169,27 +150,20 @@ $SLIDE_AMOUNT_D: 16.6vw;
           &#b{
             animation-name: slide-image-b;
           }
-
-          &#c{
-            animation-name: slide-image-c;
-          }
-
-          &#d{
-            animation-name: slide-image-d;
-          }
         }
       }
     }
 
     #description {
-      width: 36vw;
-      margin-top: 12.5vw;
+      width: 100%;
+      margin-top: 16.2vw;
       font-family: $FONT_BODY;
+      font-weight: 400;
       font-size: $FONT_SIZE_BODY;
     }
 
     #left-bar {
-      margin-top: 4.26vw;
+      margin-top: 6.26vw;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -203,7 +177,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
       .line {
         width: 60vw;
         flex-grow: 1;
-        border-bottom: 1px solid white;
+        border-bottom: 2px solid white;
         height: 1px;
       }
     }
@@ -211,10 +185,12 @@ $SLIDE_AMOUNT_D: 16.6vw;
     #pictures-bottom {
       display: flex;
       flex-direction: row;
-      margin-top: 2.86vw;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 5.5vw;
 
       img {
-        height: 47vw;
+        height: 60vw;
       }
 
       #left {
@@ -226,23 +202,15 @@ $SLIDE_AMOUNT_D: 16.6vw;
 
   .fixed-overlay {
     position: fixed;
-    top: $TOP_MARGIN;
+    top: $TOP_MARGIN_MOBILE;
     left: $X_MARGIN/2;
 
-    .links {
-      position: static;
-      top: 0;
-      left: 0;
-    }
-
     #back-button {
-      margin-top: 8.6vw;
-      left: $X_MARGIN/2;
-
-      width: 32px;
-      height: 32px;
-      border-left: 4px solid white;
-      border-bottom: 4px solid white;
+      width: 20px;
+      height: 20px;
+      margin-top: 10px;
+      border-left: 2px solid white;
+      border-bottom: 2px solid white;
       transform: rotate(45deg);
 
       cursor: pointer;
