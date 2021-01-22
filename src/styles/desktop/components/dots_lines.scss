@@ -1,3 +1,9 @@
+/**
+ * Style definitions for overlayed lines and dots.
+ */
+
+// TODO: this dot is poorly defined because it has too many specific variables,
+// making it hard to extend and use in general. See .dot-basic.
 .dot {
   width: $CIRCLE_RAD;
   height: $CIRCLE_RAD;
@@ -5,6 +11,13 @@
   border-radius: 100%;
   position: absolute;
   margin-bottom: -$CIRCLE_RAD/2;
+}
+
+.dot-basic {
+  width: $CIRCLE_RAD;
+  height: $CIRCLE_RAD;
+  background-color: white;
+  border-radius: 100%;
 }
 
 .vertical-line {

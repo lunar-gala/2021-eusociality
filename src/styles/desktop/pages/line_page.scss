@@ -1,3 +1,105 @@
 /**
  * Styles for the page showing each individual line
  */
+
+$LEFT_MARGIN: 25vw;
+
+#line-page {
+  width: 100vw;
+
+  #top-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    margin-top: $TOP_MARGIN;
+    font-family: 'Sprat Type';
+    font-size: $FONT_SIZE_TITLE;
+    font-weight: $FONT_TITLE_WEIGHT;
+  }
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: $LEFT_MARGIN;
+
+    #name {
+      // TODO: this is really bad style for font sizes and letter spacing. Not
+      // scalable
+      margin-top: 123px;
+      font-family: 'Sprat Type Condensed';
+      font-size: $FONT_SIZE_LINE_PAGE_NAME;
+      font-weight: 100;
+      letter-spacing: -0.12em;
+      text-transform: uppercase;
+      word-spacing: $HEADER_WORD_SPACING;
+    }
+
+    #designers {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      margin-top: 10px;
+      width: 100%;
+
+      #designers-text {
+        display: flex;
+        font-family: $FONT_SUBHEAD;
+        font-weight: 400;
+        font-size: 24px;
+        text-transform: uppercase;
+      }
+
+      #right-bar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-grow: 1;
+        margin-left: 12px;
+        margin-bottom: 4px;
+
+        .line {
+          flex-grow: 1;
+          border-bottom: 1px solid white;
+          height: 1px;
+        }
+      }
+    }
+
+    #pictures-top {
+      margin-top: 141px;
+    }
+
+    #description {
+      width: 36vw;
+      margin-top: 110px;
+      font-family: $FONT_BODY;
+      font-size: $FONT_SIZE_BODY;
+    }
+
+    #left-bar {
+      margin-top: 64px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-grow: 1;
+      margin-left: -25vw;
+
+      .dot-basic {
+        margin-left: -1px;
+      }
+
+      .line {
+        width: 60vw;
+        flex-grow: 1;
+        border-bottom: 1px solid white;
+        height: 1px;
+      }
+    }
+
+    #pictures-bottom {
+      margin-top: 43px;
+    }
+  }
+}

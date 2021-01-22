@@ -17,28 +17,41 @@ class LinePage extends React.Component {
   render() {
     const regexFindLineIndex = /\/lines\/(\d+)/;
     const currLineIdx = regexFindLineIndex.exec(this.props.location.pathname)[1];
-    const line_info = LINE_DATA.LINE_INFO[currLineIdx];
+    const line_info = LINE_DATA.LINE_INFO[currLineIdx - 1];
 
     return (
       <div id='line-page'>
         <div id='top-title'>
           {CONSTANTS.LANDING_PAGE_TITLE}
         </div>
-        <div id='name'>
-          {line_info.name}
+        <div className='main-content'>
+          <div id='name'>
+            {line_info.name}
+          </div>
+          <div id='designers'>
+            <div id='designers-text'>
+              {UTIL.name_list_formatter(line_info.designers)}
+            </div>
+            <div id='right-bar'>
+              <div className='dot-basic'/>
+              <div className='line'/>
+            </div>
+          </div>
+          <div id='pictures-top'>
+            Top pictures go here
+          </div>
+          <div id='description'>
+            {line_info.description}
+          </div>
+          <div id='left-bar'>
+            <div className='line'/>
+            <div className='dot-basic'/>
+          </div>
+          <div id='pictures-bottom'>
+            Bottom pictures go here
+          </div>
         </div>
-        <div id='designers'>
-          {UTIL.name_list_formatter(line_info.designers)}
-        </div>
-        <div id='pictures-top'>
-          Top pictures go here
-        </div>
-        <div id='description'>
-          {line_info.description}
-        </div>
-        <div id='pictures-bottom'>
-          Bottom pictures go here
-        </div>
+        { /* Navbar goes here */ }
 
         {/* Additional overlay components */}
         <DesktopSideNav />

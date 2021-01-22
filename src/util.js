@@ -3,7 +3,7 @@
  */
 
 
- /**
+/**
  * Formats the line numbers in the way we want in the site.
  *
  * E.g.
