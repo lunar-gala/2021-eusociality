@@ -71,12 +71,14 @@ class LinePage extends React.Component {
             <div className='dot-basic'/>
           </div>
           <div id='pictures-bottom'>
-            Bottom pictures go here
+            <img src={MODEL_4} id='left' />
+            <img src={MODEL_3} id='right' />
           </div>
         </div>
         { /* Navbar goes here */ }
 
         {/* Additional overlay components */}
+        { /* TODO: make the desktop side nav fixable so it moves with scroll */ }
         <DesktopSideNav />
         <BackButton />
       </div>

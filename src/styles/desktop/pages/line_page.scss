@@ -53,17 +53,16 @@ $SLIDE_AMOUNT_D: 16.6vw;
     top: 0;
     z-index: -1;
 
-    .background-picture {
-      opacity: 0.6;
-    }
-
+    // TODO: did we want to do a gradual opacity fade for the background?
     #first {
       width: 100vw;
+      opacity: 0.9;
     }
 
     #second {
       width: 80vw;
       margin-top: 14px;
+      opacity: 0.6;
     }
   }
 
@@ -129,7 +128,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
     }
 
     #pictures-top {
-      margin-top: 141px;
+      margin-top: 9.4vw;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -185,7 +184,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
     }
 
     #left-bar {
-      margin-top: 64px;
+      margin-top: 4.26vw;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -205,7 +204,18 @@ $SLIDE_AMOUNT_D: 16.6vw;
     }
 
     #pictures-bottom {
-      margin-top: 43px;
+      display: flex;
+      flex-direction: row;
+      margin-top: 2.86vw;
+
+      img {
+        height: 47vw;
+      }
+
+      #left {
+        margin-right: 3.61vw;
+        object-fit: cover;
+      }
     }
   }
 }
