@@ -56,11 +56,15 @@ $SLIDE_AMOUNT_D: 16.6vw;
 
     // TODO: did we want to do a gradual opacity fade for the background?
     #first {
+      background-size: cover;
+      height: 63vh;
       width: 100vw;
       opacity: 0.9;
     }
 
     #second {
+      background-size: cover;
+      height: 46vw;
       width: 80vw;
       margin-top: 14px;
       opacity: 0.6;
