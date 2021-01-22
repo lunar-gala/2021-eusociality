@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import * as CONSTANTS from '../constants';
+import * as LINE_DATA from '../data/line_data';
 import * as UTIL from '../util';
 import Navbar from '../components/Navbar';
 import TitleTheme from '../components/TitleTheme';
@@ -602,7 +604,7 @@ class LandingPage extends React.Component {
               <div id='line-name'>
                 {
                   (this.state.selectedLineIdx >= 0) ?
-                    `${CONSTANTS.LINE_INFO[this.state.selectedLineIdx].name}` :
+                    `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}` :
                     'COLLECTIVA'
                 }
               </div>
@@ -610,24 +612,27 @@ class LandingPage extends React.Component {
                 <div id='designers-name'>
                   {
                     (this.state.selectedLineIdx >= 0) ?
-                      `${UTIL.name_list_formatter(CONSTANTS.LINE_INFO[this.state.selectedLineIdx].designers)}` :
+                      `${UTIL.name_list_formatter(LINE_DATA.LINE_INFO[this.state.selectedLineIdx].designers)}` :
                       ''
                   }
                 </div>
                 <div id='see-more-wrapper' className={(this.state.selectedLineIdx >= 0 ? 'show' : '') + ' desktop'}>
-                  <div id="more-info">
+                  <Link id="more-info" to={{
+                    pathname: `/lines/${this.state.selectedLineIdx+1}`,
+                    state: { currLineIdx: this.state.selectedLineIdx }
+                  }}>
                     <span id='more-info-text'>
-                      See more
+                      See More
                     </span>
                     <div id='more-info-arrow'>
                       <div id='arrow'/>
                     </div>
-                  </div>
+                  </Link>
                   <div id='see-more-line-wrapper'>
                     <div id="see-more-dot" />
                     <div id="see-more-line" />
                   </div>
-                </div>
+                </div >
               </div>
             </div>
 
