@@ -48,7 +48,7 @@ export const NAV_LINK_INFO = [
   }
 ];
 
-export const ABOUT_TEXT = ' Nobody is ever entirely independent. We all make \
+export const ABOUT_TEXT = 'Nobody is ever entirely independent. We all make \
 up nodes in the dense, massively complex network that is our global society. \
 We rely on the contributions of countless other people to carry out even the \
 basic tasks of our everyday lives, and there is almost nothing we do that    \
@@ -58,7 +58,7 @@ carry out our lives, but also to pause and reflect on a system that so often \
 ignores, forgets, and devalues the so much fundamental work necessary to its \
 existence.';
 
-export const ABOUT_HEADER_TEXT = 'Collectiva explores the interdependence of our community';
+export const ABOUT_HEADER_TEXT = 'COLLECTIVA explores the interdependence of our community.';
 
 /** @brief Three.js environment settings */
 export const LANDING_PAGE_BACKGROUND_COLOR = 0x000000;

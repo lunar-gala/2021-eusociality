@@ -59,9 +59,9 @@ const OBJECT_POSITION = {
 
 /** @brief How much the camera tilts on mouse move */
 const CAMERA_PAN_FACTOR = {
-  x: 10,
-  y: 10,
-  z: 10
+  x: 0.5,
+  y: 0.5,
+  z: 0.5
 };
 
 /**
@@ -120,6 +120,7 @@ class LandingPage extends React.Component {
     this.touchMove = this.touchMove.bind(this);
     this.touchEnd = this.touchEnd.bind(this);
     this.render_cube = this.render_cube.bind(this);
+    this.handleOrientation = this.handleOrientation.bind(this);
 
     // Keep track of window width
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -318,7 +319,7 @@ class LandingPage extends React.Component {
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
-    window.addEventListener("deviceorientation", this.handleOrientation, true);
+    window.addEventListener('deviceorientation', this.handleOrientation, true);
 
     const canvas = document.querySelector('#landing-page-cube');
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
@@ -548,13 +549,20 @@ class LandingPage extends React.Component {
    *
    * @param {*} event From the phone tilting event
    */
-  handleOrientation(event) {
-    /*
-    var absolute = event.absolute;
-    var alpha    = event.alpha;
-    var beta     = event.beta;
-    var gamma    = event.gamma;
-    */
+  handleOrientation (event) {
+    let absolute = event.absolute;
+    let alpha    = event.alpha;
+    let beta     = event.beta;
+    let gamma    = event.gamma;
+
+    console.log(absolute, alpha, beta, gamma);
+
+    // TODO: animate this movement so it is smoother
+    this.state.camera.position.set(
+      CAMERA_POSITION.x + beta*CAMERA_PAN_FACTOR.x,
+      CAMERA_POSITION.y + gamma*CAMERA_PAN_FACTOR.y,
+      CAMERA_POSITION.z - Math.sqrt(beta**2 + gamma**2)*CAMERA_PAN_FACTOR.z
+    );
   }
 
   render() {

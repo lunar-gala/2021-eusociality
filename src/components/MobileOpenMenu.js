@@ -18,7 +18,12 @@ class MobileOpenMenu extends React.Component {
         </div>
         <div id='mobile-open-menu-border'></div>
       </div>
-      <div id='title'>
+      <div id='title' onClick={() => {
+        // Ask permission to access device gyroscope
+        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+          DeviceOrientationEvent.requestPermission();
+        }
+      }}>
         <span id='text'>
           {CONSTANTS.LANDING_PAGE_TITLE}
         </span>
