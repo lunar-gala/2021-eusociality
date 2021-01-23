@@ -7,11 +7,10 @@ import * as UTIL from '../util';
 
 // Components
 import DesktopSideNav from '../components/DesktopSideNav';
-import BackButton from '../components/BackButton';
 
 // Images
 // TODO: there will be a lot of these, so probably a good idea to move this into a file and import everything in that file
-import BACKGROUND_FIRST from '../../assets/img/examples/bg1.jpg';
+import BACKGROUND_FIRST from '../../assets/img/examples/bg3.jpg';
 import BACKGROUND_SECOND from '../../assets/img/examples/bg2.jpg';
 import MODEL_1 from '../../assets/img/examples/girl1.jpg';
 import MODEL_2 from '../../assets/img/examples/girl2.jpg';
