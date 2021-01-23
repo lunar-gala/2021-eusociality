@@ -3,15 +3,39 @@
  */
 
 $MOBILE_MENU_OPEN_SIZE: 30px;
+$LEFT_MARGIN: 30px;
 
 #mobile-open-menu-wrapper {
   position: fixed;
   top: 34px;
-  left: 30px;
+  left: $LEFT_MARGIN;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100vw;
+
+  &.mobile-nav-menu-open #title {
+    opacity: 1;
+  }
+
+  #title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    position: absolute;
+    left: -$LEFT_MARGIN;
+    bottom: 1px;
+    opacity: 0;
+    transition-duration: 1s;
+
+    #text {
+      font-family: 'Sprat Type Condensed';
+      font-weight: 300;
+      font-size: 30px;
+      letter-spacing: -0.12em;
+    }
+  }
 
   #mobile-open-menu {
     width: $MOBILE_MENU_OPEN_SIZE;

@@ -249,10 +249,10 @@ class LandingPage extends React.Component {
     }
 
     this.setState({fading: true}); // fade out
-    this.timer = setTimeout(_ => {
+    this.timer = setTimeout(() => {
       this.setState({selectedLineIdx: index});
       this.setState({fading: false}); // fade back in
-  }, 200); // animation timing offset
+    }, 200); // animation timing offset
   }
 
   /**
