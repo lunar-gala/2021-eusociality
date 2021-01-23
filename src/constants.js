@@ -21,6 +21,7 @@ export const LANDING_PAGE_STATES = {
   DEFAULT: 'default',
   MOBILE_LINE_MENU_OPEN: 'mobile-line-menu-open',
   MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open',
+  MOBILE_ABOUT_PAGE_OPEN: 'mobile-about-page-open'
 };
 
 /** @brief Width of screen we consider to be a desktop */
@@ -34,7 +35,8 @@ export const NAV_LINK_INFO = [
   },
   {
     name: 'ABOUT',
-    link_name: 'about'
+    link_name: '',
+    landing_page_state: LANDING_PAGE_STATES.MOBILE_ABOUT_PAGE_OPEN
   },
   {
     name: 'PEOPLE',
@@ -45,6 +47,18 @@ export const NAV_LINK_INFO = [
     link_name: 'about'
   }
 ];
+
+export const ABOUT_TEXT = ' Nobody is ever entirely independent. We all make \
+up nodes in the dense, massively complex network that is our global society. \
+We rely on the contributions of countless other people to carry out even the \
+basic tasks of our everyday lives, and there is almost nothing we do that    \
+doesn’t affect someone else. Lunar Gala 2021: COLLECTIVA invites us not only \
+to recognize and celebrate the work that others have done to allow us to     \
+carry out our lives, but also to pause and reflect on a system that so often \
+ignores, forgets, and devalues the so much fundamental work necessary to its \
+existence.';
+
+export const ABOUT_HEADER_TEXT = 'Collectiva explores the interdependence of our community';
 
 /** @brief Three.js environment settings */
 export const LANDING_PAGE_BACKGROUND_COLOR = 0x000000;

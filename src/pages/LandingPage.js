@@ -41,6 +41,7 @@ import radiance_negZ from '../../assets/models/skybox/radiance/negZ.jpg';
 import radiance_posX from '../../assets/models/skybox/radiance/posX.jpg';
 import radiance_posY from '../../assets/models/skybox/radiance/posY.jpg';
 import radiance_posZ from '../../assets/models/skybox/radiance/posZ.jpg';
+import AboutPageMobile from './AboutPageMobile';
 
 /*** CAMERA PARAMETERS ***/
 const CAMERA_POSITION = {
@@ -113,6 +114,7 @@ class LandingPage extends React.Component {
       mixer: null
     };
 
+    this.handlerSetLandingPageState = this.handlerSetLandingPageState.bind(this);
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
     this.touchStart = this.touchStart.bind(this);
     this.touchMove = this.touchMove.bind(this);
@@ -213,8 +215,18 @@ class LandingPage extends React.Component {
     }, 25);
   }
 
-  handlerSelectedLineIdx (index) {
+  /**
+   * Sets the state of the landing page
+   *
+   * @param {state} state See constants.js for all states
+   */
+  handlerSetLandingPageState (state) {
+    this.setState({
+      landing_page_state: state
+    });
+  }
 
+  handlerSelectedLineIdx (index) {
     // TODO: add more camera angles, also this is just for demo. These are not
     // the accurate camera angles. Also todo is to correspond the correct line
     // number to the correct camera.
@@ -577,6 +589,10 @@ class LandingPage extends React.Component {
             landing_page_state={this.state.landing_page_state}
           />
           <MobileMenuNavList
+            landing_page_state={this.state.landing_page_state}
+            handlerSetLandingPageState={this.handlerSetLandingPageState}
+          />
+          <AboutPageMobile
             landing_page_state={this.state.landing_page_state}
           />
           { /* Desktop Elements */ }

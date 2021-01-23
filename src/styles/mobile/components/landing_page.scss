@@ -24,6 +24,10 @@ $FONT_SIZE_TITLE: 48px;
   &.mobile-nav-menu-open {
     opacity: 0;
   }
+
+  &.mobile-about-page-open {
+    opacity: 0.6;
+  }
 }
 
 .landing-page {
@@ -34,10 +38,6 @@ $FONT_SIZE_TITLE: 48px;
   justify-content: center;
   height: 100%;
   width: 100%;
-
-  &.mobile-line-menu-open {
-    position: static;
-  }
 
   .title-theme {
     position: fixed;
@@ -50,6 +50,10 @@ $FONT_SIZE_TITLE: 48px;
 
     // Title disappears on nav menu open
     &.mobile-nav-menu-open {
+      opacity: 0;
+    }
+
+    &.mobile-about-page-open {
       opacity: 0;
     }
   }
@@ -76,5 +80,9 @@ $FONT_SIZE_TITLE: 48px;
     bottom: 51px;
     width: 41px;
     height: 54px;
+
+    &.mobile-about-page-open {
+      opacity: 0;
+    }
   }
 }

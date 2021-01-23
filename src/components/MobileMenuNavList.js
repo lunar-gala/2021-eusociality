@@ -27,7 +27,15 @@ class MobileMenuNavList extends React.Component {
     setTimeout(() => {
       const { history } = this.props;
 
-      history.push(`/${nav_link_info.link_name}`);
+      // TODO: this is kinda messy, the priority is 1. go to link 2. Do animation
+      if (nav_link_info.link_name !== '') {
+        history.push(`/${nav_link_info.link_name}`);
+      } else if (nav_link_info.landing_page_state) {
+        this.props.handlerSetLandingPageState(nav_link_info.landing_page_state);
+        this.setState({
+          activeIdx: -1
+        });
+      }
     }, 500);
   }
   /**
@@ -69,6 +77,7 @@ class MobileMenuNavList extends React.Component {
 MobileMenuNavList.propTypes = {
   /** @brief Indicates if the menu is open or not, controlled by the parent */
   landing_page_state: PropTypes.string.isRequired,
+  handlerSetLandingPageState: PropTypes.func.isRequired,
   history: PropTypes.object
 }
 
