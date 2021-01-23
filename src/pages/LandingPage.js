@@ -185,8 +185,7 @@ class LandingPage extends React.Component {
         }
       } else if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN) {
         if (gesture === 'Tap' && (
-          this.state.current_touch[0].y >= 256 ||
-          this.state.current_touch[0].y <= 256
+          this.state.current_touch[0].y < 90
         )) {
           this.setState({
             landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT

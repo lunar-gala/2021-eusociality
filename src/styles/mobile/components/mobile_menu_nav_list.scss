@@ -29,12 +29,14 @@
     text-decoration: none;
     margin-top: 33px;
 
-    .bullet {
-      width: 8px;
-      height: 8px;
-      background-color: white;
-      margin: 9px;
-      transform: rotate(45deg);
+    &.active .nav-element-body {
+      .title {
+        opacity: 1;
+      }
+
+      .right-bar {
+        transform: translateX(0);
+      }
     }
 
     .nav-element-body {
@@ -42,16 +44,6 @@
       flex-direction: row;
       align-items: stretch;
       width: 100%;
-
-      &.selected {
-        .title {
-          opacity: 1;
-        }
-
-        .right-bar {
-          transform: translateX(0);
-        }
-      }
 
       .title {
         display: flex;

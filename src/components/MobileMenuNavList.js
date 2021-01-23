@@ -4,10 +4,32 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import * as CONSTANTS from '../constants';
 
 class MobileMenuNavList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeIdx: -1
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick (e, index, nav_link_info) {
+    e.preventDefault();
+
+    this.setState({
+      activeIdx: index
+    });
+
+    setTimeout(() => {
+      const { history } = this.props;
+
+      history.push(`/${nav_link_info.link_name}`);
+    }, 500);
+  }
   /**
    * Generates a row of line information in the menu.
    *
@@ -19,9 +41,9 @@ class MobileMenuNavList extends React.Component {
    */
   generateNavElement (nav_link_info, index) {
     return <Link
-      // The last element has a border
-      className={`nav-element mobile-link ${(index === CONSTANTS.NAV_LINK_INFO.length - 1) ? 'end' : ''}`}
+      className={`nav-element mobile-link ${this.state.activeIdx === index ? 'active' : ''}`}
       to={`/${nav_link_info.link_name}`}
+      onClick={(e) => this.handleClick(e, index, nav_link_info)}
       key={index}>
       <div className='nav-element-body'>
         <div className='title'>
@@ -46,7 +68,8 @@ class MobileMenuNavList extends React.Component {
 
 MobileMenuNavList.propTypes = {
   /** @brief Indicates if the menu is open or not, controlled by the parent */
-  landing_page_state: PropTypes.string.isRequired
+  landing_page_state: PropTypes.string.isRequired,
+  history: PropTypes.object
 }
 
-export default MobileMenuNavList;
+export default withRouter(MobileMenuNavList);
