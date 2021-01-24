@@ -8,13 +8,13 @@ $HORIZONTAL_MARGIN: 25px;
   position: absolute;
   width: 100vw;
 
-  top: 90px;
+  top: $LANDING_PAGE_HEADER_HEIGHT;
 
   opacity: 0;
   transition-duration: 1s;
 
   &.mobile-about-page-open {
-    z-index: 3;
+    z-index: $Z_INDEX_MAIN_UI;
     opacity: 1;
   }
 

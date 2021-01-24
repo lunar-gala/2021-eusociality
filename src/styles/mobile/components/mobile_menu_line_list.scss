@@ -3,41 +3,38 @@
  */
 
 #mobile-menu-line-list {
-  position: fixed;
+  position: absolute;
+  top: $LANDING_PAGE_HEADER_HEIGHT;
   transition-duration: 1s;
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 
-  // Initially, the line menu is hidden and below
-  transform: translateY(-100%);
+  // Initially, the line menu is hidden to the right
+  transform: translateX(100vw);
 
   &.mobile-line-menu-open {
-    position: absolute;
-    transform: translateY($LINE_ELEMENT_HEIGHT*7);
+    z-index: 3;
+    transform: translateX(0);
   }
 
   .line-element {
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: $LINE_ELEMENT_HEIGHT;
     width: 100%;
-    border-top: 1px solid white;
+    border-bottom: 1px solid white;
     background-color: black;
     cursor: pointer;
 
-    .bullet {
-      width: 8px;
-      height: 8px;
-      background-color: white;
-      margin: 9px;
-      transform: rotate(45deg);
-    }
-
     .line-element-body {
-      margin-top: 32px;
+      margin-top: 25px;
+      margin-bottom: 29px;
+      margin-left: 32px;
 
       .title {
+        font-family: 'Sprat Type Condensed';
+        font-weight: 100;
         font-size: 36px;
+        text-transform: uppercase;
         transform: scale(1, 1.2);
       }
 
@@ -46,6 +43,7 @@
         margin-top: 16px;
         font-size: 16px;
         font-family: $FONT_SUBHEAD;
+        text-transform: uppercase;
       }
     }
   }

@@ -13,8 +13,13 @@ $LEFT_MARGIN: 30px;
   flex-direction: column;
   align-items: flex-start;
   width: 100vw;
+  z-index: $Z_INDEX_HEADER;
 
   &.mobile-nav-menu-open #title {
+    opacity: 1;
+  }
+
+  &.mobile-line-menu-open #title {
     opacity: 1;
   }
 

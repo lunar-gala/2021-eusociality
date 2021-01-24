@@ -189,21 +189,7 @@ class LandingPage extends React.Component {
      * think this is good bc of different platforms and such
      */
     setTimeout(() => {
-      if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) {
-        // Has to be a swipe down *and* the mobile line menu has to be at the top
-        if (gesture === 'Down' && this.state.mobile_line_menu_y_offset < 10) {
-          this.setState({
-            mobile_line_menu_y_offset: 0
-          });
-          this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
-        }
-        else if (gesture === 'Tap' && this.state.current_touch[0].y <= 256) {
-          this.setState({
-            mobile_line_menu_y_offset: 0
-          });
-          this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
-        }
-      } else if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN) {
+      if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN) {
         if (gesture === 'Tap' && (
           this.state.current_touch[0].y < 90
         )) {
@@ -594,10 +580,7 @@ class LandingPage extends React.Component {
   render() {
     const{fading} = this.state;
     return (
-        <div className={`landing-page${
-          (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) ?
-          ' mobile-line-menu-open' : ''
-        }`}
+        <div className={`landing-page ${this.state.landing_page_state}`}
           onTouchStart={this.touchStart}
           onTouchMove={this.touchMove}
           onTouchEnd={this.touchEnd}

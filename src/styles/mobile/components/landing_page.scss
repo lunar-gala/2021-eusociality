@@ -7,7 +7,7 @@ $FONT_SIZE_TITLE: 48px;
  */
 
 .landing-page-background {
-  z-index: -1;
+  z-index: $Z_INDEX_BACKGROUND;
   position: fixed;
   background-color: black;
   width: 100%;
@@ -28,6 +28,10 @@ $FONT_SIZE_TITLE: 48px;
   &.mobile-about-page-open {
     opacity: 0.6;
   }
+
+  &.mobile-line-menu-open {
+    opacity: 0;
+  }
 }
 
 .landing-page {
@@ -39,6 +43,10 @@ $FONT_SIZE_TITLE: 48px;
   height: 100%;
   width: 100%;
   overflow: hidden;
+
+  &.mobile-line-menu-open {
+    overflow: auto;
+  }
 
   .title-theme {
     position: fixed;
@@ -55,6 +63,10 @@ $FONT_SIZE_TITLE: 48px;
     }
 
     &.mobile-about-page-open {
+      opacity: 0;
+    }
+
+    &.mobile-line-menu-open {
       opacity: 0;
     }
   }

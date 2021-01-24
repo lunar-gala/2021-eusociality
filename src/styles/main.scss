@@ -20,6 +20,7 @@
 
 // Mobile styles
 @media (max-width: $DESKTOP_WIDTH - 1) {
+  @import './mobile/mobile_constants.scss';
   @import './mobile/index.scss';
   @import './mobile/components/landing_page.scss';
   @import './mobile/pages/line_page.scss';
