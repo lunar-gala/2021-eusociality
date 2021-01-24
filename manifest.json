@@ -1,0 +1,15 @@
+{
+  "short_name": "EUSOCIALITY",
+  "name": "LG 2021: EUSOCIALITY",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#000000"
+}
