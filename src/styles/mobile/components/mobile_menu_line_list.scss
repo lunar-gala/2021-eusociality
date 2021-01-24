@@ -39,11 +39,11 @@
       }
 
       .designers {
-        height: 16px;
-        margin-top: 16px;
-        font-size: 16px;
+        margin-top: 8px;
+        font-size: 20px;
         font-family: $FONT_SUBHEAD;
         text-transform: uppercase;
+        letter-spacing: -0.05em;
       }
     }
   }
