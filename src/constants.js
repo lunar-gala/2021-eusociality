@@ -23,20 +23,23 @@ export const LANDING_PAGE_STATES = {
   MOBILE_ABOUT_PAGE_OPEN: 'mobile-about-page-open',
   MOBILE_LINE_MENU_OPEN: 'mobile-line-menu-open',
   MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open',
-  MOBILE_PEOPLE_PAGE_OPEN: 'mobile-people-page-open'
+  MOBILE_PEOPLE_PAGE_OPEN: 'mobile-people-page-open',
+  MOBILE_WATCH_PAGE_OPEN: 'mobile-watch-page-open'
 };
 
 export const PATH_TO_STATE = {
   'about': LANDING_PAGE_STATES.MOBILE_ABOUT_PAGE_OPEN,
   'lines': LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN,
-  'people': LANDING_PAGE_STATES.MOBILE_PEOPLE_PAGE_OPEN
+  'people': LANDING_PAGE_STATES.MOBILE_PEOPLE_PAGE_OPEN,
+  'watch': LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
 };
 
 export const STATE_TO_PATH = {
   'default': '/',
   'mobile-about-page-open': '/about',
   'mobile-line-menu-open': '/lines',
-  'mobile-people-page-open': 'people'
+  'mobile-people-page-open': '/people',
+  'mobile-watch-page-open': '/watch'
 };
 
 /** @brief Width of screen we consider to be a desktop */
@@ -56,11 +59,13 @@ export const NAV_LINK_INFO = [
   },
   {
     name: 'PEOPLE',
-    link_name: 'people'
+    link_name: 'people',
+    landing_page_state: LANDING_PAGE_STATES.MOBILE_PEOPLE_PAGE_OPEN
   },
   {
     name: 'WATCH',
-    link_name: 'watch'
+    link_name: 'watch',
+    landing_page_state: LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
   }
 ];
 
