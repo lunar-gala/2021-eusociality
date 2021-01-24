@@ -9,7 +9,8 @@ export const LANDING_PAGE_TITLE = 'COLLECTIVA';
  * @brief State management for the landing page.
  *
  * I think for now, we can keep _all_ of the states here, desktop, iPad,
- * mobile, etc.
+ * mobile, etc. Realistically, only each surface type will use their states, so
+ * when we are on mobile, it shouldn't affect any desktop styles.
  *
  * These will also double as class names, so you can reference these in the
  * styles.
@@ -19,23 +20,29 @@ export const LANDING_PAGE_TITLE = 'COLLECTIVA';
  */
 export const LANDING_PAGE_STATES = {
   DEFAULT: 'default',
+  MOBILE_ABOUT_PAGE_OPEN: 'mobile-about-page-open',
   MOBILE_LINE_MENU_OPEN: 'mobile-line-menu-open',
-  MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open',
-  MOBILE_ABOUT_PAGE_OPEN: 'mobile-about-page-open'
+  MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open'
 };
+
+export const PATH_TO_STATE = {
+  'about': LANDING_PAGE_STATES.MOBILE_ABOUT_PAGE_OPEN,
+  'lines': LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN,
+}
 
 /** @brief Width of screen we consider to be a desktop */
 export const DESKTOP_WIDTH = 768;
 
-// TODO: is this being used?
+/** @brief Info for mobile nav menu links */
 export const NAV_LINK_INFO = [
   {
     name: 'LINES',
-    link_name: 'lines'
+    link_name: 'lines',
+    landing_page_state: LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN
   },
   {
     name: 'ABOUT',
-    link_name: '',
+    link_name: 'about',
     landing_page_state: LANDING_PAGE_STATES.MOBILE_ABOUT_PAGE_OPEN
   },
   {
@@ -44,7 +51,7 @@ export const NAV_LINK_INFO = [
   },
   {
     name: 'WATCH',
-    link_name: 'about'
+    link_name: 'watch'
   }
 ];
 

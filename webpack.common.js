@@ -12,6 +12,7 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
+        { from: './public/manifest.json' },
         { from: './public/robots.txt' },
         { from: './public/CNAME' }
       ]

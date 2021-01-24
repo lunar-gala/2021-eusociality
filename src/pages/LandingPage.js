@@ -1,8 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+
 import * as CONSTANTS from '../constants';
 import * as LINE_DATA from '../data/line_data';
 import * as UTIL from '../util';
+
 import Navbar from '../components/Navbar';
 import TitleTheme from '../components/TitleTheme';
 import Logo from '../components/Logo';
@@ -70,11 +73,25 @@ const CAMERA_PAN_FACTOR = {
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
+
+    // Update the state of the site based on the URL
+    let landing_page_state = CONSTANTS.LANDING_PAGE_STATES.DEFAULT;
+
+    const regexFindPathName = /\/(\w+).*/;
+    const currPathMatches = regexFindPathName.exec(this.props.location.pathname);
+
+    if (currPathMatches !== null) {
+      const currPathName = currPathMatches[1];
+      landing_page_state = CONSTANTS.PATH_TO_STATE[currPathName];
+    }
+
     this.state = {
       /** @brief If we are detecting mobile styles or not */
       isMobile: window.innerWidth < CONSTANTS.DESKTOP_WIDTH,
-      // Which line is currently being hovered
-      // Defaults to -1 when nothing is selected
+      /**
+       * Which line is selected. Defaults to -1 when nothing is selected.
+       * Used on the desktop landing page.
+       */
       selectedLineIdx: -1,
       /** @brief First touch recorded by `touchStart` handler */
       first_touch: [],
@@ -85,7 +102,7 @@ class LandingPage extends React.Component {
        * machine, where we perform actions and change states based on which
        * state we are in.
        */
-      landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
+      landing_page_state: landing_page_state,
       /**
        * @brief Keeps track of how far we have scrolled in the mobile line menu.
        * We use this to figure out if we should close the mobile menu or not.
@@ -475,6 +492,15 @@ class LandingPage extends React.Component {
             animation_done: true
           });
         });
+
+        // rotate the cube while the animation is playing
+        new TWEEN.Tween(this.state.object.rotation).to({
+          x: 0,
+          y: 1.5,
+          z: 0
+        }, 10000)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .start();
       },
       // called when loading is in progresses
       (xhr) => {
@@ -520,13 +546,9 @@ class LandingPage extends React.Component {
 
     var delta = this.state.clock.getDelta();
 
-    if ( mixer ) mixer.update( 3*delta );
+    if ( mixer ) mixer.update( delta );
 
     TWEEN.update(time);
-
-    if (cube_obj && !this.state.animation_done) {
-      cube_obj.rotation.y = time/10000;
-    }
 
     requestAnimationFrame(this.render_cube);
   }
@@ -550,17 +572,15 @@ class LandingPage extends React.Component {
    * @param {*} event From the phone tilting event
    */
   handleOrientation (event) {
-    let absolute = event.absolute;
-    let alpha    = event.alpha;
-    let beta     = event.beta;
-    let gamma    = event.gamma;
-
-    console.log(absolute, alpha, beta, gamma);
+    let beta     = event.beta; // up bottom tilt
+    let gamma    = event.gamma; // left (negative) right (positive) tilt
 
     // TODO: animate this movement so it is smoother
+    // CALCULATE THE PROPER POSITION OF THE OBSERVER BASED ON THE ANGLES GIVEN
     this.state.camera.position.set(
-      CAMERA_POSITION.x + beta*CAMERA_PAN_FACTOR.x,
-      CAMERA_POSITION.y + gamma*CAMERA_PAN_FACTOR.y,
+      CAMERA_POSITION.x + gamma*CAMERA_PAN_FACTOR.x,
+      CAMERA_POSITION.y + beta*CAMERA_PAN_FACTOR.y,
+      // Always get closer to the object when tilting more
       CAMERA_POSITION.z - Math.sqrt(beta**2 + gamma**2)*CAMERA_PAN_FACTOR.z
     );
   }
@@ -657,5 +677,10 @@ class LandingPage extends React.Component {
     );
   }
 }
+
+LandingPage.propTypes = {
+  location: PropTypes.object,
+  history: PropTypes.object
+};
 
 export default LandingPage;

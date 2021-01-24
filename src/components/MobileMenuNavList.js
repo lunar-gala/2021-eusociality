@@ -27,15 +27,19 @@ class MobileMenuNavList extends React.Component {
     setTimeout(() => {
       const { history } = this.props;
 
-      // TODO: this is kinda messy, the priority is 1. go to link 2. Do animation
-      if (nav_link_info.link_name !== '') {
-        history.push(`/${nav_link_info.link_name}`);
-      } else if (nav_link_info.landing_page_state) {
+      // TODO: this is kinda messy, the priority is 1. Change state 2. Go to link
+      if (nav_link_info.landing_page_state) {
         this.props.handlerSetLandingPageState(nav_link_info.landing_page_state);
-        this.setState({
-          activeIdx: -1
-        });
       }
+
+      if  (nav_link_info.link_name !== '') {
+        history.push(`/${nav_link_info.link_name}`);
+      }
+
+      // Reset the state of the navbar
+      this.setState({
+        activeIdx: -1
+      });
     }, 500);
   }
   /**
