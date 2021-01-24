@@ -226,6 +226,13 @@ class LandingPage extends React.Component {
       landing_page_state: state
     });
 
+    // If we scroll in the lines menu, the scroll will persist so we reset it
+    if (state !== CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) {
+      document.getElementById('landing-page').scrollTo({
+        top: 0
+      });
+    }
+
     const { history } = this.props;
 
     if (CONSTANTS.STATE_TO_PATH[state]) {
@@ -580,7 +587,7 @@ class LandingPage extends React.Component {
   render() {
     const{fading} = this.state;
     return (
-        <div className={`landing-page ${this.state.landing_page_state}`}
+        <div id='landing-page' className={`${this.state.landing_page_state}`}
           onTouchStart={this.touchStart}
           onTouchMove={this.touchMove}
           onTouchEnd={this.touchEnd}
