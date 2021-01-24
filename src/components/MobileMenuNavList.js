@@ -25,15 +25,9 @@ class MobileMenuNavList extends React.Component {
     });
 
     setTimeout(() => {
-      const { history } = this.props;
-
       // TODO: this is kinda messy, the priority is 1. Change state 2. Go to link
       if (nav_link_info.landing_page_state) {
         this.props.handlerSetLandingPageState(nav_link_info.landing_page_state);
-      }
-
-      if  (nav_link_info.link_name !== '') {
-        history.push(`/${nav_link_info.link_name}`);
       }
 
       // Reset the state of the navbar
@@ -82,7 +76,6 @@ MobileMenuNavList.propTypes = {
   /** @brief Indicates if the menu is open or not, controlled by the parent */
   landing_page_state: PropTypes.string.isRequired,
   handlerSetLandingPageState: PropTypes.func.isRequired,
-  history: PropTypes.object
 }
 
 export default withRouter(MobileMenuNavList);

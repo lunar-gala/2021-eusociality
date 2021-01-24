@@ -22,13 +22,22 @@ export const LANDING_PAGE_STATES = {
   DEFAULT: 'default',
   MOBILE_ABOUT_PAGE_OPEN: 'mobile-about-page-open',
   MOBILE_LINE_MENU_OPEN: 'mobile-line-menu-open',
-  MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open'
+  MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open',
+  MOBILE_PEOPLE_PAGE_OPEN: 'mobile-people-page-open'
 };
 
 export const PATH_TO_STATE = {
   'about': LANDING_PAGE_STATES.MOBILE_ABOUT_PAGE_OPEN,
   'lines': LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN,
-}
+  'people': LANDING_PAGE_STATES.MOBILE_PEOPLE_PAGE_OPEN
+};
+
+export const STATE_TO_PATH = {
+  'default': '/',
+  'mobile-about-page-open': '/about',
+  'mobile-line-menu-open': '/lines',
+  'mobile-people-page-open': 'people'
+};
 
 /** @brief Width of screen we consider to be a desktop */
 export const DESKTOP_WIDTH = 768;

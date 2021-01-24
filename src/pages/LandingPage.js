@@ -193,30 +193,26 @@ class LandingPage extends React.Component {
         // Has to be a swipe down *and* the mobile line menu has to be at the top
         if (gesture === 'Down' && this.state.mobile_line_menu_y_offset < 10) {
           this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
             mobile_line_menu_y_offset: 0
           });
+          this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
         }
         else if (gesture === 'Tap' && this.state.current_touch[0].y <= 256) {
           this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
             mobile_line_menu_y_offset: 0
           });
+          this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
         }
       } else if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN) {
         if (gesture === 'Tap' && (
           this.state.current_touch[0].y < 90
         )) {
-          this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT
-          });
+          this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
         }
       } else {
         // Tapping the top of the default landing page opens the nav menu
         if (gesture === 'Tap' && this.state.current_touch[0].y < 90) {
-          this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
-          });
+          this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN);
         }
       }
 
@@ -234,7 +230,8 @@ class LandingPage extends React.Component {
   }
 
   /**
-   * Sets the state of the landing page
+   * Sets the state of the landing page and syncs the URL with the state being
+   * set.
    *
    * @param {state} state See constants.js for all states
    */
@@ -242,6 +239,15 @@ class LandingPage extends React.Component {
     this.setState({
       landing_page_state: state
     });
+
+    const { history } = this.props;
+
+    if (CONSTANTS.STATE_TO_PATH[state]) {
+      history.push(CONSTANTS.STATE_TO_PATH[state]);
+      console.log(`state ${state} pushed to history`)
+    } else {
+      console.log(`state ${state} has no constant`)
+    }
   }
 
   handlerSelectedLineIdx (index) {
