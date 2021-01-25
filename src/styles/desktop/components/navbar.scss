@@ -45,6 +45,11 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
   padding-top: 2.5vh;
   padding-bottom: 2.5vh;
 
+  &.desktop-about-page-open {
+    opacity: 0;
+    transition-duration: 1s;
+  }
+
   .navbar-container {
     display: flex;
     flex-direction: row;

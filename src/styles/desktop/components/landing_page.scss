@@ -32,6 +32,15 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
   justify-content: center;
   overflow: hidden;
 
+  &.desktop-about-page-open {
+    opacity: 0.65;
+    transition-duration: 1s;
+
+    #main-screen {
+      opacity: 0;
+    }
+  }
+
   .faded {
     opacity: 0;
     transition: .2s;
@@ -160,6 +169,8 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     transform: $FONT_SPRAT_STRETCH;
     font-weight: $FONT_TITLE_WEIGHT;
     letter-spacing: $TITLE_TRACKING;
+    opacity: 1;
+    transition-duration: 1s;
   }
 
   .logo {
@@ -170,5 +181,10 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     right: $X_MARGIN/2;
     width: 61px;
     height: 80px;
+
+    &.desktop-about-page-open {
+      opacity: 0;
+      transition-duration: 1s;
+    }
   }
 }

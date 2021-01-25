@@ -75,6 +75,7 @@ class MobileMenuNavList extends React.Component {
 MobileMenuNavList.propTypes = {
   /** @brief Indicates if the menu is open or not, controlled by the parent */
   landing_page_state: PropTypes.string.isRequired,
+  /** @brief Sets the landing page state */
   handlerSetLandingPageState: PropTypes.func.isRequired,
 }
 

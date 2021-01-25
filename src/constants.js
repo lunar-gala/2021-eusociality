@@ -20,18 +20,28 @@ export const LANDING_PAGE_TITLE = 'COLLECTIVA';
  */
 export const LANDING_PAGE_STATES = {
   DEFAULT: 'default',
+
+  // Mobile states
   MOBILE_ABOUT_PAGE_OPEN: 'mobile-about-page-open',
   MOBILE_LINE_MENU_OPEN: 'mobile-line-menu-open',
   MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open',
   MOBILE_PEOPLE_PAGE_OPEN: 'mobile-people-page-open',
-  MOBILE_WATCH_PAGE_OPEN: 'mobile-watch-page-open'
+  MOBILE_WATCH_PAGE_OPEN: 'mobile-watch-page-open',
+
+  // Desktop states
+  DESKTOP_ABOUT_PAGE_OPEN: 'desktop-about-page-open'
 };
 
 export const PATH_TO_STATE = {
-  'about': LANDING_PAGE_STATES.MOBILE_ABOUT_PAGE_OPEN,
-  'lines': LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN,
-  'people': LANDING_PAGE_STATES.MOBILE_PEOPLE_PAGE_OPEN,
-  'watch': LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
+  'mobile': {
+    'about': LANDING_PAGE_STATES.MOBILE_ABOUT_PAGE_OPEN,
+    'lines': LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN,
+    'people': LANDING_PAGE_STATES.MOBILE_PEOPLE_PAGE_OPEN,
+    'watch': LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
+  },
+  'desktop': {
+    'about': LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN
+  }
 };
 
 export const STATE_TO_PATH = {
@@ -39,7 +49,8 @@ export const STATE_TO_PATH = {
   'mobile-about-page-open': '/about',
   'mobile-line-menu-open': '/lines',
   'mobile-people-page-open': '/people',
-  'mobile-watch-page-open': '/watch'
+  'mobile-watch-page-open': '/watch',
+  'desktop-about-page-open': '/about'
 };
 
 /** @brief Width of screen we consider to be a desktop */

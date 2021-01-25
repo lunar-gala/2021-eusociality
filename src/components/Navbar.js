@@ -26,7 +26,7 @@ class Navbar extends React.Component {
       );
     }
 
-    return <div className='navbar desktop'>
+    return <div className={`navbar desktop ${this.props.landing_page_state}`}>
       <div className="dot left-dot lower"/>
       <div className="dot left-dot upper" />
       <div className="dot right-dot lower"/>
@@ -76,8 +76,10 @@ class NavItem extends React.Component {
 Navbar.propTypes = {
   /** @brief Handles updating the line index when a NavItem is hovered over */
   handlerSelectedLineIdx: PropTypes.func.isRequired,
+  /** @brief Indicates if the menu is open or not, controlled by the parent */
+  landing_page_state: PropTypes.string.isRequired,
   /** @brief The currently selected line index on the navbar */
-  selectedLineIdx: PropTypes.number.isRequired,
+  selectedLineIdx: PropTypes.number.isRequired
 };
 
 NavItem.propTypes = {
@@ -88,7 +90,7 @@ NavItem.propTypes = {
   /** @brief Line name associated with NavItem circle */
   lineName: PropTypes.string.isRequired,
   /** @brief The currently selected line index on the navbar */
-  selectedLineIdx: PropTypes.number.isRequired,
+  selectedLineIdx: PropTypes.number.isRequired
 };
 
 export default Navbar;

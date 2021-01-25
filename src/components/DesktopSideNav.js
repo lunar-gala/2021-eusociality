@@ -3,13 +3,19 @@
  */
 
 import React from "react";
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import * as CONSTANTS from '../constants';
 
 class DesktopSideNav extends React.Component {
   render() {
     return (
       <div className="links desktop">
-        <Link className="link" to="/about">
+        <Link className="link"
+          to="/about"
+          onClick={() => {
+            this.props.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN)
+          }}>
           About
         </Link>
         <Link className="link" to="/people">
@@ -24,8 +30,8 @@ class DesktopSideNav extends React.Component {
 }
 
 DesktopSideNav.propTypes = {
-  /** @brief Indicates if the menu is open or not, controlled by the parent */
-  //landing_page_state: PropTypes.string.isRequired
+  /** @brief Sets the landing page state */
+  handlerSetLandingPageState: PropTypes.func
 };
 
 export default DesktopSideNav;

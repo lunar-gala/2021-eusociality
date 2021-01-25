@@ -86,15 +86,16 @@ class LandingPage extends React.Component {
 
     const regexFindPathName = /\/(\w+).*/;
     const currPathMatches = regexFindPathName.exec(this.props.location.pathname);
+    const isMobile = window.innerHeight < CONSTANTS.DESKTOP_WIDTH;
 
     if (currPathMatches !== null) {
       const currPathName = currPathMatches[1];
-      landing_page_state = CONSTANTS.PATH_TO_STATE[currPathName];
+      landing_page_state = CONSTANTS.PATH_TO_STATE[isMobile ? 'mobile' : 'desktop'][currPathName];
     }
 
     this.state = {
       /** @brief If we are detecting mobile styles or not */
-      isMobile: window.innerWidth < CONSTANTS.DESKTOP_WIDTH,
+      isMobile: isMobile,
       /**
        * Which line is selected. Defaults to -1 when nothing is selected.
        * Used on the desktop landing page.
@@ -332,7 +333,6 @@ class LandingPage extends React.Component {
         this.state.curr_camera_position.z - Math.sqrt(offset_x**2 + offset_y**2)*CAMERA_PAN_FACTOR_DESKTOP.z
       );
     }
-    // this.state.camera.lookAt(0, 0, 0);
   }
 
   loadCubeMap (map) {
@@ -656,7 +656,9 @@ class LandingPage extends React.Component {
           />
           { /* Desktop Elements */ }
 
-          <DesktopSideNav />
+          <DesktopSideNav
+            handlerSetLandingPageState={this.handlerSetLandingPageState}
+          />
           <div id="main-screen" className='desktop'>
             <div className={`${fading ? 'faded' : 'notFaded'}`} id='curr-line'>
               <div id='line-name'>
@@ -702,6 +704,7 @@ class LandingPage extends React.Component {
 
           <Navbar
             handlerSelectedLineIdx={this.handlerSelectedLineIdx}
+            landing_page_state={this.state.landing_page_state}
             selectedLineIdx={this.state.selectedLineIdx}
           />
         </div>
