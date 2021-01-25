@@ -284,8 +284,6 @@ class LandingPage extends React.Component {
    * @param {MouseEvent} e The mouse movement event
    */
   _onMouseMove(e) {
-    return;
-
     let x = e.screenX;
     let y = e.screenY;
     let width = this.state.width;
@@ -531,7 +529,6 @@ class LandingPage extends React.Component {
     let camera = this.state.camera;
     let renderer = this.state.renderer;
     let mixer = this.state.mixer;
-    let cube_obj = this.state.object;
 
     if (this.resizeRendererToDisplaySize(renderer)) {
       const canvas = renderer.domElement;
@@ -592,11 +589,10 @@ class LandingPage extends React.Component {
           onTouchMove={this.touchMove}
           onTouchEnd={this.touchEnd}
           onScroll={e => e.preventDefault()}
+          onMouseMove={this._onMouseMove.bind(this)}
         >
           { /* Common Elements */ }
-          <div
-            className={`landing-page-background ${this.state.landing_page_state}`}
-            onMouseMove={this._onMouseMove.bind(this)}>
+          <div className={`landing-page-background ${this.state.landing_page_state}`}>
             <canvas id='landing-page-cube' />
           </div>
           <TitleTheme
