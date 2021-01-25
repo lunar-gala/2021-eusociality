@@ -1,6 +1,6 @@
 import React from 'react';
 
-class AboutPage extends React.Component {
+class AboutPageDesktop extends React.Component {
   render() {
     return (
       <div>
@@ -10,4 +10,4 @@ class AboutPage extends React.Component {
   }
 }
 
-export default AboutPage;
+export default AboutPageDesktop;
