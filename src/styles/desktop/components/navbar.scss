@@ -44,10 +44,10 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
   border-bottom: 1px solid white;
   padding-top: 2.5vh;
   padding-bottom: 2.5vh;
+  transition-duration: 1s;
 
   &.desktop-about-page-open {
     opacity: 0;
-    transition-duration: 1s;
   }
 
   .navbar-container {

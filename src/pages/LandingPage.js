@@ -5,15 +5,22 @@ import { Link } from "react-router-dom";
 import * as CONSTANTS from '../constants';
 import * as LINE_DATA from '../data/line_data';
 import * as UTIL from '../util';
+import * as GESTURE from '../lib/Gesture';
 
-import Navbar from '../components/Navbar';
+// Common Elements
 import TitleTheme from '../components/TitleTheme';
 import Logo from '../components/Logo';
+
+// Desktop Elements
+import Navbar from '../components/Navbar';
+import AboutPageDesktop from '../pages/AboutPageDesktop';
+import DesktopSideNav from '../components/DesktopSideNav';
+
+// Mobile Elements
 import MobileOpenMenu from '../components/MobileOpenMenu';
 import MobileMenuLineList from '../components/MobileMenuLineList';
 import MobileMenuNavList from '../components/MobileMenuNavList';
-import * as GESTURE from '../lib/Gesture';
-import DesktopSideNav from '../components/DesktopSideNav';
+import AboutPageMobile from './AboutPageMobile';
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -44,7 +51,6 @@ import radiance_negZ from '../../assets/models/skybox/radiance/negZ.jpg';
 import radiance_posX from '../../assets/models/skybox/radiance/posX.jpg';
 import radiance_posY from '../../assets/models/skybox/radiance/posY.jpg';
 import radiance_posZ from '../../assets/models/skybox/radiance/posZ.jpg';
-import AboutPageMobile from './AboutPageMobile';
 
 /*** CAMERA PARAMETERS ***/
 const CAMERA_POSITION = {
@@ -635,6 +641,7 @@ class LandingPage extends React.Component {
             <canvas id='landing-page-cube' />
           </div>
           <TitleTheme
+            handlerSetLandingPageState={this.handlerSetLandingPageState}
             landing_page_state={this.state.landing_page_state}
           />
           <Logo
@@ -655,9 +662,12 @@ class LandingPage extends React.Component {
             landing_page_state={this.state.landing_page_state}
           />
           { /* Desktop Elements */ }
-
+          <AboutPageDesktop
+            landing_page_state={this.state.landing_page_state}
+          />
           <DesktopSideNav
             handlerSetLandingPageState={this.handlerSetLandingPageState}
+            landing_page_state={this.state.landing_page_state}
           />
           <div id="main-screen" className='desktop'>
             <div className={`${fading ? 'faded' : 'notFaded'}`} id='curr-line'>

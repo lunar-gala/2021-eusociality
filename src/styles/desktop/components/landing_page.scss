@@ -4,10 +4,6 @@
  * Contains a 3D asset in the back.
  */
 
-$CIRCLE_RAD : 12px;
-$OUTER : $X_MARGIN/8;
-$LOWER : $BOTTOM_MARGIN/4;
-$UPPER : $BOTTOM_MARGIN*2.2;
 $DESIGNERS_NAME_HEIGHT: 46px;
 $SEE_MORE_WRAPPER_MARGIN: 1.25vw;
 $ARROW_WIDTH: 14px;
@@ -33,10 +29,12 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
   overflow: hidden;
 
   &.desktop-about-page-open {
-    opacity: 0.65;
-    transition-duration: 1s;
+    .landing-page-background {
+      opacity: 0.65;
+      transition-duration: 1s;
+    }
 
-    #main-screen {
+    #main-screen #curr-line {
       opacity: 0;
     }
   }
@@ -164,6 +162,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
 
   .title-theme {
     position: absolute;
+    z-index: $Z_INDEX_HEADER;
     top: $TOP_MARGIN;
     font-size: $FONT_SIZE_TITLE;
     transform: $FONT_SPRAT_STRETCH;
@@ -171,6 +170,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     letter-spacing: $TITLE_TRACKING;
     opacity: 1;
     transition-duration: 1s;
+    cursor: pointer;
   }
 
   .logo {
