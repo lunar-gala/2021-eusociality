@@ -6,6 +6,15 @@
   display: flex;
   flex-direction: column;
 	align-items: center;
+	overflow: hidden;
+
+	.page-background {
+		top: 0;
+		bottom: 0;
+		position: fixed;
+		height: 100vh;
+		width: 100vw;
+	}
 	
 	.wrapper {
 		position: fixed;
@@ -31,6 +40,8 @@
 		left: $X_MARGIN/2;
 		display: block;	
 		top: 25%;	
+		background: none;
+		box-shadow: none;
 
 		.Mui-expanded {
 			margin: 0;
@@ -49,15 +60,41 @@
 		}
 
 		.tab-main {
-			background-color: $BACKGROUND_COLOR;
+			background-color: transparent;
 			color: white;
 			padding: 0;
+			box-shadow: none;
+			border: none;
 		}
 
 		.tab-header {
 			font-family: $FONT_DISPLAY;
 			font-size: 72;
 			padding: 0;
+			flex: 1;
+			box-shadow: none;
+			border: none;
+			
+			.display_circle {
+				display: block;
+				margin: auto;
+				margin-left: 50px;
+				margin-right: 0;
+				width: $CIRCLE_RAD;
+				height: $CIRCLE_RAD;
+				background-color: white;
+				border-radius: 100%;
+			}
+
+			.display_line {
+				flex: 1;
+				display: block;
+				border-bottom: 1px solid white;
+				margin: auto;
+				margin-left: 0;
+				margin-right: -$X_MARGIN/2;
+				overflow: hidden;
+			}
 		}
 
 		.tab-body {
@@ -67,7 +104,9 @@
 			flex-direction: row;
 			justify-content: space-between;
 			flex-wrap: wrap;
-
+			box-shadow: none;
+			border: none;
+			
 			.teamBio {
 				margin-top: 30px;
 				margin-bottom: 30px;
@@ -89,8 +128,6 @@
 				}
 
 			}
-
-
 		}
   }
 }
