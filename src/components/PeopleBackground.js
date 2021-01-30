@@ -23,7 +23,6 @@ class PeopleBackground extends React.Component {
         left: "-2vw",
         top: "10vh",
         opacity: 0.5
-        
       },
       img2: {
         position: 'absolute',
@@ -49,8 +48,8 @@ class PeopleBackground extends React.Component {
       img5: {
         position: 'absolute',
         width: "400px",
-        top: '40vh',
-        left: '30vw',
+        top: '45vh',
+        left: '32vw',
         opacity: 0.5
       },
       img6: {
@@ -63,7 +62,7 @@ class PeopleBackground extends React.Component {
       img7: {
         position: 'absolute',
         width: "150px",
-        top: '40vh',
+        top: '45vh',
         left: '68vw',
         opacity: 0.5
       },
