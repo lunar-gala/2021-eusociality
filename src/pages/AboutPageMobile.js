@@ -8,7 +8,7 @@ import * as CONSTANTS from '../constants';
 
 class AboutPageMobile extends React.Component {
   render() {
-    return <div id='about-page' className={this.props.landing_page_state + ' mobile'}>
+    return <div id='about-page-mobile' className={this.props.landing_page_state + ' mobile'}>
       <div id='header-section'>
         <div id='right-bar' className='bar'>
           <div className='dot-basic' />

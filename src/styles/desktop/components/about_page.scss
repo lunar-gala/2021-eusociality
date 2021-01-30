@@ -1,0 +1,89 @@
+/**
+ * About page for desktop
+ */
+
+$BOTTOM_DESCRIPTOR_LINE_WIDTH: 38.3vw;
+
+#about-page-desktop {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+
+  &.desktop-about-page-open {
+    opacity: 1;
+  }
+
+  #headline {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20vh;
+
+    #headline-text {
+      margin-left: $X_MARGIN/2;
+      font-family: 'Sprat Type Condensed';
+      font-weight: 100;
+      letter-spacing: -0.12em;
+      font-size: 7vw;
+      width: 75vw;
+      word-spacing: 0.1em;
+    }
+
+    #right-bar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-grow: 1;
+
+      .dot-basic {
+        display: flex;
+      }
+
+      .line {
+        display: flex;
+        flex-grow: 1;
+
+      }
+    }
+  }
+
+  #bottom-descriptor {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    bottom: 7vh;
+    width: 100vw;
+
+    #left-bar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: $BOTTOM_DESCRIPTOR_LINE_WIDTH;
+
+      .dot-basic {
+        display: flex;
+      }
+
+      .line {
+        position: absolute;
+        width: $BOTTOM_DESCRIPTOR_LINE_WIDTH;
+      }
+    }
+
+    #description {
+      border: 1px solid white;
+      padding-top: 48px;
+      padding-bottom: 48px;
+      padding-left: 65px;
+      padding-right: 45px;
+      margin-right: $X_MARGIN*3/8;
+
+      font-family: $FONT_BODY;
+      font-size: 18px;
+    }
+  }
+}

@@ -42,7 +42,7 @@ class LinePage extends React.Component {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
-  handleScroll (event) {
+  handleScroll () {
     let currentScrollPos = window.pageYOffset;
 
     this.setState({

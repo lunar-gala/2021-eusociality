@@ -5,15 +5,22 @@ import { Link } from "react-router-dom";
 import * as CONSTANTS from '../constants';
 import * as LINE_DATA from '../data/line_data';
 import * as UTIL from '../util';
+import * as GESTURE from '../lib/Gesture';
 
-import Navbar from '../components/Navbar';
+// Common Elements
 import TitleTheme from '../components/TitleTheme';
 import Logo from '../components/Logo';
+
+// Desktop Elements
+import Navbar from '../components/Navbar';
+import AboutPageDesktop from '../pages/AboutPageDesktop';
+import DesktopSideNav from '../components/DesktopSideNav';
+
+// Mobile Elements
 import MobileOpenMenu from '../components/MobileOpenMenu';
 import MobileMenuLineList from '../components/MobileMenuLineList';
 import MobileMenuNavList from '../components/MobileMenuNavList';
-import * as GESTURE from '../lib/Gesture';
-import DesktopSideNav from '../components/DesktopSideNav';
+import AboutPageMobile from './AboutPageMobile';
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -44,7 +51,6 @@ import radiance_negZ from '../../assets/models/skybox/radiance/negZ.jpg';
 import radiance_posX from '../../assets/models/skybox/radiance/posX.jpg';
 import radiance_posY from '../../assets/models/skybox/radiance/posY.jpg';
 import radiance_posZ from '../../assets/models/skybox/radiance/posZ.jpg';
-import AboutPageMobile from './AboutPageMobile';
 
 /*** CAMERA PARAMETERS ***/
 const CAMERA_POSITION = {
@@ -60,12 +66,19 @@ const OBJECT_POSITION = {
   z: 0
 }
 
-/** @brief How much the camera tilts on mouse move */
-const CAMERA_PAN_FACTOR = {
+/** @brief How much the camera tilts on mobile device tilt */
+const CAMERA_PAN_FACTOR_MOBILE = {
   x: 0.5,
   y: 0.5,
   z: 0.5
 };
+
+/** @brief How much the camera tilts on mouse move */
+const CAMERA_PAN_FACTOR_DESKTOP = {
+  x: 10,
+  y: 10,
+  z: 10
+}
 
 /**
  * Navbar for selecting lines
@@ -79,15 +92,16 @@ class LandingPage extends React.Component {
 
     const regexFindPathName = /\/(\w+).*/;
     const currPathMatches = regexFindPathName.exec(this.props.location.pathname);
+    const isMobile = window.innerHeight < CONSTANTS.DESKTOP_WIDTH;
 
     if (currPathMatches !== null) {
       const currPathName = currPathMatches[1];
-      landing_page_state = CONSTANTS.PATH_TO_STATE[currPathName];
+      landing_page_state = CONSTANTS.PATH_TO_STATE[isMobile ? 'mobile' : 'desktop'][currPathName];
     }
 
     this.state = {
       /** @brief If we are detecting mobile styles or not */
-      isMobile: window.innerWidth < CONSTANTS.DESKTOP_WIDTH,
+      isMobile: isMobile,
       /**
        * Which line is selected. Defaults to -1 when nothing is selected.
        * Used on the desktop landing page.
@@ -121,7 +135,14 @@ class LandingPage extends React.Component {
       height: 0,
       /** @brief 3D camera */
       camera: null,
+      /** @brief Current position of the 3D camera */
+      curr_camera_position: null,
+      /** @brief The positions of the camera for each line */
       camera_positions: [],
+      /**
+       * @brief If the animation for the 3D asset is done yet.
+       * TODO: currently not used
+       */
       animation_done: false,
       renderer: null,
       controls: null,
@@ -138,6 +159,7 @@ class LandingPage extends React.Component {
     this.touchEnd = this.touchEnd.bind(this);
     this.render_cube = this.render_cube.bind(this);
     this.handleOrientation = this.handleOrientation.bind(this);
+    this._onMouseMove = this._onMouseMove.bind(this);
 
     // Keep track of window width
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -247,23 +269,36 @@ class LandingPage extends React.Component {
     // TODO: add more camera angles, also this is just for demo. These are not
     // the accurate camera angles. Also todo is to correspond the correct line
     // number to the correct camera.
-    if (index % 2 === 0) {
-      new TWEEN.Tween(this.state.camera.position).to({
-        x: this.state.camera_positions[0].position.x,
-        y: this.state.camera_positions[0].position.y,
-        z: this.state.camera_positions[0].position.z
-      }, 2000)
+    let index_temp = index % 2;
+
+    new TWEEN.Tween(this.state.camera.position).to({
+      x: this.state.camera_positions[index_temp].position.x,
+      y: this.state.camera_positions[index_temp].position.y,
+      z: this.state.camera_positions[index_temp].position.z
+    }, 2000)
       .easing(TWEEN.Easing.Cubic.InOut)
+      .onUpdate(() => {
+          this.setState({
+            curr_camera_position: {
+              x: this.state.camera.position.x,
+              y: this.state.camera.position.y,
+              z: this.state.camera.position.z
+            }
+          });
+      })
+      .onComplete(
+        () => {
+          this.setState({
+            curr_camera_position: {
+              x: this.state.camera_positions[index_temp].position.x,
+              y: this.state.camera_positions[index_temp].position.y,
+              z: this.state.camera_positions[index_temp].position.z
+            }
+          });
+        }
+      )
       .start();
-    } else {
-      new TWEEN.Tween(this.state.camera.position).to({
-        x: this.state.camera_positions[1].position.x,
-        y: this.state.camera_positions[1].position.y,
-        z: this.state.camera_positions[1].position.z
-      }, 2000)
-      .easing(TWEEN.Easing.Cubic.InOut)
-      .start();
-    }
+
 
     this.setState({fading: true}); // fade out
     this.timer = setTimeout(() => {
@@ -284,8 +319,6 @@ class LandingPage extends React.Component {
    * @param {MouseEvent} e The mouse movement event
    */
   _onMouseMove(e) {
-    return;
-
     let x = e.screenX;
     let y = e.screenY;
     let width = this.state.width;
@@ -298,13 +331,14 @@ class LandingPage extends React.Component {
     this.setState({ x: offset_x, y: offset_y });
 
     // TODO: animate this movement so it is smoother
-    this.state.camera.position.set(
-      CAMERA_POSITION.x + offset_x*CAMERA_PAN_FACTOR.x,
-      CAMERA_POSITION.y + offset_y*CAMERA_PAN_FACTOR.y,
-      CAMERA_POSITION.z - Math.sqrt(offset_x**2 + offset_y**2)*CAMERA_PAN_FACTOR.z
-    );
 
-    // this.state.camera.lookAt(0, 0, 0);
+    if (this.state.curr_camera_position) {
+      this.state.camera.position.set(
+        this.state.curr_camera_position.x + offset_x*CAMERA_PAN_FACTOR_DESKTOP.x,
+        this.state.curr_camera_position.y + offset_y*CAMERA_PAN_FACTOR_DESKTOP.y,
+        this.state.curr_camera_position.z - Math.sqrt(offset_x**2 + offset_y**2)*CAMERA_PAN_FACTOR_DESKTOP.z
+      );
+    }
   }
 
   loadCubeMap (map) {
@@ -351,13 +385,22 @@ class LandingPage extends React.Component {
     const far = 1000;
     let camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
+    let camera_position = {
+      x: CAMERA_POSITION.x,
+      y: CAMERA_POSITION.y,
+      z: this.state.isMobile ? 500 : CAMERA_POSITION.z
+    };
+
     camera.position.set(
-      CAMERA_POSITION.x,
-      CAMERA_POSITION.y,
-      this.state.isMobile ? 500 : CAMERA_POSITION.z
+      camera_position.x,
+      camera_position.y,
+      camera_position.z
     );
 
-    this.setState({camera : camera});
+    this.setState({
+      camera: camera,
+      curr_camera_position: camera_position
+    });
 
     const scene = new THREE.Scene();
 
@@ -531,7 +574,6 @@ class LandingPage extends React.Component {
     let camera = this.state.camera;
     let renderer = this.state.renderer;
     let mixer = this.state.mixer;
-    let cube_obj = this.state.object;
 
     if (this.resizeRendererToDisplaySize(renderer)) {
       const canvas = renderer.domElement;
@@ -577,10 +619,10 @@ class LandingPage extends React.Component {
     // TODO: animate this movement so it is smoother
     // CALCULATE THE PROPER POSITION OF THE OBSERVER BASED ON THE ANGLES GIVEN
     this.state.camera.position.set(
-      CAMERA_POSITION.x + gamma*CAMERA_PAN_FACTOR.x,
-      CAMERA_POSITION.y + beta*CAMERA_PAN_FACTOR.y,
+      CAMERA_POSITION.x + gamma*CAMERA_PAN_FACTOR_MOBILE.x,
+      CAMERA_POSITION.y + beta*CAMERA_PAN_FACTOR_MOBILE.y,
       // Always get closer to the object when tilting more
-      CAMERA_POSITION.z - Math.sqrt(beta**2 + gamma**2)*CAMERA_PAN_FACTOR.z
+      CAMERA_POSITION.z - Math.sqrt(beta**2 + gamma**2)*CAMERA_PAN_FACTOR_MOBILE.z
     );
   }
 
@@ -592,14 +634,14 @@ class LandingPage extends React.Component {
           onTouchMove={this.touchMove}
           onTouchEnd={this.touchEnd}
           onScroll={e => e.preventDefault()}
+          onMouseMove={this._onMouseMove}
         >
           { /* Common Elements */ }
-          <div
-            className={`landing-page-background ${this.state.landing_page_state}`}
-            onMouseMove={this._onMouseMove.bind(this)}>
+          <div className={`landing-page-background ${this.state.landing_page_state}`}>
             <canvas id='landing-page-cube' />
           </div>
           <TitleTheme
+            handlerSetLandingPageState={this.handlerSetLandingPageState}
             landing_page_state={this.state.landing_page_state}
           />
           <Logo
@@ -620,8 +662,13 @@ class LandingPage extends React.Component {
             landing_page_state={this.state.landing_page_state}
           />
           { /* Desktop Elements */ }
-
-          <DesktopSideNav />
+          <AboutPageDesktop
+            landing_page_state={this.state.landing_page_state}
+          />
+          <DesktopSideNav
+            handlerSetLandingPageState={this.handlerSetLandingPageState}
+            landing_page_state={this.state.landing_page_state}
+          />
           <div id="main-screen" className='desktop'>
             <div className={`${fading ? 'faded' : 'notFaded'}`} id='curr-line'>
               <div id='line-name'>
@@ -667,6 +714,7 @@ class LandingPage extends React.Component {
 
           <Navbar
             handlerSelectedLineIdx={this.handlerSelectedLineIdx}
+            landing_page_state={this.state.landing_page_state}
             selectedLineIdx={this.state.selectedLineIdx}
           />
         </div>
