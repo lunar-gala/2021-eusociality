@@ -1,6 +1,12 @@
 /**
- * Styles for the main site
+ * Styles for the main site for DESKTOP
  */
+
+// lines and accents
+$CIRCLE_RAD : 12px;
+$OUTER : $X_MARGIN/8; // outer margin for vertical lines
+$LOWER : $BOTTOM_MARGIN/4;
+$UPPER : $BOTTOM_MARGIN*2.2;
 
 body {
   color: white;
@@ -67,9 +73,16 @@ p {
 	margin-top: 0.5em;
 }
 
-
-// lines and accents
-$CIRCLE_RAD : 12px;
-$OUTER : $X_MARGIN/8; // outer margin for vertical lines
-$LOWER : $BOTTOM_MARGIN/4;
-$UPPER : $BOTTOM_MARGIN*2.2;
+// Common elements
+.title-theme {
+	position: absolute;
+	z-index: $Z_INDEX_HEADER;
+	top: $TOP_MARGIN;
+	font-size: $FONT_SIZE_TITLE;
+	transform: $FONT_SPRAT_STRETCH;
+	font-weight: $FONT_TITLE_WEIGHT;
+	letter-spacing: $TITLE_TRACKING;
+	opacity: 1;
+	transition-duration: 1s;
+	cursor: pointer;
+}
