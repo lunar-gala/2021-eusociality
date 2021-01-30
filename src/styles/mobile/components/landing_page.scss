@@ -5,32 +5,36 @@ $FONT_SIZE_TITLE: 48px;
 /**
  * 3D model in the landing page.
  */
+
 .landing-page-background {
-  z-index: -1;
+  z-index: $Z_INDEX_BACKGROUND;
   position: fixed;
   background-color: black;
   width: 100%;
   height: 100%;
   transition-duration: 1s;
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  opacity: 1;
 
   #landing-page-cube {
     width: 100%;
     height: 100%;
   }
 
-  &.mobile-line-menu-open {
-    top: 0px;
-    height: 200px;
+  &.mobile-nav-menu-open {
+    opacity: 0;
   }
 
-  &.mobile-nav-menu-open {
-    bottom: 0px;
-    height: 200px;
+  &.mobile-about-page-open {
+    opacity: 0.6;
+  }
+
+  &.mobile-line-menu-open {
+    opacity: 0;
   }
 }
 
-.landing-page {
+#landing-page {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -38,9 +42,10 @@ $FONT_SIZE_TITLE: 48px;
   justify-content: center;
   height: 100%;
   width: 100%;
+  overflow: hidden;
 
   &.mobile-line-menu-open {
-    position: static;
+    overflow: auto;
   }
 
   .title-theme {
@@ -50,17 +55,19 @@ $FONT_SIZE_TITLE: 48px;
     transform: scale(1, 1.5);
     transition-duration: 1s;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    opacity: 1;
 
-    &.mobile-line-menu-open {
-      // Title becomes a bit smaller on the mobile menu open
-      font-size: $FONT_SIZE_TITLE * 0.8;
-      top: 90px;
+    // Title disappears on nav menu open
+    &.mobile-nav-menu-open {
+      opacity: 0;
     }
 
-    &.mobile-nav-menu-open {
-      // Title becomes a bit smaller on the mobile menu open
-      font-size: $FONT_SIZE_TITLE * 0.8;
-      bottom: 60px;
+    &.mobile-about-page-open {
+      opacity: 0;
+    }
+
+    &.mobile-line-menu-open {
+      opacity: 0;
     }
   }
 
@@ -87,12 +94,8 @@ $FONT_SIZE_TITLE: 48px;
     width: 41px;
     height: 54px;
 
-    &.mobile-line-menu-open {
-      display: none;
-    }
-
-    &.mobile-nav-menu-open {
-      display: none;
+    &.mobile-about-page-open {
+      opacity: 0;
     }
   }
 }

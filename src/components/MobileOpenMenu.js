@@ -8,7 +8,7 @@ import * as CONSTANTS from '../constants';
 
 class MobileOpenMenu extends React.Component {
   render() {
-    return <div id='mobile-open-menu-wrapper' className='mobile'>
+    return <div id='mobile-open-menu-wrapper' className={this.props.landing_page_state + ' mobile'}>
       <div id='mobile-open-menu' className='mobile'>
         <div id='mobile-open-menu-sign'>
           {
@@ -17,6 +17,16 @@ class MobileOpenMenu extends React.Component {
           }
         </div>
         <div id='mobile-open-menu-border'></div>
+      </div>
+      <div id='title' onClick={() => {
+        // Ask permission to access device gyroscope
+        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+          DeviceOrientationEvent.requestPermission();
+        }
+      }}>
+        <span id='text'>
+          {CONSTANTS.LANDING_PAGE_TITLE}
+        </span>
       </div>
     </div>;
   }

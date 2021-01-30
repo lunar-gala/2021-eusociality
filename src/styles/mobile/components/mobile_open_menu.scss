@@ -3,15 +3,53 @@
  */
 
 $MOBILE_MENU_OPEN_SIZE: 30px;
+$LEFT_MARGIN: 30px;
+$HEADER_HEIGHT: 90px;
 
 #mobile-open-menu-wrapper {
+  height: $HEADER_HEIGHT;
   position: fixed;
-  top: 34px;
-  left: 30px;
+  top: 0;
+  left: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
   width: 100vw;
+  z-index: $Z_INDEX_HEADER;
+
+  &.mobile-nav-menu-open {
+    background: $LANDING_PAGE_BACKGROUND_COLOR;
+  }
+
+  &.mobile-line-menu-open {
+    background: $LANDING_PAGE_BACKGROUND_COLOR;
+  }
+
+  &.mobile-nav-menu-open #title {
+    opacity: 1;
+  }
+
+  &.mobile-line-menu-open #title {
+    opacity: 1;
+  }
+
+  #title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    position: absolute;
+    opacity: 0;
+    transition-duration: 1s;
+
+    #text {
+      font-family: 'Sprat Type Condensed';
+      font-weight: 300;
+      font-size: 30px;
+      letter-spacing: -0.12em;
+    }
+  }
 
   #mobile-open-menu {
     width: $MOBILE_MENU_OPEN_SIZE;
@@ -19,6 +57,8 @@ $MOBILE_MENU_OPEN_SIZE: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: $LEFT_MARGIN;
+    z-index: $Z_INDEX_HEADER+1;
 
     #mobile-open-menu-sign {
       font-size: 40px;

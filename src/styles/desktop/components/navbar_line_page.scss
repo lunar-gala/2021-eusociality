@@ -6,6 +6,7 @@ $UNDERLINE_CIRCLE_WIDTH: 8px;
 $UNDERLINE_WIDTH: 32px + 2*$UNDERLINE_CIRCLE_WIDTH;
 $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
 $TOOLTIP_CIRCLE_WIDTH: 10px;
+$TOOLTIP_CIRCLE_HEIGHT: 8px;
 $TOOLTIP_MARGIN: 10px;
 $TOOLTIP_TICK_LENGTH: 27px;
 
@@ -179,18 +180,18 @@ $TOOLTIP_TICK_LENGTH: 27px;
 
         .dot-basic {
           width: $TOOLTIP_CIRCLE_WIDTH;
-          height: $TOOLTIP_CIRCLE_WIDTH;
+          height: $TOOLTIP_CIRCLE_HEIGHT;
           position: absolute;
         }
 
         #left-top {
-          top: -$TOOLTIP_CIRCLE_WIDTH/2;
-          left: $TOOLTIP_CIRCLE_WIDTH;
+          top: -$TOOLTIP_CIRCLE_WIDTH/2 + 1;
+          left: $TOOLTIP_CIRCLE_WIDTH/2 + 2;
         }
 
         #right-bottom {
-          right: $TOOLTIP_CIRCLE_WIDTH;
-          bottom: $TOOLTIP_TICK_LENGTH - $TOOLTIP_CIRCLE_WIDTH/2;
+          right: $TOOLTIP_CIRCLE_WIDTH/2 + 1;
+          bottom: $TOOLTIP_TICK_LENGTH - $TOOLTIP_CIRCLE_WIDTH/2 + 1;
         }
       }
 

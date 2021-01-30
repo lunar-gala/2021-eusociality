@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import * as UTIL from '../util';
 import * as LINE_DATA from '../data/line_data';
@@ -19,8 +20,10 @@ class MobileMenuLineList extends React.Component {
    * }
    */
   generateLineElement (line_info_element, index) {
-    return <div className='line-element' key={index}>
-      <div className='bullet'></div>
+    return <Link
+      className='line-element'
+      key={index}
+      to={`/lines/${index+1}`}>
       <div className='line-element-body'>
         <div className='title'>
           {`${UTIL.line_number_formatter(index)}|${line_info_element.name}`}
@@ -29,7 +32,7 @@ class MobileMenuLineList extends React.Component {
           {UTIL.name_list_formatter(line_info_element.designers)}
         </div>
       </div>
-    </div>;
+    </Link>;
   }
 
   render() {

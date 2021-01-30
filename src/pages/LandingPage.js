@@ -1,16 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+
 import * as CONSTANTS from '../constants';
 import * as LINE_DATA from '../data/line_data';
 import * as UTIL from '../util';
-import Navbar from '../components/Navbar';
+import * as GESTURE from '../lib/Gesture';
+
+// Common Elements
 import TitleTheme from '../components/TitleTheme';
 import Logo from '../components/Logo';
+
+// Desktop Elements
+import Navbar from '../components/Navbar';
+import AboutPageDesktop from '../pages/AboutPageDesktop';
+import DesktopSideNav from '../components/DesktopSideNav';
+
+// Mobile Elements
 import MobileOpenMenu from '../components/MobileOpenMenu';
 import MobileMenuLineList from '../components/MobileMenuLineList';
 import MobileMenuNavList from '../components/MobileMenuNavList';
-import * as GESTURE from '../lib/Gesture';
-import DesktopSideNav from '../components/DesktopSideNav';
+import AboutPageMobile from './AboutPageMobile';
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -56,12 +66,19 @@ const OBJECT_POSITION = {
   z: 0
 }
 
+/** @brief How much the camera tilts on mobile device tilt */
+const CAMERA_PAN_FACTOR_MOBILE = {
+  x: 0.5,
+  y: 0.5,
+  z: 0.5
+};
+
 /** @brief How much the camera tilts on mouse move */
-const CAMERA_PAN_FACTOR = {
+const CAMERA_PAN_FACTOR_DESKTOP = {
   x: 10,
   y: 10,
   z: 10
-};
+}
 
 /**
  * Navbar for selecting lines
@@ -69,11 +86,26 @@ const CAMERA_PAN_FACTOR = {
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
+
+    // Update the state of the site based on the URL
+    let landing_page_state = CONSTANTS.LANDING_PAGE_STATES.DEFAULT;
+
+    const regexFindPathName = /\/(\w+).*/;
+    const currPathMatches = regexFindPathName.exec(this.props.location.pathname);
+    const isMobile = window.innerHeight < CONSTANTS.DESKTOP_WIDTH;
+
+    if (currPathMatches !== null) {
+      const currPathName = currPathMatches[1];
+      landing_page_state = CONSTANTS.PATH_TO_STATE[isMobile ? 'mobile' : 'desktop'][currPathName];
+    }
+
     this.state = {
       /** @brief If we are detecting mobile styles or not */
-      isMobile: window.innerWidth < CONSTANTS.DESKTOP_WIDTH,
-      // Which line is currently being hovered
-      // Defaults to -1 when nothing is selected
+      isMobile: isMobile,
+      /**
+       * Which line is selected. Defaults to -1 when nothing is selected.
+       * Used on the desktop landing page.
+       */
       selectedLineIdx: -1,
       /** @brief First touch recorded by `touchStart` handler */
       first_touch: [],
@@ -84,7 +116,7 @@ class LandingPage extends React.Component {
        * machine, where we perform actions and change states based on which
        * state we are in.
        */
-      landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
+      landing_page_state: landing_page_state,
       /**
        * @brief Keeps track of how far we have scrolled in the mobile line menu.
        * We use this to figure out if we should close the mobile menu or not.
@@ -103,7 +135,14 @@ class LandingPage extends React.Component {
       height: 0,
       /** @brief 3D camera */
       camera: null,
+      /** @brief Current position of the 3D camera */
+      curr_camera_position: null,
+      /** @brief The positions of the camera for each line */
       camera_positions: [],
+      /**
+       * @brief If the animation for the 3D asset is done yet.
+       * TODO: currently not used
+       */
       animation_done: false,
       renderer: null,
       controls: null,
@@ -113,11 +152,14 @@ class LandingPage extends React.Component {
       mixer: null
     };
 
+    this.handlerSetLandingPageState = this.handlerSetLandingPageState.bind(this);
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
     this.touchStart = this.touchStart.bind(this);
     this.touchMove = this.touchMove.bind(this);
     this.touchEnd = this.touchEnd.bind(this);
     this.render_cube = this.render_cube.bind(this);
+    this.handleOrientation = this.handleOrientation.bind(this);
+    this._onMouseMove = this._onMouseMove.bind(this);
 
     // Keep track of window width
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -169,52 +211,17 @@ class LandingPage extends React.Component {
      * think this is good bc of different platforms and such
      */
     setTimeout(() => {
-      if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) {
-        // Has to be a swipe down *and* the mobile line menu has to be at the top
-        if (gesture === 'Down' && this.state.mobile_line_menu_y_offset < 10) {
-          this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
-            mobile_line_menu_y_offset: 0
-          });
-        }
-        else if (gesture === 'Tap' && this.state.current_touch[0].y <= 256) {
-          this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
-            mobile_line_menu_y_offset: 0
-          });
-        }
-      } else if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN) {
+      if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN) {
         if (gesture === 'Tap' && (
-          this.state.current_touch[0].y >= 256 ||
-          this.state.current_touch[0].y <= 256
+          this.state.current_touch[0].y < 90
         )) {
-          this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT
-          });
+          this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
         }
       } else {
-        // Swiping up on the default landing page opens the line menu
-        if (gesture === 'Up') {
-          /*
-          this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN
-          });
-          */
-        }
         // Tapping the top of the default landing page opens the nav menu
-        else if (gesture === 'Tap' && this.state.current_touch[0].y < 90) {
-          this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
-          });
+        if (gesture === 'Tap' && this.state.current_touch[0].y < 90) {
+          this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN);
         }
-        /*
-        // Tapping the lower part of the default landing page opens the line menu
-        else if (gesture === 'Tap' && this.state.current_touch[0].y >= 90) {
-          this.setState({
-            landing_page_state: CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN
-          });
-        }
-        */
       }
 
       // Happens after the delayed handle
@@ -230,34 +237,74 @@ class LandingPage extends React.Component {
     }, 25);
   }
 
-  handlerSelectedLineIdx (index) {
+  /**
+   * Sets the state of the landing page and syncs the URL with the state being
+   * set.
+   *
+   * @param {state} state See constants.js for all states
+   */
+  handlerSetLandingPageState (state) {
+    this.setState({
+      landing_page_state: state
+    });
 
+    // If we scroll in the lines menu, the scroll will persist so we reset it
+    if (state !== CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) {
+      document.getElementById('landing-page').scrollTo({
+        top: 0
+      });
+    }
+
+    const { history } = this.props;
+
+    if (CONSTANTS.STATE_TO_PATH[state]) {
+      history.push(CONSTANTS.STATE_TO_PATH[state]);
+      console.log(`state ${state} pushed to history`)
+    } else {
+      console.log(`state ${state} has no constant`)
+    }
+  }
+
+  handlerSelectedLineIdx (index) {
     // TODO: add more camera angles, also this is just for demo. These are not
     // the accurate camera angles. Also todo is to correspond the correct line
     // number to the correct camera.
-    if (index % 2 === 0) {
-      new TWEEN.Tween(this.state.camera.position).to({
-        x: this.state.camera_positions[0].position.x,
-        y: this.state.camera_positions[0].position.y,
-        z: this.state.camera_positions[0].position.z
-      }, 2000)
+    let index_temp = index % 2;
+
+    new TWEEN.Tween(this.state.camera.position).to({
+      x: this.state.camera_positions[index_temp].position.x,
+      y: this.state.camera_positions[index_temp].position.y,
+      z: this.state.camera_positions[index_temp].position.z
+    }, 2000)
       .easing(TWEEN.Easing.Cubic.InOut)
+      .onUpdate(() => {
+          this.setState({
+            curr_camera_position: {
+              x: this.state.camera.position.x,
+              y: this.state.camera.position.y,
+              z: this.state.camera.position.z
+            }
+          });
+      })
+      .onComplete(
+        () => {
+          this.setState({
+            curr_camera_position: {
+              x: this.state.camera_positions[index_temp].position.x,
+              y: this.state.camera_positions[index_temp].position.y,
+              z: this.state.camera_positions[index_temp].position.z
+            }
+          });
+        }
+      )
       .start();
-    } else {
-      new TWEEN.Tween(this.state.camera.position).to({
-        x: this.state.camera_positions[1].position.x,
-        y: this.state.camera_positions[1].position.y,
-        z: this.state.camera_positions[1].position.z
-      }, 2000)
-      .easing(TWEEN.Easing.Cubic.InOut)
-      .start();
-    }
+
 
     this.setState({fading: true}); // fade out
-    this.timer = setTimeout(_ => {
+    this.timer = setTimeout(() => {
       this.setState({selectedLineIdx: index});
       this.setState({fading: false}); // fade back in
-  }, 200); // animation timing offset
+    }, 200); // animation timing offset
   }
 
   /**
@@ -272,8 +319,6 @@ class LandingPage extends React.Component {
    * @param {MouseEvent} e The mouse movement event
    */
   _onMouseMove(e) {
-    return;
-
     let x = e.screenX;
     let y = e.screenY;
     let width = this.state.width;
@@ -286,13 +331,14 @@ class LandingPage extends React.Component {
     this.setState({ x: offset_x, y: offset_y });
 
     // TODO: animate this movement so it is smoother
-    this.state.camera.position.set(
-      CAMERA_POSITION.x + offset_x*CAMERA_PAN_FACTOR.x,
-      CAMERA_POSITION.y + offset_y*CAMERA_PAN_FACTOR.y,
-      CAMERA_POSITION.z - Math.sqrt(offset_x**2 + offset_y**2)*CAMERA_PAN_FACTOR.z
-    );
 
-    // this.state.camera.lookAt(0, 0, 0);
+    if (this.state.curr_camera_position) {
+      this.state.camera.position.set(
+        this.state.curr_camera_position.x + offset_x*CAMERA_PAN_FACTOR_DESKTOP.x,
+        this.state.curr_camera_position.y + offset_y*CAMERA_PAN_FACTOR_DESKTOP.y,
+        this.state.curr_camera_position.z - Math.sqrt(offset_x**2 + offset_y**2)*CAMERA_PAN_FACTOR_DESKTOP.z
+      );
+    }
   }
 
   loadCubeMap (map) {
@@ -323,7 +369,7 @@ class LandingPage extends React.Component {
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
-    window.addEventListener("deviceorientation", this.handleOrientation, true);
+    window.addEventListener('deviceorientation', this.handleOrientation, true);
 
     const canvas = document.querySelector('#landing-page-cube');
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
@@ -339,13 +385,22 @@ class LandingPage extends React.Component {
     const far = 1000;
     let camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
+    let camera_position = {
+      x: CAMERA_POSITION.x,
+      y: CAMERA_POSITION.y,
+      z: this.state.isMobile ? 500 : CAMERA_POSITION.z
+    };
+
     camera.position.set(
-      CAMERA_POSITION.x,
-      CAMERA_POSITION.y,
-      this.state.isMobile ? 500 : CAMERA_POSITION.z
+      camera_position.x,
+      camera_position.y,
+      camera_position.z
     );
 
-    this.setState({camera : camera});
+    this.setState({
+      camera: camera,
+      curr_camera_position: camera_position
+    });
 
     const scene = new THREE.Scene();
 
@@ -479,6 +534,15 @@ class LandingPage extends React.Component {
             animation_done: true
           });
         });
+
+        // rotate the cube while the animation is playing
+        new TWEEN.Tween(this.state.object.rotation).to({
+          x: 0,
+          y: 1.5,
+          z: 0
+        }, 10000)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .start();
       },
       // called when loading is in progresses
       (xhr) => {
@@ -510,7 +574,6 @@ class LandingPage extends React.Component {
     let camera = this.state.camera;
     let renderer = this.state.renderer;
     let mixer = this.state.mixer;
-    let cube_obj = this.state.object;
 
     if (this.resizeRendererToDisplaySize(renderer)) {
       const canvas = renderer.domElement;
@@ -524,13 +587,9 @@ class LandingPage extends React.Component {
 
     var delta = this.state.clock.getDelta();
 
-    if ( mixer ) mixer.update( 3*delta );
+    if ( mixer ) mixer.update( delta );
 
     TWEEN.update(time);
-
-    if (cube_obj && !this.state.animation_done) {
-      cube_obj.rotation.y = time/10000;
-    }
 
     requestAnimationFrame(this.render_cube);
   }
@@ -553,34 +612,36 @@ class LandingPage extends React.Component {
    *
    * @param {*} event From the phone tilting event
    */
-  handleOrientation(event) {
-    /*
-    var absolute = event.absolute;
-    var alpha    = event.alpha;
-    var beta     = event.beta;
-    var gamma    = event.gamma;
-    */
+  handleOrientation (event) {
+    let beta     = event.beta; // up bottom tilt
+    let gamma    = event.gamma; // left (negative) right (positive) tilt
+
+    // TODO: animate this movement so it is smoother
+    // CALCULATE THE PROPER POSITION OF THE OBSERVER BASED ON THE ANGLES GIVEN
+    this.state.camera.position.set(
+      CAMERA_POSITION.x + gamma*CAMERA_PAN_FACTOR_MOBILE.x,
+      CAMERA_POSITION.y + beta*CAMERA_PAN_FACTOR_MOBILE.y,
+      // Always get closer to the object when tilting more
+      CAMERA_POSITION.z - Math.sqrt(beta**2 + gamma**2)*CAMERA_PAN_FACTOR_MOBILE.z
+    );
   }
 
   render() {
     const{fading} = this.state;
     return (
-        <div className={`landing-page${
-          (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) ?
-          ' mobile-line-menu-open' : ''
-        }`}
+        <div id='landing-page' className={`${this.state.landing_page_state}`}
           onTouchStart={this.touchStart}
           onTouchMove={this.touchMove}
           onTouchEnd={this.touchEnd}
           onScroll={e => e.preventDefault()}
+          onMouseMove={this._onMouseMove}
         >
           { /* Common Elements */ }
-          <div
-            className={`landing-page-background ${this.state.landing_page_state}`}
-            onMouseMove={this._onMouseMove.bind(this)}>
+          <div className={`landing-page-background ${this.state.landing_page_state}`}>
             <canvas id='landing-page-cube' />
           </div>
           <TitleTheme
+            handlerSetLandingPageState={this.handlerSetLandingPageState}
             landing_page_state={this.state.landing_page_state}
           />
           <Logo
@@ -595,10 +656,19 @@ class LandingPage extends React.Component {
           />
           <MobileMenuNavList
             landing_page_state={this.state.landing_page_state}
+            handlerSetLandingPageState={this.handlerSetLandingPageState}
+          />
+          <AboutPageMobile
+            landing_page_state={this.state.landing_page_state}
           />
           { /* Desktop Elements */ }
-
-          <DesktopSideNav />
+          <AboutPageDesktop
+            landing_page_state={this.state.landing_page_state}
+          />
+          <DesktopSideNav
+            handlerSetLandingPageState={this.handlerSetLandingPageState}
+            landing_page_state={this.state.landing_page_state}
+          />
           <div id="main-screen" className='desktop'>
             <div className={`${fading ? 'faded' : 'notFaded'}`} id='curr-line'>
               <div id='line-name'>
@@ -644,11 +714,17 @@ class LandingPage extends React.Component {
 
           <Navbar
             handlerSelectedLineIdx={this.handlerSelectedLineIdx}
+            landing_page_state={this.state.landing_page_state}
             selectedLineIdx={this.state.selectedLineIdx}
           />
         </div>
     );
   }
 }
+
+LandingPage.propTypes = {
+  location: PropTypes.object,
+  history: PropTypes.object
+};
 
 export default LandingPage;

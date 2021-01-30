@@ -57,7 +57,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
     // TODO: did we want to do a gradual opacity fade for the background?
     #first {
       background-size: cover;
-      height: 63vh;
+      height: 56.25vw;
       width: 100vw;
       opacity: 0.9;
     }
@@ -142,7 +142,6 @@ $SLIDE_AMOUNT_D: 16.6vw;
       .sliding-image {
         width: 16vw;
         height: 23.8vw;
-        // overflow: hidden;
 
         .frame {
           width: calc(100% - 4px);

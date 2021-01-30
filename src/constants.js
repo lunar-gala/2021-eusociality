@@ -9,7 +9,8 @@ export const LANDING_PAGE_TITLE = 'COLLECTIVA';
  * @brief State management for the landing page.
  *
  * I think for now, we can keep _all_ of the states here, desktop, iPad,
- * mobile, etc.
+ * mobile, etc. Realistically, only each surface type will use their states, so
+ * when we are on mobile, it shouldn't affect any desktop styles.
  *
  * These will also double as class names, so you can reference these in the
  * styles.
@@ -19,28 +20,77 @@ export const LANDING_PAGE_TITLE = 'COLLECTIVA';
  */
 export const LANDING_PAGE_STATES = {
   DEFAULT: 'default',
+
+  // Mobile states
+  MOBILE_ABOUT_PAGE_OPEN: 'mobile-about-page-open',
   MOBILE_LINE_MENU_OPEN: 'mobile-line-menu-open',
   MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open',
+  MOBILE_PEOPLE_PAGE_OPEN: 'mobile-people-page-open',
+  MOBILE_WATCH_PAGE_OPEN: 'mobile-watch-page-open',
+
+  // Desktop states
+  DESKTOP_ABOUT_PAGE_OPEN: 'desktop-about-page-open'
+};
+
+export const PATH_TO_STATE = {
+  'mobile': {
+    'about': LANDING_PAGE_STATES.MOBILE_ABOUT_PAGE_OPEN,
+    'lines': LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN,
+    'people': LANDING_PAGE_STATES.MOBILE_PEOPLE_PAGE_OPEN,
+    'watch': LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
+  },
+  'desktop': {
+    'about': LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN
+  }
+};
+
+export const STATE_TO_PATH = {
+  'default': '/',
+  'mobile-about-page-open': '/about',
+  'mobile-line-menu-open': '/lines',
+  'mobile-people-page-open': '/people',
+  'mobile-watch-page-open': '/watch',
+  'desktop-about-page-open': '/about'
 };
 
 /** @brief Width of screen we consider to be a desktop */
 export const DESKTOP_WIDTH = 768;
 
-// TODO: is this being used?
+/** @brief Info for mobile nav menu links */
 export const NAV_LINK_INFO = [
   {
-    name: 'WATCH',
-    link_name: 'about'
+    name: 'LINES',
+    link_name: 'lines',
+    landing_page_state: LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN
   },
   {
     name: 'ABOUT',
-    link_name: 'about'
+    link_name: 'about',
+    landing_page_state: LANDING_PAGE_STATES.MOBILE_ABOUT_PAGE_OPEN
   },
   {
     name: 'PEOPLE',
-    link_name: 'people'
+    link_name: 'people',
+    landing_page_state: LANDING_PAGE_STATES.MOBILE_PEOPLE_PAGE_OPEN
+  },
+  {
+    name: 'WATCH',
+    link_name: 'watch',
+    landing_page_state: LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
   }
 ];
+
+export const ABOUT_TEXT = 'Nobody is ever entirely independent. We all make \
+up nodes in the dense, massively complex network that is our global society. \
+We rely on the contributions of countless other people to carry out even the \
+basic tasks of our everyday lives, and there is almost nothing we do that    \
+doesn’t affect someone else. Lunar Gala 2021: COLLECTIVA invites us not only \
+to recognize and celebrate the work that others have done to allow us to     \
+carry out our lives, but also to pause and reflect on a system that so often \
+ignores, forgets, and devalues the so much fundamental work necessary to its \
+existence.';
+
+export const ABOUT_HEADER_TEXT = 'COLLECTIVA explores the interdependence of our community.';
 
 /** @brief Three.js environment settings */
 export const LANDING_PAGE_BACKGROUND_COLOR = 0x000000;

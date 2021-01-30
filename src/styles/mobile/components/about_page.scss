@@ -1,0 +1,58 @@
+/**
+ * About page for mobile
+ */
+
+$HORIZONTAL_MARGIN: 25px;
+
+#about-page-mobile {
+  position: absolute;
+  width: 100vw;
+
+  top: $LANDING_PAGE_HEADER_HEIGHT;
+
+  opacity: 0;
+  transition-duration: 1s;
+
+  &.mobile-about-page-open {
+    z-index: $Z_INDEX_MAIN_UI;
+    opacity: 1;
+  }
+
+  #header-section {
+    #header-text {
+      font-family: 'Sprat Type Condensed';
+      font-weight: 100;
+      font-size: 36px;
+      letter-spacing: -0.11em;
+      text-transform: uppercase;
+    }
+
+    .bar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .line {
+      display: flex;
+      flex-grow: 1;
+
+      border-bottom: 1px solid white;
+    }
+
+    #right-bar {
+      margin-left: $HORIZONTAL_MARGIN;
+    }
+
+    #left-bar {
+      margin-right: $HORIZONTAL_MARGIN;
+    }
+  }
+
+  .text-box {
+    margin-left: $HORIZONTAL_MARGIN;
+    margin-right: $HORIZONTAL_MARGIN;
+    margin-top: 24px;
+    font-family: $FONT_BODY;
+  }
+}
