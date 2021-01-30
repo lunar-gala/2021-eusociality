@@ -709,7 +709,6 @@ class LandingPage extends React.Component {
             { /* Various line and dot elements */ }
             <div className="vertical-line" id="outer-lines" />
             <div className="vertical-line" id="inner-lines" />
-
           </div>
 
           <Navbar

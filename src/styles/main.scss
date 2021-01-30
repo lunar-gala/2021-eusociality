@@ -4,8 +4,8 @@
 
 // Shared all screens
 @import './constants.scss';
-@import './common.scss';
 @import './fonts.scss';
+@import './common.scss';
 
 // Desktop styles
 @media (min-width: $DESKTOP_WIDTH) {
@@ -18,6 +18,8 @@
   @import './desktop/components/navbar.scss';
   @import './desktop/components/navbar_line_page.scss';
   @import './desktop/components/desktop_side_nav.scss';
+  @import './desktop/components/desktop_line_accents.scss';
+  @import './desktop/components/people_page.scss';
 }
 
 // Mobile styles

@@ -1,6 +1,12 @@
 /**
- * Styles for the main site
+ * Styles for the main site for DESKTOP
  */
+
+// lines and accents
+$CIRCLE_RAD : 12px;
+$OUTER : $X_MARGIN/8; // outer margin for vertical lines
+$LOWER : $BOTTOM_MARGIN/4;
+$UPPER : $BOTTOM_MARGIN*2.2;
 
 body {
   color: white;
@@ -16,6 +22,13 @@ body {
 
 .mobile {
   display: none;
+}
+
+.main-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 /* Display font */
@@ -58,4 +71,18 @@ p {
 	font-style: normal;
 	font-size: 1em;
 	margin-top: 0.5em;
+}
+
+// Common elements
+.title-theme {
+	position: absolute;
+	z-index: $Z_INDEX_HEADER;
+	top: $TOP_MARGIN;
+	font-size: $FONT_SIZE_TITLE;
+	transform: $FONT_SPRAT_STRETCH;
+	font-weight: $FONT_TITLE_WEIGHT;
+	letter-spacing: $TITLE_TRACKING;
+	opacity: 1;
+	transition-duration: 1s;
+	cursor: pointer;
 }

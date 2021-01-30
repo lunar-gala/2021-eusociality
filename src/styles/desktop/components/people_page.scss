@@ -1,0 +1,132 @@
+/**
+ * The people page
+ */
+
+.main-page {
+  display: flex;
+  flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+
+	.page-background {
+		top: 0;
+		bottom: 0;
+		position: fixed;
+		height: 100vh;
+		width: 100vw;
+	}
+	
+	.wrapper {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 30vh;
+		background: linear-gradient(180deg, rgba(20,20,20,1) 40%, rgba(20,20,20,0) 100%);
+		z-index: 100;
+		padding: 0;
+
+		.header {
+			padding: 0;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+
+  #team-acordion {
+		position: absolute;
+		left: $X_MARGIN/2;
+		display: block;	
+		top: 25%;	
+		background: none;
+		box-shadow: none;
+
+		.Mui-expanded {
+			margin: 0;
+			padding: 0;
+		}
+
+		.team-title {
+			font-family: $FONT_DISPLAY;
+			text-transform: uppercase;
+			transform: $FONT_SPRAT_STRETCH;
+			font-weight: $FONT_SPRAT_WEIGHT;
+			font-size: 72;
+			margin: 0;
+			padding: 0;
+		}
+
+		.tab-main {
+			background-color: transparent;
+			color: white;
+			padding: 0;
+			box-shadow: none;
+			border: none;
+		}
+
+		.tab-header {
+			font-family: $FONT_DISPLAY;
+			font-size: 72;
+			padding: 0;
+			flex: 1;
+			box-shadow: none;
+			border: none;
+			
+			.display_circle {
+				display: block;
+				margin: auto;
+				margin-left: 50px;
+				margin-right: 0;
+				width: $CIRCLE_RAD;
+				height: $CIRCLE_RAD;
+				background-color: white;
+				border-radius: 100%;
+			}
+
+			.display_line {
+				flex: 1;
+				display: block;
+				border-bottom: 1px solid white;
+				margin: auto;
+				margin-left: 0;
+				margin-right: -$X_MARGIN/2*.75;
+				overflow: hidden;
+			}
+		}
+
+		.tab-body {
+			width: 100vw - $X_MARGIN;
+			padding: 0;
+			padding-top: 40px;
+			flex-direction: row;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			box-shadow: none;
+			border: none;
+			
+			.teamBio {
+				margin-top: 30px;
+				margin-bottom: 30px;
+				display: block;
+				width: 20ww;
+				justify-self: space-between;
+
+				.name {
+					text-transform: uppercase;
+					font-weight: 400;
+					font-size: 18px;
+					margin: 0;
+				}
+
+				.title {
+					text-transform: uppercase;
+					font-size: 18px;
+					margin: 0;
+				}
+
+			}
+		}
+  }
+}

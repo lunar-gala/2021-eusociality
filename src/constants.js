@@ -56,6 +56,16 @@ export const STATE_TO_PATH = {
 /** @brief Width of screen we consider to be a desktop */
 export const DESKTOP_WIDTH = 768;
 
+// TODO: is this being used?
+export const TEAM_NAMES = [
+  'Producers',
+  'Production',
+  'Creative',
+  'Design',
+  'Model',
+  'Dance'
+]
+
 /** @brief Info for mobile nav menu links */
 export const NAV_LINK_INFO = [
   {

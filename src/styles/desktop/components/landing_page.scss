@@ -160,27 +160,16 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     }
   }
 
-  .title-theme {
-    position: absolute;
-    z-index: $Z_INDEX_HEADER;
-    top: $TOP_MARGIN;
-    font-size: $FONT_SIZE_TITLE;
-    transform: $FONT_SPRAT_STRETCH;
-    font-weight: $FONT_TITLE_WEIGHT;
-    letter-spacing: $TITLE_TRACKING;
-    opacity: 1;
-    transition-duration: 1s;
-    cursor: pointer;
-  }
-
   .logo {
     position: absolute;
+    z-index: $Z_INDEX_HEADER;
 
     // Gonna be totally honest I don't think this is _quite_ accurate to get 21px under the logo
     top: $TOP_MARGIN;
     right: $X_MARGIN/2;
-    width: 61px;
-    height: 80px;
+    width: 5.5vh;
+    height: 7.3vh;
+    cursor: pointer;
 
     &.desktop-about-page-open {
       opacity: 0;
