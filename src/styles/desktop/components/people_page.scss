@@ -15,7 +15,7 @@
 		height: 100vh;
 		width: 100vw;
 	}
-	
+
 	.wrapper {
 		position: fixed;
 		top: 0;
@@ -38,8 +38,8 @@
   #team-acordion {
 		position: absolute;
 		left: $X_MARGIN/2;
-		display: block;	
-		top: 25%;	
+		display: block;
+		top: 25%;
 		background: none;
 		box-shadow: none;
 
@@ -73,7 +73,7 @@
 			flex: 1;
 			box-shadow: none;
 			border: none;
-			
+
 			.display_circle {
 				display: block;
 				margin: auto;
@@ -105,13 +105,21 @@
 			flex-wrap: wrap;
 			box-shadow: none;
 			border: none;
-			
+
 			.teamBio {
 				margin-top: 30px;
 				margin-bottom: 30px;
 				display: block;
-				width: 20ww;
+				width: 20vw;
 				justify-self: space-between;
+
+				.headshot {
+					width: 20vw;
+					height: 21.3vw;
+					background-size: cover;
+					background-repeat: no-repeat;
+					background-blend-mode: color;
+				}
 
 				.name {
 					text-transform: uppercase;
