@@ -20,9 +20,6 @@ export default function TeamTab(props) {
       let entry = PEOPLE_DATA[andrew_id];
 
       if (entry.image !== undefined) {
-        if (entry.image === undefined) {
-          console.log(entry, entry.image)
-        }
         return (
           <TeamBio
             imgSrc={entry.image}
@@ -32,7 +29,14 @@ export default function TeamTab(props) {
           />
         );
       } else {
-        return null;
+        return (
+          <TeamBio
+            imgSrc={null}
+            name={`${entry.first_name} ${entry.last_name}`}
+            title={entry.position}
+            key={andrew_id}
+          />
+        );
       }
     });
   }

@@ -32,12 +32,12 @@ import ahl2 from "../../assets/img/people/Angela Lee.jpg";
 import chsong from "../../assets/img/people/Caroline Song.jpg";
 import puxins from "../../assets/img/people/Clytze Sun.jpg";
 import ddomalik from "../../assets/img/people/David Domalik.jpg";
-// import mcagan from '../../assets/img/people/null';
+import mcagan from '../../assets/img/people/Melissa Cagan.jpg';
 import cmay1 from "../../assets/img/people/Christopher May.jpg";
 // import iyip from '../../assets/img/people/null';
 import vderienz from "../../assets/img/people/Vincent DeRienzo.jpg";
 // import aburbano from '../../assets/img/people/null';
-// import seyoungc from '../../assets/img/people/null';
+import seyoungc from '../../assets/img/people/Seyoung Choo.jpg';
 import mpandura from "../../assets/img/people/Maya Pandurangan.jpg";
 import abhartia from "../../assets/img/people/Aadya Bhartia.jpg";
 import lenal from "../../assets/img/people/Lena Li.jpg";
@@ -47,7 +47,7 @@ import carmeny from "../../assets/img/people/Carmen Yu.jpg";
 import abandi from "../../assets/img/people/Arushi Bandi.jpg";
 import knandgao from "../../assets/img/people/Khushi Nandgaonkar.jpg";
 import kathyz from "../../assets/img/people/Kathy Zhang.jpg";
-// import skylarm  from '../../assets/img/people/null';
+import skylarm  from '../../assets/img/people/Skylar McAuliffe.jpg';
 import ajafrani from "../../assets/img/people/Amal Jafrani.jpg";
 import jlai2 from "../../assets/img/people/Jessica Lai.jpg";
 import ejchapma from "../../assets/img/people/Elise Chapman.jpg";
@@ -60,7 +60,7 @@ import lkendric from "../../assets/img/people/Leah Kendrick.jpg";
 // import hsiaotyp from '../../assets/img/people/null';
 // import jwesthei from '../../assets/img/people/null';
 import oluk from "../../assets/img/people/Olivia Luk.jpg";
-// import cscheire from '../../assets/img/people/null';
+import cscheire from '../../assets/img/people/Cassandra Scheirer.jpg';
 // import madelind from '../../assets/img/people/null';
 import adriennw from "../../assets/img/people/Adrienne Wang.jpg";
 import aestuart from "../../assets/img/people/Audry Stuart.jpg";
@@ -70,7 +70,7 @@ import christi5 from "../../assets/img/people/Christina Li.jpg";
 import cmedward from "../../assets/img/people/Clayton Edwards.jpg";
 import dgardilc from "../../assets/img/people/Danova Gardilcic.jpg";
 import dongwonl from "../../assets/img/people/Dong Won Lee.jpg";
-// import fpd from '../../assets/img/people/null';
+import fpd from '../../assets/img/people/Fiona Dubrosa.jpg';
 import xhe2 from "../../assets/img/people/Xiao He.jpg";
 import jlangan from "../../assets/img/people/Jade Langan.jpg";
 import jtimczyk from "../../assets/img/people/Jessica Timczyk.jpg";
@@ -83,7 +83,7 @@ import mgamerma from "../../assets/img/people/Max Gamerman.jpg";
 import maxliu from "../../assets/img/people/Max Liu.jpg";
 import ruomingx from "../../assets/img/people/Ruoming Xin.jpg";
 // import makim from '../../assets/img/people/null';
-// import morganbo from '../../assets/img/people/null';
+import morganbo from '../../assets/img/people/Morgan Boyd.jpg';
 import njeans from "../../assets/img/people/Nathalie Jeans.jpg";
 import nathanwa from "../../assets/img/people/Nathan Wai.jpg";
 import nwai from "../../assets/img/people/Nora Wai.jpg";
@@ -301,7 +301,8 @@ export const PEOPLE_DATA = {
     last_name: "Cagan",
     team: "Creative",
     position: "Photographer",
-    filename: null,
+    filename: "Melissa Cagan.jpg",
+    image: mcagan
   },
   cmay1: {
     first_name: "CJ",
@@ -338,7 +339,8 @@ export const PEOPLE_DATA = {
     last_name: "Choo",
     team: "Design",
     position: "Design Coordinator",
-    filename: null,
+    filename: "Seyoung Choo.jpg",
+    image: seyoungc
   },
   mpandura: {
     first_name: "Maya",
@@ -417,7 +419,8 @@ export const PEOPLE_DATA = {
     last_name: "McAuliffe",
     team: "Design",
     position: "The Marianas Trench",
-    filename: null,
+    filename: "Skylar McAuliffe.jpg",
+    image: skylarm
   },
   ajafrani: {
     first_name: "Amal ",
@@ -518,7 +521,8 @@ export const PEOPLE_DATA = {
     last_name: "Scheirer",
     team: "Design",
     position: "Digital Warfare",
-    filename: null,
+    filename: "Cassandra Scheirer.jpg",
+    image: cscheire
   },
   madelind: {
     first_name: "Madi",
@@ -596,7 +600,8 @@ export const PEOPLE_DATA = {
     last_name: "Dubrosa",
     team: "Model",
     position: "Model Coordinator",
-    filename: null,
+    filename: "Fiona Dubrosa.jpg",
+    image: fpd
   },
   xhe2: {
     first_name: "Ivy",
@@ -698,7 +703,8 @@ export const PEOPLE_DATA = {
     last_name: "Boyd",
     team: "Model",
     position: "Model",
-    filename: null,
+    filename: "Morgan Boyd.jpg",
+    image: morganbo
   },
   njeans: {
     first_name: "Nathalie",
