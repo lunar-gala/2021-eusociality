@@ -363,7 +363,7 @@ export const PEOPLE_DATA = {
     "last_name": "Westheimer",
     "team": "Design",
     "position": "Somatic",
-    "filename": ""
+    "filename": null
   },
   "oluk": {
     "first_name": "Olivia Luk",
@@ -566,7 +566,7 @@ export const PEOPLE_DATA = {
     "last_name": "Jinsi",
     "team": "Model",
     "position": "Model",
-    "filename": "omisa jinsi.jpg"
+    "filename": "Omisa Jinsi.jpg"
   },
   "pgao1": {
     "first_name": "Patrick",
@@ -587,7 +587,7 @@ export const PEOPLE_DATA = {
     "last_name": "Koanda",
     "team": "Model",
     "position": "Model",
-    "filename": ""
+    "filename": null
   },
   "radeoti": {
     "first_name": "Remi",
@@ -608,7 +608,7 @@ export const PEOPLE_DATA = {
     "last_name": "Lee",
     "team": "Model",
     "position": "Model",
-    "filename": ""
+    "filename": null
   },
   "tbournia": {
     "first_name": "Themistokles",
@@ -671,6 +671,6 @@ export const PEOPLE_DATA = {
     "last_name": "Oberman",
     "team": "Design",
     "position": "The Marianas Trench",
-    "filename": ""
+    "filename": null
   }
 }
