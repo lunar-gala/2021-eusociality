@@ -56,15 +56,14 @@ export const STATE_TO_PATH = {
 /** @brief Width of screen we consider to be a desktop */
 export const DESKTOP_WIDTH = 768;
 
-// TODO: is this being used?
+/** @brief List of team names used in the people page */
 export const TEAM_NAMES = [
-  'Producers',
-  'Production',
   'Creative',
   'Design',
   'Model',
+  'Public Relations',
   'Dance'
-]
+];
 
 /** @brief Info for mobile nav menu links */
 export const NAV_LINK_INFO = [
