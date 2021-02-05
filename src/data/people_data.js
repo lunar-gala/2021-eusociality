@@ -962,3 +962,27 @@ export const PEOPLE_BY_TEAMS = {
     "ejc2"
   ],
 };
+
+function shuffle(a) {
+	for (let i = a.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[a[i], a[j]] = [a[j], a[i]];
+	}
+	return a;
+}
+
+export function getRandomHeadshots(num) {
+  var output = []
+  var keys = Object.keys(PEOPLE_DATA);
+  keys = shuffle(keys);
+  console.log(keys)
+  var i = 0
+
+  while (output.length < num) {
+    if (PEOPLE_DATA[keys[i]]['image']) {
+      output.push(PEOPLE_DATA[keys[i]]['image']);
+    }
+    i += 1;
+  }
+  return output;
+}

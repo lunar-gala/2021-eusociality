@@ -68,7 +68,7 @@ export default function TeamTab(props) {
 
 TeamTab.propTypes = {
   /** @brief Shows if the tab is expanded or not */
-  expanded: PropTypes.bool.isRequired,
+  expanded: PropTypes.bool,
   /** @brief Handles updating accordion when tab is clocked */
   handleChange: PropTypes.func.isRequired,
   /** @brief Name of the team */
