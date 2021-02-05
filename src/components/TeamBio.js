@@ -20,7 +20,7 @@ export default function TeamBio(props) {
 
 TeamBio.propTypes = {
   /** @brief Shows if the tab is expanded or not */
-  imgSrc: PropTypes.string.isRequired,
+  imgSrc: PropTypes.string,
   /** @brief Shows if the tab is expanded or not */
   name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

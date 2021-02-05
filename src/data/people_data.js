@@ -973,9 +973,7 @@ function shuffle(a) {
 
 export function getRandomHeadshots(num) {
   var output = []
-  var keys = Object.keys(PEOPLE_DATA);
-  keys = shuffle(keys);
-  console.log(keys)
+  var keys = shuffle(Object.keys(PEOPLE_DATA));
   var i = 0
 
   while (output.length < num) {
