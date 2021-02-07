@@ -65,9 +65,10 @@
 		.team-title {
 			font-family: $FONT_DISPLAY;
 			text-transform: uppercase;
-			transform: $FONT_SPRAT_STRETCH;
+			//transform: $FONT_SPRAT_STRETCH;
+			letter-spacing: $FONT_SPRAT_KERN;
 			font-weight: $FONT_SPRAT_WEIGHT;
-			font-size: 72;
+			font-size: 14vh; //May need to be smaller
 			margin: 0;
 			padding: 0;
 		}
@@ -82,7 +83,8 @@
 
 		.tab-header {
 			font-family: $FONT_DISPLAY;
-			font-size: 72;
+			font-weight: $FONT_SPRAT_WEIGHT;
+			// font-size: 20vh;
 			padding: 0;
 			flex: 1;
 			box-shadow: none;
@@ -132,13 +134,15 @@
 
 				.name {
 					text-transform: uppercase;
-					font-weight: 400;
+					font-weight: 500;
 					font-size: 18px;
 					margin: 0;
+					margin-top: 1em;
 				}
 
 				.title {
 					text-transform: uppercase;
+					font-weight: 300;
 					font-size: 18px;
 					margin: 0;
 				}

@@ -50,7 +50,7 @@ $FONT_BODY: 'franklin-gothic-urw', sans-serif;;
 
 // font sizes
 $FONT_SIZE_NAV: 30px; // changed from 38px
-$FONT_SIZE_LINK: 24px;
+$FONT_SIZE_LINK: 2.25vh; //changed from 24px
 $FONT_SIZE_LINE: 114px; // changed from 144px
 $FONT_SIZE_DESIGNER: 36px;
 $FONT_SIZE_TITLE: 48px;
@@ -60,7 +60,8 @@ $FONT_SIZE_LINE_PAGE_NAME: 108px;
 
 // font adjustments and weights
 $FONT_SPRAT_STRETCH: scaleY(1.2);
-$FONT_SPRAT_WEIGHT: 300;
+$FONT_SPRAT_KERN: -0.11em;
+$FONT_SPRAT_WEIGHT: 200;
 $FONT_TITLE_WEIGHT: 400;
 $FONT_LINK_WEIGHT: 400;
 $FONT_LABEL_WEIGHT: 200;

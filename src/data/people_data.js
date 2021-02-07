@@ -856,6 +856,9 @@ export const PEOPLE_DATA = {
 
 /**
  * @brief Contains Andrew IDs sorted by their teams.
+ *
+ * Names appear in the order that is defined below, so you can change the order
+ * here.
  */
 export const PEOPLE_BY_TEAMS = {
   Creative: [

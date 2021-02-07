@@ -62,7 +62,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
       #line-name {
         font-size: $FONT_SIZE_LINE;
         text-transform: uppercase;
-        transform: $FONT_SPRAT_STRETCH;
+        // transform: $FONT_SPRAT_STRETCH; // Shouldn't be any stretch
         font-weight: $FONT_SPRAT_WEIGHT;
         letter-spacing: $HEADER_TRACKING;
         word-spacing: $HEADER_WORD_SPACING;
