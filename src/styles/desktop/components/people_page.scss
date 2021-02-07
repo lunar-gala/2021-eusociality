@@ -54,7 +54,7 @@
 			//transform: $FONT_SPRAT_STRETCH;
 			letter-spacing: $FONT_SPRAT_KERN;
 			font-weight: $FONT_SPRAT_WEIGHT;
-			font-size: 1.75em;
+			font-size: 14vh; //May need to be smaller
 			margin: 0;
 			padding: 0;
 		}
@@ -70,7 +70,7 @@
 		.tab-header {
 			font-family: $FONT_DISPLAY;
 			font-weight: $FONT_SPRAT_WEIGHT;
-			font-size: 1.75em;
+			// font-size: 20vh;
 			padding: 0;
 			flex: 1;
 			box-shadow: none;

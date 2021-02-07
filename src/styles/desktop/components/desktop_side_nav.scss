@@ -10,7 +10,7 @@
   .link-wrapper {
     display: flex;
     flex-direction: row;
-    margin-bottom: 8px;
+    margin-bottom: 4px; //changed from 8px
     transition-duration: 1s;
 
     &.selected .left-bar {
