@@ -128,7 +128,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
 
         .line {
           flex-grow: 1;
-          border-bottom: 1px solid white;
+          background-color: white;
           height: 1px;
         }
       }
@@ -148,7 +148,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
         .frame {
           width: calc(100% - 4px);
           height: calc(100% - 2px);
-          border: 2px solid white;
+          border: 1px solid white;
         }
 
         .image {
@@ -204,7 +204,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
       .line {
         width: 60vw;
         flex-grow: 1;
-        border-bottom: 1px solid white;
+        background-color: white;
         height: 1px;
       }
     }
