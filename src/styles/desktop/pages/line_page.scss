@@ -234,6 +234,10 @@ $SLIDE_AMOUNT_D: 16.6vw;
       position: static;
       top: 0;
       left: 0;
+
+      .link-wrapper .left-bar {
+        display: none;
+      }
     }
 
     #back-button {
