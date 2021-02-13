@@ -356,13 +356,14 @@ class LandingPage extends React.Component {
 
     let phi = (90*offset_x)*Math.PI/180;
     let theta = (90*offset_y)*Math.PI/180;
+    let kappa = (90 + 90*offset_x)*Math.PI/180;
 
     // TODO: animate this movement so it is smoother
     if (this.state.curr_camera_position) {
       this.state.camera.position.set(
         this.state.curr_camera_position.x + Math.sin(phi)*CAMERA_PAN_FACTOR_DESKTOP.x,
         this.state.curr_camera_position.y + Math.sin(theta)*CAMERA_PAN_FACTOR_DESKTOP.y,
-        this.state.curr_camera_position.z + Math.cos(phi)*CAMERA_PAN_FACTOR_DESKTOP.z
+        this.state.curr_camera_position.z - Math.pow(Math.cos(kappa), 2)*CAMERA_PAN_FACTOR_DESKTOP.z
       );
     }
   }
