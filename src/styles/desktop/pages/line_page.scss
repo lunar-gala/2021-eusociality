@@ -245,9 +245,10 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
   }
 
   #back-button-wrapper {
-      position: fixed;
-      top: calc(#{$TITLE_MARGIN_TOP} + 40px);
-      left: $X_MARGIN/2;
+    position: fixed;
+    top: calc(#{$TITLE_MARGIN_TOP} + 40px);
+    left: $X_MARGIN/2;
+
     #back-button {
 
       width: $BACK_BUTTON_SIZE;
