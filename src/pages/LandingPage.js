@@ -308,11 +308,11 @@ class LandingPage extends React.Component {
 
   handlerSelectedLineIdx (index) {
     // TODO: change this once we get an alumni asset
-    index = (index % 16) + 1;
+    let camera_index = (index % 16) + 1;
     new TWEEN.Tween(this.state.camera.position).to({
-      x: this.state.camera_positions[index].position.x,
-      y: this.state.camera_positions[index].position.y,
-      z: this.state.camera_positions[index].position.z
+      x: this.state.camera_positions[camera_index].position.x,
+      y: this.state.camera_positions[camera_index].position.y,
+      z: this.state.camera_positions[camera_index].position.z
     }, 2000)
       .easing(TWEEN.Easing.Cubic.InOut)
       .onUpdate(() => {
@@ -328,9 +328,9 @@ class LandingPage extends React.Component {
         () => {
           this.setState({
             curr_camera_position: {
-              x: this.state.camera_positions[index].position.x,
-              y: this.state.camera_positions[index].position.y,
-              z: this.state.camera_positions[index].position.z
+              x: this.state.camera_positions[camera_index].position.x,
+              y: this.state.camera_positions[camera_index].position.y,
+              z: this.state.camera_positions[camera_index].position.z
             }
           });
         }
