@@ -45,7 +45,8 @@ $FONT_SIZE_TITLE: 48px;
   overflow: hidden;
 
   &.mobile-line-menu-open {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .title-theme {
