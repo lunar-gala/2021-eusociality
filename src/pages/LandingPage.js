@@ -657,7 +657,6 @@ class LandingPage extends React.Component {
   }
 
   render() {
-    const{fading} = this.state;
     return (
         <div id='landing-page' className={`${this.state.landing_page_state}`}
           onTouchStart={this.touchStart}
@@ -704,7 +703,7 @@ class LandingPage extends React.Component {
             landing_page_state={this.state.landing_page_state}
           />
           <div id="main-screen" className='desktop'>
-            <div className={`${fading ? 'faded' : 'notFaded'}`} id='curr-line'>
+            <div className={`${this.state.fading ? 'faded' : 'notFaded'}`} id='curr-line'>
               <div id='line-name'>
                 {
                   (this.state.selectedLineIdx >= 0) ?
