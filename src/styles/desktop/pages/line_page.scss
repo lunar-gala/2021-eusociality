@@ -72,6 +72,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
   }
 
   #top-title {
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,6 +82,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
     font-size: $FONT_SIZE_TITLE;
     font-weight: 100;
     letter-spacing: -0.05em;
+    text-decoration: none;
   }
 
   .main-content {
@@ -92,7 +94,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
     #name {
       // TODO: this is really bad style for font sizes and letter spacing. Not
       // scalable
-      margin-top: 123px;
+      margin-top: 207px;
       font-family: 'Sprat Type Condensed';
       font-size: $FONT_SIZE_LINE_PAGE_NAME;
       font-weight: 100;

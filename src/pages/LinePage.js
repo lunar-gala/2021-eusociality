@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 import * as CONSTANTS from '../constants';
@@ -74,9 +75,11 @@ class LinePage extends React.Component {
             backgroundImage: `url(${BACKGROUND_SECOND})`
           }} id='second' className='background-picture' />
         </div>
-        <div id='top-title'>
+        <Link id='top-title'
+          to={'/'}
+        >
           {CONSTANTS.LANDING_PAGE_TITLE}
-        </div>
+        </Link>
         <div className='main-content'>
           <div id='name'>
             {line_info.name}
