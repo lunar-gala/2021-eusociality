@@ -4,7 +4,7 @@
  * controlled by the landing page state.
  */
 
-$MARGIN_HORIZONTAL_COUNTDOWN: 15vw;
+$MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
 
 #watch-page-desktop {
   position: absolute;
@@ -32,6 +32,7 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 15vw;
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 25%;
 
       .number {
         font-size: 14.4vw;
