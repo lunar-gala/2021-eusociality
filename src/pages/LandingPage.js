@@ -27,7 +27,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
-import cube_frag from '../../assets/models/cube_frag/reducedpoly_partial.gltf'
+import cube_frag from '../../assets/models/cube_frag/reducedpoly_final.gltf'
 
 import * as TWEEN from '@tweenjs/tween.js';
 
@@ -307,15 +307,12 @@ class LandingPage extends React.Component {
   }
 
   handlerSelectedLineIdx (index) {
-    // TODO: add more camera angles, also this is just for demo. These are not
-    // the accurate camera angles. Also todo is to correspond the correct line
-    // number to the correct camera.
-    let index_temp = index % 2;
-
+    // TODO: change this once we get an alumni asset
+    index = (index % 16) + 1;
     new TWEEN.Tween(this.state.camera.position).to({
-      x: this.state.camera_positions[index_temp].position.x,
-      y: this.state.camera_positions[index_temp].position.y,
-      z: this.state.camera_positions[index_temp].position.z
+      x: this.state.camera_positions[index].position.x,
+      y: this.state.camera_positions[index].position.y,
+      z: this.state.camera_positions[index].position.z
     }, 2000)
       .easing(TWEEN.Easing.Cubic.InOut)
       .onUpdate(() => {
@@ -331,9 +328,9 @@ class LandingPage extends React.Component {
         () => {
           this.setState({
             curr_camera_position: {
-              x: this.state.camera_positions[index_temp].position.x,
-              y: this.state.camera_positions[index_temp].position.y,
-              z: this.state.camera_positions[index_temp].position.z
+              x: this.state.camera_positions[index].position.x,
+              y: this.state.camera_positions[index].position.y,
+              z: this.state.camera_positions[index].position.z
             }
           });
         }
@@ -349,8 +346,6 @@ class LandingPage extends React.Component {
         selectedLineIdx: index,
         fading: false
       });
-
-      console.log('DEBUG set states back to normal')
     }, 200); // animation timing offset
   }
 
@@ -366,6 +361,8 @@ class LandingPage extends React.Component {
    * @param {MouseEvent} e The mouse movement event
    */
   _onMouseMove(e) {
+
+    return;
     let x = e.screenX;
     let y = e.screenY;
     let width = this.state.width;
@@ -550,14 +547,24 @@ class LandingPage extends React.Component {
           object: object.scene
         });
 
+        console.log(object);
+
         let object_children = object.scene.children[0].children;
 
         for (let i = 0; i < object_children.length; i++) {
+          let wireframe_index = 0;
+          let asset_index = 1;
+
+          if (object_children[i].name === 'Bound') {
+            wireframe_index = 1;
+            asset_index = 0;
+          }
+
           // Set iridescence texture for the main object
-          object_children[i].children[1].material = iridescence_material_main;
+          object_children[i].children[asset_index].material = iridescence_material_main;
 
           // Set iridescence texture for the outline on the main object
-          let atom_array = object_children[i].children[0].children;
+          let atom_array = object_children[i].children[wireframe_index].children;
 
           for (let j = 0; j < atom_array.length; j++) {
             atom_array[j].material = iridescence_material_outline;
@@ -574,10 +581,20 @@ class LandingPage extends React.Component {
         );
 
         // Should set the pieces of the object to be in the initial stages of the animation
-
-        // TODO: set to the scene camera
         this.setState({
           camera_positions: object.cameras
+        });
+
+        let starting_camera = object.cameras[0];
+
+        camera.position.set(
+          starting_camera.position.x,
+          starting_camera.position.y,
+          starting_camera.position.z
+        );
+
+        this.setState({
+          curr_camera_position: camera_position
         });
 
         let mixer = new THREE.AnimationMixer( object.scene );
@@ -678,6 +695,10 @@ class LandingPage extends React.Component {
    * @param {*} event From the phone tilting event
    */
   handleOrientation (event) {
+    if (!this.state.isMobile) {
+      return;
+    }
+
     let beta     = event.beta; // up bottom tilt
     let gamma    = event.gamma; // left (negative) right (positive) tilt
 
@@ -694,99 +715,99 @@ class LandingPage extends React.Component {
 
   render() {
     return (
-        <div id='landing-page' className={`${this.state.landing_page_state}`}
-          onTouchStart={this.touchStart}
-          onTouchMove={this.touchMove}
-          onTouchEnd={this.touchEnd}
-          onScroll={e => e.preventDefault()}
-          onMouseMove={this.state.isMobile ? null : this._onMouseMove}
-        >
-          { /* Common Elements */ }
-          <div className={`landing-page-background ${this.state.landing_page_state} ${this.state.assetHasLoaded ? 'visible' : ''}`}>
-            <canvas id='landing-page-cube' />
-          </div>
-          <TitleTheme
-            handlerSetLandingPageState={this.handlerSetLandingPageState}
-            landing_page_state={this.state.landing_page_state}
-            selectedLineIdx={this.state.selectedLineIdx}
-          />
-          <Logo
-            landing_page_state={this.state.landing_page_state}
-          />
-          { /* Mobile Elements */ }
-          <MobileOpenMenu
-            landing_page_state={this.state.landing_page_state}
-          />
-          <MobileMenuLineList
-            landing_page_state={this.state.landing_page_state}
-          />
-          <MobileMenuNavList
-            landing_page_state={this.state.landing_page_state}
-            handlerSetLandingPageState={this.handlerSetLandingPageState}
-          />
-          <AboutPageMobile
-            landing_page_state={this.state.landing_page_state}
-          />
-          { /* Desktop Elements */ }
-          <AboutPageDesktop
-            landing_page_state={this.state.landing_page_state}
-          />
-          <WatchPageDesktop
-            countdownState={this.state.countdownState}
-            landing_page_state={this.state.landing_page_state}
-          />
-          <DesktopSideNav
-            handlerSetLandingPageState={this.handlerSetLandingPageState}
-            landing_page_state={this.state.landing_page_state}
-          />
-          <div id="main-screen" className='desktop'>
-            <div className={`${this.state.fading ? 'faded' : 'notFaded'}`} id='curr-line'>
-              <div id='line-name'>
+      <div id='landing-page' className={`${this.state.landing_page_state}`}
+        onTouchStart={this.touchStart}
+        onTouchMove={this.touchMove}
+        onTouchEnd={this.touchEnd}
+        onScroll={e => e.preventDefault()}
+        onMouseMove={this.state.isMobile ? null : this._onMouseMove}
+      >
+        { /* Common Elements */ }
+        <div className={`landing-page-background ${this.state.landing_page_state} ${this.state.assetHasLoaded ? 'visible' : ''}`}>
+          <canvas id='landing-page-cube' />
+        </div>
+        <TitleTheme
+          handlerSetLandingPageState={this.handlerSetLandingPageState}
+          landing_page_state={this.state.landing_page_state}
+          selectedLineIdx={this.state.selectedLineIdx}
+        />
+        <Logo
+          landing_page_state={this.state.landing_page_state}
+        />
+        { /* Mobile Elements */ }
+        <MobileOpenMenu
+          landing_page_state={this.state.landing_page_state}
+        />
+        <MobileMenuLineList
+          landing_page_state={this.state.landing_page_state}
+        />
+        <MobileMenuNavList
+          landing_page_state={this.state.landing_page_state}
+          handlerSetLandingPageState={this.handlerSetLandingPageState}
+        />
+        <AboutPageMobile
+          landing_page_state={this.state.landing_page_state}
+        />
+        { /* Desktop Elements */ }
+        <AboutPageDesktop
+          landing_page_state={this.state.landing_page_state}
+        />
+        <WatchPageDesktop
+          countdownState={this.state.countdownState}
+          landing_page_state={this.state.landing_page_state}
+        />
+        <DesktopSideNav
+          handlerSetLandingPageState={this.handlerSetLandingPageState}
+          landing_page_state={this.state.landing_page_state}
+        />
+        <div id="main-screen" className='desktop'>
+          <div className={`${this.state.fading ? 'faded' : 'notFaded'}`} id='curr-line'>
+            <div id='line-name'>
+              {
+                (this.state.selectedLineIdx >= 0) ?
+                  `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}` :
+                  'COLLECTIVA'
+              }
+            </div>
+            <div id='below-line-name'>
+              <div id='designers-name'>
                 {
                   (this.state.selectedLineIdx >= 0) ?
-                    `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}` :
-                    'COLLECTIVA'
+                    `${UTIL.name_list_formatter(LINE_DATA.LINE_INFO[this.state.selectedLineIdx].designers)}` :
+                    ''
                 }
               </div>
-              <div id='below-line-name'>
-                <div id='designers-name'>
-                  {
-                    (this.state.selectedLineIdx >= 0) ?
-                      `${UTIL.name_list_formatter(LINE_DATA.LINE_INFO[this.state.selectedLineIdx].designers)}` :
-                      ''
-                  }
-                </div>
-                <div id='see-more-wrapper' className={(this.state.selectedLineIdx >= 0 ? 'show' : '') + ' desktop'}>
-                  <Link id="more-info" to={{
-                    pathname: `/lines/${this.state.selectedLineIdx+1}`,
-                    state: { currLineIdx: this.state.selectedLineIdx }
-                  }}>
-                    <span id='more-info-text'>
-                      See More
-                    </span>
-                    <div id='more-info-arrow'>
-                      <div id='arrow'/>
-                    </div>
-                  </Link>
-                  <div id='see-more-line-wrapper' className={(this.state.fading ? '' : 'visible')}>
-                    <div id="see-more-dot" />
-                    <div id="see-more-line" />
+              <div id='see-more-wrapper' className={(this.state.selectedLineIdx >= 0 ? 'show' : '') + ' desktop'}>
+                <Link id="more-info" to={{
+                  pathname: `/lines/${this.state.selectedLineIdx+1}`,
+                  state: { currLineIdx: this.state.selectedLineIdx }
+                }}>
+                  <span id='more-info-text'>
+                    See More
+                  </span>
+                  <div id='more-info-arrow'>
+                    <div id='arrow'/>
                   </div>
-                </div >
-              </div>
+                </Link>
+                <div id='see-more-line-wrapper' className={(this.state.fading ? '' : 'visible')}>
+                  <div id="see-more-dot" />
+                  <div id="see-more-line" />
+                </div>
+              </div >
             </div>
-
-            { /* Various line and dot elements */ }
-            <div className="vertical-line" id="outer-lines" />
-            <div className="vertical-line" id="inner-lines" />
           </div>
 
-          <Navbar
-            handlerSelectedLineIdx={this.handlerSelectedLineIdx}
-            landing_page_state={this.state.landing_page_state}
-            selectedLineIdx={this.state.selectedLineIdx}
-          />
+          { /* Various line and dot elements */ }
+          <div className="vertical-line" id="outer-lines" />
+          <div className="vertical-line" id="inner-lines" />
         </div>
+
+        <Navbar
+          handlerSelectedLineIdx={this.handlerSelectedLineIdx}
+          landing_page_state={this.state.landing_page_state}
+          selectedLineIdx={this.state.selectedLineIdx}
+        />
+      </div>
     );
   }
 }
