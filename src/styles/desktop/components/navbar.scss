@@ -103,7 +103,7 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
       width: 100%;
       height: 12px;
       opacity: 0;
-      transition: 0.5s;
+      transition: $MEDIUM_ANIMATION_DURATION;
     }
 
     &.selected {
@@ -115,15 +115,15 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
         opacity: 1;
 
         .left {
-          animation: 1s ease-in-out underline-circle-left-animation forwards;
+          animation: $MEDIUM_ANIMATION_DURATION ease-in-out underline-circle-left-animation forwards;
         }
 
         .right {
-          animation: 1s ease-in-out underline-circle-right-animation forwards;
+          animation: $MEDIUM_ANIMATION_DURATION ease-in-out underline-circle-right-animation forwards;
         }
 
         .underline {
-          animation: 1s ease-in-out underline-animation forwards;
+          animation: $MEDIUM_ANIMATION_DURATION ease-in-out underline-animation forwards;
         }
       }
     }
