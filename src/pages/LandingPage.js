@@ -53,10 +53,17 @@ import radiance_posY from '../../assets/models/skybox/radiance/posY.jpg';
 import radiance_posZ from '../../assets/models/skybox/radiance/posZ.jpg';
 
 /*** CAMERA PARAMETERS ***/
+/** @brief Absolute coordinates of the default camera position */
 const CAMERA_POSITION = {
   x: 0,
   y: 30,
   z: 400
+};
+
+const CAMERA_POSITION_MOBILE = {
+  x: 0,
+  y: 0,
+  z: 500
 };
 
 /** @brief Starting position of the object */
@@ -79,6 +86,9 @@ const CAMERA_PAN_FACTOR_DESKTOP = {
   y: 10,
   z: 10
 }
+
+/** @brief how much people tilt their phones when they hold it on average, in degrees. */
+const RESTING_PHONE_ANGLE = 36;
 
 /**
  * Navbar for selecting lines
@@ -124,6 +134,14 @@ class LandingPage extends React.Component {
        * don't close the bottom sheet yet.
        */
       mobile_line_menu_y_offset: 0,
+      /**
+       * @brief This state indicates if a line index is changing. We use it for
+       * fade-out, but we can also use it for other animations.
+       *
+       * The way we use this state is that if we click on a line, we briefly
+       * set this to true, so when we set it back to false, we get an animation
+       * triggered for each line change.
+       */
       fading: false,
       /** @brief Mouse position x */
       x: 0,
@@ -299,11 +317,15 @@ class LandingPage extends React.Component {
       )
       .start();
 
+    // fade out
+    this.setState({fading: true});
 
-    this.setState({fading: true}); // fade out
     this.timer = setTimeout(() => {
-      this.setState({selectedLineIdx: index});
-      this.setState({fading: false}); // fade back in
+      // fade back in
+      this.setState({
+        selectedLineIdx: index,
+        fading: false
+      });
     }, 200); // animation timing offset
   }
 
@@ -386,9 +408,7 @@ class LandingPage extends React.Component {
     let camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
     let camera_position = {
-      x: CAMERA_POSITION.x,
-      y: CAMERA_POSITION.y,
-      z: this.state.isMobile ? 500 : CAMERA_POSITION.z
+      ...(this.state.isMobile ? CAMERA_POSITION : CAMERA_POSITION_MOBILE)
     };
 
     camera.position.set(
@@ -466,6 +486,8 @@ class LandingPage extends React.Component {
 
     /**
      * Add controls so we can tweak the asset
+     *
+     * TODO: remove this for the actual
      */
     const gui = new GUI();
     gui.remember(iridescence_texture_main);
@@ -617,12 +639,11 @@ class LandingPage extends React.Component {
     let gamma    = event.gamma; // left (negative) right (positive) tilt
 
     // TODO: animate this movement so it is smoother
-    // CALCULATE THE PROPER POSITION OF THE OBSERVER BASED ON THE ANGLES GIVEN
-    this.state.camera.position.set(
-      CAMERA_POSITION.x + gamma*CAMERA_PAN_FACTOR_MOBILE.x,
-      CAMERA_POSITION.y + beta*CAMERA_PAN_FACTOR_MOBILE.y,
-      // Always get closer to the object when tilting more
-      CAMERA_POSITION.z - Math.sqrt(beta**2 + gamma**2)*CAMERA_PAN_FACTOR_MOBILE.z
+    // We subtract from the beta (X) axis since we assume people hold their phones at that resting angle
+    this.state.object.rotation.set(
+      -((beta - RESTING_PHONE_ANGLE)*Math.PI/180)*CAMERA_PAN_FACTOR_MOBILE.x,
+      -(gamma*Math.PI/180)*CAMERA_PAN_FACTOR_MOBILE.y,
+      0
     );
   }
 
@@ -634,7 +655,7 @@ class LandingPage extends React.Component {
           onTouchMove={this.touchMove}
           onTouchEnd={this.touchEnd}
           onScroll={e => e.preventDefault()}
-          onMouseMove={this._onMouseMove}
+          onMouseMove={this.state.isMobile ? null : this._onMouseMove}
         >
           { /* Common Elements */ }
           <div className={`landing-page-background ${this.state.landing_page_state}`}>
@@ -643,6 +664,7 @@ class LandingPage extends React.Component {
           <TitleTheme
             handlerSetLandingPageState={this.handlerSetLandingPageState}
             landing_page_state={this.state.landing_page_state}
+            selectedLineIdx={this.state.selectedLineIdx}
           />
           <Logo
             landing_page_state={this.state.landing_page_state}
@@ -698,7 +720,7 @@ class LandingPage extends React.Component {
                       <div id='arrow'/>
                     </div>
                   </Link>
-                  <div id='see-more-line-wrapper'>
+                  <div id='see-more-line-wrapper' className={(this.state.fading ? '' : 'visible')}>
                     <div id="see-more-dot" />
                     <div id="see-more-line" />
                   </div>
