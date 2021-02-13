@@ -113,9 +113,10 @@ class LinePage extends React.Component {
         </div>
         <NavbarLinePage selectedLineIdx={this.state.selectedLineIdx} handlerSelectedLineIdx={this.handlerSelectedLineIdx} />
         {/* Additional overlay components */}
-        { /* TODO: make the desktop side nav fixable so it moves with scroll */ }
         <div className='fixed-overlay'>
           <DesktopSideNav />
+        </div>
+        <div id='back-button-wrapper'>
           <div id='back-button' className={this.state.showBackButton ? 'show' : ''} onClick={
             () => this.props.history.goBack()
           } />
