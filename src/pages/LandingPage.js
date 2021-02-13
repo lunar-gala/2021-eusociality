@@ -82,9 +82,9 @@ const CAMERA_PAN_FACTOR_MOBILE = {
 
 /** @brief How much the camera tilts on mouse move */
 const CAMERA_PAN_FACTOR_DESKTOP = {
-  x: 10,
-  y: 10,
-  z: 10
+  x: 50,
+  y: 50,
+  z: 20
 }
 
 /** @brief how much people tilt their phones when they hold it on average, in degrees. */
@@ -354,13 +354,15 @@ class LandingPage extends React.Component {
 
     this.setState({ x: offset_x, y: offset_y });
 
-    // TODO: animate this movement so it is smoother
+    let phi = (90*offset_x)*Math.PI/180;
+    let theta = (90*offset_y)*Math.PI/180;
 
+    // TODO: animate this movement so it is smoother
     if (this.state.curr_camera_position) {
       this.state.camera.position.set(
-        this.state.curr_camera_position.x + offset_x*CAMERA_PAN_FACTOR_DESKTOP.x,
-        this.state.curr_camera_position.y + offset_y*CAMERA_PAN_FACTOR_DESKTOP.y,
-        this.state.curr_camera_position.z - Math.sqrt(offset_x**2 + offset_y**2)*CAMERA_PAN_FACTOR_DESKTOP.z
+        this.state.curr_camera_position.x + Math.sin(phi)*CAMERA_PAN_FACTOR_DESKTOP.x,
+        this.state.curr_camera_position.y + Math.sin(theta)*CAMERA_PAN_FACTOR_DESKTOP.y,
+        this.state.curr_camera_position.z + Math.cos(phi)*CAMERA_PAN_FACTOR_DESKTOP.z
       );
     }
   }
