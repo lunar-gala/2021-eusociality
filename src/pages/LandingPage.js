@@ -146,6 +146,17 @@ class LandingPage extends React.Component {
        * triggered for each line change.
        */
       fading: false,
+      /**
+       * @brief Keeps track of the interval that updates the countdown timer.
+       *
+       * We need to keep track of this because we need to cancel it if we are
+       * no longer on the watch page and don't want to update the countdown.
+       */
+      countdownInterval: null,
+      /**
+       * @brief The current countdown timer state.
+       */
+      countdownState: UTIL.calculate_date_difference(CONSTANTS.SHOW_DATE),
       /** @brief Mouse position x */
       x: 0,
       /** @brief Mouse position y */
@@ -173,16 +184,15 @@ class LandingPage extends React.Component {
       mixer: null
     };
 
+    this.handleOrientation = this.handleOrientation.bind(this);
     this.handlerSetLandingPageState = this.handlerSetLandingPageState.bind(this);
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
+    this._onMouseMove = this._onMouseMove.bind(this);
+    this.render_cube = this.render_cube.bind(this);
     this.touchStart = this.touchStart.bind(this);
     this.touchMove = this.touchMove.bind(this);
     this.touchEnd = this.touchEnd.bind(this);
-    this.render_cube = this.render_cube.bind(this);
-    this.handleOrientation = this.handleOrientation.bind(this);
-    this._onMouseMove = this._onMouseMove.bind(this);
-
-    // Keep track of window width
+    this.updateCountdown = this.updateCountdown.bind(this);
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
@@ -276,6 +286,16 @@ class LandingPage extends React.Component {
       });
     }
 
+    // We need to start the countdown timer if we enter the watch page
+    if (state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN) {
+      this.setState({
+        countdownInterval: setInterval(this.updateCountdown, 1000),
+        countdownState: UTIL.calculate_date_difference(CONSTANTS.SHOW_DATE)
+      });
+    } else if (this.state.countdownInterval) {
+      clearInterval(this.state.countdownInterval);
+    }
+
     const { history } = this.props;
 
     if (CONSTANTS.STATE_TO_PATH[state]) {
@@ -329,6 +349,8 @@ class LandingPage extends React.Component {
         selectedLineIdx: index,
         fading: false
       });
+
+      console.log('DEBUG set states back to normal')
     }, 200); // animation timing offset
   }
 
@@ -394,6 +416,18 @@ class LandingPage extends React.Component {
     return loader.load(files);
   }
 
+  /**
+   * @brief Updates the countdown timer on the watch page.
+   */
+  updateCountdown () {
+    this.setState({
+      countdownState: UTIL.calculate_date_difference(CONSTANTS.SHOW_DATE)
+    });
+  }
+
+  /**
+   * @brief We create the 3D asset here and load it onto the page.
+   */
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
@@ -649,11 +683,13 @@ class LandingPage extends React.Component {
 
     // TODO: animate this movement so it is smoother
     // We subtract from the beta (X) axis since we assume people hold their phones at that resting angle
-    this.state.object.rotation.set(
-      -((beta - RESTING_PHONE_ANGLE)*Math.PI/180)*CAMERA_PAN_FACTOR_MOBILE.x,
-      -(gamma*Math.PI/180)*CAMERA_PAN_FACTOR_MOBILE.y,
-      0
-    );
+    if (this.state.object) {
+      this.state.object.rotation.set(
+        -((beta - RESTING_PHONE_ANGLE)*Math.PI/180)*CAMERA_PAN_FACTOR_MOBILE.x,
+        -(gamma*Math.PI/180)*CAMERA_PAN_FACTOR_MOBILE.y,
+        0
+      );
+    }
   }
 
   render() {
@@ -696,6 +732,7 @@ class LandingPage extends React.Component {
             landing_page_state={this.state.landing_page_state}
           />
           <WatchPageDesktop
+            countdownState={this.state.countdownState}
             landing_page_state={this.state.landing_page_state}
           />
           <DesktopSideNav

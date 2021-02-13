@@ -4,27 +4,6 @@ import * as CONSTANTS from '../constants';
 import * as UTIL from '../util';
 
 class WatchPageDesktop extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      countdownState: UTIL.calculate_date_difference(CONSTANTS.SHOW_DATE)
-    };
-
-    this.updateCountdown = this.updateCountdown.bind(this);
-  }
-
-  componentDidMount() {
-    this.updateCountdown();
-  }
-
-  updateCountdown () {
-    this.setState({
-      countdownState: UTIL.calculate_date_difference(CONSTANTS.SHOW_DATE)
-    });
-    setInterval(this.updateCountdown, 1000);
-  }
-
   getCountdownComponent (label, number) {
     return <div className='countdown-component'>
       <div className='number'>
@@ -41,10 +20,10 @@ class WatchPageDesktop extends React.Component {
     return (
       <div id='watch-page-desktop' className={`desktop ${this.props.landing_page_state}`}>
         <div id='countdown'>
-          {this.getCountdownComponent('DAYS', this.state.countdownState.days)}
-          {this.getCountdownComponent('HOURS', this.state.countdownState.hours)}
-          {this.getCountdownComponent('MINUTES', this.state.countdownState.minutes)}
-          {this.getCountdownComponent('SECONDS', this.state.countdownState.seconds)}
+          {this.getCountdownComponent('DAYS', this.props.countdownState.days)}
+          {this.getCountdownComponent('HOURS', this.props.countdownState.hours)}
+          {this.getCountdownComponent('MINUTES', this.props.countdownState.minutes)}
+          {this.getCountdownComponent('SECONDS', this.props.countdownState.seconds)}
         </div>
         <div id='show-date'>
           <div id='show-date-text'>
@@ -70,8 +49,10 @@ class WatchPageDesktop extends React.Component {
 }
 
 WatchPageDesktop.propTypes = {
+  /** @brief Countdown state of the watch page. */
+  countdownState: PropTypes.object.isRequired,
   /** @brief Indicates if the menu is open or not, controlled by the parent */
-  landing_page_state: PropTypes.string.isRequired,
+  landing_page_state: PropTypes.string.isRequired
 };
 
 export default WatchPageDesktop;
