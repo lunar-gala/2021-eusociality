@@ -49,6 +49,9 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
   &.desktop-about-page-open {
     opacity: 0;
   }
+  &.desktop-watch-page-open {
+    opacity: 0;
+  }
 
   .navbar-container {
     display: flex;

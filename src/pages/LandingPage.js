@@ -14,6 +14,7 @@ import Logo from '../components/Logo';
 // Desktop Elements
 import Navbar from '../components/Navbar';
 import AboutPageDesktop from '../pages/AboutPageDesktop';
+import WatchPageDesktop from '../pages/WatchPageDesktop';
 import DesktopSideNav from '../components/DesktopSideNav';
 
 // Mobile Elements
@@ -693,6 +694,9 @@ class LandingPage extends React.Component {
           />
           { /* Desktop Elements */ }
           <AboutPageDesktop
+            landing_page_state={this.state.landing_page_state}
+          />
+          <WatchPageDesktop
             landing_page_state={this.state.landing_page_state}
           />
           <DesktopSideNav

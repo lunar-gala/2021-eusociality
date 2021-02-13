@@ -43,6 +43,16 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
       opacity: 0;
     }
   }
+  &.desktop-watch-page-open {
+    .landing-page-background {
+      opacity: 0.65;
+      transition-duration: 1s;
+    }
+
+    #main-screen #curr-line {
+      opacity: 0;
+    }
+  }
 
   .faded {
     opacity: 0;
@@ -190,6 +200,10 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     cursor: pointer;
 
     &.desktop-about-page-open {
+      opacity: 0;
+      transition-duration: 1s;
+    }
+    &.desktop-watch-page-open {
       opacity: 0;
       transition-duration: 1s;
     }
