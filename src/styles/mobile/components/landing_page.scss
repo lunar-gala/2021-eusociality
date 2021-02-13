@@ -5,7 +5,6 @@ $FONT_SIZE_TITLE: 48px;
 /**
  * 3D model in the landing page.
  */
-
 .landing-page-background {
   z-index: $Z_INDEX_BACKGROUND;
   position: fixed;
@@ -14,7 +13,12 @@ $FONT_SIZE_TITLE: 48px;
   height: 100%;
   transition-duration: 1s;
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-  opacity: 1;
+  opacity: 0;
+  transition-duration: $LONG_ANIMATION_DURATION;
+
+  &.visible {
+    opacity: 1;
+  }
 
   #landing-page-cube {
     width: 100%;

@@ -110,7 +110,9 @@ class LandingPage extends React.Component {
     }
 
     this.state = {
-      /** @brief If we are detecting mobile styles or not */
+      /** @brief If the 3D asset has loaded. */
+      assetHasLoaded: false,
+      /** @brief If we are detecting mobile styles or not. */
       isMobile: isMobile,
       /**
        * Which line is selected. Defaults to -1 when nothing is selected.
@@ -524,9 +526,6 @@ class LandingPage extends React.Component {
           }
         }
 
-        console.log(object);
-
-
         scene.add(object.scene);
 
         // Starting position of the 3d asset. We want to offset it to the right.
@@ -565,6 +564,12 @@ class LandingPage extends React.Component {
         }, 10000)
           .easing(TWEEN.Easing.Quadratic.Out)
           .start();
+
+        setTimeout(() => {
+          this.setState({
+            assetHasLoaded: true
+          })
+        }, 200);
       },
       // called when loading is in progresses
       (xhr) => {
@@ -658,7 +663,7 @@ class LandingPage extends React.Component {
           onMouseMove={this.state.isMobile ? null : this._onMouseMove}
         >
           { /* Common Elements */ }
-          <div className={`landing-page-background ${this.state.landing_page_state}`}>
+          <div className={`landing-page-background ${this.state.landing_page_state} ${this.state.assetHasLoaded ? 'visible' : ''}`}>
             <canvas id='landing-page-cube' />
           </div>
           <TitleTheme
