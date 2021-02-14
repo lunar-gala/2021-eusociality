@@ -212,6 +212,45 @@ class LandingPage extends React.Component {
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
+  startupAnimationSequenceMobile () {
+    this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
+
+    let temp = function check_cube_progress () {
+      if (this.state.assetHasLoaded) {
+        clearInterval(interval);
+
+        // Expand the cube
+        let object_children = this.state.object.children[0].children;
+
+        for (let i = 0; i < this.state.cube_positions.length; i++) {
+          let curr_child = object_children[i];
+          console.log(curr_child);
+
+          new TWEEN.Tween(curr_child.position).to({
+            x: this.state.cube_positions[i].end.x,
+            y: this.state.cube_positions[i].end.y,
+            z: this.state.cube_positions[i].end.z
+          }, 2000)
+            .easing(TWEEN.Easing.Cubic.InOut)
+            .onComplete(
+              () => {
+                curr_child.position.set(
+                  this.state.cube_positions[i].end.x,
+                  this.state.cube_positions[i].end.y,
+                  this.state.cube_positions[i].end.z
+                )
+              }
+            )
+            .start()
+        }
+      }
+    }
+
+    temp = temp.bind(this);
+
+    let interval = setInterval(temp, 10);
+  }
+
   startupAnimationSequence () {
     // Make the navbar expand from the middle and the sidebars slide in from the
     // top
@@ -524,10 +563,14 @@ class LandingPage extends React.Component {
     window.addEventListener('resize', this.updateWindowDimensions);
     window.addEventListener('deviceorientation', this.handleOrientation, true);
     window.addEventListener('load', () => {
-      setTimeout(() => {
-        // Start the animation while we try to load the asset
-        this.startupAnimationSequence();
-      }, 400);
+      if (this.state.isMobile) {
+        this.startupAnimationSequenceMobile();
+      } else {
+        setTimeout(() => {
+          // Start the animation while we try to load the asset
+          this.startupAnimationSequence();
+        }, 400);
+      }
     })
 
     const canvas = document.querySelector('#landing-page-cube');

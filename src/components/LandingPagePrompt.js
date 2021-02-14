@@ -19,7 +19,7 @@ class LandingPagePrompt extends React.Component {
     return (
       <div
         id="landing-page-prompt"
-        className={`${this.props.landing_page_state} ${
+        className={`desktop ${this.props.landing_page_state} ${
           this.state.out_animation
             ? "out-animation"
             : this.props.landing_page_animations_middleTitle
