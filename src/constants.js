@@ -22,6 +22,7 @@ export const LANDING_PAGE_STATES = {
   DEFAULT: 'default',
 
   // Mobile states
+  MOBILE_LANDING_PAGE_LOAD: 'mobile-landing-page-load',
   MOBILE_ABOUT_PAGE_OPEN: 'mobile-about-page-open',
   MOBILE_LINE_MENU_OPEN: 'mobile-line-menu-open',
   MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open',
@@ -29,18 +30,24 @@ export const LANDING_PAGE_STATES = {
   MOBILE_WATCH_PAGE_OPEN: 'mobile-watch-page-open',
 
   // Desktop states
-  DESKTOP_ABOUT_PAGE_OPEN: 'desktop-about-page-open'
+  DESKTOP_LANDING_PAGE_LOAD: 'desktop-landing-page-load',
+  DESKTOP_LANDING_PAGE_CUBE_INTRO: 'desktop-landing-page-cube-intro',
+  DESKTOP_ABOUT_PAGE_OPEN: 'desktop-about-page-open',
+  DESKTOP_WATCH_PAGE_OPEN: 'desktop-watch-page-open'
 };
 
 export const PATH_TO_STATE = {
   'mobile': {
+    'start': LANDING_PAGE_STATES.MOBILE_LANDING_PAGE_LOAD,
     'about': LANDING_PAGE_STATES.MOBILE_ABOUT_PAGE_OPEN,
     'lines': LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN,
     'people': LANDING_PAGE_STATES.MOBILE_PEOPLE_PAGE_OPEN,
     'watch': LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
   },
   'desktop': {
-    'about': LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN
+    'start': LANDING_PAGE_STATES.DESKTOP_LANDING_PAGE_LOAD,
+    'about': LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN,
+    'watch': LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN
   }
 };
 
@@ -50,7 +57,8 @@ export const STATE_TO_PATH = {
   'mobile-line-menu-open': '/lines',
   'mobile-people-page-open': '/people',
   'mobile-watch-page-open': '/watch',
-  'desktop-about-page-open': '/about'
+  'desktop-about-page-open': '/about',
+  'desktop-watch-page-open': '/watch'
 };
 
 /** @brief Width of screen we consider to be a desktop */
@@ -131,3 +139,6 @@ export const IRIDESCENCE_SETTINGS_OUTLINE = {
   BOOST: 50,
   SIZE: 64
 };
+
+/** @brief Date of the show. Used in the watch page to calculate the countdown. */
+export const SHOW_DATE = new Date(Date.parse('15 Apr 2021 19:00:00 EDT'));

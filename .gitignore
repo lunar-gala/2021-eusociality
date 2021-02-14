@@ -1,3 +1,6 @@
+.vscode/
+yarn.lock
+
 build/
 .htaccess
 

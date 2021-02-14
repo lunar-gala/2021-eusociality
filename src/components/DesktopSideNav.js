@@ -11,7 +11,7 @@ class DesktopSideNav extends React.Component {
   render() {
     // TODO: reuse code here
     return (
-      <div className="links desktop">
+      <div className={`links desktop ${this.props.landing_page_state}`}>
         <div className={`link-wrapper ${this.props.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN ? 'selected' : ''}`}>
           <div className='left-bar'>
             <div className='line'/>
@@ -34,12 +34,15 @@ class DesktopSideNav extends React.Component {
             People
           </Link>
         </div>
-        <div className='link-wrapper'>
+        <div className={`link-wrapper ${this.props.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN ? 'selected' : ''}`}>
           <div className='left-bar'>
             <div className='line'/>
             <div className='dot-basic'/>
           </div>
-          <Link className="link" to="/">
+          <Link className="link" to="/watch"
+            onClick={() => {
+              this.props.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN)
+            }}>
             Watch
           </Link>
         </div>

@@ -12,9 +12,10 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
+        { from: './public/CNAME' },
+        { from: './public/favicon.ico' },
         { from: './public/manifest.json' },
-        { from: './public/robots.txt' },
-        { from: './public/CNAME' }
+        { from: './public/robots.txt' }
       ]
     })
   ],

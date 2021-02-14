@@ -82,7 +82,15 @@ p {
 	transform: $FONT_SPRAT_STRETCH;
 	font-weight: $FONT_TITLE_WEIGHT;
 	letter-spacing: $TITLE_TRACKING;
-	opacity: 1;
+	opacity: 0;
 	transition-duration: 1s;
 	cursor: pointer;
+
+	// Title is not visible when no line is selected
+	&.default {
+		animation: blur-in $ANIMATION_DURATION_BLUR forwards;
+	}
+	&.visible {
+		opacity: 1;
+	}
 }

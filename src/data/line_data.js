@@ -13,7 +13,7 @@ export const LINE_INFO = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras cursus iaculis leo, quis mollis ligula ultrices condimentum. Donec sagittis, sem vitae scelerisque porta, eros libero volutpat orci, quis placerat sapien lacus at quam. Quisque maximus vel enim sit amet blandit. Curabitur tempus nisl a ex aliquet, et lobortis metus rhoncus. Vestibulum sit amet lobortis augue, viverra feugiat nisi. Ut in ultrices risus. Morbi placerat diam semper dapibus rhoncus. Nam ut convallis dui. Praesent dictum erat tincidunt sapien molestie, sed rhoncus est posuere. Morbi placerat diam semper dapibus rhoncus. Nam ut convallis dui. Praesent dictum erat tincidunt sapien molestie, sed rhoncus.'
   },
   {
-    name: 'Heroine',
+    name: 'Lorelei',
     designers: [
       'Lena Li',
       'Linda Lin'
@@ -111,25 +111,16 @@ export const LINE_INFO = [
       'Leah Kendrick',
       'Tyng Peck'
     ]
+  },
+  {
+    name: 'Alumni',
+    designers: [
+      'TBD'
+    ]
   }
 ];
 
 
-export const LINE_NAME_LOOKUP = [
-  'Gossamer Idle',
-  'Heroine',
-  'Nexus',
-  'Chrysophyta',
-  'Mirror',
-  'The Marianas Trench',
-  'Obfuscate',
-  'Salvos',
-  'Bloom',
-  'Rensaci',
-  'Bound',
-  'Invasion',
-  'Somatic',
-  'Relinquo',
-  'Digital Warfare',
-  'Icarus'
-];
+export const LINE_NAME_LOOKUP = LINE_INFO.map(
+  entry => entry.name
+);

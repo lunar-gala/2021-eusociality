@@ -1,0 +1,166 @@
+/**
+ * Animations for when the page first loads.
+ */
+
+$ANIMATION_DURATION_PROMPT: 1s;
+$ANIMATION_TIMING_PROMPT: linear;
+
+@keyframes prompt-title-blur-out {
+  from {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    filter: blur(2rem);
+  }
+}
+@keyframes prompt-title-blur-in {
+  0% {
+    opacity: 0;
+    filter: blur(2rem);
+  }
+  75% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes right-bar-slide-out {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+@keyframes right-bar-slide-in {
+  0% {
+    transform: translateX(100vw);
+  }
+  50% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes left-bar-slide-out {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100vw);
+  }
+}
+@keyframes left-bar-slide-in {
+  0% {
+    transform: translateX(-100vw);
+  }
+  50% {
+    transform: translateX(-100vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+// The enter button appears at the end
+@keyframes enter-site-fade-out {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes enter-site-fade-in {
+  0% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#landing-page-prompt {
+  &.start-animation {
+    opacity: 1;
+
+    #title {
+      animation-duration: $ANIMATION_DURATION_PROMPT;
+      animation-timing-function: $ANIMATION_TIMING_PROMPT;
+      animation-fill-mode: forwards;
+      animation-name: prompt-title-blur-in;
+    }
+
+    .left-bar {
+      animation-duration: $ANIMATION_DURATION_PROMPT;
+      animation-timing-function: $ANIMATION_TIMING_PROMPT;
+      animation-fill-mode: forwards;
+      animation-name: left-bar-slide-in;
+    }
+
+    .right-bar {
+      animation-duration: $ANIMATION_DURATION_PROMPT;
+      animation-timing-function: $ANIMATION_TIMING_PROMPT;
+      animation-fill-mode: forwards;
+      animation-name: right-bar-slide-in;
+    }
+
+    #enter-site {
+      animation-duration: $ANIMATION_DURATION_PROMPT;
+      animation-timing-function: $ANIMATION_TIMING_PROMPT;
+      animation-fill-mode: forwards;
+      animation-name: enter-site-fade-in;
+    }
+  }
+
+  &.out-animation {
+    opacity: 1;
+    #title {
+      animation-duration: $ANIMATION_DURATION_PROMPT;
+      animation-timing-function: $ANIMATION_TIMING_PROMPT;
+      animation-fill-mode: forwards;
+      animation-name: prompt-title-blur-out;
+    }
+
+    .left-bar {
+      animation-duration: $ANIMATION_DURATION_PROMPT;
+      animation-timing-function: $ANIMATION_TIMING_PROMPT;
+      animation-fill-mode: forwards;
+      animation-name: left-bar-slide-out;
+    }
+
+    .right-bar {
+      animation-duration: $ANIMATION_DURATION_PROMPT;
+      animation-timing-function: $ANIMATION_TIMING_PROMPT;
+      animation-fill-mode: forwards;
+      animation-name: right-bar-slide-out;
+    }
+
+    #enter-site {
+      animation-duration: $ANIMATION_DURATION_PROMPT;
+      animation-timing-function: $ANIMATION_TIMING_PROMPT;
+      animation-fill-mode: forwards;
+      animation-name: enter-site-fade-out;
+    }
+  }
+}
