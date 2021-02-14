@@ -205,23 +205,19 @@ class LandingPage extends React.Component {
   }
 
   startupAnimationSequence () {
-    // Make the navbar expand from the middle
+    // Make the navbar expand from the middle and the sidebars slide in from the
+    // top
     this.setState({
-      landing_page_animations_navbar: 'start-animation'
+      landing_page_animations_navbar: 'start-animation',
+      landing_page_animations_sidebar: 'start-animation'
     });
 
     setTimeout(() => {
-      // Make sidebars slide in from the top
+      // Make the center title show up
       this.setState({
-        landing_page_animations_sidebar: 'start-animation'
+        landing_page_animations_middleTitle: 'start-animation'
       });
-      setTimeout(() => {
-        // Make the center title show up
-        this.setState({
-          landing_page_animations_middleTitle: 'start-animation'
-        });
-      }, 300);
-    }, 300)
+    }, 1000)
   }
 
   enterSiteAnimationSequence () {
@@ -840,10 +836,6 @@ class LandingPage extends React.Component {
               </div >
             </div>
           </div>
-
-          { /* Various line and dot elements */ }
-          <div className={`vertical-line ${this.state.landing_page_state} ${this.state.landing_page_animations_sidebar}`} id="outer-lines" />
-          <div className={`vertical-line ${this.state.landing_page_state} ${this.state.landing_page_animations_sidebar}`} id="inner-lines" />
         </div>
 
         <Navbar
@@ -852,6 +844,10 @@ class LandingPage extends React.Component {
           landing_page_state={this.state.landing_page_state}
           selectedLineIdx={this.state.selectedLineIdx}
         />
+
+        { /* Various line and dot elements */ }
+        <div className={`vertical-line ${this.state.landing_page_state} ${this.state.landing_page_animations_sidebar}`} id="outer-lines" />
+        <div className={`vertical-line ${this.state.landing_page_state} ${this.state.landing_page_animations_sidebar}`} id="inner-lines" />
       </div>
     );
   }

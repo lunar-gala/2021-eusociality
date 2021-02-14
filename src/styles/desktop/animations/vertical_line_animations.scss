@@ -1,0 +1,19 @@
+$ANIMATION_DURATION_VERTICAL_LINE: 1s;
+$ANIMATION_TIMING_VERTICAL_LINE: linear;
+
+@keyframes come-down-from-top {
+  from {
+    transform: translateY(-100vh);
+  } to {
+    transform: translateY(0);
+  }
+}
+
+.vertical-line {
+  &.start-animation {
+    animation-name: come-down-from-top;
+    animation-duration: $ANIMATION_DURATION_VERTICAL_LINE;
+    animation-timing-function: $ANIMATION_TIMING_VERTICAL_LINE;
+    animation-fill-mode: forwards;
+  }
+}
