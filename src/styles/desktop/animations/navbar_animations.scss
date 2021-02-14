@@ -1,0 +1,70 @@
+/**
+ * Animations for when the page first loads.
+ */
+
+$ANIMATION_DURATION_NAVBAR: 1s;
+$ANIMATION_TIMING_NAVBAR: linear;
+
+@keyframes navbar-left-dots {
+  0% {
+    transform: translateX(-$X_MARGIN/8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    transform: translateX(-$X_MARGIN/8);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes navbar-right-dots {
+  0% {
+    transform: translateX($X_MARGIN/8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes navbar-expand {
+  0% {
+    width: 2*$CIRCLE_RAD;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    width: 100vw;
+  }
+}
+
+.navbar {
+  &.start-animation {
+    opacity: 1;
+    animation-duration: $ANIMATION_DURATION_NAVBAR;
+    animation-timing-function: $ANIMATION_TIMING_NAVBAR;
+    animation-name: navbar-expand;
+    animation-fill-mode: forwards;
+
+    .left-dot {
+      animation-duration: $ANIMATION_DURATION_NAVBAR;
+      animation-timing-function: $ANIMATION_TIMING_NAVBAR;
+      animation-name: navbar-left-dots;
+      animation-fill-mode: forwards;
+    }
+
+    .right-dot {
+      animation-duration: $ANIMATION_DURATION_NAVBAR;
+      animation-timing-function: $ANIMATION_TIMING_NAVBAR;
+      animation-name: navbar-right-dots;
+      animation-fill-mode: forwards;
+    }
+  }
+}

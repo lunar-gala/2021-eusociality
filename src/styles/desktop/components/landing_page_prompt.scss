@@ -1,0 +1,60 @@
+/**
+ * Prompt that appears after the initial load and before a user enters the main
+ * site.
+ */
+
+$MARGIN_BAR: 12px;
+$BAR_WIDTH: 74vw;
+
+#landing-page-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  position: absolute;
+  opacity: 0;
+
+  &.hidden {
+    display: none;
+  }
+
+  .bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100vw;
+
+    .line {
+      display: flex;
+      flex-grow: 1;
+    }
+
+    .hidden {
+      width: 100vw - $BAR_WIDTH;
+    }
+  }
+
+  .right-bar {
+    margin-bottom: $MARGIN_BAR;
+  }
+
+  .left-bar {
+    margin-top: $MARGIN_BAR;
+  }
+
+  #title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13vh;
+    font-weight: 300;
+    letter-spacing: -0.12em;
+  }
+
+  #enter-site {
+    margin-top: 12px;
+    font-family: $FONT_SUBHEAD;
+    font-size: 24px;
+    cursor: pointer;
+  }
+}

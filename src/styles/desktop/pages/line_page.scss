@@ -3,11 +3,14 @@
  */
 
 $LEFT_MARGIN: 25vw;
+$TITLE_MARGIN_TOP: 15vw;
 
 $SLIDE_AMOUNT_A: 6.66vw;
 $SLIDE_AMOUNT_B: -2.8vw;
 $SLIDE_AMOUNT_C: 6.4vw;
 $SLIDE_AMOUNT_D: 16.6vw;
+$BACK_BUTTON_SIZE: 24px;
+$BACK_BUTTON_STROKE_WIDTH: 3px;
 
 // Animations
 @keyframes slide-image-a {
@@ -72,6 +75,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
   }
 
   #top-title {
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,6 +85,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
     font-size: $FONT_SIZE_TITLE;
     font-weight: 100;
     letter-spacing: -0.05em;
+    text-decoration: none;
   }
 
   .main-content {
@@ -92,7 +97,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
     #name {
       // TODO: this is really bad style for font sizes and letter spacing. Not
       // scalable
-      margin-top: 123px;
+      margin-top: $TITLE_MARGIN_TOP;
       font-family: 'Sprat Type Condensed';
       font-size: $FONT_SIZE_LINE_PAGE_NAME;
       font-weight: 100;
@@ -126,7 +131,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
 
         .line {
           flex-grow: 1;
-          border-bottom: 1px solid white;
+          background-color: white;
           height: 1px;
         }
       }
@@ -146,7 +151,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
         .frame {
           width: calc(100% - 4px);
           height: calc(100% - 2px);
-          border: 2px solid white;
+          border: 1px solid white;
         }
 
         .image {
@@ -202,7 +207,7 @@ $SLIDE_AMOUNT_D: 16.6vw;
       .line {
         width: 60vw;
         flex-grow: 1;
-        border-bottom: 1px solid white;
+        background-color: white;
         height: 1px;
       }
     }
@@ -232,16 +237,24 @@ $SLIDE_AMOUNT_D: 16.6vw;
       position: static;
       top: 0;
       left: 0;
+
+      .link-wrapper .left-bar {
+        display: none;
+      }
     }
+  }
+
+  #back-button-wrapper {
+    position: fixed;
+    top: calc(#{$TITLE_MARGIN_TOP} + 40px);
+    left: $X_MARGIN/2;
 
     #back-button {
-      margin-top: 8.6vw;
-      left: $X_MARGIN/2;
 
-      width: 32px;
-      height: 32px;
-      border-left: 4px solid white;
-      border-bottom: 4px solid white;
+      width: $BACK_BUTTON_SIZE;
+      height: $BACK_BUTTON_SIZE;
+      border-left: $BACK_BUTTON_STROKE_WIDTH solid white;
+      border-bottom: $BACK_BUTTON_STROKE_WIDTH solid white;
       transform: rotate(45deg);
 
       cursor: pointer;

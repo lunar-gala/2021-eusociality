@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 import * as CONSTANTS from '../constants';
@@ -74,9 +75,11 @@ class LinePage extends React.Component {
             backgroundImage: `url(${BACKGROUND_SECOND})`
           }} id='second' className='background-picture' />
         </div>
-        <div id='top-title'>
+        <Link id='top-title'
+          to={'/'}
+        >
           {CONSTANTS.LANDING_PAGE_TITLE}
-        </div>
+        </Link>
         <div className='main-content'>
           <div id='name'>
             {line_info.name}
@@ -110,9 +113,10 @@ class LinePage extends React.Component {
         </div>
         <NavbarLinePage selectedLineIdx={this.state.selectedLineIdx} handlerSelectedLineIdx={this.handlerSelectedLineIdx} />
         {/* Additional overlay components */}
-        { /* TODO: make the desktop side nav fixable so it moves with scroll */ }
         <div className='fixed-overlay'>
           <DesktopSideNav />
+        </div>
+        <div id='back-button-wrapper'>
           <div id='back-button' className={this.state.showBackButton ? 'show' : ''} onClick={
             () => this.props.history.goBack()
           } />

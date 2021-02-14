@@ -1,7 +1,12 @@
 /**
  * Utility functions
  */
+import * as CONSTANTS from './constants';
 
+const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+const _MS_PER_HOUR = 1000 * 60 * 60;
+const _MS_PER_MINUTE = 1000 * 60;
+const _MS_PER_SECOND = 1000;
 
 /**
  * Formats the line numbers in the way we want in the site.
@@ -51,4 +56,46 @@ export function name_list_formatter(name_list) {
 
   // List is empty
   return "";
+}
+
+/**
+ * Returns the number of days, hours, minutes, and seconds between the current
+ * time and the target date.
+ */
+export function calculate_date_difference (target_date) {
+  let difference = target_date - Date.now();
+
+  let num_days = Math.floor(difference / _MS_PER_DAY);
+  difference = difference - num_days * _MS_PER_DAY;
+  let num_hours = Math.floor(difference / _MS_PER_HOUR);
+  difference = difference - num_hours * _MS_PER_HOUR;
+  let num_minutes = Math.floor(difference / _MS_PER_MINUTE);
+  difference = difference - num_minutes * _MS_PER_MINUTE;
+  let num_seconds = Math.floor(difference / _MS_PER_SECOND);
+
+  return {
+    days: num_days,
+    hours: num_hours,
+    minutes: num_minutes,
+    seconds: num_seconds
+  };
+}
+
+/**
+ * Formats a Date object into
+ *
+ * MM/DD/YYYY
+ * HH:MM (AM/PM)
+ *
+ * @param {Date} date Date object
+ */
+export function format_date (date) {
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  let year = date.getFullYear();
+
+  return {
+    date: `${month}/${day}/${year}`,
+    time: `${date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })} EST`
+  };
 }

@@ -8,6 +8,20 @@
 	align-items: center;
 	overflow: hidden;
 
+	.headshotImg {
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-blend-mode: color;
+	}
+
+	.headshot {
+		width: 20vw;
+		height: 21.3vw;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-blend-mode: color;
+	}
+
 	.page-background {
 		top: 0;
 		bottom: 0;
@@ -15,7 +29,7 @@
 		height: 100vh;
 		width: 100vw;
 	}
-	
+
 	.wrapper {
 		position: fixed;
 		top: 0;
@@ -38,8 +52,8 @@
   #team-acordion {
 		position: absolute;
 		left: $X_MARGIN/2;
-		display: block;	
-		top: 25%;	
+		display: block;
+		top: 25%;
 		background: none;
 		box-shadow: none;
 
@@ -51,9 +65,10 @@
 		.team-title {
 			font-family: $FONT_DISPLAY;
 			text-transform: uppercase;
-			transform: $FONT_SPRAT_STRETCH;
+			//transform: $FONT_SPRAT_STRETCH;
+			letter-spacing: $FONT_SPRAT_KERN;
 			font-weight: $FONT_SPRAT_WEIGHT;
-			font-size: 72;
+			font-size: 14vh; //May need to be smaller
 			margin: 0;
 			padding: 0;
 		}
@@ -68,12 +83,13 @@
 
 		.tab-header {
 			font-family: $FONT_DISPLAY;
-			font-size: 72;
+			font-weight: $FONT_SPRAT_WEIGHT;
+			// font-size: 20vh;
 			padding: 0;
 			flex: 1;
 			box-shadow: none;
 			border: none;
-			
+
 			.display_circle {
 				display: block;
 				margin: auto;
@@ -101,27 +117,32 @@
 			padding: 0;
 			padding-top: 40px;
 			flex-direction: row;
-			justify-content: space-between;
+			justify-content: flex-start;
 			flex-wrap: wrap;
 			box-shadow: none;
 			border: none;
-			
+
 			.teamBio {
 				margin-top: 30px;
 				margin-bottom: 30px;
+				margin-right: 2.5vw;
 				display: block;
-				width: 20ww;
-				justify-self: space-between;
+				width: 20vw;
+				justify-self: flex-start;
+
+
 
 				.name {
 					text-transform: uppercase;
-					font-weight: 400;
+					font-weight: 500;
 					font-size: 18px;
 					margin: 0;
+					margin-top: 1em;
 				}
 
 				.title {
 					text-transform: uppercase;
+					font-weight: 300;
 					font-size: 18px;
 					margin: 0;
 				}

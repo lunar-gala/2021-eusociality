@@ -46,7 +46,31 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
   padding-bottom: 2.5vh;
   transition-duration: 1s;
 
+  &.default {
+    .navbar-container {
+      animation: blur-in $ANIMATION_DURATION_BLUR forwards;
+    }
+  }
+  &.desktop-landing-page-load {
+    opacity: 0;
+
+    // We need to keep this because the navbar will have opacity: 1 at the end
+    // of its animation
+    .navbar-container {
+      opacity: 0;
+      pointer-events: none;;
+    }
+  }
+  &.desktop-landing-page-cube-intro {
+    .navbar-container {
+      opacity: 0;
+      pointer-events: none;;
+    }
+  }
   &.desktop-about-page-open {
+    opacity: 0;
+  }
+  &.desktop-watch-page-open {
     opacity: 0;
   }
 
@@ -56,6 +80,7 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
     justify-content: space-between;
     align-items: center;
     width: 100vw - 2*3*$OUTER;
+    transition-duration: 1s;
   }
 
   .navBall {
@@ -103,7 +128,7 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
       width: 100%;
       height: 12px;
       opacity: 0;
-      transition: 0.5s;
+      transition: $MEDIUM_ANIMATION_DURATION;
     }
 
     &.selected {
@@ -115,15 +140,15 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
         opacity: 1;
 
         .left {
-          animation: 1s ease-in-out underline-circle-left-animation forwards;
+          animation: $MEDIUM_ANIMATION_DURATION ease-in-out underline-circle-left-animation forwards;
         }
 
         .right {
-          animation: 1s ease-in-out underline-circle-right-animation forwards;
+          animation: $MEDIUM_ANIMATION_DURATION ease-in-out underline-circle-right-animation forwards;
         }
 
         .underline {
-          animation: 1s ease-in-out underline-animation forwards;
+          animation: $MEDIUM_ANIMATION_DURATION ease-in-out underline-animation forwards;
         }
       }
     }

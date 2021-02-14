@@ -6,11 +6,22 @@
   position: absolute;
   top: $TOP_MARGIN;
   left: 0;
+  transition-duration: 1s;
+
+  &.default {
+    animation: blur-in $ANIMATION_DURATION_BLUR forwards;
+  }
+  &.desktop-landing-page-load {
+    opacity: 0;
+  }
+  &.desktop-landing-page-cube-intro {
+    opacity: 0;
+  }
 
   .link-wrapper {
     display: flex;
     flex-direction: row;
-    margin-bottom: 8px;
+    margin-bottom: 4px; //changed from 8px
     transition-duration: 1s;
 
     &.selected .left-bar {
