@@ -31,6 +31,7 @@ export const LANDING_PAGE_STATES = {
 
   // Desktop states
   DESKTOP_LANDING_PAGE_LOAD: 'desktop-landing-page-load',
+  DESKTOP_LANDING_PAGE_CUBE_INTRO: 'desktop-landing-page-cube-intro',
   DESKTOP_ABOUT_PAGE_OPEN: 'desktop-about-page-open',
   DESKTOP_WATCH_PAGE_OPEN: 'desktop-watch-page-open'
 };

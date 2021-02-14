@@ -46,11 +46,25 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
   padding-bottom: 2.5vh;
   transition-duration: 1s;
 
+  &.default {
+    .navbar-container {
+      animation: blur-in $ANIMATION_DURATION_BLUR forwards;
+    }
+  }
   &.desktop-landing-page-load {
     opacity: 0;
 
+    // We need to keep this because the navbar will have opacity: 1 at the end
+    // of its animation
     .navbar-container {
       opacity: 0;
+      pointer-events: none;;
+    }
+  }
+  &.desktop-landing-page-cube-intro {
+    .navbar-container {
+      opacity: 0;
+      pointer-events: none;;
     }
   }
   &.desktop-about-page-open {
@@ -66,6 +80,7 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
     justify-content: space-between;
     align-items: center;
     width: 100vw - 2*3*$OUTER;
+    transition-duration: 1s;
   }
 
   .navBall {

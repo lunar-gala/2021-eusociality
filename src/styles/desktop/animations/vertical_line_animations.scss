@@ -11,6 +11,7 @@ $ANIMATION_TIMING_VERTICAL_LINE: linear;
 
 .vertical-line {
   &.start-animation {
+    opacity: 1;
     animation-name: come-down-from-top;
     animation-duration: $ANIMATION_DURATION_VERTICAL_LINE;
     animation-timing-function: $ANIMATION_TIMING_VERTICAL_LINE;

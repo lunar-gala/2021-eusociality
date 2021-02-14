@@ -11,6 +11,7 @@ class LandingPagePrompt extends React.Component {
     super(props);
 
     this.state = {
+      out_animation: false,
       visible: true,
     };
   }
@@ -19,7 +20,9 @@ class LandingPagePrompt extends React.Component {
       <div
         id="landing-page-prompt"
         className={`${this.props.landing_page_state} ${
-          this.props.landing_page_animations_middleTitle
+          this.state.out_animation
+            ? "out-animation"
+            : this.props.landing_page_animations_middleTitle
         } ${this.state.visible ? "visible" : "hidden"}`}
       >
         <div className="right-bar bar">
@@ -36,10 +39,12 @@ class LandingPagePrompt extends React.Component {
         <div
           id="enter-site"
           onClick={() => {
+            this.setState({
+              out_animation: true,
+            });
             this.props.handlerSetLandingPageState(
-              CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+              CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LANDING_PAGE_CUBE_INTRO
             );
-
             // Set display: none after animation plays
             setTimeout(() => {
               this.setState({
