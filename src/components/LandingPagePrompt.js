@@ -7,11 +7,23 @@ import PropTypes from "prop-types";
 import * as CONSTANTS from "../constants";
 
 class LandingPagePrompt extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      visible: true,
+    };
+  }
   render() {
     return (
-      <div id="landing-page-prompt" className={`${this.props.landing_page_state} ${this.props.landing_page_animations_middleTitle}`}>
+      <div
+        id="landing-page-prompt"
+        className={`${this.props.landing_page_state} ${
+          this.props.landing_page_animations_middleTitle
+        } ${this.state.visible ? "visible" : "hidden"}`}
+      >
         <div className="right-bar bar">
-          <div className="hidden"/>
+          <div className="hidden" />
           <div className="dot-basic" />
           <div className="line" />
         </div>
@@ -19,12 +31,21 @@ class LandingPagePrompt extends React.Component {
         <div className="left-bar bar">
           <div className="line" />
           <div className="dot-basic" />
-          <div className="hidden"/>
+          <div className="hidden" />
         </div>
         <div
-          id='enter-site'
+          id="enter-site"
           onClick={() => {
-            this.props.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT)
+            this.props.handlerSetLandingPageState(
+              CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+            );
+
+            // Set display: none after animation plays
+            setTimeout(() => {
+              this.setState({
+                visible: false,
+              });
+            }, 1000);
           }}
         >
           Enter →

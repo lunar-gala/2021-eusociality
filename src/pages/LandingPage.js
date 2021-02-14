@@ -317,6 +317,13 @@ class LandingPage extends React.Component {
       landing_page_state: state
     });
 
+    // If we are entering the site, we need to end all animations
+    if (state === CONSTANTS.LANDING_PAGE_STATES.DEFAULT) {
+      this.setState({
+        landing_page_animations_middleTitle: 'out-animation'
+      });
+    }
+
     // If we scroll in the lines menu, the scroll will persist so we reset it
     if (state !== CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) {
       document.getElementById('landing-page').scrollTo({
@@ -811,8 +818,7 @@ class LandingPage extends React.Component {
             <div id='line-name'>
               {
                 (this.state.selectedLineIdx >= 0) ?
-                  `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}` :
-                  'COLLECTIVA'
+                  `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}` : ''
               }
             </div>
             <div id='below-line-name'>

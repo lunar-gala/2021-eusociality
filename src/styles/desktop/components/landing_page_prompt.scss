@@ -14,6 +14,10 @@ $BAR_WIDTH: 74vw;
   position: absolute;
   opacity: 0;
 
+  &.hidden {
+    display: none;
+  }
+
   .bar {
     display: flex;
     flex-direction: row;

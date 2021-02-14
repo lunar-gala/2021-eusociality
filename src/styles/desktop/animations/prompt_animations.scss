@@ -5,6 +5,16 @@
 $ANIMATION_DURATION_PROMPT: 1s;
 $ANIMATION_TIMING_PROMPT: linear;
 
+@keyframes prompt-title-blur-out {
+  from {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    filter: blur(2rem);
+  }
+}
 @keyframes prompt-title-blur-in {
   0% {
     opacity: 0;
@@ -14,8 +24,23 @@ $ANIMATION_TIMING_PROMPT: linear;
     opacity: 1;
     filter: blur(0);
   }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
 }
 
+@keyframes right-bar-slide-out {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
 @keyframes right-bar-slide-in {
   0% {
     transform: translateX(100vw);
@@ -28,6 +53,17 @@ $ANIMATION_TIMING_PROMPT: linear;
   }
 }
 
+@keyframes left-bar-slide-out {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100vw);
+  }
+}
 @keyframes left-bar-slide-in {
   0% {
     transform: translateX(-100vw);
@@ -41,6 +77,17 @@ $ANIMATION_TIMING_PROMPT: linear;
 }
 
 // The enter button appears at the end
+@keyframes enter-site-fade-out {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 @keyframes enter-site-fade-in {
   0% {
     opacity: 0;
@@ -87,6 +134,33 @@ $ANIMATION_TIMING_PROMPT: linear;
   }
 
   &.out-animation {
-    opacity: 0;
+    opacity: 1;
+    #title {
+      animation-duration: $ANIMATION_DURATION_PROMPT;
+      animation-timing-function: $ANIMATION_TIMING_PROMPT;
+      animation-fill-mode: forwards;
+      animation-name: prompt-title-blur-out;
+    }
+
+    .left-bar {
+      animation-duration: $ANIMATION_DURATION_PROMPT;
+      animation-timing-function: $ANIMATION_TIMING_PROMPT;
+      animation-fill-mode: forwards;
+      animation-name: left-bar-slide-out;
+    }
+
+    .right-bar {
+      animation-duration: $ANIMATION_DURATION_PROMPT;
+      animation-timing-function: $ANIMATION_TIMING_PROMPT;
+      animation-fill-mode: forwards;
+      animation-name: right-bar-slide-out;
+    }
+
+    #enter-site {
+      animation-duration: $ANIMATION_DURATION_PROMPT;
+      animation-timing-function: $ANIMATION_TIMING_PROMPT;
+      animation-fill-mode: forwards;
+      animation-name: enter-site-fade-out;
+    }
   }
 }
