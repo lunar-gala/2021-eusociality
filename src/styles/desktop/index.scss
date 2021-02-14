@@ -87,6 +87,9 @@ p {
 	cursor: pointer;
 
 	// Title is not visible when no line is selected
+	&.default {
+		animation: blur-in $ANIMATION_DURATION_BLUR forwards;
+	}
 	&.visible {
 		opacity: 1;
 	}
