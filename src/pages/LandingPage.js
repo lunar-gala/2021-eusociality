@@ -16,6 +16,7 @@ import Navbar from '../components/Navbar';
 import AboutPageDesktop from '../pages/AboutPageDesktop';
 import WatchPageDesktop from '../pages/WatchPageDesktop';
 import DesktopSideNav from '../components/DesktopSideNav';
+import LandingPagePrompt from '../components/LandingPagePrompt';
 
 // Mobile Elements
 import MobileOpenMenu from '../components/MobileOpenMenu';
@@ -798,6 +799,11 @@ class LandingPage extends React.Component {
         />
         <DesktopSideNav
           handlerSetLandingPageState={this.handlerSetLandingPageState}
+          landing_page_state={this.state.landing_page_state}
+        />
+        <LandingPagePrompt
+          handlerSetLandingPageState={this.handlerSetLandingPageState}
+          landing_page_animations_middleTitle={this.state.landing_page_animations_middleTitle}
           landing_page_state={this.state.landing_page_state}
         />
         <div id='main-screen' className={`desktop ${this.state.landing_page_state}`}>
