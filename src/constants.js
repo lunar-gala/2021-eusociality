@@ -22,6 +22,7 @@ export const LANDING_PAGE_STATES = {
   DEFAULT: 'default',
 
   // Mobile states
+  MOBILE_LANDING_PAGE_LOAD: 'mobile-landing-page-load',
   MOBILE_ABOUT_PAGE_OPEN: 'mobile-about-page-open',
   MOBILE_LINE_MENU_OPEN: 'mobile-line-menu-open',
   MOBILE_NAV_MENU_OPEN: 'mobile-nav-menu-open',
@@ -29,18 +30,21 @@ export const LANDING_PAGE_STATES = {
   MOBILE_WATCH_PAGE_OPEN: 'mobile-watch-page-open',
 
   // Desktop states
+  DESKTOP_LANDING_PAGE_LOAD: 'desktop-landing-page-load',
   DESKTOP_ABOUT_PAGE_OPEN: 'desktop-about-page-open',
   DESKTOP_WATCH_PAGE_OPEN: 'desktop-watch-page-open'
 };
 
 export const PATH_TO_STATE = {
   'mobile': {
+    'start': LANDING_PAGE_STATES.MOBILE_LANDING_PAGE_LOAD,
     'about': LANDING_PAGE_STATES.MOBILE_ABOUT_PAGE_OPEN,
     'lines': LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN,
     'people': LANDING_PAGE_STATES.MOBILE_PEOPLE_PAGE_OPEN,
     'watch': LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
   },
   'desktop': {
+    'start': LANDING_PAGE_STATES.DESKTOP_LANDING_PAGE_LOAD,
     'about': LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN,
     'watch': LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN
   }

@@ -103,11 +103,15 @@ class LandingPage extends React.Component {
 
     const regexFindPathName = /\/(\w+).*/;
     const currPathMatches = regexFindPathName.exec(this.props.location.pathname);
-    const isMobile = window.innerHeight < CONSTANTS.DESKTOP_WIDTH;
+    const isMobile = window.innerWidth < CONSTANTS.DESKTOP_WIDTH;
+
+    console.log('matches', currPathMatches, isMobile);
 
     if (currPathMatches !== null) {
       const currPathName = currPathMatches[1];
       landing_page_state = CONSTANTS.PATH_TO_STATE[isMobile ? 'mobile' : 'desktop'][currPathName];
+    } else {
+      landing_page_state = CONSTANTS.PATH_TO_STATE[isMobile ? 'mobile' : 'desktop']['start'];
     }
 
     this.state = {
