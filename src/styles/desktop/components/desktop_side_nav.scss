@@ -7,6 +7,10 @@
   top: $TOP_MARGIN;
   left: 0;
 
+  &.desktop-landing-page-load {
+    opacity: 0;
+  }
+
   .link-wrapper {
     display: flex;
     flex-direction: row;

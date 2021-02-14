@@ -46,6 +46,13 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
   padding-bottom: 2.5vh;
   transition-duration: 1s;
 
+  &.desktop-landing-page-load {
+    opacity: 0;
+
+    .navbar-container {
+      opacity: 0;
+    }
+  }
   &.desktop-about-page-open {
     opacity: 0;
   }

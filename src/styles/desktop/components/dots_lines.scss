@@ -32,6 +32,10 @@
   border-left: 1px solid white;
   border-right: 1px solid white;
   pointer-events: none;
+
+  &.desktop-landing-page-load {
+    opacity: 0;
+  }
 }
 
 #outer-lines {

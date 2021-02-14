@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as LINE_DATA from "../data/line_data";
 import * as UTIL from "../util";
-import NavBall from '../../assets/img/navBall.svg'
+import NavBall from "../../assets/img/navBall.svg";
 
 /**
  * Navbar for selecting lines
@@ -26,13 +26,17 @@ class Navbar extends React.Component {
       );
     }
 
-    return <div className={`navbar desktop ${this.props.landing_page_state}`}>
-      <div className="dot left-dot lower"/>
-      <div className="dot left-dot upper" />
-      <div className="dot right-dot lower"/>
-      <div className="dot right-dot upper" />
-      <div className='navbar-container'>{items}</div>
-    </div>;
+    return (
+      <div
+        className={`navbar desktop ${this.props.landing_page_state} ${this.props.landing_page_animations_navbar}`}
+      >
+        <div className="dot left-dot lower" />
+        <div className="dot left-dot upper" />
+        <div className="dot right-dot lower" />
+        <div className="dot right-dot upper" />
+        <div className="navbar-container">{items}</div>
+      </div>
+    );
   }
 }
 
@@ -53,20 +57,16 @@ class NavItem extends React.Component {
           this.props.handlerSelectedLineIdx(this.props.lineIdx);
         }}
       >
-        <NavBall className={`navBall ${this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""}`}/>
+        <NavBall
+          className={`navBall ${
+            this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""
+          }`}
+        />
         {UTIL.line_number_formatter(this.props.lineIdx)}
-        <div
-          className='underline-animation'
-        >
-          <div
-            className='underline'
-          />
-          <div
-            className='underline-circle left'
-          />
-          <div
-            className='underline-circle right'
-          />
+        <div className="underline-animation">
+          <div className="underline" />
+          <div className="underline-circle left" />
+          <div className="underline-circle right" />
         </div>
       </div>
     );
@@ -76,10 +76,12 @@ class NavItem extends React.Component {
 Navbar.propTypes = {
   /** @brief Handles updating the line index when a NavItem is hovered over */
   handlerSelectedLineIdx: PropTypes.func.isRequired,
+  /** @brief What animation to run on the navbar. */
+  landing_page_animations_navbar: PropTypes.string,
   /** @brief Indicates if the menu is open or not, controlled by the parent */
   landing_page_state: PropTypes.string.isRequired,
   /** @brief The currently selected line index on the navbar */
-  selectedLineIdx: PropTypes.number.isRequired
+  selectedLineIdx: PropTypes.number.isRequired,
 };
 
 NavItem.propTypes = {
@@ -90,7 +92,7 @@ NavItem.propTypes = {
   /** @brief Line name associated with NavItem circle */
   lineName: PropTypes.string.isRequired,
   /** @brief The currently selected line index on the navbar */
-  selectedLineIdx: PropTypes.number.isRequired
+  selectedLineIdx: PropTypes.number.isRequired,
 };
 
 export default Navbar;

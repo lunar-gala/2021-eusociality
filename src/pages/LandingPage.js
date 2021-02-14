@@ -161,6 +161,10 @@ class LandingPage extends React.Component {
        * @brief The current countdown timer state.
        */
       countdownState: UTIL.calculate_date_difference(CONSTANTS.SHOW_DATE),
+      landing_page_animations_navbar: '',
+      landing_page_animations_sidebar: '',
+      landing_page_animations_header: '',
+      landing_page_animations_middleTitle: '',
       /** @brief Mouse position x */
       x: 0,
       /** @brief Mouse position y */
@@ -198,6 +202,39 @@ class LandingPage extends React.Component {
     this.touchEnd = this.touchEnd.bind(this);
     this.updateCountdown = this.updateCountdown.bind(this);
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
+  startupAnimationSequence () {
+    // Make the navbar expand from the middle
+    this.setState({
+      landing_page_animations_navbar: 'start-animation'
+    });
+
+    setTimeout(() => {
+      // Make sidebars slide in from the top
+      this.setState({
+        landing_page_animations_sidebar: 'start-animation'
+      });
+      setTimeout(() => {
+        // Make the center title show up
+        this.setState({
+          landing_page_animations_middleTitle: 'start-animation'
+        });
+      }, 300);
+    }, 300)
+  }
+
+  enterSiteAnimationSequence () {
+    this.setState({
+      landing_page_animations_middleTitle: 'close-animation'
+    });
+
+    // Bring up the default landing page state
+    setTimeout(() => {
+      this.setState({
+        landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+      });
+    }, 500);
   }
 
   touchStart (event) {
@@ -430,6 +467,9 @@ class LandingPage extends React.Component {
    * @brief We create the 3D asset here and load it onto the page.
    */
   componentDidMount() {
+    // Start the animation while we try to load
+    this.startupAnimationSequence();
+
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
     window.addEventListener('deviceorientation', this.handleOrientation, true);
@@ -764,7 +804,7 @@ class LandingPage extends React.Component {
           handlerSetLandingPageState={this.handlerSetLandingPageState}
           landing_page_state={this.state.landing_page_state}
         />
-        <div id="main-screen" className='desktop'>
+        <div id='main-screen' className={`desktop ${this.state.landing_page_state}`}>
           <div className={`${this.state.fading ? 'faded' : 'notFaded'}`} id='curr-line'>
             <div id='line-name'>
               {
@@ -802,12 +842,13 @@ class LandingPage extends React.Component {
           </div>
 
           { /* Various line and dot elements */ }
-          <div className="vertical-line" id="outer-lines" />
-          <div className="vertical-line" id="inner-lines" />
+          <div className={`vertical-line ${this.state.landing_page_state} ${this.state.landing_page_animations_sidebar}`} id="outer-lines" />
+          <div className={`vertical-line ${this.state.landing_page_state} ${this.state.landing_page_animations_sidebar}`} id="inner-lines" />
         </div>
 
         <Navbar
           handlerSelectedLineIdx={this.handlerSelectedLineIdx}
+          landing_page_animations_navbar={this.state.landing_page_animations_navbar}
           landing_page_state={this.state.landing_page_state}
           selectedLineIdx={this.state.selectedLineIdx}
         />

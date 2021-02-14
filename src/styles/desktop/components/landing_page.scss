@@ -16,9 +16,15 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
   opacity: 0;
   transition-duration: $LONG_ANIMATION_DURATION;
 
+  &.desktop-landing-page-load {
+    opacity: 0;
+  }
+
+  /*
   &.visible {
     opacity: 1;
   }
+  */
 
   #landing-page-cube {
     width: 100%;
@@ -56,16 +62,20 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
 
   .faded {
     opacity: 0;
-    transition: .2s;
+    transition: 0.2s;
   }
 
   .notFaded {
     opacity: 1;
-    transition: .2s;
+    transition: 0.2s;
   }
 
   #main-screen {
     flex-direction: row;
+
+    &.desktop-landing-page-load {
+      opacity: 0;
+    }
 
     #curr-line {
       position: absolute;
@@ -199,6 +209,9 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     height: 7.3vh;
     cursor: pointer;
 
+    &.desktop-landing-page-load {
+      opacity: 0;
+    }
     &.desktop-about-page-open {
       opacity: 0;
       transition-duration: 1s;
