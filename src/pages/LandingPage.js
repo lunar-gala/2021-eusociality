@@ -1,39 +1,39 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import * as CONSTANTS from '../constants';
-import * as LINE_DATA from '../data/line_data';
-import * as UTIL from '../util';
-import * as GESTURE from '../lib/Gesture';
+import * as CONSTANTS from "../constants";
+import * as LINE_DATA from "../data/line_data";
+import * as UTIL from "../util";
+import * as GESTURE from "../lib/Gesture";
 
 // Common Elements
-import TitleTheme from '../components/TitleTheme';
-import Logo from '../components/Logo';
+import TitleTheme from "../components/TitleTheme";
+import Logo from "../components/Logo";
 
 // Desktop Elements
-import Navbar from '../components/Navbar';
-import AboutPageDesktop from '../pages/AboutPageDesktop';
-import WatchPageDesktop from '../pages/WatchPageDesktop';
-import DesktopSideNav from '../components/DesktopSideNav';
-import LandingPagePrompt from '../components/LandingPagePrompt';
+import Navbar from "../components/Navbar";
+import AboutPageDesktop from "../pages/AboutPageDesktop";
+import WatchPageDesktop from "../pages/WatchPageDesktop";
+import DesktopSideNav from "../components/DesktopSideNav";
+import LandingPagePrompt from "../components/LandingPagePrompt";
 
 // Mobile Elements
-import MobileOpenMenu from '../components/MobileOpenMenu';
-import MobileMenuLineList from '../components/MobileMenuLineList';
-import MobileMenuNavList from '../components/MobileMenuNavList';
-import AboutPageMobile from './AboutPageMobile';
+import MobileOpenMenu from "../components/MobileOpenMenu";
+import MobileMenuLineList from "../components/MobileMenuLineList";
+import MobileMenuNavList from "../components/MobileMenuNavList";
+import AboutPageMobile from "./AboutPageMobile";
 
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
-import cube_frag from '../../assets/models/cube_frag/reducedpoly_final.gltf'
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { GUI } from "three/examples/jsm/libs/dat.gui.module";
+import cube_frag from "../../assets/models/cube_frag/reducedpoly_final.gltf";
 
-import * as TWEEN from '@tweenjs/tween.js';
+import * as TWEEN from "@tweenjs/tween.js";
 
-import ThinFilmFresnelMap from '../lib/ThinFilmFresnelMap';
-import IridescentMaterial from '../lib/IridescentMaterial';
+import ThinFilmFresnelMap from "../lib/ThinFilmFresnelMap";
+import IridescentMaterial from "../lib/IridescentMaterial";
 
 /**
  * Import HDR map
@@ -41,53 +41,53 @@ import IridescentMaterial from '../lib/IridescentMaterial';
  * This defines a 6-faced cube that is the "world" around the object. This is
  * used in iridescence texture to calculate light diffusion.
  */
-import irradiance_negX from '../../assets/models/skybox/irradiance/negX.jpg';
-import irradiance_negY from '../../assets/models/skybox/irradiance/negY.jpg';
-import irradiance_negZ from '../../assets/models/skybox/irradiance/negZ.jpg';
-import irradiance_posX from '../../assets/models/skybox/irradiance/posX.jpg';
-import irradiance_posY from '../../assets/models/skybox/irradiance/posY.jpg';
-import irradiance_posZ from '../../assets/models/skybox/irradiance/posZ.jpg';
-import radiance_negX from '../../assets/models/skybox/radiance/negX.jpg';
-import radiance_negY from '../../assets/models/skybox/radiance/negY.jpg';
-import radiance_negZ from '../../assets/models/skybox/radiance/negZ.jpg';
-import radiance_posX from '../../assets/models/skybox/radiance/posX.jpg';
-import radiance_posY from '../../assets/models/skybox/radiance/posY.jpg';
-import radiance_posZ from '../../assets/models/skybox/radiance/posZ.jpg';
+import irradiance_negX from "../../assets/models/skybox/irradiance/negX.jpg";
+import irradiance_negY from "../../assets/models/skybox/irradiance/negY.jpg";
+import irradiance_negZ from "../../assets/models/skybox/irradiance/negZ.jpg";
+import irradiance_posX from "../../assets/models/skybox/irradiance/posX.jpg";
+import irradiance_posY from "../../assets/models/skybox/irradiance/posY.jpg";
+import irradiance_posZ from "../../assets/models/skybox/irradiance/posZ.jpg";
+import radiance_negX from "../../assets/models/skybox/radiance/negX.jpg";
+import radiance_negY from "../../assets/models/skybox/radiance/negY.jpg";
+import radiance_negZ from "../../assets/models/skybox/radiance/negZ.jpg";
+import radiance_posX from "../../assets/models/skybox/radiance/posX.jpg";
+import radiance_posY from "../../assets/models/skybox/radiance/posY.jpg";
+import radiance_posZ from "../../assets/models/skybox/radiance/posZ.jpg";
 
 /*** CAMERA PARAMETERS ***/
 /** @brief Absolute coordinates of the default camera position */
 const CAMERA_POSITION = {
   x: 0,
   y: 30,
-  z: 400
+  z: 400,
 };
 
 const CAMERA_POSITION_MOBILE = {
   x: 0,
   y: 0,
-  z: 500
+  z: 500,
 };
 
 /** @brief Starting position of the object */
 const OBJECT_POSITION = {
   x: 200,
   y: 0,
-  z: 0
-}
+  z: 0,
+};
 
 /** @brief How much the camera tilts on mobile device tilt */
 const CAMERA_PAN_FACTOR_MOBILE = {
   x: 0.5,
   y: 0.5,
-  z: 0.5
+  z: 0.5,
 };
 
 /** @brief How much the camera tilts on mouse move */
 const CAMERA_PAN_FACTOR_DESKTOP = {
   x: 50,
   y: 50,
-  z: 20
-}
+  z: 20,
+};
 
 /** @brief how much people tilt their phones when they hold it on average, in degrees. */
 const RESTING_PHONE_ANGLE = 36;
@@ -103,16 +103,20 @@ class LandingPage extends React.Component {
     let landing_page_state = CONSTANTS.LANDING_PAGE_STATES.DEFAULT;
 
     const regexFindPathName = /\/(\w+).*/;
-    const currPathMatches = regexFindPathName.exec(this.props.location.pathname);
+    const currPathMatches = regexFindPathName.exec(
+      this.props.location.pathname
+    );
     const isMobile = window.innerWidth < CONSTANTS.DESKTOP_WIDTH;
 
-    console.log('matches', currPathMatches, isMobile);
+    console.log("matches", currPathMatches, isMobile);
 
     if (currPathMatches !== null) {
       const currPathName = currPathMatches[1];
-      landing_page_state = CONSTANTS.PATH_TO_STATE[isMobile ? 'mobile' : 'desktop'][currPathName];
+      landing_page_state =
+        CONSTANTS.PATH_TO_STATE[isMobile ? "mobile" : "desktop"][currPathName];
     } else {
-      landing_page_state = CONSTANTS.PATH_TO_STATE[isMobile ? 'mobile' : 'desktop']['start'];
+      landing_page_state =
+        CONSTANTS.PATH_TO_STATE[isMobile ? "mobile" : "desktop"]["start"];
     }
 
     this.state = {
@@ -162,10 +166,10 @@ class LandingPage extends React.Component {
        * @brief The current countdown timer state.
        */
       countdownState: UTIL.calculate_date_difference(CONSTANTS.SHOW_DATE),
-      landing_page_animations_navbar: '',
-      landing_page_animations_sidebar: '',
-      landing_page_animations_header: '',
-      landing_page_animations_middleTitle: '',
+      landing_page_animations_navbar: "",
+      landing_page_animations_sidebar: "",
+      landing_page_animations_header: "",
+      landing_page_animations_middleTitle: "",
       /** @brief Mouse position x */
       x: 0,
       /** @brief Mouse position y */
@@ -196,11 +200,13 @@ class LandingPage extends React.Component {
       /** @brief Indicates if the cube has already been expanded. */
       cube_has_expanded: false,
       /** @brief Positions of the objects in the cube. */
-      cube_positions: []
+      cube_positions: [],
     };
 
     this.handleOrientation = this.handleOrientation.bind(this);
-    this.handlerSetLandingPageState = this.handlerSetLandingPageState.bind(this);
+    this.handlerSetLandingPageState = this.handlerSetLandingPageState.bind(
+      this
+    );
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
     this._onMouseMove = this._onMouseMove.bind(this);
     this.playCubeAnimation = this.playCubeAnimation.bind(this);
@@ -212,10 +218,10 @@ class LandingPage extends React.Component {
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
-  startupAnimationSequenceMobile () {
+  startupAnimationSequenceMobile() {
     this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
 
-    let temp = function check_cube_progress () {
+    let temp = function check_cube_progress() {
       if (this.state.assetHasLoaded) {
         clearInterval(interval);
 
@@ -226,92 +232,99 @@ class LandingPage extends React.Component {
           let curr_child = object_children[i];
           console.log(curr_child);
 
-          new TWEEN.Tween(curr_child.position).to({
-            x: this.state.cube_positions[i].end.x,
-            y: this.state.cube_positions[i].end.y,
-            z: this.state.cube_positions[i].end.z
-          }, 2000)
-            .easing(TWEEN.Easing.Cubic.InOut)
-            .onComplete(
-              () => {
-                curr_child.position.set(
-                  this.state.cube_positions[i].end.x,
-                  this.state.cube_positions[i].end.y,
-                  this.state.cube_positions[i].end.z
-                )
-              }
+          new TWEEN.Tween(curr_child.position)
+            .to(
+              {
+                x: this.state.cube_positions[i].end.x,
+                y: this.state.cube_positions[i].end.y,
+                z: this.state.cube_positions[i].end.z,
+              },
+              2000
             )
-            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
+            .onComplete(() => {
+              curr_child.position.set(
+                this.state.cube_positions[i].end.x,
+                this.state.cube_positions[i].end.y,
+                this.state.cube_positions[i].end.z
+              );
+            })
+            .start();
         }
       }
-    }
+    };
 
     temp = temp.bind(this);
 
     let interval = setInterval(temp, 10);
   }
 
-  startupAnimationSequence () {
+  startupAnimationSequence() {
     // Make the navbar expand from the middle and the sidebars slide in from the
     // top
     this.setState({
-      landing_page_animations_navbar: 'start-animation',
-      landing_page_animations_sidebar: 'start-animation'
+      landing_page_animations_navbar: "start-animation",
+      landing_page_animations_sidebar: "start-animation",
     });
 
     setTimeout(() => {
       // Make the center title show up
       this.setState({
-        landing_page_animations_middleTitle: 'start-animation'
+        landing_page_animations_middleTitle: "start-animation",
       });
-    }, 1000)
+    }, 1000);
   }
 
-  enterSiteAnimationSequence () {
+  enterSiteAnimationSequence() {
     this.setState({
-      landing_page_animations_middleTitle: 'close-animation'
+      landing_page_animations_middleTitle: "close-animation",
     });
 
     // Bring up the default landing page state
     setTimeout(() => {
       this.setState({
-        landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+        landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
       });
     }, 500);
   }
 
-  touchStart (event) {
+  touchStart(event) {
     let touches = GESTURE.getTouchesList(event);
 
     this.setState({
       first_touch: GESTURE.getFingerPosition(touches, touches.length),
-      current_touch: GESTURE.getFingerPosition(touches, touches.length)
-    })
-  }
-
-  touchMove (event) {
-    let touches = GESTURE.getTouchesList(event);
-
-    this.setState({
-      current_touch: GESTURE.getFingerPosition(touches, touches.length)
+      current_touch: GESTURE.getFingerPosition(touches, touches.length),
     });
   }
 
-  touchEnd () {
+  touchMove(event) {
+    let touches = GESTURE.getTouchesList(event);
+
+    this.setState({
+      current_touch: GESTURE.getFingerPosition(touches, touches.length),
+    });
+  }
+
+  touchEnd() {
     let gesture = GESTURE.getGesture(
       this.state.first_touch[0].x,
       this.state.current_touch[0].x,
       this.state.first_touch[0].y,
-      this.state.current_touch[0].y);
+      this.state.current_touch[0].y
+    );
 
-    if (gesture === 'Tap') {
-      console.log('[DEBUG] Tap', this.state.current_touch[0].y);
+    if (gesture === "Tap") {
+      console.log("[DEBUG] Tap", this.state.current_touch[0].y);
     } else if (
-      this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN &&
-      (gesture === 'Up')) {
+      this.state.landing_page_state ===
+        CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN &&
+      gesture === "Up"
+    ) {
       this.setState({
-        mobile_line_menu_y_offset: this.state.mobile_line_menu_y_offset +
-          this.state.first_touch[0].y - this.state.current_touch[0].y
+        mobile_line_menu_y_offset:
+          this.state.mobile_line_menu_y_offset +
+          this.state.first_touch[0].y -
+          this.state.current_touch[0].y,
       });
     }
 
@@ -326,41 +339,50 @@ class LandingPage extends React.Component {
      * think this is good bc of different platforms and such
      */
     setTimeout(() => {
-      if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN) {
-        if (gesture === 'Tap' && (
-          this.state.current_touch[0].y < 90
-        )) {
-          this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
+      if (
+        this.state.landing_page_state ===
+        CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
+      ) {
+        if (gesture === "Tap" && this.state.current_touch[0].y < 90) {
+          this.handlerSetLandingPageState(
+            CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+          );
         }
       } else {
         // Tapping the top of the default landing page opens the nav menu
-        if (gesture === 'Tap' && this.state.current_touch[0].y < 90) {
-          this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN);
+        if (gesture === "Tap" && this.state.current_touch[0].y < 90) {
+          this.handlerSetLandingPageState(
+            CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
+          );
         }
       }
 
       // Happens after the delayed handle
-      console.log('[DEBUG] State:', this.state.landing_page_state);
+      console.log("[DEBUG] State:", this.state.landing_page_state);
       if (
-        this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN &&
-        (gesture === 'Down')) {
+        this.state.landing_page_state ===
+          CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN &&
+        gesture === "Down"
+      ) {
         this.setState({
-          mobile_line_menu_y_offset: this.state.mobile_line_menu_y_offset +
-            this.state.first_touch[0].y - this.state.current_touch[0].y
+          mobile_line_menu_y_offset:
+            this.state.mobile_line_menu_y_offset +
+            this.state.first_touch[0].y -
+            this.state.current_touch[0].y,
         });
       }
     }, 25);
   }
 
-  playCubeAnimation () {
-    let temp = function check_cube_progress () {
+  playCubeAnimation() {
+    let temp = function check_cube_progress() {
       if (this.state.assetHasLoaded) {
         clearInterval(interval);
 
         this.state.cube_animations.expand.play();
         this.state.cube_animations.rotation.start();
       }
-    }
+    };
 
     temp = temp.bind(this);
 
@@ -373,24 +395,26 @@ class LandingPage extends React.Component {
    *
    * @param {state} state See constants.js for all states
    */
-  handlerSetLandingPageState (state) {
+  handlerSetLandingPageState(state) {
     this.setState({
-      landing_page_state: state
+      landing_page_state: state,
     });
 
     // If we are entering the site, we need to end all animations
-    if (state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LANDING_PAGE_CUBE_INTRO) {
+    if (
+      state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LANDING_PAGE_CUBE_INTRO
+    ) {
       this.playCubeAnimation();
     } else if (state === CONSTANTS.LANDING_PAGE_STATES.DEFAULT) {
       this.setState({
-        landing_page_animations_navbar: ''
+        landing_page_animations_navbar: "",
       });
     }
 
     // If we scroll in the lines menu, the scroll will persist so we reset it
     if (state !== CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN) {
-      document.getElementById('landing-page').scrollTo({
-        top: 0
+      document.getElementById("landing-page").scrollTo({
+        top: 0,
       });
     }
 
@@ -398,7 +422,7 @@ class LandingPage extends React.Component {
     if (state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN) {
       this.setState({
         countdownInterval: setInterval(this.updateCountdown, 1000),
-        countdownState: UTIL.calculate_date_difference(CONSTANTS.SHOW_DATE)
+        countdownState: UTIL.calculate_date_difference(CONSTANTS.SHOW_DATE),
       });
     } else if (this.state.countdownInterval) {
       clearInterval(this.state.countdownInterval);
@@ -408,13 +432,13 @@ class LandingPage extends React.Component {
 
     if (CONSTANTS.STATE_TO_PATH[state]) {
       history.push(CONSTANTS.STATE_TO_PATH[state]);
-      console.log(`state ${state} pushed to history`)
+      console.log(`state ${state} pushed to history`);
     } else {
-      console.log(`state ${state} has no constant`)
+      console.log(`state ${state} has no constant`);
     }
   }
 
-  handlerSelectedLineIdx (index) {
+  handlerSelectedLineIdx(index) {
     // Expand the cube
     if (!this.state.cube_has_expanded) {
       let object_children = this.state.object.children[0].children;
@@ -423,65 +447,69 @@ class LandingPage extends React.Component {
         let curr_child = object_children[i];
         console.log(curr_child);
 
-        new TWEEN.Tween(curr_child.position).to({
-          x: this.state.cube_positions[i].end.x,
-          y: this.state.cube_positions[i].end.y,
-          z: this.state.cube_positions[i].end.z
-        }, 2000)
-          .easing(TWEEN.Easing.Cubic.InOut)
-          .onComplete(
-            () => {
-              curr_child.position.set(
-                this.state.cube_positions[i].end.x,
-                this.state.cube_positions[i].end.y,
-                this.state.cube_positions[i].end.z
-              )
-            }
+        new TWEEN.Tween(curr_child.position)
+          .to(
+            {
+              x: this.state.cube_positions[i].end.x,
+              y: this.state.cube_positions[i].end.y,
+              z: this.state.cube_positions[i].end.z,
+            },
+            2000
           )
-          .start()
+          .easing(TWEEN.Easing.Cubic.InOut)
+          .onComplete(() => {
+            curr_child.position.set(
+              this.state.cube_positions[i].end.x,
+              this.state.cube_positions[i].end.y,
+              this.state.cube_positions[i].end.z
+            );
+          })
+          .start();
       }
       this.setState({
-        cube_has_expanded: true
+        cube_has_expanded: true,
       });
     }
     // TODO: change this once we get an alumni asset
     let camera_index = (index % 16) + 1;
-    new TWEEN.Tween(this.state.camera.position).to({
-      x: this.state.camera_positions[camera_index].position.x,
-      y: this.state.camera_positions[camera_index].position.y,
-      z: this.state.camera_positions[camera_index].position.z
-    }, 2000)
+    new TWEEN.Tween(this.state.camera.position)
+      .to(
+        {
+          x: this.state.camera_positions[camera_index].position.x,
+          y: this.state.camera_positions[camera_index].position.y,
+          z: this.state.camera_positions[camera_index].position.z,
+        },
+        2000
+      )
       .easing(TWEEN.Easing.Cubic.InOut)
       .onUpdate(() => {
-          this.setState({
-            curr_camera_position: {
-              x: this.state.camera.position.x,
-              y: this.state.camera.position.y,
-              z: this.state.camera.position.z
-            }
-          });
+        this.setState({
+          curr_camera_position: {
+            x: this.state.camera.position.x,
+            y: this.state.camera.position.y,
+            z: this.state.camera.position.z,
+          },
+        });
       })
-      .onComplete(
-        () => {
-          this.setState({
-            curr_camera_position: {
-              x: this.state.camera_positions[camera_index].position.x,
-              y: this.state.camera_positions[camera_index].position.y,
-              z: this.state.camera_positions[camera_index].position.z
-            }
-          });
-        }
-      )
+      .onComplete(() => {
+        this.setState({
+          curr_camera_position: {
+            x: this.state.camera_positions[camera_index].position.x,
+            y: this.state.camera_positions[camera_index].position.y,
+            z: this.state.camera_positions[camera_index].position.z,
+          },
+        });
+      })
       .start();
 
     // fade out
-    this.setState({fading: true});
+    this.setState({ fading: true });
 
     this.timer = setTimeout(() => {
       // fade back in
       this.setState({
         selectedLineIdx: index,
-        fading: false
+        fading: false,
       });
     }, 200); // animation timing offset
   }
@@ -498,51 +526,53 @@ class LandingPage extends React.Component {
    * @param {MouseEvent} e The mouse movement event
    */
   _onMouseMove(e) {
-
     return;
     let x = e.screenX;
     let y = e.screenY;
     let width = this.state.width;
-    let height= this.state.height;
+    let height = this.state.height;
 
     // Offset for the camera
-    let offset_x = (x - width/2)/(width/2);
-    let offset_y = -(y - height/2)/(height/2);
+    let offset_x = (x - width / 2) / (width / 2);
+    let offset_y = -(y - height / 2) / (height / 2);
 
     this.setState({ x: offset_x, y: offset_y });
 
-    let phi = (90*offset_x)*Math.PI/180;
-    let theta = (90*offset_y)*Math.PI/180;
-    let kappa = (90 + 90*offset_x)*Math.PI/180;
+    let phi = (90 * offset_x * Math.PI) / 180;
+    let theta = (90 * offset_y * Math.PI) / 180;
+    let kappa = ((90 + 90 * offset_x) * Math.PI) / 180;
 
     // TODO: animate this movement so it is smoother
     if (this.state.curr_camera_position) {
       this.state.camera.position.set(
-        this.state.curr_camera_position.x + Math.sin(phi)*CAMERA_PAN_FACTOR_DESKTOP.x,
-        this.state.curr_camera_position.y + Math.sin(theta)*CAMERA_PAN_FACTOR_DESKTOP.y,
-        this.state.curr_camera_position.z - Math.pow(Math.cos(kappa), 2)*CAMERA_PAN_FACTOR_DESKTOP.z
+        this.state.curr_camera_position.x +
+          Math.sin(phi) * CAMERA_PAN_FACTOR_DESKTOP.x,
+        this.state.curr_camera_position.y +
+          Math.sin(theta) * CAMERA_PAN_FACTOR_DESKTOP.y,
+        this.state.curr_camera_position.z -
+          Math.pow(Math.cos(kappa), 2) * CAMERA_PAN_FACTOR_DESKTOP.z
       );
     }
   }
 
-  loadCubeMap (map) {
+  loadCubeMap(map) {
     let files = [
       radiance_negX,
       radiance_negY,
       radiance_negZ,
       radiance_posX,
       radiance_posY,
-      radiance_posZ
+      radiance_posZ,
     ];
 
-    if (map === 'irradiance') {
+    if (map === "irradiance") {
       files = [
         irradiance_negX,
         irradiance_negY,
         irradiance_negZ,
         irradiance_posX,
         irradiance_posY,
-        irradiance_posZ
+        irradiance_posZ,
       ];
     }
 
@@ -553,9 +583,9 @@ class LandingPage extends React.Component {
   /**
    * @brief Updates the countdown timer on the watch page.
    */
-  updateCountdown () {
+  updateCountdown() {
     this.setState({
-      countdownState: UTIL.calculate_date_difference(CONSTANTS.SHOW_DATE)
+      countdownState: UTIL.calculate_date_difference(CONSTANTS.SHOW_DATE),
     });
   }
 
@@ -564,9 +594,9 @@ class LandingPage extends React.Component {
    */
   componentDidMount() {
     this.updateWindowDimensions();
-    window.addEventListener('resize', this.updateWindowDimensions);
-    window.addEventListener('deviceorientation', this.handleOrientation, true);
-    window.addEventListener('load', () => {
+    window.addEventListener("resize", this.updateWindowDimensions);
+    window.addEventListener("deviceorientation", this.handleOrientation, true);
+    window.addEventListener("load", () => {
       if (this.state.isMobile) {
         this.startupAnimationSequenceMobile();
       } else {
@@ -575,13 +605,13 @@ class LandingPage extends React.Component {
           this.startupAnimationSequence();
         }, 400);
       }
-    })
+    });
 
-    const canvas = document.querySelector('#landing-page-cube');
+    const canvas = document.querySelector("#landing-page-cube");
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 
     this.setState({
-      renderer: renderer
+      renderer: renderer,
     });
 
     /* Set up camera */
@@ -592,7 +622,7 @@ class LandingPage extends React.Component {
     let camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
     let camera_position = {
-      ...(this.state.isMobile ? CAMERA_POSITION : CAMERA_POSITION_MOBILE)
+      ...(this.state.isMobile ? CAMERA_POSITION : CAMERA_POSITION_MOBILE),
     };
 
     camera.position.set(
@@ -603,7 +633,7 @@ class LandingPage extends React.Component {
 
     this.setState({
       camera: camera,
-      curr_camera_position: camera_position
+      curr_camera_position: camera_position,
     });
 
     const scene = new THREE.Scene();
@@ -611,12 +641,12 @@ class LandingPage extends React.Component {
     this.setState({
       controls: new OrbitControls(camera, renderer.domElement),
       clock: new THREE.Clock(),
-      scene: scene
+      scene: scene,
     });
 
     // Add a light and background
-    scene.background = new THREE.Color( CONSTANTS.LANDING_PAGE_BACKGROUND_COLOR );
-    const light_color = 0xFFFFFF;
+    scene.background = new THREE.Color(CONSTANTS.LANDING_PAGE_BACKGROUND_COLOR);
+    const light_color = 0xffffff;
     const light_intensity = 1;
     const light_amb = new THREE.AmbientLight(light_color, light_intensity);
     scene.add(light_amb);
@@ -628,8 +658,8 @@ class LandingPage extends React.Component {
      * HDR, or "world view" of the object. Think of this as the world in a cube
      * as seen from the object. This is 6 sides in the X, Y, Z directions.
      */
-    let radiance = this.loadCubeMap('radiance');
-    let irradiance = this.loadCubeMap('irradiance');
+    let radiance = this.loadCubeMap("radiance");
+    let irradiance = this.loadCubeMap("irradiance");
 
     // Texture for the main cube
     let iridescence_texture_main = new ThinFilmFresnelMap(
@@ -676,14 +706,14 @@ class LandingPage extends React.Component {
     const gui = new GUI();
     gui.remember(iridescence_texture_main);
     gui.remember(iridescence_material_main);
-    gui.add(iridescence_texture_main, 'filmThickness').min(100).max(1000);
-    gui.add(iridescence_texture_main, 'refractiveIndexFilm').min(1).max(5);
-    gui.add(iridescence_texture_main, 'refractiveIndexBase').min(1).max(5);
-    gui.add(iridescence_material_main, 'boost').min(1).max(50);
-    gui.add(iridescence_material_main, 'iridescenceRatio').min(0).max(10);
-    gui.add(iridescence_material_main, 'baseTextureRatio').min(0).max(10);
-    gui.add(iridescence_material_main, 'brightness').min(0).max(10);
-    gui.add(iridescence_material_main, 'textureZoom').min(0).max(2);
+    gui.add(iridescence_texture_main, "filmThickness").min(100).max(1000);
+    gui.add(iridescence_texture_main, "refractiveIndexFilm").min(1).max(5);
+    gui.add(iridescence_texture_main, "refractiveIndexBase").min(1).max(5);
+    gui.add(iridescence_material_main, "boost").min(1).max(50);
+    gui.add(iridescence_material_main, "iridescenceRatio").min(0).max(10);
+    gui.add(iridescence_material_main, "baseTextureRatio").min(0).max(10);
+    gui.add(iridescence_material_main, "brightness").min(0).max(10);
+    gui.add(iridescence_material_main, "textureZoom").min(0).max(2);
     gui.close();
 
     gltf_loader.load(
@@ -691,7 +721,7 @@ class LandingPage extends React.Component {
       // called when resource is loaded
       (object) => {
         this.setState({
-          object: object.scene
+          object: object.scene,
         });
 
         console.log(object);
@@ -702,16 +732,19 @@ class LandingPage extends React.Component {
           let wireframe_index = 0;
           let asset_index = 1;
 
-          if (object_children[i].name === 'Bound') {
+          if (object_children[i].name === "Bound") {
             wireframe_index = 1;
             asset_index = 0;
           }
 
           // Set iridescence texture for the main object
-          object_children[i].children[asset_index].material = iridescence_material_main;
+          object_children[i].children[
+            asset_index
+          ].material = iridescence_material_main;
 
           // Set iridescence texture for the outline on the main object
-          let atom_array = object_children[i].children[wireframe_index].children;
+          let atom_array =
+            object_children[i].children[wireframe_index].children;
 
           for (let j = 0; j < atom_array.length; j++) {
             atom_array[j].material = iridescence_material_outline;
@@ -729,7 +762,7 @@ class LandingPage extends React.Component {
 
         // Should set the pieces of the object to be in the initial stages of the animation
         this.setState({
-          camera_positions: object.cameras
+          camera_positions: object.cameras,
         });
 
         let starting_camera = object.cameras[0];
@@ -741,12 +774,12 @@ class LandingPage extends React.Component {
         );
 
         this.setState({
-          curr_camera_position: camera_position
+          curr_camera_position: camera_position,
         });
 
-        let mixer = new THREE.AnimationMixer( object.scene );
+        let mixer = new THREE.AnimationMixer(object.scene);
         this.setState({
-          mixer: mixer
+          mixer: mixer,
         });
 
         let cube_animations = object.animations[0];
@@ -754,7 +787,9 @@ class LandingPage extends React.Component {
 
         for (let i = 0; i < cube_animations.tracks.length; i++) {
           cube_animations.tracks[i].times = [0, 10];
-          cube_animations.tracks[i].values = cube_animations.tracks[i].values.slice(0, 6);
+          cube_animations.tracks[i].values = cube_animations.tracks[
+            i
+          ].values.slice(0, 6);
 
           object_children[i].position.set(
             cube_animations.tracks[i].values[0],
@@ -767,61 +802,69 @@ class LandingPage extends React.Component {
             start: {
               x: cube_animations.tracks[i].values[0],
               y: cube_animations.tracks[i].values[1],
-              z: cube_animations.tracks[i].values[2]
+              z: cube_animations.tracks[i].values[2],
             },
             end: {
               x: cube_animations.tracks[i].values[3],
               y: cube_animations.tracks[i].values[4],
-              z: cube_animations.tracks[i].values[5]
-            }
+              z: cube_animations.tracks[i].values[5],
+            },
           });
         }
         this.setState({
-          cube_positions: cube_positions
+          cube_positions: cube_positions,
         });
 
         cube_animations.duration = 10;
 
         console.log(object);
 
-        let cube_expand_animation = mixer.clipAction( cube_animations );
+        let cube_expand_animation = mixer.clipAction(cube_animations);
         cube_expand_animation.setLoop(THREE.LoopPingPong);
         cube_expand_animation.repetitions = 2;
         cube_expand_animation.timeScale = 5;
 
-        mixer.addEventListener('finished', () => {
+        mixer.addEventListener("finished", () => {
           this.setState({
-            animation_done: true
+            animation_done: true,
           });
-          this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
+          this.handlerSetLandingPageState(
+            CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+          );
         });
 
         // rotate the cube while the animation is playing
-        let cube_rotation_animation = new TWEEN.Tween(this.state.object.rotation).to({
-          x: 0,
-          y: 1.5,
-          z: 0
-        }, 5000)
+        let cube_rotation_animation = new TWEEN.Tween(
+          this.state.object.rotation
+        )
+          .to(
+            {
+              x: 0,
+              y: 1.5,
+              z: 0,
+            },
+            5000
+          )
           .easing(TWEEN.Easing.Quadratic.Out);
 
         this.setState({
           cube_animations: {
             expand: cube_expand_animation,
-            rotation: cube_rotation_animation
-          }
+            rotation: cube_rotation_animation,
+          },
         });
 
         this.setState({
-          assetHasLoaded: true
-        })
+          assetHasLoaded: true,
+        });
       },
       // called when loading is in progresses
       (xhr) => {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
       },
       // called when loading has errors
       (error) => {
-        console.log('An error happened', error);
+        console.log("An error happened", error);
       }
     );
 
@@ -841,7 +884,7 @@ class LandingPage extends React.Component {
   }
 
   // requestAnimationFrame passes time in as seconds
-  render_cube (time) {
+  render_cube(time) {
     let camera = this.state.camera;
     let renderer = this.state.renderer;
     let mixer = this.state.mixer;
@@ -858,7 +901,7 @@ class LandingPage extends React.Component {
 
     var delta = this.state.clock.getDelta();
 
-    if ( mixer ) mixer.update( delta );
+    if (mixer) mixer.update(delta);
 
     TWEEN.update(time);
 
@@ -866,15 +909,15 @@ class LandingPage extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions);
-    window.removeEventListener('deviceorientation', this.handleOrientation);
+    window.removeEventListener("resize", this.updateWindowDimensions);
+    window.removeEventListener("deviceorientation", this.handleOrientation);
   }
 
   updateWindowDimensions() {
     this.setState({
       width: window.innerWidth,
       height: window.innerHeight,
-      isMobile: window.innerWidth < CONSTANTS.DESKTOP_WIDTH
+      isMobile: window.innerWidth < CONSTANTS.DESKTOP_WIDTH,
     });
   }
 
@@ -883,20 +926,21 @@ class LandingPage extends React.Component {
    *
    * @param {*} event From the phone tilting event
    */
-  handleOrientation (event) {
+  handleOrientation(event) {
     if (!this.state.isMobile) {
       return;
     }
 
-    let beta     = event.beta; // up bottom tilt
-    let gamma    = event.gamma; // left (negative) right (positive) tilt
+    let beta = event.beta; // up bottom tilt
+    let gamma = event.gamma; // left (negative) right (positive) tilt
 
     // TODO: animate this movement so it is smoother
     // We subtract from the beta (X) axis since we assume people hold their phones at that resting angle
     if (this.state.object) {
       this.state.object.rotation.set(
-        -((beta - RESTING_PHONE_ANGLE)*Math.PI/180)*CAMERA_PAN_FACTOR_MOBILE.x,
-        -(gamma*Math.PI/180)*CAMERA_PAN_FACTOR_MOBILE.y,
+        -(((beta - RESTING_PHONE_ANGLE) * Math.PI) / 180) *
+          CAMERA_PAN_FACTOR_MOBILE.x,
+        -((gamma * Math.PI) / 180) * CAMERA_PAN_FACTOR_MOBILE.y,
         0
       );
     }
@@ -904,29 +948,39 @@ class LandingPage extends React.Component {
 
   render() {
     return (
-      <div id='landing-page' className={`${this.state.landing_page_state}`}
+      <div
+        id="landing-page"
+        className={`${this.state.landing_page_state}`}
         onTouchStart={this.touchStart}
         onTouchMove={this.touchMove}
         onTouchEnd={this.touchEnd}
-        onScroll={e => e.preventDefault()}
+        onScroll={(e) => e.preventDefault()}
         onMouseMove={this.state.isMobile ? null : this._onMouseMove}
       >
-        { /* Common Elements */ }
-        <div className={`landing-page-background ${this.state.landing_page_state} ${(this.state.assetHasLoaded && (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LANDING_PAGE_CUBE_INTRO || this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.DEFAULT)) ? 'visible' : ''}`}>
-          <canvas id='landing-page-cube' />
+        {/* Common Elements */}
+        <div
+          className={`landing-page-background ${
+            this.state.landing_page_state
+          } ${
+            this.state.assetHasLoaded &&
+            (this.state.landing_page_state ===
+              CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LANDING_PAGE_CUBE_INTRO ||
+              this.state.landing_page_state ===
+                CONSTANTS.LANDING_PAGE_STATES.DEFAULT)
+              ? "visible"
+              : ""
+          }`}
+        >
+          <canvas id="landing-page-cube" />
         </div>
         <TitleTheme
           handlerSetLandingPageState={this.handlerSetLandingPageState}
           landing_page_state={this.state.landing_page_state}
           selectedLineIdx={this.state.selectedLineIdx}
         />
-        <Logo
-          landing_page_state={this.state.landing_page_state}
-        />
-        { /* Mobile Elements */ }
-        <MobileOpenMenu
-          landing_page_state={this.state.landing_page_state}
-        />
+        <Logo landing_page_state={this.state.landing_page_state} />
+        {/* Mobile Elements */}
+        <MobileOpenMenu landing_page_state={this.state.landing_page_state} />
         <MobileMenuLineList
           landing_page_state={this.state.landing_page_state}
         />
@@ -934,13 +988,9 @@ class LandingPage extends React.Component {
           landing_page_state={this.state.landing_page_state}
           handlerSetLandingPageState={this.handlerSetLandingPageState}
         />
-        <AboutPageMobile
-          landing_page_state={this.state.landing_page_state}
-        />
-        { /* Desktop Elements */ }
-        <AboutPageDesktop
-          landing_page_state={this.state.landing_page_state}
-        />
+        <AboutPageMobile landing_page_state={this.state.landing_page_state} />
+        {/* Desktop Elements */}
+        <AboutPageDesktop landing_page_state={this.state.landing_page_state} />
         <WatchPageDesktop
           countdownState={this.state.countdownState}
           landing_page_state={this.state.landing_page_state}
@@ -951,56 +1001,80 @@ class LandingPage extends React.Component {
         />
         <LandingPagePrompt
           handlerSetLandingPageState={this.handlerSetLandingPageState}
-          landing_page_animations_middleTitle={this.state.landing_page_animations_middleTitle}
+          landing_page_animations_middleTitle={
+            this.state.landing_page_animations_middleTitle
+          }
           landing_page_state={this.state.landing_page_state}
         />
-        <div id='main-screen' className={`desktop ${this.state.landing_page_state}`}>
-          <div className={`${this.state.fading ? 'faded' : 'notFaded'}`} id='curr-line'>
-            <div id='line-name'>
-              {
-                (this.state.selectedLineIdx >= 0) ?
-                  `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}` : ''
-              }
+        <div
+          id="main-screen"
+          className={`desktop ${this.state.landing_page_state}`}
+        >
+          <div
+            className={`${this.state.fading ? "faded" : "notFaded"}`}
+            id="curr-line"
+          >
+            <div id="line-name">
+              {this.state.selectedLineIdx >= 0
+                ? `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}`
+                : ""}
             </div>
-            <div id='below-line-name'>
-              <div id='designers-name'>
-                {
-                  (this.state.selectedLineIdx >= 0) ?
-                    `${UTIL.name_list_formatter(LINE_DATA.LINE_INFO[this.state.selectedLineIdx].designers)}` :
-                    ''
-                }
+            <div id="below-line-name">
+              <div id="designers-name">
+                {this.state.selectedLineIdx >= 0
+                  ? `${UTIL.name_list_formatter(
+                      LINE_DATA.LINE_INFO[this.state.selectedLineIdx].designers
+                    )}`
+                  : ""}
               </div>
-              <div id='see-more-wrapper' className={(this.state.selectedLineIdx >= 0 ? 'show' : '') + ' desktop'}>
-                <Link id="more-info" to={{
-                  pathname: `/lines/${this.state.selectedLineIdx+1}`,
-                  state: { currLineIdx: this.state.selectedLineIdx }
-                }}>
-                  <span id='more-info-text'>
-                    See More
-                  </span>
-                  <div id='more-info-arrow'>
-                    <div id='arrow'/>
+              <div
+                id="see-more-wrapper"
+                className={
+                  (this.state.selectedLineIdx >= 0 ? "show" : "") + " desktop"
+                }
+              >
+                <Link
+                  id="more-info"
+                  to={{
+                    pathname: `/lines/${this.state.selectedLineIdx + 1}`,
+                    state: { currLineIdx: this.state.selectedLineIdx },
+                  }}
+                >
+                  <span id="more-info-text">See More</span>
+                  <div id="more-info-arrow">
+                    <div id="arrow" />
                   </div>
                 </Link>
-                <div id='see-more-line-wrapper' className={(this.state.fading ? '' : 'visible')}>
+                <div
+                  id="see-more-line-wrapper"
+                  className={this.state.fading ? "" : "visible"}
+                >
                   <div id="see-more-dot" />
                   <div id="see-more-line" />
                 </div>
-              </div >
+              </div>
             </div>
           </div>
         </div>
 
         <Navbar
           handlerSelectedLineIdx={this.handlerSelectedLineIdx}
-          landing_page_animations_navbar={this.state.landing_page_animations_navbar}
+          landing_page_animations_navbar={
+            this.state.landing_page_animations_navbar
+          }
           landing_page_state={this.state.landing_page_state}
           selectedLineIdx={this.state.selectedLineIdx}
         />
 
-        { /* Various line and dot elements */ }
-        <div className={`vertical-line ${this.state.landing_page_state} ${this.state.landing_page_animations_sidebar}`} id="outer-lines" />
-        <div className={`vertical-line ${this.state.landing_page_state} ${this.state.landing_page_animations_sidebar}`} id="inner-lines" />
+        {/* Various line and dot elements */}
+        <div
+          className={`vertical-line ${this.state.landing_page_state} ${this.state.landing_page_animations_sidebar}`}
+          id="outer-lines"
+        />
+        <div
+          className={`vertical-line ${this.state.landing_page_state} ${this.state.landing_page_animations_sidebar}`}
+          id="inner-lines"
+        />
       </div>
     );
   }
@@ -1008,7 +1082,7 @@ class LandingPage extends React.Component {
 
 LandingPage.propTypes = {
   location: PropTypes.object,
-  history: PropTypes.object
+  history: PropTypes.object,
 };
 
 export default LandingPage;
