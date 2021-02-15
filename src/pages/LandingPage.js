@@ -381,6 +381,10 @@ class LandingPage extends React.Component {
     // If we are entering the site, we need to end all animations
     if (state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LANDING_PAGE_CUBE_INTRO) {
       this.playCubeAnimation();
+    } else if (state === CONSTANTS.LANDING_PAGE_STATES.DEFAULT) {
+      this.setState({
+        landing_page_animations_navbar: ''
+      });
     }
 
     // If we scroll in the lines menu, the scroll will persist so we reset it
