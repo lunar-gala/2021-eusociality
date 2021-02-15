@@ -1,7 +1,6 @@
 /**
  * Utility functions
  */
-import * as CONSTANTS from './constants';
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 const _MS_PER_HOUR = 1000 * 60 * 60;
@@ -62,7 +61,7 @@ export function name_list_formatter(name_list) {
  * Returns the number of days, hours, minutes, and seconds between the current
  * time and the target date.
  */
-export function calculate_date_difference (target_date) {
+export function calculate_date_difference(target_date) {
   let difference = target_date - Date.now();
 
   let num_days = Math.floor(difference / _MS_PER_DAY);
@@ -77,7 +76,7 @@ export function calculate_date_difference (target_date) {
     days: num_days,
     hours: num_hours,
     minutes: num_minutes,
-    seconds: num_seconds
+    seconds: num_seconds,
   };
 }
 
@@ -89,13 +88,17 @@ export function calculate_date_difference (target_date) {
  *
  * @param {Date} date Date object
  */
-export function format_date (date) {
+export function format_date(date) {
   let month = date.getMonth() + 1;
   let day = date.getDate();
   let year = date.getFullYear();
 
   return {
     date: `${month}/${day}/${year}`,
-    time: `${date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })} EST`
+    time: `${date.toLocaleString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    })} EST`,
   };
 }
