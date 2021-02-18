@@ -1,5 +1,8 @@
 /**
  * Common animations shared among many elements.
+ *
+ * For each animation, we provide some constants, and also a class that an
+ * element can add so it can trigger the animation.
  */
 
 $ANIMATION_DURATION_BLUR: 500ms;
@@ -14,5 +17,45 @@ $ANIMATION_DURATION_BLUR: 500ms;
   100% {
     opacity: 1;
     filter: blur(0);
+  }
+}
+
+.blur-in-animation {
+  animation: blur-in $ANIMATION_DURATION_BLUR linear forwards;
+}
+
+$ANIMATION_DURATION_FADE_OUT: 500ms;
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-out-animation {
+  animation: fade-out $ANIMATION_DURATION_FADE_OUT linear forwards;
+}
+
+$ANIMATION_DURATION_SLIDE_IN: 500ms;
+@keyframes right-bar-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes left-bar-slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
   }
 }

@@ -32,7 +32,11 @@ export const LANDING_PAGE_STATES = {
   // Desktop states
   DESKTOP_LANDING_PAGE_LOAD: "desktop-landing-page-load",
   DESKTOP_LANDING_PAGE_CUBE_INTRO: "desktop-landing-page-cube-intro",
+  DESKTOP_ABOUT_PAGE_LOAD: "desktop-about-page-load",
   DESKTOP_ABOUT_PAGE_OPEN: "desktop-about-page-open",
+  DESKTOP_PEOPLE_PAGE_LOAD: "desktop-people-page-load",
+  DESKTOP_PEOPLE_PAGE_OPEN: "desktop-people-page-open",
+  DESKTOP_WATCH_PAGE_LOAD: "desktop-watch-page-load",
   DESKTOP_WATCH_PAGE_OPEN: "desktop-watch-page-open",
 };
 
@@ -44,10 +48,15 @@ export const PATH_TO_STATE = {
     people: LANDING_PAGE_STATES.MOBILE_PEOPLE_PAGE_OPEN,
     watch: LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN,
   },
+  /**
+   * For many of the desktop states, we start with the load state instead of
+   * the open state, so we can trigger load animations.
+   */
   desktop: {
     start: LANDING_PAGE_STATES.DESKTOP_LANDING_PAGE_LOAD,
-    about: LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN,
-    watch: LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN,
+    about: LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_LOAD,
+    people: LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_LOAD,
+    watch: LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_LOAD,
   },
 };
 
@@ -59,6 +68,7 @@ export const STATE_TO_PATH = {
   "mobile-watch-page-open": "/watch",
   "desktop-about-page-open": "/about",
   "desktop-watch-page-open": "/watch",
+  "desktop-people-page-open": "/people",
 };
 
 /** @brief Width of screen we consider to be a desktop */

@@ -2,11 +2,19 @@
  * The people page
  */
 
-.main-page {
+#people-page.main-page {
   display: flex;
   flex-direction: column;
 	align-items: center;
 	overflow: hidden;
+
+
+	&.desktop-people-page-open {
+		.page-background, #team-accordion {
+			animation: blur-in $ANIMATION_DURATION_BLUR forwards;
+      backface-visibility: hidden;
+		}
+	}
 
 	.headshotImg {
 		background-size: cover;
@@ -28,6 +36,7 @@
 		position: fixed;
 		height: 100vh;
 		width: 100vw;
+		opacity: 0;
 	}
 
 	.wrapper {
@@ -49,13 +58,14 @@
 		}
 	}
 
-  #team-acordion {
+  #team-accordion {
 		position: absolute;
 		left: $X_MARGIN/2;
 		display: block;
 		top: 25%;
 		background: none;
 		box-shadow: none;
+		opacity: 0;
 
 		.Mui-expanded {
 			margin: 0;

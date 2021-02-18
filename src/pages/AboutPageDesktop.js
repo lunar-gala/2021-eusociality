@@ -21,7 +21,13 @@ class AboutPageDesktop extends React.Component {
             <div className="dot-basic" />
             <div className="line" />
           </div>
-          <div id="description">{CONSTANTS.ABOUT_TEXT}</div>
+          <div id="description">
+            <div id='description-text'>
+              {CONSTANTS.ABOUT_TEXT}
+            </div>
+            <div id="border-top-right"/>
+            <div id="border-left-bottom"/>
+          </div>
         </div>
       </div>
     );

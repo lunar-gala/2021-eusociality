@@ -20,6 +20,10 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     opacity: 0;
   }
 
+  &.desktop-people-page-open {
+    transition-duration: 0s;
+  }
+
   &.visible {
     opacity: 1;
   }
@@ -208,19 +212,14 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     cursor: pointer;
     transition-duration: 1s;
 
-    &.default {
+    &.start-animation {
       animation: blur-in $ANIMATION_DURATION_BLUR forwards;
     }
-    &.desktop-landing-page-load {
+    &.desktop-landing-page-load, .desktop-landing-page-cube-intro {
       opacity: 0;
     }
-    &.desktop-landing-page-cube-intro {
-      opacity: 0;
-    }
-    &.desktop-about-page-open {
-      opacity: 0;
-    }
-    &.desktop-watch-page-open {
+    &.desktop-about-page-load, &.desktop-watch-page-load, &.desktop-people-page-load,
+    &.desktop-about-page-open, &.desktop-watch-page-open, &.desktop-people-page-open {
       opacity: 0;
     }
   }
