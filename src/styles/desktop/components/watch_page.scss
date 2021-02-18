@@ -1,0 +1,126 @@
+/**
+ * Watch page for desktop. Similar to the about page where it is not a
+ * standalone page, and lives inside the landing page. Its visibility is
+ * controlled by the landing page state.
+ */
+
+$MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
+
+#watch-page-desktop {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+
+  &.desktop-watch-page-open {
+    opacity: 1;
+
+    .right-bar {
+      animation: right-bar-slide-in $ANIMATION_DURATION_SLIDE_IN forwards;
+    }
+
+    .left-bar {
+      animation: left-bar-slide-in $ANIMATION_DURATION_SLIDE_IN forwards;
+    }
+
+    #countdown, #show-date-text, #show-time-text {
+      opacity: 0;
+      animation: blur-in $ANIMATION_DURATION_BLUR forwards;
+      animation-delay: $ANIMATION_DURATION_SLIDE_IN;
+    }
+  }
+
+  #countdown {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100vw - 2*$MARGIN_HORIZONTAL_COUNTDOWN;
+    margin-right: $MARGIN_HORIZONTAL_COUNTDOWN;
+    margin-left: $MARGIN_HORIZONTAL_COUNTDOWN;
+
+    .countdown-component {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 25%;
+
+      .number {
+        font-size: 14.4vw;
+        font-weight: 300;
+        letter-spacing: -0.12em;
+      }
+
+      .label {
+        font-family: $FONT_SUBHEAD;
+        font-size: 2.36vw;
+        font-weight: 400;
+        letter-spacing: -0.05em;
+      }
+    }
+  }
+
+  #show-date {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    bottom: 8vw;
+    width: 100vw;
+
+    #show-date-text {
+      font-size: 4.44vw;
+      font-weight: 300;
+      margin-left: $X_MARGIN*3/8;
+      margin-right: 12px;
+    }
+
+    .right-bar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-grow: 1;
+
+      .line {
+        flex-grow: 1;
+        background-color: white;
+        height: 1px;
+      }
+    }
+  }
+
+  #show-time {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    bottom: 3vw;
+    width: 100vw;
+
+    #show-time-text {
+      font-size: 4.44vw;
+      font-weight: 300;
+      letter-spacing: -0.12em;
+      margin-right: $X_MARGIN*3/8;
+      margin-left: 12px;
+    }
+
+    .left-bar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-grow: 1;
+      margin-left: 12px;
+
+      .line {
+        flex-grow: 1;
+        background-color: white;
+        height: 1px;
+      }
+    }
+  }
+}
