@@ -24,6 +24,21 @@ $ANIMATION_DURATION_BLUR: 500ms;
   animation: blur-in $ANIMATION_DURATION_BLUR linear forwards;
 }
 
+$ANIMATION_DURATION_FADE_OUT: 500ms;
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-out-animation {
+  animation: fade-out $ANIMATION_DURATION_FADE_OUT linear forwards;
+}
+
 $ANIMATION_DURATION_SLIDE_IN: 500ms;
 @keyframes right-bar-slide-in {
   from {

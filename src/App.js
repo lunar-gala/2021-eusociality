@@ -22,9 +22,6 @@ class App extends React.Component {
             path="/lines/([1-9]|10|11|12|13|14|15|16)"
             component={LinePage}
           ></Route>
-          <Route path="/people">
-            <PeoplePage />
-          </Route>
           <Route path="/" component={LandingPage} />
         </Switch>
       </Router>
