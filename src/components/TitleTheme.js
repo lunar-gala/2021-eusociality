@@ -39,7 +39,7 @@ TitleTheme.propTypes = {
   /** @brief Indicates if the menu is open or not, controlled by the parent */
   landing_page_state: PropTypes.string.isRequired,
   /** @brief The currently selected line index on the navbar */
-  selectedLineIdx: PropTypes.number.isRequired,
+  selectedLineIdx: PropTypes.number,
 };
 
 export default TitleTheme;
