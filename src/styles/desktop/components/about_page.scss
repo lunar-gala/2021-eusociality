@@ -4,6 +4,41 @@
 
 $BOTTOM_DESCRIPTOR_LINE_WIDTH: 38.3vw;
 
+@keyframes expand-border-height-first {
+  0% {
+    width: 0;
+    height: 0;
+  }
+
+  50% {
+    width: 0;
+    height: 100%;
+  }
+
+  100% {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@keyframes expand-border-width-first {
+  0% {
+    width: 0;
+    height: 0;
+  }
+
+  50% {
+    width: 100%;
+    height: 0;
+  }
+
+  100% {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
 #about-page-desktop {
   position: absolute;
   display: flex;
@@ -14,6 +49,47 @@ $BOTTOM_DESCRIPTOR_LINE_WIDTH: 38.3vw;
 
   &.desktop-about-page-open {
     opacity: 1;
+
+    // Text blurs in after all sliding animations are done
+    #headline #headline-text, #description-text {
+      opacity: 0;
+      animation: blur-in $ANIMATION_DURATION_BLUR forwards;
+      animation-delay: $ANIMATION_DURATION_SLIDE_IN + $ANIMATION_DURATION_SLIDE_IN;
+    }
+
+    #right-bar {
+      animation: right-bar-slide-in $ANIMATION_DURATION_SLIDE_IN forwards;
+    }
+
+    #bottom-descriptor {
+      .dot-basic,
+      .line {
+        animation: left-bar-slide-in $ANIMATION_DURATION_SLIDE_IN forwards;
+      }
+
+      #description {
+        #border-left-bottom {
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-bottom: 1px solid white; // Make borders visible
+          border-left: 1px solid white; // Make borders visible
+          animation: expand-border-height-first $ANIMATION_DURATION_SLIDE_IN forwards;
+          animation-delay: $ANIMATION_DURATION_SLIDE_IN;
+        }
+
+        // And this the bottom & left borders (expands left, then up)
+        #border-top-right {
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-top: 1px solid white; // Make borders visible
+          border-right: 1px solid white; // Make borders visible
+          animation: expand-border-width-first $ANIMATION_DURATION_SLIDE_IN forwards;
+          animation-delay: $ANIMATION_DURATION_SLIDE_IN;
+        }
+      }
+    }
   }
 
   #headline {
@@ -44,7 +120,6 @@ $BOTTOM_DESCRIPTOR_LINE_WIDTH: 38.3vw;
       .line {
         display: flex;
         flex-grow: 1;
-
       }
     }
   }
@@ -75,15 +150,18 @@ $BOTTOM_DESCRIPTOR_LINE_WIDTH: 38.3vw;
     }
 
     #description {
-      border: 1px solid white;
+      position: relative;
       padding-top: 48px;
       padding-bottom: 48px;
       padding-left: 65px;
       padding-right: 45px;
       margin-right: $X_MARGIN*3/8;
+      z-index: $Z_INDEX_HEADER;
 
-      font-family: $FONT_BODY;
-      font-size: 18px;
+      #description-text {
+        font-family: $FONT_BODY;
+        font-size: 18px;
+      }
     }
   }
 }
