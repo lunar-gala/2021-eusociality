@@ -9,7 +9,7 @@ class TitleTheme extends React.Component {
         className={`title-theme ${this.props.landing_page_state} ${
           this.props.landing_page_animations_header
         } ${
-          this.props.selectedLineIdx >= 0 ||
+          ((this.props.selectedLineIdx !== null) && this.props.selectedLineIdx >= 0) ||
           this.props.landing_page_state ==
             CONSTANTS.LANDING_PAGE_STATES.DEFAULT ||
           this.props.landing_page_state ==
