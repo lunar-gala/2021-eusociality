@@ -15,6 +15,7 @@ import Logo from "../components/Logo";
 import Navbar from "../components/Navbar";
 import AboutPageDesktop from "../pages/AboutPageDesktop";
 import WatchPageDesktop from "../pages/WatchPageDesktop";
+import PeoplePage from "../pages/PeoplePage";
 import DesktopSideNav from "../components/DesktopSideNav";
 import LandingPagePrompt from "../components/LandingPagePrompt";
 
@@ -169,6 +170,7 @@ class LandingPage extends React.Component {
       landing_page_animations_navbar: "",
       landing_page_animations_sidebar: "",
       landing_page_animations_header: "",
+      landing_page_animations_logo: "",
       landing_page_animations_middleTitle: "",
       /** @brief Mouse position x */
       x: 0,
@@ -304,6 +306,20 @@ class LandingPage extends React.Component {
           CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN
         );
       }, 500);
+    } else if (
+      start_state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_LOAD
+    ) {
+      this.setState({
+        landing_page_animations_header: "start-animation",
+      });
+      setTimeout(() => {
+        this.setState({
+          landing_page_animations_sidebar: "start-animation",
+        });
+        this.handlerSetLandingPageState(
+          CONSTANTS.LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_OPEN
+        );
+      }, 500);
     }
   }
 
@@ -427,7 +443,7 @@ class LandingPage extends React.Component {
    *
    * @param {state} state See constants.js for all states
    */
-  handlerSetLandingPageState(state) {
+  handlerSetLandingPageState (state) {
     this.setState({
       landing_page_state: state,
     });
@@ -464,9 +480,9 @@ class LandingPage extends React.Component {
 
     if (CONSTANTS.STATE_TO_PATH[state]) {
       history.push(CONSTANTS.STATE_TO_PATH[state]);
-      console.log(`state ${state} pushed to history`);
+      console.log(`[DEBUG] state ${state} pushed to history`);
     } else {
-      console.log(`state ${state} has no constant`);
+      console.log(`[DEBUG] state ${state} has no constant`);
     }
   }
 
@@ -868,6 +884,7 @@ class LandingPage extends React.Component {
           this.setState({
             animation_done: true,
             landing_page_animations_header: "start-animation",
+            landing_page_animations_logo: "start-animation",
           });
           this.handlerSetLandingPageState(
             CONSTANTS.LANDING_PAGE_STATES.DEFAULT
@@ -1024,7 +1041,7 @@ class LandingPage extends React.Component {
         />
         <Logo
           landing_page_animations_header={
-            this.state.landing_page_animations_header
+            this.state.landing_page_animations_logo
           }
           landing_page_state={this.state.landing_page_state}
         />
@@ -1042,6 +1059,10 @@ class LandingPage extends React.Component {
         <AboutPageDesktop landing_page_state={this.state.landing_page_state} />
         <WatchPageDesktop
           countdownState={this.state.countdownState}
+          landing_page_state={this.state.landing_page_state}
+        />
+        <PeoplePage
+          handlerSetLandingPageState={this.handlerSetLandingPageState}
           landing_page_state={this.state.landing_page_state}
         />
         <DesktopSideNav

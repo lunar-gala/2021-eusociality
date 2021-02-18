@@ -34,6 +34,7 @@ export const LANDING_PAGE_STATES = {
   DESKTOP_LANDING_PAGE_CUBE_INTRO: "desktop-landing-page-cube-intro",
   DESKTOP_ABOUT_PAGE_LOAD: "desktop-about-page-load",
   DESKTOP_ABOUT_PAGE_OPEN: "desktop-about-page-open",
+  DESKTOP_PEOPLE_PAGE_LOAD: "desktop-people-page-load",
   DESKTOP_PEOPLE_PAGE_OPEN: "desktop-people-page-open",
   DESKTOP_WATCH_PAGE_LOAD: "desktop-watch-page-load",
   DESKTOP_WATCH_PAGE_OPEN: "desktop-watch-page-open",
@@ -54,7 +55,7 @@ export const PATH_TO_STATE = {
   desktop: {
     start: LANDING_PAGE_STATES.DESKTOP_LANDING_PAGE_LOAD,
     about: LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_LOAD,
-    people: LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_OPEN,
+    people: LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_LOAD,
     watch: LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_LOAD,
   },
 };
@@ -67,6 +68,7 @@ export const STATE_TO_PATH = {
   "mobile-watch-page-open": "/watch",
   "desktop-about-page-open": "/about",
   "desktop-watch-page-open": "/watch",
+  "desktop-people-page-open": "/watch",
 };
 
 /** @brief Width of screen we consider to be a desktop */

@@ -45,8 +45,10 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
   padding-top: 2.5vh;
   padding-bottom: 2.5vh;
   transition-duration: 1s;
+  pointer-events: none;
 
   &.default {
+    pointer-events: all;
     .navbar-container {
       animation: blur-in $ANIMATION_DURATION_BLUR forwards;
     }
@@ -67,10 +69,10 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
       pointer-events: none;;
     }
   }
-  &.desktop-about-page-open, &.desktop-watch-page-open {
+  &.desktop-about-page-open, &.desktop-watch-page-open, &.desktop-people-page-open {
     opacity: 0;
   }
-  &.desktop-about-page-load, &.desktop-watch-page-load {
+  &.desktop-about-page-load, &.desktop-watch-page-load, &.desktop-people-page-load {
     opacity: 0;
   }
 
