@@ -311,15 +311,13 @@ class LandingPage extends React.Component {
     ) {
       this.setState({
         landing_page_animations_header: "start-animation",
+          landing_page_animations_sidebar: "start-animation",
       });
       setTimeout(() => {
-        this.setState({
-          landing_page_animations_sidebar: "start-animation",
-        });
         this.handlerSetLandingPageState(
           CONSTANTS.LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_OPEN
         );
-      }, 500);
+      }, 1000);
     }
   }
 

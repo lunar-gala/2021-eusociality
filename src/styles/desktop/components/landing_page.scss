@@ -20,6 +20,10 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     opacity: 0;
   }
 
+  &.desktop-people-page-open {
+    transition-duration: 0s;
+  }
+
   &.visible {
     opacity: 1;
   }

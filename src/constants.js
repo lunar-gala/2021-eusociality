@@ -68,7 +68,7 @@ export const STATE_TO_PATH = {
   "mobile-watch-page-open": "/watch",
   "desktop-about-page-open": "/about",
   "desktop-watch-page-open": "/watch",
-  "desktop-people-page-open": "/watch",
+  "desktop-people-page-open": "/people",
 };
 
 /** @brief Width of screen we consider to be a desktop */

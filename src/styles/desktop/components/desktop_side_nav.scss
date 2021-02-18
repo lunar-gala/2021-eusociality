@@ -19,6 +19,7 @@ $DESKTOP_SIDE_NAV_SLIDE_DURATION: 400ms;
   top: $TOP_MARGIN;
   left: 0;
   transition-duration: 1s;
+  opacity: 0;
 
   &.start-animation {
     animation: blur-in $ANIMATION_DURATION_BLUR forwards;
