@@ -395,7 +395,7 @@ class LandingPage extends React.Component {
    *
    * @param {state} state See constants.js for all states
    */
-  handlerSetLandingPageState(state) {
+  handlerSetLandingPageState (state) {
     this.setState({
       landing_page_state: state,
     });

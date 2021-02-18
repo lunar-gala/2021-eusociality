@@ -2,6 +2,18 @@
  * Navigation sidebar on desktop
  */
 
+$DESKTOP_SIDE_NAV_SLIDE_DURATION: 400ms;
+
+@keyframes left-bar-slide-in-desktop-nav {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
 .links {
   position: absolute;
   top: $TOP_MARGIN;
@@ -11,9 +23,11 @@
   &.default {
     animation: blur-in $ANIMATION_DURATION_BLUR forwards;
   }
+
   &.desktop-landing-page-load {
     opacity: 0;
   }
+
   &.desktop-landing-page-cube-intro {
     opacity: 0;
   }
@@ -25,6 +39,7 @@
     transition-duration: 1s;
 
     &.selected .left-bar {
+      animation: left-bar-slide-in-desktop-nav $DESKTOP_SIDE_NAV_SLIDE_DURATION forwards cubic-bezier(0.075, 0.82, 0.165, 1);
       opacity: 1;
     }
 
@@ -33,6 +48,7 @@
       flex-direction: row;
       align-items: center;
       opacity: 0;
+      transform: translateX(-100%);
 
       .line {
         display: flex;
