@@ -628,7 +628,7 @@ class LandingPage extends React.Component {
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
     window.addEventListener("deviceorientation", this.handleOrientation, true);
-    window.addEventListener("DOMContentLoaded", () => {
+    window.addEventListener("load", () => {
       if (this.state.isMobile) {
         this.startupAnimationSequenceMobile();
       } else {

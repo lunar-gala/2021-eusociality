@@ -77,6 +77,7 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
       font-weight: 300;
       margin-left: $X_MARGIN*3/8;
       margin-right: 12px;
+      backface-visibility: hidden;
     }
 
     .right-bar {
@@ -107,6 +108,7 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
       letter-spacing: -0.12em;
       margin-right: $X_MARGIN*3/8;
       margin-left: 12px;
+      backface-visibility: hidden;
     }
 
     .left-bar {
