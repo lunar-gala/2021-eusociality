@@ -7,9 +7,10 @@
   flex-direction: column;
 	align-items: center;
 	overflow: hidden;
-
+	display: none;
 
 	&.desktop-people-page-open {
+		display: block;
 		.page-background, #team-accordion {
 			animation: blur-in $ANIMATION_DURATION_BLUR forwards;
       backface-visibility: hidden;

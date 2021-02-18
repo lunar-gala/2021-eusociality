@@ -93,6 +93,8 @@ const CAMERA_PAN_FACTOR_DESKTOP = {
 /** @brief how much people tilt their phones when they hold it on average, in degrees. */
 const RESTING_PHONE_ANGLE = 36;
 
+const regexFindPathName = /\/(\w+).*/;
+
 /**
  * Navbar for selecting lines
  */
@@ -103,7 +105,6 @@ class LandingPage extends React.Component {
     // Update the state of the site based on the URL
     let landing_page_state = CONSTANTS.LANDING_PAGE_STATES.DEFAULT;
 
-    const regexFindPathName = /\/(\w+).*/;
     const currPathMatches = regexFindPathName.exec(
       this.props.location.pathname
     );
@@ -442,6 +443,12 @@ class LandingPage extends React.Component {
    * @param {state} state See constants.js for all states
    */
   handlerSetLandingPageState (state) {
+    if (state === this.state.landing_page_state) {
+      return;
+    }
+
+    console.log(`[DEBUG] Old State ${this.state.landing_page_state}, New State ${state}`);
+
     this.setState({
       landing_page_state: state,
     });
@@ -476,9 +483,9 @@ class LandingPage extends React.Component {
 
     const { history } = this.props;
 
-    if (CONSTANTS.STATE_TO_PATH[state]) {
+    if (CONSTANTS.STATE_TO_PATH[state] && (this.props.location.pathname !== CONSTANTS.STATE_TO_PATH[state])) {
+      console.log(`[DEBUG] state ${state} pushed to history, previous ${this.props.location.pathname}`);
       history.push(CONSTANTS.STATE_TO_PATH[state]);
-      console.log(`[DEBUG] state ${state} pushed to history`);
     } else {
       console.log(`[DEBUG] state ${state} has no constant`);
     }
@@ -642,7 +649,8 @@ class LandingPage extends React.Component {
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
     window.addEventListener("deviceorientation", this.handleOrientation, true);
-    window.addEventListener("load", () => {
+    window.addEventListener("pageshow", () => {
+      console.log("[DEBUG] pageshow event hit")
       if (this.state.isMobile) {
         this.startupAnimationSequenceMobile();
       } else {
@@ -650,6 +658,14 @@ class LandingPage extends React.Component {
           // Trigger the animation for the current page
           this.startupAnimationSequence(this.state.landing_page_state);
         }, 400);
+      }
+    });
+
+    this.props.history.listen((loc, action) => {
+      console.log(loc, action);
+      if (action === "POP") {
+        console.log("[DEBUG] Back button pressed, POP: ", loc);
+        this.handlerSetLandingPageState(CONSTANTS.PATH_TO_STATE["desktop_nav"][UTIL.return_first_regex_match(regexFindPathName, loc.pathname)]);
       }
     });
 

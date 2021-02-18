@@ -41,7 +41,8 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
   justify-content: center;
   overflow: hidden;
 
-  &.desktop-about-page-open {
+  &.desktop-about-page-open,
+  &.desktop-watch-page-open {
     .landing-page-background {
       opacity: 0.65;
       transition-duration: 1s;
@@ -51,12 +52,8 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
       opacity: 0;
     }
   }
-  &.desktop-watch-page-open {
-    .landing-page-background {
-      opacity: 0.65;
-      transition-duration: 1s;
-    }
 
+  &.desktop-people-page-open {
     #main-screen #curr-line {
       opacity: 0;
     }
@@ -220,7 +217,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     }
     &.desktop-about-page-load, &.desktop-watch-page-load, &.desktop-people-page-load,
     &.desktop-about-page-open, &.desktop-watch-page-open, &.desktop-people-page-open {
-      opacity: 0;
+      opacity: 0 !important;
     }
   }
 }

@@ -102,3 +102,15 @@ export function format_date(date) {
     })} EST`,
   };
 }
+
+export function return_first_regex_match (regex, string) {
+  const currPathMatches = regex.exec(
+    string
+  );
+
+  if (currPathMatches == null) {
+    return "";
+  } else {
+    return currPathMatches[1];
+  }
+}
