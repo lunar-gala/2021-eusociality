@@ -650,7 +650,7 @@ class LandingPage extends React.Component {
     const fov = 75;
     const aspect = canvas.clientWidth / canvas.clientHeight;
     const near = 0.1;
-    const far = 1000;
+    const far = 2000;
     let camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
     let camera_position = {
