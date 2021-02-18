@@ -767,6 +767,14 @@ class LandingPage extends React.Component {
           if (object_children[i].name === "Bound") {
             wireframe_index = 1;
             asset_index = 0;
+
+            let temp_object_children = object_children[i].children[
+              asset_index
+            ].children;
+
+            for (let j = 0; j < temp_object_children.length; j++) {
+              temp_object_children[j].material = iridescence_material_main;
+            }
           }
 
           // Set iridescence texture for the main object
