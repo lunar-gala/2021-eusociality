@@ -11,7 +11,9 @@ class DesktopSideNav extends React.Component {
   render() {
     // TODO: reuse code here
     return (
-      <div className={`links desktop ${this.props.landing_page_state}`}>
+      <div
+        className={`links desktop ${this.props.landing_page_state} ${this.props.landing_page_animations_header}`}
+      >
         <div
           className={`link-wrapper ${
             this.props.landing_page_state ===
@@ -77,6 +79,8 @@ class DesktopSideNav extends React.Component {
 DesktopSideNav.propTypes = {
   /** @brief Sets the landing page state */
   handlerSetLandingPageState: PropTypes.func,
+  /** @brief Can trigger animations for the element */
+  landing_page_animations_header: PropTypes.string,
   /** @brief Indicates if the menu is open or not, controlled by the parent */
   landing_page_state: PropTypes.string,
 };

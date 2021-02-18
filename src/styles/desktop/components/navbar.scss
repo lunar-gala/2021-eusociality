@@ -67,10 +67,10 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
       pointer-events: none;;
     }
   }
-  &.desktop-about-page-open {
+  &.desktop-about-page-open, &.desktop-watch-page-open {
     opacity: 0;
   }
-  &.desktop-watch-page-open {
+  &.desktop-about-page-load, &.desktop-watch-page-load {
     opacity: 0;
   }
 

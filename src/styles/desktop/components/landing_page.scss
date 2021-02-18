@@ -208,7 +208,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     cursor: pointer;
     transition-duration: 1s;
 
-    &.default {
+    &.start-animation {
       animation: blur-in $ANIMATION_DURATION_BLUR forwards;
     }
     &.desktop-landing-page-load {

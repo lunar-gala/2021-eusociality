@@ -259,20 +259,52 @@ class LandingPage extends React.Component {
     let interval = setInterval(temp, 10);
   }
 
-  startupAnimationSequence() {
-    // Make the navbar expand from the middle and the sidebars slide in from the
-    // top
-    this.setState({
-      landing_page_animations_navbar: "start-animation",
-      landing_page_animations_sidebar: "start-animation",
-    });
-
-    setTimeout(() => {
-      // Make the center title show up
+  startupAnimationSequence(start_state) {
+    if (
+      start_state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LANDING_PAGE_LOAD
+    ) {
+      // Make the navbar expand from the middle and the sidebars slide in from the
+      // top
       this.setState({
-        landing_page_animations_middleTitle: "start-animation",
+        landing_page_animations_navbar: "start-animation",
+        landing_page_animations_sidebar: "start-animation",
       });
-    }, 1000);
+
+      setTimeout(() => {
+        // Make the center title show up
+        this.setState({
+          landing_page_animations_middleTitle: "start-animation",
+        });
+      }, 1000);
+    } else if (
+      start_state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_LOAD
+    ) {
+      this.setState({
+        landing_page_animations_header: "start-animation",
+      });
+      setTimeout(() => {
+        this.setState({
+          landing_page_animations_sidebar: "start-animation",
+        });
+        this.handlerSetLandingPageState(
+          CONSTANTS.LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN
+        );
+      }, 500);
+    } else if (
+      start_state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_LOAD
+    ) {
+      this.setState({
+        landing_page_animations_header: "start-animation",
+      });
+      setTimeout(() => {
+        this.setState({
+          landing_page_animations_sidebar: "start-animation",
+        });
+        this.handlerSetLandingPageState(
+          CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN
+        );
+      }, 500);
+    }
   }
 
   enterSiteAnimationSequence() {
@@ -395,7 +427,7 @@ class LandingPage extends React.Component {
    *
    * @param {state} state See constants.js for all states
    */
-  handlerSetLandingPageState (state) {
+  handlerSetLandingPageState(state) {
     this.setState({
       landing_page_state: state,
     });
@@ -596,13 +628,13 @@ class LandingPage extends React.Component {
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
     window.addEventListener("deviceorientation", this.handleOrientation, true);
-    window.addEventListener("load", () => {
+    window.addEventListener("DOMContentLoaded", () => {
       if (this.state.isMobile) {
         this.startupAnimationSequenceMobile();
       } else {
         setTimeout(() => {
-          // Start the animation while we try to load the asset
-          this.startupAnimationSequence();
+          // Trigger the animation for the current page
+          this.startupAnimationSequence(this.state.landing_page_state);
         }, 400);
       }
     });
@@ -827,6 +859,7 @@ class LandingPage extends React.Component {
         mixer.addEventListener("finished", () => {
           this.setState({
             animation_done: true,
+            landing_page_animations_header: "start-animation",
           });
           this.handlerSetLandingPageState(
             CONSTANTS.LANDING_PAGE_STATES.DEFAULT
@@ -975,10 +1008,18 @@ class LandingPage extends React.Component {
         </div>
         <TitleTheme
           handlerSetLandingPageState={this.handlerSetLandingPageState}
+          landing_page_animations_header={
+            this.state.landing_page_animations_header
+          }
           landing_page_state={this.state.landing_page_state}
           selectedLineIdx={this.state.selectedLineIdx}
         />
-        <Logo landing_page_state={this.state.landing_page_state} />
+        <Logo
+          landing_page_animations_header={
+            this.state.landing_page_animations_header
+          }
+          landing_page_state={this.state.landing_page_state}
+        />
         {/* Mobile Elements */}
         <MobileOpenMenu landing_page_state={this.state.landing_page_state} />
         <MobileMenuLineList
@@ -997,6 +1038,9 @@ class LandingPage extends React.Component {
         />
         <DesktopSideNav
           handlerSetLandingPageState={this.handlerSetLandingPageState}
+          landing_page_animations_header={
+            this.state.landing_page_animations_header
+          }
           landing_page_state={this.state.landing_page_state}
         />
         <LandingPagePrompt
