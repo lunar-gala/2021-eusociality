@@ -2,163 +2,196 @@
  * The people page
  */
 
+@keyframes slide-in {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 #people-page.main-page {
   display: flex;
   flex-direction: column;
-	align-items: center;
-	overflow: hidden;
-	display: none;
+  align-items: center;
+  overflow: hidden;
 
-	&.desktop-people-page-open {
-		display: block;
-		.page-background, #team-accordion {
-			animation: blur-in $ANIMATION_DURATION_BLUR forwards;
+  &.desktop-people-page-open {
+    .page-background,
+    #team-accordion {
+      animation: blur-in $ANIMATION_DURATION_BLUR forwards;
       backface-visibility: hidden;
-		}
-	}
+    }
+  }
 
-	.headshotImg {
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-blend-mode: color;
-	}
+  .headshotImg {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: color;
+  }
 
-	.headshot {
-		width: 20vw;
-		height: 21.3vw;
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-blend-mode: color;
-	}
+  .headshot {
+    width: 20vw;
+    height: 21.3vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: color;
+  }
 
-	.page-background {
-		top: 0;
-		bottom: 0;
-		position: fixed;
-		height: 100vh;
-		width: 100vw;
-		opacity: 0;
-	}
+  .page-background {
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    opacity: 0;
+  }
 
-	.wrapper {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 30vh;
-		background: linear-gradient(180deg, rgba(20,20,20,1) 40%, rgba(20,20,20,0) 100%);
-		z-index: 100;
-		padding: 0;
+  .wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30vh;
+    background: linear-gradient(
+      180deg,
+      rgba(20, 20, 20, 1) 40%,
+      rgba(20, 20, 20, 0) 100%
+    );
+    z-index: 100;
+    padding: 0;
 
-		.header {
-			padding: 0;
-			margin: 0;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
-	}
+    .header {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 
   #team-accordion {
-		position: absolute;
-		left: $X_MARGIN/2;
-		display: block;
-		top: 25%;
-		background: none;
-		box-shadow: none;
-		opacity: 0;
+    position: absolute;
+    left: $X_MARGIN/2;
+    display: block;
+    top: 25%;
+    background: none;
+    box-shadow: none;
+    opacity: 0;
 
-		.Mui-expanded {
-			margin: 0;
-			padding: 0;
-		}
+    .Mui-expanded {
+      margin: 0;
+      padding: 0;
+    }
 
-		.team-title {
-			font-family: $FONT_DISPLAY;
-			text-transform: uppercase;
-			//transform: $FONT_SPRAT_STRETCH;
-			letter-spacing: $FONT_SPRAT_KERN;
-			font-weight: $FONT_SPRAT_WEIGHT;
-			font-size: 14vh; //May need to be smaller
-			margin: 0;
-			padding: 0;
-		}
+    .team-title {
+      font-family: $FONT_DISPLAY;
+      text-transform: uppercase;
+      //transform: $FONT_SPRAT_STRETCH;
+      letter-spacing: $FONT_SPRAT_KERN;
+      font-weight: $FONT_SPRAT_WEIGHT;
+      font-size: 14vh; //May need to be smaller
+      margin: 0;
+      padding: 0;
+    }
 
-		.tab-main {
-			background-color: transparent;
-			color: white;
-			padding: 0;
-			box-shadow: none;
-			border: none;
-		}
+    .tab-main {
+      background-color: transparent;
+      color: white;
+      padding: 0;
+      box-shadow: none;
+      border: none;
+    }
 
-		.tab-header {
-			font-family: $FONT_DISPLAY;
-			font-weight: $FONT_SPRAT_WEIGHT;
-			// font-size: 20vh;
-			padding: 0;
-			flex: 1;
-			box-shadow: none;
-			border: none;
+    .tab-header {
+      font-family: $FONT_DISPLAY;
+      font-weight: $FONT_SPRAT_WEIGHT;
+      // font-size: 20vh;
+      padding: 0;
+      flex: 1;
+      box-shadow: none;
+      border: none;
 
-			.display_circle {
-				display: block;
-				margin: auto;
-				margin-left: 50px;
-				margin-right: 0;
-				width: $CIRCLE_RAD;
-				height: $CIRCLE_RAD;
-				background-color: white;
-				border-radius: 100%;
+			.animatedSlide {
+        animation-duration: 0.2s;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-name: slide-in;
 			}
 
-			.display_line {
-				flex: 1;
-				display: block;
-				border-bottom: 1px solid white;
-				margin: auto;
-				margin-left: 0;
-				margin-right: -$X_MARGIN/2*.75;
-				overflow: hidden;
-			}
-		}
+      .display_circle {
+        display: block;
+        margin: auto;
+        margin-left: 50px;
+        margin-right: 0;
+        width: $CIRCLE_RAD;
+        height: $CIRCLE_RAD;
+        background-color: white;
+        border-radius: 100%;
+      }
 
-		.tab-body {
-			width: 100vw - $X_MARGIN;
-			padding: 0;
-			padding-top: 40px;
-			flex-direction: row;
-			justify-content: flex-start;
-			flex-wrap: wrap;
-			box-shadow: none;
-			border: none;
+      .display_line {
+        flex: 1;
+        display: block;
+        border-bottom: 1px solid white;
+        margin: auto;
+        margin-left: 0;
+        margin-right: -$X_MARGIN/2 * 0.75;
+        overflow: hidden;
+      }
+    }
 
-			.teamBio {
-				margin-top: 30px;
-				margin-bottom: 30px;
-				margin-right: 2.5vw;
-				display: block;
-				width: 20vw;
-				justify-self: flex-start;
+    .tab-body {
+      width: 100vw - $X_MARGIN;
+      padding: 0;
+      padding-top: 40px;
+      flex-wrap: wrap;
+      border: none;
 
+      .bioWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        box-shadow: none;
+      }
 
+      .notPictured {
+        h2 {
+          margin-bottom: 10px;
+          font-size: 46;
+        }
+        p {
+          text-transform: uppercase;
+          font-size: 18;
+          margin-bottom: 2px;
+        }
+      }
 
-				.name {
-					text-transform: uppercase;
-					font-weight: 500;
-					font-size: 18px;
-					margin: 0;
-					margin-top: 1em;
-				}
+      .teamBio {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        margin-right: 2.5vw;
+        display: block;
+        width: 20vw;
+        justify-self: flex-start;
 
-				.title {
-					text-transform: uppercase;
-					font-weight: 300;
-					font-size: 18px;
-					margin: 0;
-				}
+        .name {
+          text-transform: uppercase;
+          font-weight: 500;
+          font-size: 18px;
+          margin: 0;
+          margin-top: 1em;
+        }
 
-			}
-		}
+        .title {
+          text-transform: uppercase;
+          font-weight: 300;
+          font-size: 18px;
+          margin: 0;
+        }
+      }
+    }
   }
 }

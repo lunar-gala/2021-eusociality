@@ -1192,63 +1192,70 @@ class LandingPage extends React.Component {
           }
           landing_page_state={this.state.landing_page_state}
         />
-        <LandingPagePrompt
-          handlerSetLandingPageState={this.handlerSetLandingPageState}
-          landing_page_animations_middleTitle={
-            this.state.landing_page_animations_middleTitle
-          }
-          landing_page_state={this.state.landing_page_state}
-        />
-        <div
-          id="main-screen"
-          className={`desktop ${this.state.landing_page_state}`}
-        >
+        { this.state.landing_page_state ==
+          CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LANDING_PAGE_LOAD &&
+          <LandingPagePrompt
+            handlerSetLandingPageState={this.handlerSetLandingPageState}
+            landing_page_animations_middleTitle={
+              this.state.landing_page_animations_middleTitle
+            }
+            landing_page_state={this.state.landing_page_state}
+          />
+        }
+        {this.state.landing_page_state ==
+          CONSTANTS.LANDING_PAGE_STATES.DEFAULT && (
           <div
-            className={`${this.state.fading ? "faded" : "notFaded"}`}
-            id="curr-line"
+            id="main-screen"
+            className={`desktop ${this.state.landing_page_state}`}
           >
-            <div id="line-name">
-              {this.state.selectedLineIdx >= 0
-                ? `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}`
-                : ""}
-            </div>
-            <div id="below-line-name">
-              <div id="designers-name">
+            <div
+              className={`${this.state.fading ? "faded" : "notFaded"}`}
+              id="curr-line"
+            >
+              <div id="line-name">
                 {this.state.selectedLineIdx >= 0
-                  ? `${UTIL.name_list_formatter(
-                      LINE_DATA.LINE_INFO[this.state.selectedLineIdx].designers
-                    )}`
+                  ? `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}`
                   : ""}
               </div>
-              <div
-                id="see-more-wrapper"
-                className={
-                  (this.state.selectedLineIdx >= 0 ? "show" : "") + " desktop"
-                }
-              >
-                <Link
-                  id="more-info"
-                  to={{
-                    pathname: `/lines/${this.state.selectedLineIdx + 1}`,
-                    state: { currLineIdx: this.state.selectedLineIdx },
-                  }}
-                >
-                  <span id="more-info-text">See More</span>
-                  <div id="more-info-arrow">
-                    <div id="arrow" />
-                  </div>
-                </Link>
+              <div id="below-line-name">
+                <div id="designers-name">
+                  {this.state.selectedLineIdx >= 0
+                    ? `${UTIL.name_list_formatter(
+                        LINE_DATA.LINE_INFO[this.state.selectedLineIdx]
+                          .designers
+                      )}`
+                    : ""}
+                </div>
                 <div
-                  id="see-more-line-wrapper"
-                  className={this.state.fading ? "" : "visible"}
+                  id="see-more-wrapper"
+                  className={
+                    (this.state.selectedLineIdx >= 0 ? "show" : "") + " desktop"
+                  }
                 >
-                  <div id="see-more-dot" />
-                  <div id="see-more-line" />
+                  <Link
+                    id="more-info"
+                    to={{
+                      pathname: `/lines/${this.state.selectedLineIdx + 1}`,
+                      state: { currLineIdx: this.state.selectedLineIdx },
+                    }}
+                  >
+                    <span id="more-info-text">See More</span>
+                    <div id="more-info-arrow">
+                      <div id="arrow" />
+                    </div>
+                  </Link>
+                  <div
+                    id="see-more-line-wrapper"
+                    className={this.state.fading ? "" : "visible"}
+                  >
+                    <div id="see-more-dot" />
+                    <div id="see-more-line" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         <Navbar
           handlerSelectedLineIdx={this.handlerSelectedLineIdx}

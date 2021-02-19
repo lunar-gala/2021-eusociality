@@ -92,6 +92,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
         font-weight: $FONT_SPRAT_WEIGHT;
         letter-spacing: $HEADER_TRACKING;
         word-spacing: $HEADER_WORD_SPACING;
+        pointer-events: none;
       }
 
       #below-line-name {

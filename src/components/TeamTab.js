@@ -11,9 +11,10 @@ import { PEOPLE_DATA, PEOPLE_BY_TEAMS } from "../data/people_data";
 export default function TeamTab(props) {
   const { expanded, handleChange, teamName } = props;
 
-  const [curHover, setCurHover] = useState(false);
+  const [curClicked, setCurClicked] = useState(false);
 
   let pictures = [];
+  let notPictured = [];
 
   if (PEOPLE_BY_TEAMS[teamName] !== undefined) {
     pictures = PEOPLE_BY_TEAMS[teamName].map((andrew_id) => {
@@ -29,14 +30,12 @@ export default function TeamTab(props) {
           />
         );
       } else {
-        return (
-          <TeamBio
-            imgSrc={null}
-            name={`${entry.first_name} ${entry.last_name}`}
-            title={entry.position}
-            key={andrew_id}
-          />
+        notPictured.push(
+          <p>
+            {entry.first_name} {entry.last_name}
+          </p>
         );
+        return <></>;
       }
     });
   }
@@ -48,20 +47,27 @@ export default function TeamTab(props) {
         aria-controls="panel1d-content"
         id="panel1d-header"
       >
-        <h1
-          className="team-title"
-          onMouseEnter={() => setCurHover(true)}
-          onMouseLeave={() => setCurHover(false)}
-        >
+        <h1 className="team-title" onClick={() => setCurClicked(!curClicked)}>
           {teamName}
         </h1>
-        {curHover && (
+        {curClicked && (
           <>
-            <div className="display_circle" /> <div className="display_line" />
+            <div className="display_circle animatedSlide" /> <div className="display_line animatedSlide" />
           </>
         )}
       </AccordionSummary>
-      <AccordionDetails className="tab-body">{pictures}</AccordionDetails>
+      <AccordionDetails className="tab-body">
+        <div className="bioWrapper">{pictures}</div>
+
+        <div className="notPictured">
+          {notPictured.length > 0 && (
+            <>
+              <h2>Not Pictured</h2>
+              {notPictured}
+            </>
+          )}
+        </div>
+      </AccordionDetails>
     </Accordion>
   );
 }
