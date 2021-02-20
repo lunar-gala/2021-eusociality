@@ -2,8 +2,8 @@
  * Styles for the page showing each individual line
  */
 
-$LEFT_MARGIN: 25vw;
-$TITLE_MARGIN_TOP: 15vw;
+$LEFT_MARGIN: 20vw;
+$TITLE_MARGIN_TOP: 10vw;
 
 $SLIDE_AMOUNT_A: 6.66vw;
 $SLIDE_AMOUNT_B: -2.8vw;
@@ -16,7 +16,8 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
 @keyframes slide-image-a {
   from {
     transform: translateY(0);
-  } to {
+  }
+  to {
     transform: translateY($SLIDE_AMOUNT_A);
   }
 }
@@ -24,7 +25,8 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
 @keyframes slide-image-b {
   from {
     transform: translateY(0);
-  } to {
+  }
+  to {
     transform: translateY($SLIDE_AMOUNT_B);
   }
 }
@@ -32,7 +34,8 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
 @keyframes slide-image-c {
   from {
     transform: translateY(0);
-  } to {
+  }
+  to {
     transform: translateY($SLIDE_AMOUNT_C);
   }
 }
@@ -40,8 +43,49 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
 @keyframes slide-image-d {
   from {
     transform: translateY(0);
-  } to {
+  }
+  to {
     transform: translateY($SLIDE_AMOUNT_D);
+  }
+}
+
+.blur {
+  -webkit-animation: blur 1s linear forwards;
+  -moz-animation: blur 1s linear forwards;
+  -ms-animation: blur 1s linear forwards;
+  -o-animation: blur 1s linear forwards;
+  animation: blur 1s linear forwards;
+}
+@-webkit-keyframes blur {
+  from {
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+  }
+  to {
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+  }
+}
+@-moz-keyframes blur {
+  from {
+    -moz-filter: blur(10px);
+    filter: blur(10px);
+  }
+  to {
+    -moz-filter: blur(0px);
+    filter: blur(0px);
+  }
+}
+@keyframes blur {
+  from {
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    filter: blur(10px);
+  }
+  to {
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    filter: blur(0px);
   }
 }
 
@@ -57,20 +101,18 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
     top: 0;
     z-index: -1;
 
-    // TODO: did we want to do a gradual opacity fade for the background?
-    #first {
-      background-size: cover;
-      height: 56.25vw;
+    .videoTag {
+      position: absolute;
       width: 100vw;
-      opacity: 0.9;
-    }
-
-    #second {
-      background-size: cover;
-      height: 46vw;
-      width: 80vw;
-      margin-top: 14px;
-      opacity: 0.6;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      margin: 0;
+      padding: 0;
+      background-color: grey;
+      opacity: 0.5;
+      z-index: 0;
     }
   }
 
@@ -81,7 +123,7 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
     align-items: center;
     width: 100vw;
     margin-top: $TOP_MARGIN;
-    font-family: 'Sprat Type Condensed';
+    font-family: "Sprat Type Condensed";
     font-size: $FONT_SIZE_TITLE;
     font-weight: 100;
     letter-spacing: -0.05em;
@@ -93,12 +135,13 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
     flex-direction: column;
     align-items: flex-start;
     margin-left: $LEFT_MARGIN;
+    pointer-events: none;
 
     #name {
       // TODO: this is really bad style for font sizes and letter spacing. Not
       // scalable
       margin-top: $TITLE_MARGIN_TOP;
-      font-family: 'Sprat Type Condensed';
+      font-family: "Sprat Type Condensed";
       font-size: $FONT_SIZE_LINE_PAGE_NAME;
       font-weight: 100;
       letter-spacing: -0.12em;
@@ -137,6 +180,7 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
       }
     }
 
+    /*
     #pictures-top {
       margin-top: 9.4vw;
       display: flex;
@@ -166,34 +210,76 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
           animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
           animation-fill-mode: forwards;
 
-          &#a{
+          &#a {
             animation-name: slide-image-a;
           }
 
-          &#b{
+          &#b {
             animation-name: slide-image-b;
           }
 
-          &#c{
+          &#c {
             animation-name: slide-image-c;
           }
 
-          &#d{
+          &#d {
             animation-name: slide-image-d;
           }
         }
       }
     }
+    */
 
-    #description {
-      width: 36vw;
-      margin-top: 12.5vw;
-      font-family: $FONT_BODY;
-      font-size: $FONT_SIZE_BODY;
+    #content {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+
+      #description {
+        width: 36vw;
+        margin-top: 5vh;
+        font-family: $FONT_BODY;
+        font-size: $FONT_SIZE_BODY;
+      }
+
+      #models {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        justify-items: flex-end;
+        align-items: center;
+
+
+
+        .pictures {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          justify-items: flex-end;
+          align-items: center;
+          width: 16vw;
+          height: 23.8vw;
+          margin-left: 3vw;
+
+          img {
+            width: 16vw;
+            height: 23.8vw;
+            transform: translateY(10px);
+          }
+
+          .frame {
+
+            width: 16vw;
+            height: 23.8vw;
+            border: 1px solid white;
+          }
+        }
+      }
     }
 
     #left-bar {
-      margin-top: 4.26vw;
+      margin-top: -2.5vh;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -212,6 +298,7 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
       }
     }
 
+    /*
     #pictures-bottom {
       display: flex;
       flex-direction: row;
@@ -226,44 +313,46 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
         object-fit: cover;
       }
     }
+    
   }
+  */
 
-  .fixed-overlay {
-    position: fixed;
-    top: $TOP_MARGIN;
-    left: $X_MARGIN/2;
-
-    .links {
-      position: static;
+    .fixed-overlay {
+      position: fixed;
       top: 0;
-      left: 0;
+      left: $X_MARGIN/2;
 
-      .link-wrapper .left-bar {
-        display: none;
+      .links {
+        position: static;
+        top: 0;
+        left: 0;
+
+        .link-wrapper .left-bar {
+          display: none;
+        }
       }
     }
-  }
 
-  #back-button-wrapper {
-    position: fixed;
-    top: calc(#{$TITLE_MARGIN_TOP} + 40px);
-    left: $X_MARGIN/2;
+    #back-button-wrapper {
+      position: fixed;
+      top: 50vh;
+      left: $X_MARGIN/2;
 
-    #back-button {
+      #back-button {
+        width: $BACK_BUTTON_SIZE;
+        height: $BACK_BUTTON_SIZE;
+        border-left: $BACK_BUTTON_STROKE_WIDTH solid white;
+        border-bottom: $BACK_BUTTON_STROKE_WIDTH solid white;
+        transform: rotate(45deg);
 
-      width: $BACK_BUTTON_SIZE;
-      height: $BACK_BUTTON_SIZE;
-      border-left: $BACK_BUTTON_STROKE_WIDTH solid white;
-      border-bottom: $BACK_BUTTON_STROKE_WIDTH solid white;
-      transform: rotate(45deg);
+        cursor: pointer;
 
-      cursor: pointer;
-
-      opacity: 0;
-      transition-duration: 1s;
-
-      &.show {
         opacity: 1;
+        transition-duration: 1s;
+
+        &.show {
+          opacity: 1;
+        }
       }
     }
   }

@@ -11,6 +11,8 @@ import DesktopSideNav from "../components/DesktopSideNav";
 
 // Images
 // TODO: there will be a lot of these, so probably a good idea to move this into a file and import everything in that file
+import BACKGROUND_FIRST from "../../assets/img/examples/bg3.jpg";
+import BACKGROUND_SECOND from "../../assets/img/examples/bg2.jpg";
 import MODEL_1 from "../../assets/img/examples/girl1.jpg";
 import MODEL_2 from "../../assets/img/examples/girl2.jpg";
 import MODEL_3 from "../../assets/img/examples/girl3.jpg";
@@ -27,16 +29,12 @@ class LinePage extends React.Component {
     )[1];
 
     this.state = {
-      landing_page_state: CONSTANTS.LANDING_PAGE_STATES.LINE_PAGE,
       selectedLineIdx: currLineNumber - 1,
       showBackButton: true,
     };
 
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
-
-    // We need to trigger this to tell the App to allow transitions to happen on the main page
-    this.props.handlePageLoad();
   }
 
   componentDidMount() {
@@ -61,7 +59,7 @@ class LinePage extends React.Component {
 
   slidingImage(image, id) {
     return (
-      <div className="pictures" id={id}>
+      <div className="sliding-image" id={id}>
         <img
           src={image}
           className={`image`}
@@ -79,19 +77,25 @@ class LinePage extends React.Component {
     return (
       <div id="line-page">
         <div id="background">
-          <video className="videoTag" autoPlay loop muted>
-            <source
-              src={
-                "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
-              }
-              type="video/mp4"
-            />
-          </video>
+          <div
+            style={{
+              backgroundImage: `url(${BACKGROUND_FIRST})`,
+            }}
+            id="first"
+            className="background-picture"
+          />
+          <div
+            style={{
+              backgroundImage: `url(${BACKGROUND_SECOND})`,
+            }}
+            id="second"
+            className="background-picture"
+          />
         </div>
         <Link id="top-title" to={"/"}>
           {CONSTANTS.LANDING_PAGE_TITLE}
         </Link>
-        <div className="main-content blur">
+        <div className="main-content">
           <div id="name">{line_info.name}</div>
           <div id="designers">
             <div id="designers-text">
@@ -102,24 +106,25 @@ class LinePage extends React.Component {
               <div className="line" />
             </div>
           </div>
-
-          <div id="content">
-            <div id="description">
-              {line_info.description
-                ? line_info.description
-                : LINE_DATA.LINE_INFO[0].description}
-            </div>
-            <div id="models">
-              {this.slidingImage(MODEL_2, "a")}
-              {this.slidingImage(MODEL_4, "b")}
-            </div>
+          <div id="pictures-top">
+            {this.slidingImage(MODEL_2, "a")}
+            {this.slidingImage(MODEL_4, "b")}
+            {this.slidingImage(MODEL_1, "c")}
+            {this.slidingImage(MODEL_3, "d")}
           </div>
-
+          <div id="description">
+            {line_info.description
+              ? line_info.description
+              : LINE_DATA.LINE_INFO[0].description}
+          </div>
           <div id="left-bar">
             <div className="line" />
             <div className="dot-basic" />
           </div>
-
+          <div id="pictures-bottom">
+            <img src={MODEL_4} id="left" />
+            <img src={MODEL_3} id="right" />
+          </div>
         </div>
         <NavbarLinePage
           selectedLineIdx={this.state.selectedLineIdx}
@@ -127,17 +132,13 @@ class LinePage extends React.Component {
         />
         {/* Additional overlay components */}
         <div className="fixed-overlay">
-          <DesktopSideNav
-            landing_page_state={this.state.landing_page_state}
-          />
+          <DesktopSideNav />
         </div>
         <div id="back-button-wrapper">
           <div
             id="back-button"
             className={this.state.showBackButton ? "show" : ""}
-            onClick={() => {
-              this.props.history.goBack();
-            }}
+            onClick={() => this.props.history.goBack()}
           />
         </div>
       </div>
@@ -147,7 +148,6 @@ class LinePage extends React.Component {
 
 LinePage.propTypes = {
   location: PropTypes.object,
-  handlePageLoad: PropTypes.func,
   history: PropTypes.object,
 };
 
