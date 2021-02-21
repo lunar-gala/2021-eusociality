@@ -712,6 +712,18 @@ class LandingPage extends React.Component {
     });
   }
 
+  startupWrapper () {
+    console.log("[DEBUG] Hit startup Wrapper")
+    if (this.state.isMobile) {
+      this.startupAnimationSequenceMobile();
+    } else {
+      setTimeout(() => {
+        // Trigger the animation for the current page
+        this.startupAnimationSequence(this.state.landing_page_state);
+      }, 400);
+    }
+  }
+
   /**
    * @brief We create the 3D asset here and load it onto the page.
    */
@@ -721,15 +733,16 @@ class LandingPage extends React.Component {
     window.addEventListener("deviceorientation", this.handleOrientation, true);
     window.addEventListener("pageshow", () => {
       console.log("[DEBUG] pageshow event hit");
-      if (this.state.isMobile) {
-        this.startupAnimationSequenceMobile();
-      } else {
-        setTimeout(() => {
-          // Trigger the animation for the current page
-          this.startupAnimationSequence(this.state.landing_page_state);
-        }, 400);
-      }
+      this.props.handlePageLoad();
+
+      this.startupWrapper();
     });
+
+    // If we already have loaded, just trigger the startup sequence
+    if (this.props.page_has_loaded) {
+      this.startupWrapper();
+    }
+
 
     this.props.history.listen((loc, action) => {
       console.log(loc, action);
@@ -1245,6 +1258,8 @@ class LandingPage extends React.Component {
 LandingPage.propTypes = {
   location: PropTypes.object,
   history: PropTypes.object,
+  handlePageLoad: PropTypes.func,
+  page_has_loaded: PropTypes.bool,
 };
 
 export default LandingPage;

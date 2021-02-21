@@ -10,6 +10,18 @@ import ScrollToTop from "./lib/ScrollToTop";
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      page_has_loaded: false,
+    };
+
+    this.handlePageLoad = this.handlePageLoad.bind(this);
+  }
+
+  handlePageLoad() {
+    this.setState({
+      page_has_loaded: true,
+    });
   }
 
   render() {
@@ -20,8 +32,17 @@ class App extends React.Component {
           <Route
             path="/lines/([1-9]|10|11|12|13|14|15|16)"
             component={LinePage}
-          ></Route>
-          <Route path="/" component={LandingPage} />
+          />
+          <Route
+            path="/"
+            render={(props) => (
+              <LandingPage
+                {...props}
+                handlePageLoad={this.handlePageLoad}
+                page_has_loaded={this.state.page_has_loaded}
+              />
+            )}
+          />
         </Switch>
       </Router>
     );

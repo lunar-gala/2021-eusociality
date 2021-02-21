@@ -46,8 +46,9 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
   padding-bottom: 2.5vh;
   transition-duration: 1s;
   pointer-events: none;
+  z-index: $Z_INDEX_HEADER;
 
-  &.default {
+  &.default, &.desktop-line-page-open {
     pointer-events: all;
     .navbar-container {
       animation: blur-in $ANIMATION_DURATION_BLUR forwards;
