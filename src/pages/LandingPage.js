@@ -104,6 +104,7 @@ class LandingPage extends React.Component {
 
     // Update the state of the site based on the URL
     let landing_page_state = CONSTANTS.LANDING_PAGE_STATES.DEFAULT;
+    let selectedLineIdx = -1;
 
     const currPathMatches = regexFindPathName.exec(
       this.props.location.pathname
@@ -114,8 +115,19 @@ class LandingPage extends React.Component {
 
     if (currPathMatches !== null) {
       const currPathName = currPathMatches[1];
-      landing_page_state =
-        CONSTANTS.PATH_TO_STATE[isMobile ? "mobile" : "desktop"][currPathName];
+
+      if (isNaN(currPathName)) {
+        landing_page_state =
+          CONSTANTS.PATH_TO_STATE[isMobile ? "mobile" : "desktop"][
+            currPathName
+          ];
+      }
+      // This matches a line number
+      else {
+        landing_page_state =
+          CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LINE_PAGE_LOAD;
+        selectedLineIdx = parseInt(currPathName);
+      }
     } else {
       landing_page_state =
         CONSTANTS.PATH_TO_STATE[isMobile ? "mobile" : "desktop"]["start"];
@@ -130,7 +142,7 @@ class LandingPage extends React.Component {
        * Which line is selected. Defaults to -1 when nothing is selected.
        * Used on the desktop landing page.
        */
-      selectedLineIdx: -1,
+      selectedLineIdx: selectedLineIdx,
       /** @brief First touch recorded by `touchStart` handler */
       first_touch: [],
       /** @brief Current touch recorded by `touchMove` handler */
@@ -156,7 +168,7 @@ class LandingPage extends React.Component {
        * set this to true, so when we set it back to false, we get an animation
        * triggered for each line change.
        */
-      fading: false,
+      fading: true,
       /**
        * @brief Keeps track of the interval that updates the countdown timer.
        *
@@ -312,12 +324,25 @@ class LandingPage extends React.Component {
     ) {
       this.setState({
         landing_page_animations_header: "start-animation",
-          landing_page_animations_sidebar: "start-animation",
+        landing_page_animations_sidebar: "start-animation",
       });
       setTimeout(() => {
         this.handlerSetLandingPageState(
           CONSTANTS.LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_OPEN
         );
+      }, 1000);
+    } else if (
+      start_state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LINE_PAGE_LOAD
+    ) {
+      this.setState({
+        landing_page_animations_header: "start-animation",
+        landing_page_animations_sidebar: "start-animation",
+      });
+      setTimeout(() => {
+        this.handlerSetLandingPageState(
+          CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LINE_PAGE_OPEN
+        );
+        this.handlerSelectedLineIdx(this.state.selectedLineIdx);
       }, 1000);
     }
   }
@@ -442,12 +467,14 @@ class LandingPage extends React.Component {
    *
    * @param {state} state See constants.js for all states
    */
-  handlerSetLandingPageState (state) {
+  handlerSetLandingPageState(state) {
     if (state === this.state.landing_page_state) {
       return;
     }
 
-    console.log(`[DEBUG] Old State ${this.state.landing_page_state}, New State ${state}`);
+    console.log(
+      `[DEBUG] Old State ${this.state.landing_page_state}, New State ${state}`
+    );
 
     this.setState({
       landing_page_state: state,
@@ -462,6 +489,16 @@ class LandingPage extends React.Component {
       this.setState({
         landing_page_animations_navbar: "",
       });
+
+      // Fix url paths
+      if (this.state.selectedLineIdx >= 0) {
+        this.props.history.replace("/");
+      } else {
+        this.props.history.push("/");
+      }
+
+      // Reset lines info
+      this.handlerSelectedLineIdx(-1);
     }
 
     // If we scroll in the lines menu, the scroll will persist so we reset it
@@ -483,8 +520,13 @@ class LandingPage extends React.Component {
 
     const { history } = this.props;
 
-    if (CONSTANTS.STATE_TO_PATH[state] && (this.props.location.pathname !== CONSTANTS.STATE_TO_PATH[state])) {
-      console.log(`[DEBUG] state ${state} pushed to history, previous ${this.props.location.pathname}`);
+    if (
+      CONSTANTS.STATE_TO_PATH[state] &&
+      this.props.location.pathname !== CONSTANTS.STATE_TO_PATH[state]
+    ) {
+      console.log(
+        `[DEBUG] state ${state} pushed to history, previous ${this.props.location.pathname}`
+      );
       history.push(CONSTANTS.STATE_TO_PATH[state]);
     } else {
       console.log(`[DEBUG] state ${state} has no constant`);
@@ -492,6 +534,16 @@ class LandingPage extends React.Component {
   }
 
   handlerSelectedLineIdx(index) {
+    // This means we need to go to default landing page state
+    if (index < 0) {
+      this.setState({
+        fading: true,
+        selectedLineIdx: index,
+      });
+
+      return;
+    }
+
     // Expand the cube
     if (!this.state.cube_has_expanded) {
       let object_children = this.state.object.children[0].children;
@@ -523,6 +575,7 @@ class LandingPage extends React.Component {
         cube_has_expanded: true,
       });
     }
+
     // TODO: change this once we get an alumni asset
     let camera_index = (index % 16) + 1;
     new TWEEN.Tween(this.state.camera.position)
@@ -555,8 +608,25 @@ class LandingPage extends React.Component {
       })
       .start();
 
+    /**
+     * Put the line number in the url. We want this because
+     *
+     * 1. If a user navigates to /6, then the 6th line should show up, without
+     *    all the transition stuff
+     * 2. If a user navigates to the line page and then goes back, they should
+     *    be able to go the line they came from
+     */
+    if (this.state.selectedLineIdx >= 0) {
+      this.props.history.replace(`/${index + 1}`);
+    } else {
+      this.props.history.push(`/${index + 1}`);
+    }
+
     // fade out
     this.setState({ fading: true });
+    this.handlerSetLandingPageState(
+      CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LINE_PAGE_OPEN
+    );
 
     this.timer = setTimeout(() => {
       // fade back in
@@ -650,7 +720,7 @@ class LandingPage extends React.Component {
     window.addEventListener("resize", this.updateWindowDimensions);
     window.addEventListener("deviceorientation", this.handleOrientation, true);
     window.addEventListener("pageshow", () => {
-      console.log("[DEBUG] pageshow event hit")
+      console.log("[DEBUG] pageshow event hit");
       if (this.state.isMobile) {
         this.startupAnimationSequenceMobile();
       } else {
@@ -665,7 +735,11 @@ class LandingPage extends React.Component {
       console.log(loc, action);
       if (action === "POP") {
         console.log("[DEBUG] Back button pressed, POP: ", loc);
-        this.handlerSetLandingPageState(CONSTANTS.PATH_TO_STATE["desktop_nav"][UTIL.return_first_regex_match(regexFindPathName, loc.pathname)]);
+        this.handlerSetLandingPageState(
+          CONSTANTS.PATH_TO_STATE["desktop_nav"][
+            UTIL.return_first_regex_match(regexFindPathName, loc.pathname)
+          ]
+        );
       }
     });
 
@@ -798,9 +872,8 @@ class LandingPage extends React.Component {
             wireframe_index = 1;
             asset_index = 0;
 
-            let temp_object_children = object_children[i].children[
-              asset_index
-            ].children;
+            let temp_object_children =
+              object_children[i].children[asset_index].children;
 
             for (let j = 0; j < temp_object_children.length; j++) {
               temp_object_children[j].material = iridescence_material_main;
@@ -1038,7 +1111,9 @@ class LandingPage extends React.Component {
             (this.state.landing_page_state ===
               CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LANDING_PAGE_CUBE_INTRO ||
               this.state.landing_page_state ===
-                CONSTANTS.LANDING_PAGE_STATES.DEFAULT)
+                CONSTANTS.LANDING_PAGE_STATES.DEFAULT ||
+              this.state.landing_page_state ===
+                CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LINE_PAGE_OPEN)
               ? "visible"
               : ""
           }`}

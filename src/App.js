@@ -2,7 +2,6 @@ import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import LinePage from "./pages/LinePage";
-import PeoplePage from "./pages/PeoplePage";
 import ScrollToTop from "./lib/ScrollToTop";
 
 /**

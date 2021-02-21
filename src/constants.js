@@ -34,6 +34,8 @@ export const LANDING_PAGE_STATES = {
   DESKTOP_LANDING_PAGE_CUBE_INTRO: "desktop-landing-page-cube-intro",
   DESKTOP_ABOUT_PAGE_LOAD: "desktop-about-page-load",
   DESKTOP_ABOUT_PAGE_OPEN: "desktop-about-page-open",
+  DESKTOP_LINE_PAGE_LOAD: "desktop-line-page-load",
+  DESKTOP_LINE_PAGE_OPEN: "desktop-line-page-open",
   DESKTOP_PEOPLE_PAGE_LOAD: "desktop-people-page-load",
   DESKTOP_PEOPLE_PAGE_OPEN: "desktop-people-page-open",
   DESKTOP_WATCH_PAGE_LOAD: "desktop-watch-page-load",
