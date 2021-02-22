@@ -467,7 +467,7 @@ class LandingPage extends React.Component {
    * create a loading function here to wait for the cube to load before
    * expanding.
    */
-  playCubeExpand() {
+  playCubeExpand(camera_index) {
     let temp = function check_cube_progress() {
       console.log("checking cube progress", this.state.assetHasLoaded);
       if (this.state.assetHasLoaded) {
@@ -493,6 +493,36 @@ class LandingPage extends React.Component {
                 this.state.cube_positions[i].end.y,
                 this.state.cube_positions[i].end.z
               );
+            })
+            .start();
+
+          new TWEEN.Tween(this.state.camera.position)
+            .to(
+              {
+                x: this.state.camera_positions[camera_index].position.x,
+                y: this.state.camera_positions[camera_index].position.y,
+                z: this.state.camera_positions[camera_index].position.z,
+              },
+              2000
+            )
+            .easing(TWEEN.Easing.Cubic.InOut)
+            .onUpdate(() => {
+              this.setState({
+                curr_camera_position: {
+                  x: this.state.camera.position.x,
+                  y: this.state.camera.position.y,
+                  z: this.state.camera.position.z,
+                },
+              });
+            })
+            .onComplete(() => {
+              this.setState({
+                curr_camera_position: {
+                  x: this.state.camera_positions[camera_index].position.x,
+                  y: this.state.camera_positions[camera_index].position.y,
+                  z: this.state.camera_positions[camera_index].position.z,
+                },
+              });
             })
             .start();
         }
@@ -587,44 +617,44 @@ class LandingPage extends React.Component {
       return;
     }
 
-    // Expand the cube
+    // Expand the cube and move the camera to the correct position
     if (!this.state.cube_has_expanded) {
       this.setState({
         cube_has_expanded: true,
       });
-      this.playCubeExpand();
-    }
-
-    let camera_index = index;
-    new TWEEN.Tween(this.state.camera.position)
-      .to(
-        {
-          x: this.state.camera_positions[camera_index].position.x,
-          y: this.state.camera_positions[camera_index].position.y,
-          z: this.state.camera_positions[camera_index].position.z,
-        },
-        2000
-      )
-      .easing(TWEEN.Easing.Cubic.InOut)
-      .onUpdate(() => {
-        this.setState({
-          curr_camera_position: {
-            x: this.state.camera.position.x,
-            y: this.state.camera.position.y,
-            z: this.state.camera.position.z,
-          },
-        });
-      })
-      .onComplete(() => {
-        this.setState({
-          curr_camera_position: {
+      this.playCubeExpand(index);
+    } else {
+      let camera_index = index;
+      new TWEEN.Tween(this.state.camera.position)
+        .to(
+          {
             x: this.state.camera_positions[camera_index].position.x,
             y: this.state.camera_positions[camera_index].position.y,
             z: this.state.camera_positions[camera_index].position.z,
           },
-        });
-      })
-      .start();
+          2000
+        )
+        .easing(TWEEN.Easing.Cubic.InOut)
+        .onUpdate(() => {
+          this.setState({
+            curr_camera_position: {
+              x: this.state.camera.position.x,
+              y: this.state.camera.position.y,
+              z: this.state.camera.position.z,
+            },
+          });
+        })
+        .onComplete(() => {
+          this.setState({
+            curr_camera_position: {
+              x: this.state.camera_positions[camera_index].position.x,
+              y: this.state.camera_positions[camera_index].position.y,
+              z: this.state.camera_positions[camera_index].position.z,
+            },
+          });
+        })
+        .start();
+    }
 
     /**
      * Put the line number in the url. We want this because
