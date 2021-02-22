@@ -20,6 +20,11 @@ class App extends React.Component {
     this.handlePageLoad = this.handlePageLoad.bind(this);
   }
 
+  /**
+   * Indicate that the page has loaded, so we are free to run animations
+   * without waiting for any assets to load, which would chop up the smoothness
+   * of the animation.
+   */
   handlePageLoad () {
     this.setState({
       page_has_loaded: true,
@@ -40,6 +45,7 @@ class App extends React.Component {
                     render={(props) => (
                       <LinePage
                         {...props}
+                        handlePageLoad={this.handlePageLoad}
                       />
                     )}
                   />

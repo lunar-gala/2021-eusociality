@@ -36,6 +36,9 @@ class LinePage extends React.Component {
 
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+
+    // We need to trigger this to tell the App to allow transitions to happen on the main page
+    this.props.handlePageLoad();
   }
 
   componentDidMount() {
@@ -153,6 +156,7 @@ class LinePage extends React.Component {
 
 LinePage.propTypes = {
   location: PropTypes.object,
+  handlePageLoad: PropTypes.func,
   history: PropTypes.object,
 };
 

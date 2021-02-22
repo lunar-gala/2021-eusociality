@@ -224,7 +224,9 @@ class LandingPage extends React.Component {
     );
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
     this._onMouseMove = this._onMouseMove.bind(this);
+    this.pageShow = this.pageShow.bind(this);
     this.playCubeAnimation = this.playCubeAnimation.bind(this);
+    this.playCubeExpand = this.playCubeExpand.bind(this);
     this.render_cube = this.render_cube.bind(this);
     this.touchStart = this.touchStart.bind(this);
     this.touchMove = this.touchMove.bind(this);
@@ -245,7 +247,6 @@ class LandingPage extends React.Component {
 
         for (let i = 0; i < this.state.cube_positions.length; i++) {
           let curr_child = object_children[i];
-          console.log(curr_child);
 
           new TWEEN.Tween(curr_child.position)
             .to(
@@ -462,6 +463,48 @@ class LandingPage extends React.Component {
   }
 
   /**
+   * Sometimes the asset has not loaded when we want to expand the cube, so we
+   * create a loading function here to wait for the cube to load before
+   * expanding.
+   */
+  playCubeExpand() {
+    let temp = function check_cube_progress() {
+      console.log('checking cube progress', this.state.assetHasLoaded)
+      if (this.state.assetHasLoaded) {
+        clearInterval(interval);
+        let object_children = this.state.object.children[0].children;
+
+        for (let i = 0; i < this.state.cube_positions.length; i++) {
+          let curr_child = object_children[i];
+
+          new TWEEN.Tween(curr_child.position)
+            .to(
+              {
+                x: this.state.cube_positions[i].end.x,
+                y: this.state.cube_positions[i].end.y,
+                z: this.state.cube_positions[i].end.z,
+              },
+              2000
+            )
+            .easing(TWEEN.Easing.Cubic.InOut)
+            .onComplete(() => {
+              curr_child.position.set(
+                this.state.cube_positions[i].end.x,
+                this.state.cube_positions[i].end.y,
+                this.state.cube_positions[i].end.z
+              );
+            })
+            .start();
+        }
+      }
+    };
+
+    temp = temp.bind(this);
+
+    let interval = setInterval(temp, 10);
+  }
+
+  /**
    * Sets the state of the landing page and syncs the URL with the state being
    * set.
    *
@@ -546,34 +589,10 @@ class LandingPage extends React.Component {
 
     // Expand the cube
     if (!this.state.cube_has_expanded) {
-      let object_children = this.state.object.children[0].children;
-
-      for (let i = 0; i < this.state.cube_positions.length; i++) {
-        let curr_child = object_children[i];
-        console.log(curr_child);
-
-        new TWEEN.Tween(curr_child.position)
-          .to(
-            {
-              x: this.state.cube_positions[i].end.x,
-              y: this.state.cube_positions[i].end.y,
-              z: this.state.cube_positions[i].end.z,
-            },
-            2000
-          )
-          .easing(TWEEN.Easing.Cubic.InOut)
-          .onComplete(() => {
-            curr_child.position.set(
-              this.state.cube_positions[i].end.x,
-              this.state.cube_positions[i].end.y,
-              this.state.cube_positions[i].end.z
-            );
-          })
-          .start();
-      }
       this.setState({
         cube_has_expanded: true,
       });
+      this.playCubeExpand();
     }
 
     let camera_index = index;
@@ -710,8 +729,8 @@ class LandingPage extends React.Component {
     });
   }
 
-  startupWrapper () {
-    console.log("[DEBUG] Hit startup Wrapper")
+  startupWrapper() {
+    console.log("[DEBUG] Hit startup Wrapper");
     if (this.state.isMobile) {
       this.startupAnimationSequenceMobile();
     } else {
@@ -722,6 +741,12 @@ class LandingPage extends React.Component {
     }
   }
 
+  pageShow() {
+    console.log("[DEBUG] pageshow event hit");
+    this.props.handlePageLoad();
+    this.startupWrapper();
+  }
+
   /**
    * @brief We create the 3D asset here and load it onto the page.
    */
@@ -729,18 +754,12 @@ class LandingPage extends React.Component {
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
     window.addEventListener("deviceorientation", this.handleOrientation, true);
-    window.addEventListener("pageshow", () => {
-      console.log("[DEBUG] pageshow event hit");
-      this.props.handlePageLoad();
-
-      this.startupWrapper();
-    });
+    window.addEventListener("pageshow", this.pageShow);
 
     // If we already have loaded, just trigger the startup sequence
     if (this.props.page_has_loaded) {
       this.startupWrapper();
     }
-
 
     this.props.history.listen((loc, action) => {
       console.log(loc, action);
@@ -1067,6 +1086,7 @@ class LandingPage extends React.Component {
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateWindowDimensions);
     window.removeEventListener("deviceorientation", this.handleOrientation);
+    window.removeEventListener("pageshow", this.pageShow);
   }
 
   updateWindowDimensions() {
