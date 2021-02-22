@@ -40,6 +40,9 @@ export const LANDING_PAGE_STATES = {
   DESKTOP_PEOPLE_PAGE_OPEN: "desktop-people-page-open",
   DESKTOP_WATCH_PAGE_LOAD: "desktop-watch-page-load",
   DESKTOP_WATCH_PAGE_OPEN: "desktop-watch-page-open",
+
+  // Line page
+  LINE_PAGE: "line-page",
 };
 
 export const PATH_TO_STATE = {

@@ -33,6 +33,10 @@ $DESKTOP_SIDE_NAV_SLIDE_DURATION: 400ms;
     opacity: 0;
   }
 
+  &.line-page {
+    opacity: 1;
+  }
+
   .link-wrapper {
     display: flex;
     flex-direction: row;
