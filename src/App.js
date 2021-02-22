@@ -3,6 +3,8 @@ import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import LinePage from "./pages/LinePage";
 import ScrollToTop from "./lib/ScrollToTop";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { Line } from "three";
 
 /**
  * This is the highest level of the web app.
@@ -13,12 +15,13 @@ class App extends React.Component {
 
     this.state = {
       page_has_loaded: false,
+      transition_key: 0
     };
 
     this.handlePageLoad = this.handlePageLoad.bind(this);
   }
 
-  handlePageLoad() {
+  handlePageLoad () {
     this.setState({
       page_has_loaded: true,
     });
@@ -28,22 +31,34 @@ class App extends React.Component {
     return (
       <Router>
         <ScrollToTop />
-        <Switch>
-          <Route
-            path="/lines/([1-9]|10|11|12|13|14|15|16)"
-            component={LinePage}
-          />
-          <Route
-            path="/"
-            render={(props) => (
-              <LandingPage
-                {...props}
-                handlePageLoad={this.handlePageLoad}
-                page_has_loaded={this.state.page_has_loaded}
-              />
-            )}
-          />
-        </Switch>
+        <Route
+          render={({location}) => (
+            <TransitionGroup>
+              <CSSTransition timeout={2000} classNames="fade" key={location.pathname.includes('lines')}>
+                <Switch location={location}>
+                  <Route
+                    path="/lines/([1-9]|10|11|12|13|14|15|16)"
+                    render={(props) => (
+                      <LinePage
+                        {...props}
+                      />
+                    )}
+                  />
+                  <Route
+                    path="/"
+                    render={(props) => (
+                      <LandingPage
+                        {...props}
+                        handlePageLoad={this.handlePageLoad}
+                        page_has_loaded={this.state.page_has_loaded}
+                      />
+                    )}
+                  />
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
+          )}
+        />
       </Router>
     );
   }

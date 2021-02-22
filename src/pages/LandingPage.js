@@ -126,7 +126,7 @@ class LandingPage extends React.Component {
       else {
         landing_page_state =
           CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LINE_PAGE_LOAD;
-        selectedLineIdx = parseInt(currPathName);
+        selectedLineIdx = parseInt(currPathName) - 1;
       }
     } else {
       landing_page_state =
