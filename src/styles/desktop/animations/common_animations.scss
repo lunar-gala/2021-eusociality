@@ -59,3 +59,19 @@ $ANIMATION_DURATION_SLIDE_IN: 500ms;
     transform: translateX(0);
   }
 }
+
+$ANIMATION_DURATION_FADE: 1s;
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity $ANIMATION_DURATION_FADE ease-in;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity $ANIMATION_DURATION_FADE ease-in;
+}

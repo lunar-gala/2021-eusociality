@@ -34,10 +34,15 @@ export const LANDING_PAGE_STATES = {
   DESKTOP_LANDING_PAGE_CUBE_INTRO: "desktop-landing-page-cube-intro",
   DESKTOP_ABOUT_PAGE_LOAD: "desktop-about-page-load",
   DESKTOP_ABOUT_PAGE_OPEN: "desktop-about-page-open",
+  DESKTOP_LINE_PAGE_LOAD: "desktop-line-page-load",
+  DESKTOP_LINE_PAGE_OPEN: "desktop-line-page-open",
   DESKTOP_PEOPLE_PAGE_LOAD: "desktop-people-page-load",
   DESKTOP_PEOPLE_PAGE_OPEN: "desktop-people-page-open",
   DESKTOP_WATCH_PAGE_LOAD: "desktop-watch-page-load",
   DESKTOP_WATCH_PAGE_OPEN: "desktop-watch-page-open",
+
+  // Line page
+  LINE_PAGE: "line-page",
 };
 
 export const PATH_TO_STATE = {
@@ -57,6 +62,12 @@ export const PATH_TO_STATE = {
     about: LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_LOAD,
     people: LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_LOAD,
     watch: LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_LOAD,
+  },
+  desktop_nav: {
+    "": LANDING_PAGE_STATES.DEFAULT,
+    about: LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN,
+    people: LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_OPEN,
+    watch: LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN,
   },
 };
 
@@ -131,12 +142,12 @@ export const ANIMATION_DURATION = 3000;
 export const IRIDESCENCE_SETTINGS_MAIN = {
   THICKNESS: 293,
   REFRACTIVE_INDEX_FILM: 1.5,
-  REFRACTIVE_INDEX_BASE: 2.3,
-  BOOST: 2,
+  REFRACTIVE_INDEX_BASE: 2.6,
+  BOOST: 17.9,
+  IRIDESCENT_TEXTURE_RATIO: 0.96,
   BASE_TEXTURE_RATIO: 0.52,
-  IRIDESCENT_TEXTURE_RATIO: 0.75,
-  BRIGHTNESS: 1.2,
-  TEXTURE_ZOOM: 0.3,
+  BRIGHTNESS: 0.3,
+  TEXTURE_ZOOM: 0.8,
   SIZE: 64,
 };
 

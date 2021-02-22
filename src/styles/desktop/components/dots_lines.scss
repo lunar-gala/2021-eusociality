@@ -28,7 +28,7 @@
 .vertical-line {
   height: 100vh;
   top: 0;
-  position: absolute;
+  position: fixed;
   border-left: 1px solid white;
   border-right: 1px solid white;
   pointer-events: none;

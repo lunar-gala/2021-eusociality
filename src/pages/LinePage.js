@@ -29,12 +29,16 @@ class LinePage extends React.Component {
     )[1];
 
     this.state = {
+      landing_page_state: CONSTANTS.LANDING_PAGE_STATES.LINE_PAGE,
       selectedLineIdx: currLineNumber - 1,
       showBackButton: true,
     };
 
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+
+    // We need to trigger this to tell the App to allow transitions to happen on the main page
+    this.props.handlePageLoad();
   }
 
   componentDidMount() {
@@ -132,13 +136,17 @@ class LinePage extends React.Component {
         />
         {/* Additional overlay components */}
         <div className="fixed-overlay">
-          <DesktopSideNav />
+          <DesktopSideNav
+            landing_page_state={this.state.landing_page_state}
+          />
         </div>
         <div id="back-button-wrapper">
           <div
             id="back-button"
             className={this.state.showBackButton ? "show" : ""}
-            onClick={() => this.props.history.goBack()}
+            onClick={() => {
+              this.props.history.goBack();
+            }}
           />
         </div>
       </div>
@@ -148,6 +156,7 @@ class LinePage extends React.Component {
 
 LinePage.propTypes = {
   location: PropTypes.object,
+  handlePageLoad: PropTypes.func,
   history: PropTypes.object,
 };
 

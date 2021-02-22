@@ -41,7 +41,8 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
   justify-content: center;
   overflow: hidden;
 
-  &.desktop-about-page-open {
+  &.desktop-about-page-open,
+  &.desktop-watch-page-open {
     .landing-page-background {
       opacity: 0.65;
       transition-duration: 1s;
@@ -51,12 +52,8 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
       opacity: 0;
     }
   }
-  &.desktop-watch-page-open {
-    .landing-page-background {
-      opacity: 0.65;
-      transition-duration: 1s;
-    }
 
+  &.desktop-people-page-open {
     #main-screen #curr-line {
       opacity: 0;
     }
@@ -75,16 +72,18 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
   #main-screen {
     flex-direction: row;
 
-    &.desktop-landing-page-load {
-      opacity: 0;
-    }
-
     #curr-line {
       position: absolute;
       left: $X_MARGIN/2;
       width: 100vw - $X_MARGIN/2;
       bottom: 40vh;
       display: block;
+      opacity: 0;
+
+      &.notFaded {
+        opacity: 1;
+        transition: 0.2s;
+      }
 
       #line-name {
         font-size: $FONT_SIZE_LINE;
@@ -215,12 +214,12 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     &.start-animation {
       animation: blur-in $ANIMATION_DURATION_BLUR forwards;
     }
-    &.desktop-landing-page-load, .desktop-landing-page-cube-intro {
+    &.desktop-landing-page-load, &.desktop-landing-page-cube-intro, &.desktop-line-page-load {
       opacity: 0;
     }
     &.desktop-about-page-load, &.desktop-watch-page-load, &.desktop-people-page-load,
     &.desktop-about-page-open, &.desktop-watch-page-open, &.desktop-people-page-open {
-      opacity: 0;
+      opacity: 0 !important;
     }
   }
 }
