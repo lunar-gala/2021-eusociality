@@ -22,29 +22,34 @@ class PeoplePage extends React.Component {
         <Parallax
           strength={500}
           style={{
-            position: 'absolute',
+            position: "absolute",
             top: 0,
             bottom: 0,
-            left: '-50vw',
-            right: '50vw',
+            left: "-50vw",
+            right: "50vw",
           }}
         >
-          <Background style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0,}}>
-          <PeopleBackground />
-
+          <Background
+            style={{
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+            }}
+          >
+          {/*
+            <PeopleBackground />
+          */}
           </Background>
         </Parallax>
 
-        {true && (
-          <>
-            <div id="team-accordion">
-              <PeopleAccordion />
-            </div>
+        <div id="team-accordion">
+          <PeopleAccordion />
+        </div>
 
-            <div className="vertical-line" id="outer-lines" />
-            <div className="vertical-line" id="inner-lines" />
-          </>
-        )}
+        <div className="vertical-line" id="outer-lines" />
+        <div className="vertical-line" id="inner-lines" />
       </div>
     );
   }

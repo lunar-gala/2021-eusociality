@@ -6,9 +6,6 @@ import filter from "../../assets/img/filter.jpg";
 class PeopleBackground extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
-    };
   }
 
   render() {

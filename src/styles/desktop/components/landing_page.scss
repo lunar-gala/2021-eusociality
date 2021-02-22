@@ -15,6 +15,9 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
   height: 100vh;
   opacity: 0;
   transition-duration: $LONG_ANIMATION_DURATION;
+  position: fixed;
+  top: 0;
+  left: 0;
 
   &.desktop-landing-page-load {
     opacity: 0;
@@ -40,15 +43,18 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  height: 100vh;
+  width: 100vw;
 
   &.desktop-about-page-open,
+  &.desktop-people-page-open,
   &.desktop-watch-page-open {
     .landing-page-background {
       opacity: 0.65;
       transition-duration: 1s;
     }
 
-    #main-screen #curr-line {
+    #main-screen #curr-line.notFaded {
       opacity: 0;
     }
   }
