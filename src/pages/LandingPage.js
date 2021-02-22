@@ -85,8 +85,8 @@ const CAMERA_PAN_FACTOR_MOBILE = {
 
 /** @brief How much the camera tilts on mouse move */
 const CAMERA_PAN_FACTOR_DESKTOP = {
-  x: 50,
-  y: 50,
+  x: 25,
+  y: 25,
   z: 20,
 };
 
