@@ -576,8 +576,7 @@ class LandingPage extends React.Component {
       });
     }
 
-    // TODO: change this once we get an alumni asset
-    let camera_index = (index % 16) + 1;
+    let camera_index = index;
     new TWEEN.Tween(this.state.camera.position)
       .to(
         {
@@ -921,7 +920,7 @@ class LandingPage extends React.Component {
           camera_positions: object.cameras,
         });
 
-        let starting_camera = object.cameras[0];
+        let starting_camera = object.cameras[16];
 
         camera.position.set(
           starting_camera.position.x,

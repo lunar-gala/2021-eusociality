@@ -13,7 +13,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
   background-color: black;
   width: 100%;
   height: 100vh;
-  opacity: 1 !important;
+  opacity: 0;
   transition-duration: $LONG_ANIMATION_DURATION;
 
   &.desktop-landing-page-load {

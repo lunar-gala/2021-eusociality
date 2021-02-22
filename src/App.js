@@ -4,7 +4,6 @@ import LandingPage from "./pages/LandingPage";
 import LinePage from "./pages/LinePage";
 import ScrollToTop from "./lib/ScrollToTop";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { Line } from "three";
 
 /**
  * This is the highest level of the web app.
@@ -34,7 +33,7 @@ class App extends React.Component {
         <Route
           render={({location}) => (
             <TransitionGroup>
-              <CSSTransition timeout={2000} classNames="fade" key={location.pathname.includes('lines')}>
+              <CSSTransition timeout={1000} classNames="fade" key={location.pathname.includes('lines')}>
                 <Switch location={location}>
                   <Route
                     path="/lines/([1-9]|10|11|12|13|14|15|16)"
