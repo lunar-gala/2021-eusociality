@@ -49,6 +49,7 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
       width: 25%;
 
       .number {
+        font-family: 'Sprat Type Condensed';
         font-size: 14.4vw;
         font-weight: 300;
         letter-spacing: -0.12em;
@@ -73,9 +74,10 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
     width: 100vw;
 
     #show-date-text {
+      font-family: 'Sprat Type Condensed';
       font-size: 4.44vw;
       font-weight: 300;
-      margin-left: $X_MARGIN*3/8;
+      margin-left: $X_MARGIN*4/8;
       margin-right: 12px;
       backface-visibility: hidden;
     }
@@ -103,10 +105,11 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
     width: 100vw;
 
     #show-time-text {
+      font-family: 'Sprat Type Condensed';
       font-size: 4.44vw;
       font-weight: 300;
       letter-spacing: -0.12em;
-      margin-right: $X_MARGIN*3/8;
+      margin-right: $X_MARGIN*4/8;
       margin-left: 12px;
       backface-visibility: hidden;
     }
