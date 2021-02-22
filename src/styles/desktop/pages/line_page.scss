@@ -17,6 +17,7 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
   from {
     transform: translateY(0);
   }
+
   to {
     transform: translateY($SLIDE_AMOUNT_A);
   }
@@ -26,6 +27,7 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
   from {
     transform: translateY(0);
   }
+
   to {
     transform: translateY($SLIDE_AMOUNT_B);
   }
@@ -35,6 +37,7 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
   from {
     transform: translateY(0);
   }
+
   to {
     transform: translateY($SLIDE_AMOUNT_C);
   }
@@ -44,6 +47,7 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
   from {
     transform: translateY(0);
   }
+
   to {
     transform: translateY($SLIDE_AMOUNT_D);
   }
@@ -56,32 +60,38 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
   -o-animation: blur 1s linear forwards;
   animation: blur 1s linear forwards;
 }
+
 @-webkit-keyframes blur {
   from {
     -webkit-filter: blur(10px);
     filter: blur(10px);
   }
+
   to {
     -webkit-filter: blur(0px);
     filter: blur(0px);
   }
 }
+
 @-moz-keyframes blur {
   from {
     -moz-filter: blur(10px);
     filter: blur(10px);
   }
+
   to {
     -moz-filter: blur(0px);
     filter: blur(0px);
   }
 }
+
 @keyframes blur {
   from {
     -webkit-filter: blur(10px);
     -moz-filter: blur(10px);
     filter: blur(10px);
   }
+
   to {
     -webkit-filter: blur(0px);
     -moz-filter: blur(0px);
@@ -113,6 +123,45 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
       background-color: grey;
       opacity: 0.5;
       z-index: 0;
+    }
+  }
+
+  .fixed-overlay {
+    position: fixed;
+    top: 36px;
+    left: $X_MARGIN/2;
+
+    .links {
+      position: static;
+      top: 0;
+      left: 0;
+
+      .link-wrapper .left-bar {
+        display: none;
+      }
+    }
+  }
+
+  #back-button-wrapper {
+    position: fixed;
+    top: calc(#{$TITLE_MARGIN_TOP} + 40px);
+    left: $X_MARGIN/2;
+
+    #back-button {
+      width: $BACK_BUTTON_SIZE;
+      height: $BACK_BUTTON_SIZE;
+      border-left: $BACK_BUTTON_STROKE_WIDTH solid white;
+      border-bottom: $BACK_BUTTON_STROKE_WIDTH solid white;
+      transform: rotate(45deg);
+
+      cursor: pointer;
+
+      opacity: 1;
+      transition-duration: 1s;
+
+      &.show {
+        opacity: 1;
+      }
     }
   }
 
@@ -179,56 +228,6 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
         }
       }
     }
-
-    /*
-    #pictures-top {
-      margin-top: 9.4vw;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      width: 100%;
-
-      .sliding-image {
-        width: 16vw;
-        height: 23.8vw;
-
-        .frame {
-          width: calc(100% - 4px);
-          height: calc(100% - 2px);
-          border: 1px solid white;
-        }
-
-        .image {
-          width: 16vw;
-          height: 23.8vw;
-          z-index: -1;
-          position: absolute;
-          object-fit: none;
-
-          animation-delay: 1s;
-          animation-duration: 2s;
-          animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-          animation-fill-mode: forwards;
-
-          &#a {
-            animation-name: slide-image-a;
-          }
-
-          &#b {
-            animation-name: slide-image-b;
-          }
-
-          &#c {
-            animation-name: slide-image-c;
-          }
-
-          &#d {
-            animation-name: slide-image-d;
-          }
-        }
-      }
-    }
-    */
 
     #content {
       display: flex;
@@ -298,62 +297,5 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
       }
     }
 
-    /*
-    #pictures-bottom {
-      display: flex;
-      flex-direction: row;
-      margin-top: 2.86vw;
-
-      img {
-        height: 47vw;
-      }
-
-      #left {
-        margin-right: 3.61vw;
-        object-fit: cover;
-      }
-    }
-    
-  }
-  */
-
-    .fixed-overlay {
-      position: fixed;
-      top: 0;
-      left: $X_MARGIN/2;
-
-      .links {
-        position: static;
-        top: 0;
-        left: 0;
-
-        .link-wrapper .left-bar {
-          display: none;
-        }
-      }
-    }
-
-    #back-button-wrapper {
-      position: fixed;
-      top: 50vh;
-      left: $X_MARGIN/2;
-
-      #back-button {
-        width: $BACK_BUTTON_SIZE;
-        height: $BACK_BUTTON_SIZE;
-        border-left: $BACK_BUTTON_STROKE_WIDTH solid white;
-        border-bottom: $BACK_BUTTON_STROKE_WIDTH solid white;
-        transform: rotate(45deg);
-
-        cursor: pointer;
-
-        opacity: 1;
-        transition-duration: 1s;
-
-        &.show {
-          opacity: 1;
-        }
-      }
-    }
   }
 }
