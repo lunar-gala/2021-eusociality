@@ -1111,10 +1111,8 @@ class LandingPage extends React.Component {
                     state: { currLineIdx: this.state.selectedLineIdx },
                   }}
                 >
-                  <span id="more-info-text">See More</span>
-                  <div id="more-info-arrow">
-                    <div id="arrow" />
-                  </div>
+                  <span id="more-info-text">See More →</span>
+                  
                 </Link>
                 <div
                   id="see-more-line-wrapper"

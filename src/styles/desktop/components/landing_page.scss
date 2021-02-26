@@ -89,7 +89,6 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
       #line-name {
         font-size: $FONT_SIZE_LINE;
         text-transform: uppercase;
-        // transform: $FONT_SPRAT_STRETCH; // Shouldn't be any stretch
         font-weight: $FONT_SPRAT_WEIGHT;
         letter-spacing: $HEADER_TRACKING;
         word-spacing: $HEADER_WORD_SPACING;
@@ -140,11 +139,11 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
             cursor: pointer;
 
             #more-info-text {
-              font-family: $FONT_BODY;
+              font-family: $FONT_SUBHEAD;
               text-transform: uppercase;
               font-size: $FONT_SIZE_LABEL;
               font-weight: $FONT_LABEL_WEIGHT;
-              border-bottom: 2px solid white;
+              // border-bottom: 2px solid white;
               margin-right: 8px;
             }
 
