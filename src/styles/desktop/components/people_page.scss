@@ -90,10 +90,9 @@
     .team-title {
       font-family: $FONT_DISPLAY;
       text-transform: uppercase;
-      //transform: $FONT_SPRAT_STRETCH;
       letter-spacing: $FONT_SPRAT_KERN;
       font-weight: $FONT_SPRAT_WEIGHT;
-      font-size: 14vh; //May need to be smaller
+      font-size: 10vh; // TODO: May need to be bigger
       margin: 0;
       padding: 0;
     }

@@ -1264,9 +1264,6 @@ class LandingPage extends React.Component {
                   }}
                 >
                   <span id="more-info-text">See More</span>
-                  <div id="more-info-arrow">
-                    <div id="arrow" />
-                  </div>
                 </Link>
                 <div
                   id="see-more-line-wrapper"
