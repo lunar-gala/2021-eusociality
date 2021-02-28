@@ -4,6 +4,8 @@ import TitleTheme from "../components/TitleTheme";
 import DesktopSideNav from "../components/DesktopSideNav";
 import PeopleAccordion from "../components/PeopleAccordion";
 import PeopleBackground from "../components/PeopleBackground";
+import MobileOpenMenu from "../components/MobileOpenMenu";
+import MobileMenuNavList from "../components/MobileMenuNavList";
 
 class PeoplePage extends React.Component {
   constructor(props) {
@@ -23,7 +25,11 @@ class PeoplePage extends React.Component {
             <TitleTheme landing_page_state={this.state.landing_page_state} />
             {/*<Logo landing_page_state={this.state.landing_page_state} />*/}
             <DesktopSideNav />
-            
+            <MobileOpenMenu landing_page_state={this.state.landing_page_state} />
+            <MobileMenuNavList
+              landing_page_state={this.state.landing_page_state}
+              handlerSetLandingPageState={this.handlerSetLandingPageState}
+            />
           </div>
         </div>
 
