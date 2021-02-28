@@ -91,27 +91,19 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
         transition: 0.2s;
       }
 
-      #line-name {
-        font-family: 'Sprat Type Condensed';
-        font-size: $FONT_SIZE_LINE;
-        text-transform: uppercase;
-        font-weight: $FONT_SPRAT_WEIGHT;
-        letter-spacing: $HEADER_TRACKING;
-        word-spacing: $HEADER_WORD_SPACING;
-        pointer-events: none;
-      }
-
-      #below-line-name {
+      #above-line-name {
         display: flex;
         flex-direction: row;
+        align-items: center;
 
-        #designers-name {
-          display: flex;
-          height: $DESIGNERS_NAME_HEIGHT;
-          font-size: $FONT_SIZE_DESIGNER;
-          font-family: $FONT_SUBHEAD;
+        #line-name {
+          font-family: 'Sprat Type Condensed';
+          font-size: $FONT_SIZE_LINE;
           text-transform: uppercase;
-          letter-spacing: $SUBHEAD_TRACKING;
+          font-weight: $FONT_SPRAT_WEIGHT;
+          letter-spacing: $HEADER_TRACKING;
+          word-spacing: $HEADER_WORD_SPACING;
+          pointer-events: none;
         }
 
         #see-more-wrapper {
@@ -125,7 +117,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
           // depending on platform... I think less padding is more correct, but
           // idk why it doesn't work.
           // padding-bottom: $SEE_MORE_BOTTOM_MARGIN;
-          margin-left: 24px;
+          margin-left: 36px;
           right: $SEE_MORE_WRAPPER_MARGIN;
 
           opacity: 0;
@@ -141,7 +133,8 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
             display: flex;
             flex-direction: row;
             margin-right: $X_MARGIN/2 - $SEE_MORE_WRAPPER_MARGIN;
-            bottom: $FONT_SIZE_DESIGNER;
+            margin-bottom: 12px;
+            bottom: 55%;
             text-decoration: none;
             cursor: pointer;
 
@@ -200,6 +193,20 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
               border-radius: 100%;
             }
           }
+        }
+      }
+
+      #below-line-name {
+        display: flex;
+        flex-direction: row;
+
+        #designers-name {
+          display: flex;
+          height: $DESIGNERS_NAME_HEIGHT;
+          font-size: $FONT_SIZE_DESIGNER;
+          font-family: $FONT_SUBHEAD;
+          text-transform: uppercase;
+          letter-spacing: $SUBHEAD_TRACKING;
         }
       }
     }

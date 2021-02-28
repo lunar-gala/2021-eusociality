@@ -1237,17 +1237,10 @@ class LandingPage extends React.Component {
             className={`${this.state.fading ? "faded" : "notFaded"}`}
             id="curr-line"
           >
-            <div id="line-name">
-              {this.state.selectedLineIdx >= 0
-                ? `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}`
-                : ""}
-            </div>
-            <div id="below-line-name">
-              <div id="designers-name">
+            <div id="above-line-name">
+              <div id="line-name">
                 {this.state.selectedLineIdx >= 0
-                  ? `${UTIL.name_list_formatter(
-                      LINE_DATA.LINE_INFO[this.state.selectedLineIdx].designers
-                    )}`
+                  ? `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}`
                   : ""}
               </div>
               <div
@@ -1272,6 +1265,15 @@ class LandingPage extends React.Component {
                   <div id="see-more-dot" />
                   <div id="see-more-line" />
                 </div>
+              </div>
+            </div>
+            <div id="below-line-name">
+              <div id="designers-name">
+                {this.state.selectedLineIdx >= 0
+                  ? `${UTIL.name_list_formatter(
+                      LINE_DATA.LINE_INFO[this.state.selectedLineIdx].designers
+                    )}`
+                  : ""}
               </div>
             </div>
           </div>
