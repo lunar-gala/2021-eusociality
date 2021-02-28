@@ -85,6 +85,7 @@ p {
 	flex-direction: row;
 	align-items: center;
 	cursor: pointer;
+	pointer-events: none;
 
 
 	// Title is not visible when no line is selected
@@ -93,6 +94,7 @@ p {
 	}
 	&.visible {
 		opacity: 1;
+		pointer-events: all;
 	}
 
 	span {

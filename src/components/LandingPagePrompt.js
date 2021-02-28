@@ -61,7 +61,7 @@ class LandingPagePrompt extends React.Component {
             }, 1000);
           }}
         >
-          Enter →
+          ENTER →
         </div>
       </div>
     );

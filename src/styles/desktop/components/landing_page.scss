@@ -222,10 +222,12 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     }
     &.desktop-landing-page-load, &.desktop-landing-page-cube-intro, &.desktop-line-page-load {
       opacity: 0;
+      pointer-events: none;
     }
     &.desktop-about-page-load, &.desktop-watch-page-load, &.desktop-people-page-load,
     &.desktop-about-page-open, &.desktop-watch-page-open, &.desktop-people-page-open {
       opacity: 0 !important;
+      pointer-events: none;
     }
   }
 }
