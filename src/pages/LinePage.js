@@ -16,6 +16,7 @@ import MODEL_2 from "../../assets/img/examples/girl2.jpg";
 import MODEL_3 from "../../assets/img/examples/girl3.jpg";
 import MODEL_4 from "../../assets/img/examples/girl4.jpg";
 import NavbarLinePage from "../components/NavbarLinePage";
+import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
 
 class LinePage extends React.Component {
   constructor(props) {
@@ -89,7 +90,14 @@ class LinePage extends React.Component {
           </video>
         </div>
         <Link id="top-title" to={"/"}>
-          {CONSTANTS.LANDING_PAGE_TITLE}
+          <div id="top-title-wrapper">
+            <span>
+              {CONSTANTS.LANDING_PAGE_TITLE}
+            </span>
+            <div id="collectiva-logo">
+              <COLLECTIVA_LOGO />
+            </div>
+          </div>
         </Link>
         <div className="main-content blur">
           <div id="name">{line_info.name}</div>

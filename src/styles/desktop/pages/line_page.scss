@@ -11,6 +11,7 @@ $SLIDE_AMOUNT_C: 6.4vw;
 $SLIDE_AMOUNT_D: 16.6vw;
 $BACK_BUTTON_SIZE: 24px;
 $BACK_BUTTON_STROKE_WIDTH: 3px;
+$LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
 
 // Animations
 @keyframes slide-image-a {
@@ -172,11 +173,31 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
     align-items: center;
     width: 100vw;
     margin-top: $TOP_MARGIN;
-    font-family: "Sprat Type Condensed";
-    font-size: $FONT_SIZE_TITLE;
-    font-weight: 100;
-    letter-spacing: -0.05em;
     text-decoration: none;
+
+    #top-title-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      span {
+        font-family: "Sprat Type Condensed";
+        font-size: $FONT_SIZE_TITLE;
+        font-weight: 100;
+        letter-spacing: -0.05em;
+      }
+
+      #collectiva-logo {
+        margin-top: 4px;
+        margin-left: 12px;
+        height: $LOGO_SIZE;
+        width: $LOGO_SIZE;
+
+        svg {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
   }
 
   .main-content {
