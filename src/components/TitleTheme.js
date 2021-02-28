@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as CONSTANTS from "../constants";
+import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
 
 class TitleTheme extends React.Component {
   render() {
@@ -28,7 +29,12 @@ class TitleTheme extends React.Component {
           );
         }}
       >
-        {CONSTANTS.LANDING_PAGE_TITLE}
+        <span>
+          {CONSTANTS.LANDING_PAGE_TITLE}
+        </span>
+        <div id="collectiva-logo">
+          <COLLECTIVA_LOGO />
+        </div>
       </div>
     );
   }

@@ -7,6 +7,7 @@ $CIRCLE_RAD : 12px;
 $OUTER : $X_MARGIN/8; // outer margin for vertical lines
 $LOWER : $BOTTOM_MARGIN/4;
 $UPPER : $BOTTOM_MARGIN*2.2;
+$LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
 
 body {
   color: white;
@@ -78,13 +79,13 @@ p {
 	position: absolute;
 	z-index: $Z_INDEX_HEADER;
 	top: $TOP_MARGIN;
-	font-size: $FONT_SIZE_TITLE;
-	font-family: 'Sprat Type Condensed';
-	font-weight: 300;
-	letter-spacing: $TITLE_TRACKING;
 	opacity: 0;
 	transition-duration: 1s;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	cursor: pointer;
+
 
 	// Title is not visible when no line is selected
 	&.start-animation {
@@ -92,5 +93,23 @@ p {
 	}
 	&.visible {
 		opacity: 1;
+	}
+
+	span {
+		font-size: $FONT_SIZE_TITLE;
+		font-family: 'Sprat Type Condensed';
+		font-weight: 300;
+		letter-spacing: $TITLE_TRACKING;
+	}
+
+	#collectiva-logo {
+		margin-left: 12px;
+		height: $LOGO_SIZE;
+		width: $LOGO_SIZE;
+
+		svg {
+			height: 100%;
+			width: 100%;
+		}
 	}
 }
