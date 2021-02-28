@@ -24,6 +24,7 @@
     #team-accordion {
       animation: blur-in $ANIMATION_DURATION_BLUR forwards;
       backface-visibility: hidden;
+      z-index: $Z_INDEX_HEADER;
     }
   }
 
