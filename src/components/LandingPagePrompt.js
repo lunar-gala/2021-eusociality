@@ -5,6 +5,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as CONSTANTS from "../constants";
+import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
 
 class LandingPagePrompt extends React.Component {
   constructor(props) {
@@ -30,7 +31,14 @@ class LandingPagePrompt extends React.Component {
           <div className="dot-basic" />
           <div className="line" />
         </div>
-        <div id="title">{CONSTANTS.LANDING_PAGE_TITLE}</div>
+        <div id="title">
+          <span>
+            {CONSTANTS.LANDING_PAGE_TITLE}
+          </span>
+          <div id="collectiva-logo">
+            <COLLECTIVA_LOGO />
+          </div>
+        </div>
         <div className="left-bar bar">
           <div className="line" />
           <div className="dot-basic" />
