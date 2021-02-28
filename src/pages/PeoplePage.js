@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import * as CONSTANTS from "../constants";
 import TitleTheme from "../components/TitleTheme";
 import DesktopSideNav from "../components/DesktopSideNav";
@@ -25,11 +26,10 @@ class PeoplePage extends React.Component {
             <TitleTheme landing_page_state={this.state.landing_page_state} />
             {/*<Logo landing_page_state={this.state.landing_page_state} />*/}
             <DesktopSideNav />
-            <MobileOpenMenu landing_page_state={this.state.landing_page_state} />
-            <MobileMenuNavList
+            <MobileOpenMenu />
+            {/* <MobileMenuNavList
               landing_page_state={this.state.landing_page_state}
-              handlerSetLandingPageState={this.handlerSetLandingPageState}
-            />
+            /> */}
           </div>
         </div>
 

@@ -129,12 +129,14 @@ $FONT_SIZE_TITLE: 48px;
   vertical-align: middle;
   border-style: none;
   align-self: center;
-  width: 20vh;
+  width: 30vw;
 }
 
 #gyro-prompt-text {
   color: white;
   padding-top: 5vh;
+  display: none;
+  font-size: 2rem;
 }
 
 #rotate-icon {

@@ -23,6 +23,7 @@ import MobileOpenMenu from "../components/MobileOpenMenu";
 import MobileMenuLineList from "../components/MobileMenuLineList";
 import MobileMenuNavList from "../components/MobileMenuNavList";
 import AboutPageMobile from "./AboutPageMobile";
+import GyroPrompt from '../components/GyroPrompt';
 
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -988,6 +989,7 @@ class LandingPage extends React.Component {
           landing_page_state={this.state.landing_page_state}
           handlerSetLandingPageState={this.handlerSetLandingPageState}
         />
+        <GyroPrompt />
         <AboutPageMobile landing_page_state={this.state.landing_page_state} />
         {/* Desktop Elements */}
         <AboutPageDesktop landing_page_state={this.state.landing_page_state} />

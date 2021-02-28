@@ -3,10 +3,10 @@
  */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import * as CONSTANTS from '../constants';
 import RotateIcon from "../../assets/img/rotateicon.png";
-import GyroPrompt from './GyroPrompt';
 
 class MobileOpenMenu extends React.Component {
   render() {
@@ -20,12 +20,7 @@ class MobileOpenMenu extends React.Component {
         </div>
         <div id='mobile-open-menu-border'></div>
       </div>
-      <div id='title' onClick={() => {
-        // Ask permission to access device gyroscope
-        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-          DeviceOrientationEvent.requestPermission();
-        }
-      }}>
+      <div id='title'>
         <span id='text'>
           {CONSTANTS.LANDING_PAGE_TITLE}
         </span>
@@ -33,7 +28,22 @@ class MobileOpenMenu extends React.Component {
       <img src={RotateIcon} id='rotate-icon' onClick={(event) => {
         event.stopPropagation();
         console.log("clicked rotate icon");
-        $('#gyro-prompt-overlay').css('display', 'flex');
+        document.getElementById('gyro-prompt-overlay').style.display = "flex";
+        document.getElementById('gyro-prompt-text').style.display = "block";
+        setTimeout(() => {
+          document.getElementById('gyro-prompt-overlay').style.display = "none";
+        }, 5000);
+        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+          //document.getElementById('gyro-prompt-overlay').style.display = "flex";
+          DeviceOrientationEvent.requestPermission().then(response => {
+            if (response === 'granted') {
+              document.getElementById('gyro-prompt-text').style.display = "block";
+            } else {
+              document.getElementById('gyro-prompt-overlay').style.display = "none";
+            }
+          })
+        }
+        
       }}></img>
     </div>;
   }
