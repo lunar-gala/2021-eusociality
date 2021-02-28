@@ -104,3 +104,41 @@ $FONT_SIZE_TITLE: 48px;
     }
   }
 }
+
+#gyro-prompt-overlay {
+  display: none;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 15;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #00000080;
+}
+
+#gyro-prompt-content {
+  width: 60vw;
+  text-align: center;
+}
+
+#gyro-prompt-icon {
+  vertical-align: middle;
+  border-style: none;
+  align-self: center;
+  width: 20vh;
+}
+
+#gyro-prompt-text {
+  color: white;
+  padding-top: 5vh;
+}
+
+#rotate-icon {
+  height: 50px;
+  z-index: 10;
+  margin-right: 30px;
+}

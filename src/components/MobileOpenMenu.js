@@ -5,6 +5,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as CONSTANTS from '../constants';
+import RotateIcon from "../../assets/img/rotateicon.png";
+import GyroPrompt from './GyroPrompt';
 
 class MobileOpenMenu extends React.Component {
   render() {
@@ -28,6 +30,11 @@ class MobileOpenMenu extends React.Component {
           {CONSTANTS.LANDING_PAGE_TITLE}
         </span>
       </div>
+      <img src={RotateIcon} id='rotate-icon' onClick={(event) => {
+        event.stopPropagation();
+        console.log("clicked rotate icon");
+        $('#gyro-prompt-overlay').css('display', 'flex');
+      }}></img>
     </div>;
   }
 }
