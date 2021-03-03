@@ -11,6 +11,15 @@
   }
 }
 
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+
 #people-page.main-page {
   display: flex;
   flex-direction: column;
@@ -104,6 +113,33 @@
       padding: 0;
       box-shadow: none;
       border: none;
+
+      &.clicked {
+        .display_circle, .display_line {
+          opacity: 1;
+          animation-duration: 0.2s;
+          animation-fill-mode: both;
+          animation-name: slide-in;
+        }
+      }
+
+      &.unclicked {
+        .display_circle, .display_line {
+          opacity: 1;
+          animation-duration: 0.2s;
+          animation-fill-mode: both;
+          animation-name: slide-out;
+        }
+
+        &:hover {
+          .display_circle, .display_line {
+            opacity: 1;
+            animation-duration: 0.2s;
+            animation-fill-mode: both;
+            animation-name: slide-in;
+          }
+        }
+      }
     }
 
     .tab-header {
