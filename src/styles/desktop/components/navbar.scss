@@ -5,7 +5,7 @@
 $UNDERLINE_CIRCLE_WIDTH: 8px;
 $UNDERLINE_WIDTH: 32px + 2*$UNDERLINE_CIRCLE_WIDTH;
 $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
-$NAVBALL_SIZE: 16px;
+$NAVBALL_SIZE: 10px;
 
 @keyframes underline-animation {
   from {
@@ -91,7 +91,7 @@ $NAVBALL_SIZE: 16px;
   }
 
   .navBall {
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     display: block;
     width: $NAVBALL_SIZE;
     height: $NAVBALL_SIZE;
