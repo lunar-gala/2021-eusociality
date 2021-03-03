@@ -3,7 +3,7 @@
  */
 
 $LEFT_MARGIN: 20vw;
-$TITLE_MARGIN_TOP: 10vw;
+$TITLE_MARGIN_TOP: 10vh;
 
 $SLIDE_AMOUNT_A: 6.66vw;
 $SLIDE_AMOUNT_B: -2.8vw;
@@ -103,7 +103,6 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
 #line-page {
   width: 100vw;
   height: 100vh;
-  padding-bottom: 2.5vh;
 
   #background {
     display: flex;
@@ -267,8 +266,6 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
         justify-items: flex-end;
         align-items: center;
 
-
-
         .pictures {
           display: flex;
           flex-direction: row;
@@ -286,7 +283,7 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
           }
 
           .frame {
-
+            position: absolute;
             width: 16vw;
             height: 23.8vw;
             border: 1px solid white;
@@ -296,7 +293,7 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
     }
 
     #left-bar {
-      margin-top: -2.5vh;
+      margin-top: 5vh;
       display: flex;
       flex-direction: row;
       align-items: center;
