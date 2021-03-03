@@ -130,7 +130,6 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
   .fixed-overlay {
     position: fixed;
     top: 36px;
-    left: calc($X_MARGIN/2 - 32px);
 
     .links {
       position: static;
