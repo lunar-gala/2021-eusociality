@@ -8,7 +8,7 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
 $TOOLTIP_CIRCLE_WIDTH: 10px;
 $TOOLTIP_CIRCLE_HEIGHT: 8px;
 $TOOLTIP_MARGIN: 10px;
-$TOOLTIP_TICK_LENGTH: 27px;
+$TOOLTIP_TICK_LENGTH: 4.5vh;
 
 @keyframes underline-animation {
   from {
@@ -40,10 +40,12 @@ $TOOLTIP_TICK_LENGTH: 27px;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  margin-top: 5vw;
 
   border-top: 1px solid white;
   border-bottom: 1px solid white;
+
+  position: fixed;
+  bottom: 2.5vh;
   padding-top: 2.5vh;
   padding-bottom: 2.5vh;
 
@@ -143,8 +145,9 @@ $TOOLTIP_TICK_LENGTH: 27px;
       flex-direction: column;
       align-items: center;
       position: absolute;
-      bottom: 52px;
       opacity: 0;
+      margin-bottom: 40px;
+      bottom: 63px;
       transition-duration: 200ms;
 
       .vertical-tick {
@@ -189,7 +192,7 @@ $TOOLTIP_TICK_LENGTH: 27px;
 
         #right-bottom {
           right: $TOOLTIP_CIRCLE_WIDTH/2 + 1;
-          bottom: $TOOLTIP_TICK_LENGTH - $TOOLTIP_CIRCLE_WIDTH/2 + 1;
+          bottom: calc($TOOLTIP_TICK_LENGTH - $TOOLTIP_CIRCLE_WIDTH/2 + 1);
         }
       }
 
