@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import * as LINE_DATA from "../data/line_data";
 import * as UTIL from "../util";
-import NavBall from '../../assets/img/navBall.svg'
 
 /**
  * Navbar for navigating to different lines within the lines page
@@ -27,7 +26,7 @@ class NavbarLinePage extends React.Component {
       );
     }
 
-    return <div className='navbar-line-page desktop'>
+    return <div className='navbar-line-page desktop blur'>
       <div className='navbar-container'>{items}</div>
     </div>;
   }
@@ -54,7 +53,7 @@ class NavLinePageItem extends React.Component {
           this.props.handlerSelectedLineIdx(this.props.lineIdx);
         }}
       >
-        <NavBall className={`navBall ${this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""}`}/>
+        <div className={`navBall ${this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""}`}/>
         {UTIL.line_number_formatter(this.props.lineIdx)}
         <div
           className='underline-animation'

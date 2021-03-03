@@ -26,6 +26,8 @@ class LinePage extends React.Component {
     )[1];
 
     this.state = {
+      animation_blur: "blur",
+      animation_slide: true,
       landing_page_state: CONSTANTS.LANDING_PAGE_STATES.LINE_PAGE,
       selectedLineIdx: currLineNumber - 1,
       showBackButton: true,
@@ -99,13 +101,13 @@ class LinePage extends React.Component {
             </div>
           </div>
         </Link>
-        <div className="main-content blur">
-          <div id="name">{line_info.name}</div>
+        <div className="main-content">
+          <div id="name" className={this.state.animation_blur} key={line_info.name}>{line_info.name}</div>
           <div id="designers">
-            <div id="designers-text">
+            <div id="designers-text" className={this.state.animation_blur} key={line_info.designers}>
               {UTIL.name_list_formatter(line_info.designers)}
             </div>
-            <div id="right-bar">
+            <div id="right-bar" className={this.state.animation_slide ? "right-bar-slide-in-animation" : ""} key={this.state.selectedLineIdx}>
               <div className="dot-basic" />
               <div className="line" />
             </div>
@@ -113,18 +115,18 @@ class LinePage extends React.Component {
 
           <div id="content">
             <div id="upper">
-              <div id="description">
+              <div id="description" className={this.state.animation_blur} key={line_info.name}>
                 {line_info.description
                   ? line_info.description
                   : LINE_DATA.LINE_INFO[0].description}
               </div>
 
-              <div id="models">
+              <div id="models" className={this.state.animation_blur} key={this.state.selectedLineIdx}>
                 {this.slidingImage(MODEL_2, "a")}
                 {this.slidingImage(MODEL_4, "b")}
               </div>
             </div>
-            <div id="left-bar">
+            <div id="left-bar" className={this.state.animation_slide ? "left-bar-slide-in-animation" : ""} key={this.state.selectedLineIdx}>
               <div className="line" />
               <div className="dot-basic" />
             </div>

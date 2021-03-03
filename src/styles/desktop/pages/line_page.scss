@@ -37,49 +37,9 @@ $PICTURE_LEFT_MARGIN: 3vw;
 }
 
 .blur {
-  -webkit-animation: blur 1s linear forwards;
-  -moz-animation: blur 1s linear forwards;
-  -ms-animation: blur 1s linear forwards;
-  -o-animation: blur 1s linear forwards;
-  animation: blur 1s linear forwards;
-}
-
-@-webkit-keyframes blur {
-  from {
-    -webkit-filter: blur(10px);
-    filter: blur(10px);
-  }
-
-  to {
-    -webkit-filter: blur(0px);
-    filter: blur(0px);
-  }
-}
-
-@-moz-keyframes blur {
-  from {
-    -moz-filter: blur(10px);
-    filter: blur(10px);
-  }
-
-  to {
-    -moz-filter: blur(0px);
-    filter: blur(0px);
-  }
-}
-
-@keyframes blur {
-  from {
-    -webkit-filter: blur(10px);
-    -moz-filter: blur(10px);
-    filter: blur(10px);
-  }
-
-  to {
-    -webkit-filter: blur(0px);
-    -moz-filter: blur(0px);
-    filter: blur(0px);
-  }
+  opacity: 0;
+  animation: blur-in 500ms linear forwards;
+  animation-delay: $ANIMATION_DURATION_SLIDE_IN;
 }
 
 #line-page {
@@ -273,11 +233,11 @@ $PICTURE_LEFT_MARGIN: 3vw;
 
             &#a {
               animation: slide-image-a 500ms forwards;
-              animation-delay: 500ms;
+              animation-delay: 1s;
             }
             &#b {
               animation: slide-image-b 500ms forwards;
-              animation-delay: 500ms;
+              animation-delay: 1s;
             }
           }
 
@@ -292,6 +252,7 @@ $PICTURE_LEFT_MARGIN: 3vw;
     }
 
     #left-bar {
+      opacity: 1;
       margin-top: 5vh;
       display: flex;
       flex-direction: row;

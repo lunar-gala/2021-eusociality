@@ -50,6 +50,10 @@ $ANIMATION_DURATION_SLIDE_IN: 500ms;
   }
 }
 
+.right-bar-slide-in-animation {
+  animation: right-bar-slide-in $ANIMATION_DURATION_SLIDE_IN forwards;
+}
+
 @keyframes left-bar-slide-in {
   from {
     transform: translateX(-100%);
@@ -58,6 +62,10 @@ $ANIMATION_DURATION_SLIDE_IN: 500ms;
   to {
     transform: translateX(0);
   }
+}
+
+.left-bar-slide-in-animation {
+  animation: left-bar-slide-in $ANIMATION_DURATION_SLIDE_IN forwards;
 }
 
 $ANIMATION_DURATION_FADE: 1s;
