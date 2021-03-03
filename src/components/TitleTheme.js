@@ -19,7 +19,9 @@ class TitleTheme extends React.Component {
           this.props.landing_page_state ==
             CONSTANTS.LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN ||
           this.props.landing_page_state ==
-            CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN
+            CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN ||
+          this.props.landing_page_state ==
+            CONSTANTS.LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_OPEN
             ? "visible"
             : ""
         }`}
