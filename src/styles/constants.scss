@@ -33,6 +33,7 @@ $LANDING_PAGE_BACKGROUND_COLOR: #000000;
 $BACKGROUND_COLOR: #000000;
 
 // Keep track of z-indices
+$Z_INDEX_GOD: 999; /* highly discouraged to use */
 $Z_INDEX_HEADER: 10;
 $Z_INDEX_MAIN_UI: 3;
 $Z_INDEX_BACKGROUND: -1;

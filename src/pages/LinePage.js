@@ -11,11 +11,10 @@ import DesktopSideNav from "../components/DesktopSideNav";
 
 // Images
 // TODO: there will be a lot of these, so probably a good idea to move this into a file and import everything in that file
-import MODEL_1 from "../../assets/img/examples/girl1.jpg";
 import MODEL_2 from "../../assets/img/examples/girl2.jpg";
-import MODEL_3 from "../../assets/img/examples/girl3.jpg";
 import MODEL_4 from "../../assets/img/examples/girl4.jpg";
 import NavbarLinePage from "../components/NavbarLinePage";
+import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
 
 class LinePage extends React.Component {
   constructor(props) {
@@ -27,6 +26,8 @@ class LinePage extends React.Component {
     )[1];
 
     this.state = {
+      animation_blur: "blur",
+      animation_slide: true,
       landing_page_state: CONSTANTS.LANDING_PAGE_STATES.LINE_PAGE,
       selectedLineIdx: currLineNumber - 1,
       showBackButton: true,
@@ -62,8 +63,10 @@ class LinePage extends React.Component {
   slidingImage(image, id) {
     return (
       <div className="pictures" id={id}>
-        <img
-          src={image}
+        <div
+          style={{
+            backgroundImage: `url(${image})`
+          }}
           className={`image`}
           key={this.state.selectedLineIdx}
           id={id}
@@ -89,35 +92,44 @@ class LinePage extends React.Component {
           </video>
         </div>
         <Link id="top-title" to={"/"}>
-          {CONSTANTS.LANDING_PAGE_TITLE}
+          <div id="top-title-wrapper">
+            <span>
+              {CONSTANTS.LANDING_PAGE_TITLE}
+            </span>
+            <div id="collectiva-logo">
+              <COLLECTIVA_LOGO />
+            </div>
+          </div>
         </Link>
-        <div className="main-content blur">
-          <div id="name">{line_info.name}</div>
+        <div className="main-content">
+          <div id="name" className={this.state.animation_blur} key={line_info.name}>{line_info.name}</div>
           <div id="designers">
-            <div id="designers-text">
+            <div id="designers-text" className={this.state.animation_blur} key={line_info.designers}>
               {UTIL.name_list_formatter(line_info.designers)}
             </div>
-            <div id="right-bar">
+            <div id="right-bar" className={this.state.animation_slide ? "right-bar-slide-in-animation" : ""} key={this.state.selectedLineIdx}>
               <div className="dot-basic" />
               <div className="line" />
             </div>
           </div>
 
           <div id="content">
-            <div id="description">
-              {line_info.description
-                ? line_info.description
-                : LINE_DATA.LINE_INFO[0].description}
-            </div>
-            <div id="models">
-              {this.slidingImage(MODEL_2, "a")}
-              {this.slidingImage(MODEL_4, "b")}
-            </div>
-          </div>
+            <div id="upper">
+              <div id="description" className={this.state.animation_blur} key={line_info.name}>
+                {line_info.description
+                  ? line_info.description
+                  : LINE_DATA.LINE_INFO[0].description}
+              </div>
 
-          <div id="left-bar">
-            <div className="line" />
-            <div className="dot-basic" />
+              <div id="models" className={this.state.animation_blur} key={this.state.selectedLineIdx}>
+                {this.slidingImage(MODEL_2, "a")}
+                {this.slidingImage(MODEL_4, "b")}
+              </div>
+            </div>
+            <div id="left-bar" className={this.state.animation_slide ? "left-bar-slide-in-animation" : ""} key={this.state.selectedLineIdx}>
+              <div className="line" />
+              <div className="dot-basic" />
+            </div>
           </div>
 
         </div>

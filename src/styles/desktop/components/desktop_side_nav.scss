@@ -15,11 +15,12 @@ $DESKTOP_SIDE_NAV_SLIDE_DURATION: 400ms;
 }
 
 .links {
-  position: absolute;
+  position: fixed;
   top: $TOP_MARGIN;
   left: 0;
   transition-duration: 1s;
   opacity: 0;
+  z-index: $Z_INDEX_HEADER;
 
   &.start-animation {
     animation: blur-in $ANIMATION_DURATION_BLUR forwards;
@@ -27,10 +28,12 @@ $DESKTOP_SIDE_NAV_SLIDE_DURATION: 400ms;
 
   &.desktop-landing-page-load {
     opacity: 0;
+    pointer-events: none;;
   }
 
   &.desktop-landing-page-cube-intro {
     opacity: 0;
+    pointer-events: none;;
   }
 
   &.line-page {
@@ -44,6 +47,11 @@ $DESKTOP_SIDE_NAV_SLIDE_DURATION: 400ms;
     transition-duration: 1s;
 
     &.selected .left-bar {
+      animation: left-bar-slide-in-desktop-nav $DESKTOP_SIDE_NAV_SLIDE_DURATION forwards cubic-bezier(0.075, 0.82, 0.165, 1);
+      opacity: 1;
+    }
+
+    &:hover .left-bar {
       animation: left-bar-slide-in-desktop-nav $DESKTOP_SIDE_NAV_SLIDE_DURATION forwards cubic-bezier(0.075, 0.82, 0.165, 1);
       opacity: 1;
     }

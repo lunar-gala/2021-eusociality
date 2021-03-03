@@ -12,10 +12,13 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
+        { from: './public/android-chrome-96x96.png' },
+        { from: './public/apple-touch-icon.png' },
         { from: './public/CNAME' },
         { from: './public/favicon.ico' },
         { from: './public/manifest.json' },
-        { from: './public/robots.txt' }
+        { from: './public/robots.txt' },
+        { from: './public/safari-pinned-tab.svg' }
       ]
     })
   ],

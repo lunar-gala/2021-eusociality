@@ -7,61 +7,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Overpass:ital@0;1&display=swap');
 
 @font-face {
-    font-family: "Sprat Type";
-    src: url("../../assets/fonts/sprat-type/Sprat-Regular.otf");
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Sprat Type";
-    src: url("../../assets/fonts/sprat-type/Sprat-RegularBold.otf");
-    font-weight: bold;
-}
-
-@font-face {
-    font-family: "Sprat Type";
-    src: url("../../assets/fonts/sprat-type/Sprat-RegularLight.otf");
-    font-weight: 300;
-}
-
-@font-face {
-    font-family: "Sprat Type";
-    src: url("../../assets/fonts/sprat-type/Sprat-RegularThin.otf");
-    font-weight: 100;
-}
-
-@font-face {
     font-family: 'Sprat Type Condensed';
     src: url('../../assets/fonts/sprat-type/Sprat-CondensedLight.otf');
-    font-weight: 100;
+    font-weight: 400;
 }
 
 @font-face {
     font-family: 'Sprat Type Condensed';
     src: url('../../assets/fonts/sprat-type/Sprat-CondensedRegular.otf');
-    font-weight: normal;
+    font-weight: 600;
 }
 
-// font families
+// Font families
 $FONT_DISPLAY: 'Sprat Type Condensed';
 $FONT_SUBHEAD: 'Overpass Mono', monospace;
 $FONT_BODY: 'franklin-gothic-urw', sans-serif;;
 
-// font sizes
-$FONT_SIZE_NAV: 30px; // changed from 38px
-$FONT_SIZE_LINK: 2.25vh; //changed from 24px
-$FONT_SIZE_LINE: 114px; // changed from 144px
-$FONT_SIZE_DESIGNER: 36px;
+// Font sizes
+$FONT_SIZE_NAV: 2em; // changed from 38px
+$FONT_SIZE_LINK: 2vh; //changed from 24px
+$FONT_SIZE_LINE: 12vh; // changed from 114px
+$FONT_SIZE_DESIGNER: 3vh;
 $FONT_SIZE_TITLE: 48px;
 $FONT_SIZE_BODY: 18px;
-$FONT_SIZE_LABEL: 30px;
-$FONT_SIZE_LINE_PAGE_NAME: 108px;
+$FONT_SIZE_LABEL: $FONT_SIZE_LINK;
+$FONT_SIZE_LINE_PAGE_NAME: 12vh;
 
 // font adjustments and weights
-$FONT_SPRAT_STRETCH: scaleY(1.2);
-$FONT_SPRAT_KERN: -0.11em;
+$FONT_SPRAT_KERN: -0.1em;
 $FONT_SPRAT_WEIGHT: 200;
 $FONT_TITLE_WEIGHT: 400;
 $FONT_LINK_WEIGHT: 400;
-$FONT_LABEL_WEIGHT: 200;
+$FONT_LABEL_WEIGHT: 400;

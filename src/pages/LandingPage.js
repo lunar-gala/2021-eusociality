@@ -85,8 +85,8 @@ const CAMERA_PAN_FACTOR_MOBILE = {
 
 /** @brief How much the camera tilts on mouse move */
 const CAMERA_PAN_FACTOR_DESKTOP = {
-  x: 50,
-  y: 50,
+  x: 25,
+  y: 25,
   z: 20,
 };
 
@@ -1237,17 +1237,10 @@ class LandingPage extends React.Component {
             className={`${this.state.fading ? "faded" : "notFaded"}`}
             id="curr-line"
           >
-            <div id="line-name">
-              {this.state.selectedLineIdx >= 0
-                ? `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}`
-                : ""}
-            </div>
-            <div id="below-line-name">
-              <div id="designers-name">
+            <div id="above-line-name">
+              <div id="line-name">
                 {this.state.selectedLineIdx >= 0
-                  ? `${UTIL.name_list_formatter(
-                      LINE_DATA.LINE_INFO[this.state.selectedLineIdx].designers
-                    )}`
+                  ? `${LINE_DATA.LINE_INFO[this.state.selectedLineIdx].name}`
                   : ""}
               </div>
               <div
@@ -1263,10 +1256,7 @@ class LandingPage extends React.Component {
                     state: { currLineIdx: this.state.selectedLineIdx },
                   }}
                 >
-                  <span id="more-info-text">See More</span>
-                  <div id="more-info-arrow">
-                    <div id="arrow" />
-                  </div>
+                  <span id="more-info-text">See More →</span>
                 </Link>
                 <div
                   id="see-more-line-wrapper"
@@ -1275,6 +1265,15 @@ class LandingPage extends React.Component {
                   <div id="see-more-dot" />
                   <div id="see-more-line" />
                 </div>
+              </div>
+            </div>
+            <div id="below-line-name">
+              <div id="designers-name">
+                {this.state.selectedLineIdx >= 0
+                  ? `${UTIL.name_list_formatter(
+                      LINE_DATA.LINE_INFO[this.state.selectedLineIdx].designers
+                    )}`
+                  : ""}
               </div>
             </div>
           </div>

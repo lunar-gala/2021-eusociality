@@ -5,6 +5,8 @@
 
 $MARGIN_BAR: 12px;
 $BAR_WIDTH: 74vw;
+$TITLE_FONT_SIZE: 14vh;
+$LOGO_SIZE: $TITLE_FONT_SIZE - 3vh;
 
 #landing-page-prompt {
   display: flex;
@@ -44,11 +46,26 @@ $BAR_WIDTH: 74vw;
 
   #title {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    font-size: 13vh;
-    font-weight: 300;
-    letter-spacing: -0.12em;
+
+    span {
+      font-size: $TITLE_FONT_SIZE;
+      font-weight: 300;
+      letter-spacing: $FONT_SPRAT_KERN;
+    }
+
+    #collectiva-logo {
+      margin-top: 12px;
+      margin-left: 12px;
+      height: $LOGO_SIZE;
+      width: $LOGO_SIZE;
+
+      svg {
+        height: 100%;
+        width: 100%;
+      }
+    }
   }
 
   #enter-site {

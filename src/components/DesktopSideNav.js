@@ -30,9 +30,10 @@ class DesktopSideNav extends React.Component {
             className="link"
             to="/about"
             onClick={() => {
+              this.props.handlerSetLandingPageState ?
               this.props.handlerSetLandingPageState(
                 CONSTANTS.LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN
-              );
+              ) : null
             }}
           >
             About
@@ -54,9 +55,10 @@ class DesktopSideNav extends React.Component {
             className="link"
             to="/people"
             onClick={() => {
+              this.props.handlerSetLandingPageState ?
               this.props.handlerSetLandingPageState(
                 CONSTANTS.LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_OPEN
-              );
+              ) : null
             }}
           >
             People
@@ -78,9 +80,10 @@ class DesktopSideNav extends React.Component {
             className="link"
             to="/watch"
             onClick={() => {
+              this.props.handlerSetLandingPageState ?
               this.props.handlerSetLandingPageState(
                 CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN
-              );
+              ) : null
             }}
           >
             Watch

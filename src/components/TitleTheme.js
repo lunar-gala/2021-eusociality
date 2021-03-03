@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as CONSTANTS from "../constants";
+import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
 
 class TitleTheme extends React.Component {
   render() {
@@ -18,7 +19,9 @@ class TitleTheme extends React.Component {
           this.props.landing_page_state ==
             CONSTANTS.LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN ||
           this.props.landing_page_state ==
-            CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN
+            CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN ||
+          this.props.landing_page_state ==
+            CONSTANTS.LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_OPEN
             ? "visible"
             : ""
         }`}
@@ -28,7 +31,12 @@ class TitleTheme extends React.Component {
           );
         }}
       >
-        {CONSTANTS.LANDING_PAGE_TITLE}
+        <span>
+          {CONSTANTS.LANDING_PAGE_TITLE}
+        </span>
+        <div id="collectiva-logo">
+          <COLLECTIVA_LOGO />
+        </div>
       </div>
     );
   }

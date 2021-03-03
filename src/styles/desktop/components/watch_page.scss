@@ -16,6 +16,10 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
   height: 100vh;
   opacity: 0;
 
+  .left-bar {
+    transform: translateX(-100%);
+  }
+
   &.desktop-watch-page-open {
     opacity: 1;
 
@@ -25,12 +29,13 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
 
     .left-bar {
       animation: left-bar-slide-in $ANIMATION_DURATION_SLIDE_IN forwards;
+      animation-delay: $ANIMATION_DURATION_SLIDE_IN;
     }
 
     #countdown, #show-date-text, #show-time-text {
       opacity: 0;
       animation: blur-in $ANIMATION_DURATION_BLUR forwards;
-      animation-delay: $ANIMATION_DURATION_SLIDE_IN;
+      animation-delay: $ANIMATION_DURATION_SLIDE_IN*2;
     }
   }
 
@@ -49,6 +54,7 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
       width: 25%;
 
       .number {
+        font-family: 'Sprat Type Condensed';
         font-size: 14.4vw;
         font-weight: 300;
         letter-spacing: -0.12em;
@@ -58,7 +64,7 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
         font-family: $FONT_SUBHEAD;
         font-size: 2.36vw;
         font-weight: 400;
-        letter-spacing: -0.05em;
+        letter-spacing: $FONT_SPRAT_KERN;
       }
     }
   }
@@ -73,9 +79,10 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
     width: 100vw;
 
     #show-date-text {
+      font-family: 'Sprat Type Condensed';
       font-size: 4.44vw;
       font-weight: 300;
-      margin-left: $X_MARGIN*3/8;
+      margin-left: $X_MARGIN*4/8;
       margin-right: 12px;
       backface-visibility: hidden;
     }
@@ -103,10 +110,11 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
     width: 100vw;
 
     #show-time-text {
+      font-family: 'Sprat Type Condensed';
       font-size: 4.44vw;
       font-weight: 300;
       letter-spacing: -0.12em;
-      margin-right: $X_MARGIN*3/8;
+      margin-right: $X_MARGIN*4/8;
       margin-left: 12px;
       backface-visibility: hidden;
     }

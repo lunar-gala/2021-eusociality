@@ -3,14 +3,17 @@
  */
 
 $LEFT_MARGIN: 20vw;
-$TITLE_MARGIN_TOP: 10vw;
+$TITLE_MARGIN_TOP: 10vh;
 
-$SLIDE_AMOUNT_A: 6.66vw;
-$SLIDE_AMOUNT_B: -2.8vw;
-$SLIDE_AMOUNT_C: 6.4vw;
-$SLIDE_AMOUNT_D: 16.6vw;
+$SLIDE_AMOUNT_A: 40px;
+$SLIDE_AMOUNT_B: 40px;
 $BACK_BUTTON_SIZE: 24px;
 $BACK_BUTTON_STROKE_WIDTH: 3px;
+$LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
+
+$PICTURE_WIDTH: 18vw;
+$PICTURE_HEIGHT: 40vh;
+$PICTURE_LEFT_MARGIN: 3vw;
 
 // Animations
 @keyframes slide-image-a {
@@ -33,75 +36,15 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
   }
 }
 
-@keyframes slide-image-c {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY($SLIDE_AMOUNT_C);
-  }
-}
-
-@keyframes slide-image-d {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY($SLIDE_AMOUNT_D);
-  }
-}
-
 .blur {
-  -webkit-animation: blur 1s linear forwards;
-  -moz-animation: blur 1s linear forwards;
-  -ms-animation: blur 1s linear forwards;
-  -o-animation: blur 1s linear forwards;
-  animation: blur 1s linear forwards;
-}
-
-@-webkit-keyframes blur {
-  from {
-    -webkit-filter: blur(10px);
-    filter: blur(10px);
-  }
-
-  to {
-    -webkit-filter: blur(0px);
-    filter: blur(0px);
-  }
-}
-
-@-moz-keyframes blur {
-  from {
-    -moz-filter: blur(10px);
-    filter: blur(10px);
-  }
-
-  to {
-    -moz-filter: blur(0px);
-    filter: blur(0px);
-  }
-}
-
-@keyframes blur {
-  from {
-    -webkit-filter: blur(10px);
-    -moz-filter: blur(10px);
-    filter: blur(10px);
-  }
-
-  to {
-    -webkit-filter: blur(0px);
-    -moz-filter: blur(0px);
-    filter: blur(0px);
-  }
+  opacity: 0;
+  animation: blur-in 500ms linear forwards;
+  animation-delay: $ANIMATION_DURATION_SLIDE_IN;
 }
 
 #line-page {
   width: 100vw;
-  padding-bottom: 2.5vh;
+  height: 100vh;
 
   #background {
     display: flex;
@@ -129,23 +72,18 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
   .fixed-overlay {
     position: fixed;
     top: 36px;
-    left: $X_MARGIN/2;
 
     .links {
       position: static;
       top: 0;
       left: 0;
-
-      .link-wrapper .left-bar {
-        display: none;
-      }
     }
   }
 
   #back-button-wrapper {
     position: fixed;
     top: calc(#{$TITLE_MARGIN_TOP} + 40px);
-    left: $X_MARGIN/2;
+    left: calc(#{$X_MARGIN/4} + 14px + #{$BACK_BUTTON_SIZE/sqrt(2)});
 
     #back-button {
       width: $BACK_BUTTON_SIZE;
@@ -172,11 +110,31 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
     align-items: center;
     width: 100vw;
     margin-top: $TOP_MARGIN;
-    font-family: "Sprat Type Condensed";
-    font-size: $FONT_SIZE_TITLE;
-    font-weight: 100;
-    letter-spacing: -0.05em;
     text-decoration: none;
+
+    #top-title-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      span {
+        font-family: "Sprat Type Condensed";
+        font-size: $FONT_SIZE_TITLE;
+        font-weight: 100;
+        letter-spacing: -0.05em;
+      }
+
+      #collectiva-logo {
+        margin-top: 4px;
+        margin-left: 12px;
+        height: $LOGO_SIZE;
+        width: $LOGO_SIZE;
+
+        svg {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
   }
 
   .main-content {
@@ -231,9 +189,14 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
 
     #content {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       width: 100%;
-      justify-content: space-between;
+
+      #upper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
 
       #description {
         width: 36vw;
@@ -249,7 +212,8 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
         justify-items: flex-end;
         align-items: center;
 
-
+        position: absolute;
+        right: 0;
 
         .pictures {
           display: flex;
@@ -257,20 +221,30 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
           justify-content: flex-end;
           justify-items: flex-end;
           align-items: center;
-          width: 16vw;
-          height: 23.8vw;
-          margin-left: 3vw;
+          width: $PICTURE_WIDTH;
+          height: $PICTURE_HEIGHT;
+          margin-left: $PICTURE_LEFT_MARGIN;
+          margin-top: 48px;
 
-          img {
-            width: 16vw;
-            height: 23.8vw;
-            transform: translateY(10px);
+          .image {
+            width: $PICTURE_WIDTH;
+            height: $PICTURE_HEIGHT;
+            background-size: cover;
+
+            &#a {
+              animation: slide-image-a 500ms forwards;
+              animation-delay: 1s;
+            }
+            &#b {
+              animation: slide-image-b 500ms forwards;
+              animation-delay: 1s;
+            }
           }
 
           .frame {
-
-            width: 16vw;
-            height: 23.8vw;
+            position: absolute;
+            width: $PICTURE_WIDTH;
+            height: $PICTURE_HEIGHT;
             border: 1px solid white;
           }
         }
@@ -278,12 +252,14 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
     }
 
     #left-bar {
-      margin-top: -2.5vh;
+      opacity: 1;
+      margin-top: 5vh;
       display: flex;
       flex-direction: row;
       align-items: center;
       flex-grow: 1;
       margin-left: -25vw;
+      width: calc(100vw - #{$PICTURE_LEFT_MARGIN} - 2*#{$PICTURE_WIDTH});
 
       .dot-basic {
         margin-left: -1px;

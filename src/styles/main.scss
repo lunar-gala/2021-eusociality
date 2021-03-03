@@ -2,6 +2,8 @@
  * Compiles all the styles together
  */
 
+@use 'sass:math' as *;
+
 // Shared all screens
 @import './constants.scss';
 @import './fonts.scss';

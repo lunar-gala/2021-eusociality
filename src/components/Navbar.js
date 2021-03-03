@@ -57,7 +57,7 @@ class NavItem extends React.Component {
           this.props.handlerSelectedLineIdx(this.props.lineIdx);
         }}
       >
-        <NavBall
+        <div
           className={`navBall ${
             this.props.selectedLineIdx === this.props.lineIdx ? "selected" : ""
           }`}

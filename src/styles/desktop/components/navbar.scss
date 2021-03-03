@@ -5,6 +5,7 @@
 $UNDERLINE_CIRCLE_WIDTH: 8px;
 $UNDERLINE_WIDTH: 32px + 2*$UNDERLINE_CIRCLE_WIDTH;
 $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
+$NAVBALL_SIZE: 10px;
 
 @keyframes underline-animation {
   from {
@@ -56,6 +57,7 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
   }
   &.desktop-landing-page-load {
     opacity: 0;
+    pointer-events: none;;
 
     // We need to keep this because the navbar will have opacity: 1 at the end
     // of its animation
@@ -72,9 +74,11 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
   }
   &.desktop-about-page-open, &.desktop-watch-page-open, &.desktop-people-page-open {
     opacity: 0;
+    pointer-events: none;;
   }
   &.desktop-about-page-load, &.desktop-watch-page-load, &.desktop-people-page-load, &.desktop-line-page-load {
     opacity: 0;
+    pointer-events: none;;
   }
 
   .navbar-container {
@@ -87,9 +91,12 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
   }
 
   .navBall {
-    margin: auto;
+    margin-bottom: 6px;
     display: block;
-    transform: scale(.9, .8);
+    width: $NAVBALL_SIZE;
+    height: $NAVBALL_SIZE;
+    background-color: white;
+    border-radius: 100%;
     opacity: 0;
     transition: .5s;
   }
@@ -115,7 +122,6 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
     align-items: center;
     font-size: $FONT_SIZE_NAV;
     cursor: pointer;
-    transform: $FONT_SPRAT_STRETCH;
     font-weight: $FONT_SPRAT_WEIGHT;
     transition: .5s;
     border-bottom: 2px solid;

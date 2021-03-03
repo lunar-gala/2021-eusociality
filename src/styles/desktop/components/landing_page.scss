@@ -91,27 +91,19 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
         transition: 0.2s;
       }
 
-      #line-name {
-        font-size: $FONT_SIZE_LINE;
-        text-transform: uppercase;
-        // transform: $FONT_SPRAT_STRETCH; // Shouldn't be any stretch
-        font-weight: $FONT_SPRAT_WEIGHT;
-        letter-spacing: $HEADER_TRACKING;
-        word-spacing: $HEADER_WORD_SPACING;
-        pointer-events: none;
-      }
-
-      #below-line-name {
+      #above-line-name {
         display: flex;
         flex-direction: row;
+        align-items: center;
 
-        #designers-name {
-          display: flex;
-          height: $DESIGNERS_NAME_HEIGHT;
-          font-size: $FONT_SIZE_DESIGNER;
-          font-family: $FONT_SUBHEAD;
+        #line-name {
+          font-family: 'Sprat Type Condensed';
+          font-size: $FONT_SIZE_LINE;
           text-transform: uppercase;
-          letter-spacing: $SUBHEAD_TRACKING;
+          font-weight: $FONT_SPRAT_WEIGHT;
+          letter-spacing: $HEADER_TRACKING;
+          word-spacing: $HEADER_WORD_SPACING;
+          pointer-events: none;
         }
 
         #see-more-wrapper {
@@ -125,7 +117,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
           // depending on platform... I think less padding is more correct, but
           // idk why it doesn't work.
           // padding-bottom: $SEE_MORE_BOTTOM_MARGIN;
-          margin-left: 24px;
+          margin-left: 36px;
           right: $SEE_MORE_WRAPPER_MARGIN;
 
           opacity: 0;
@@ -141,16 +133,16 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
             display: flex;
             flex-direction: row;
             margin-right: $X_MARGIN/2 - $SEE_MORE_WRAPPER_MARGIN;
-            bottom: $FONT_SIZE_DESIGNER;
+            margin-bottom: 12px;
+            bottom: 55%;
             text-decoration: none;
             cursor: pointer;
 
             #more-info-text {
-              font-family: $FONT_BODY;
+              font-family: $FONT_SUBHEAD;
               text-transform: uppercase;
               font-size: $FONT_SIZE_LABEL;
               font-weight: $FONT_LABEL_WEIGHT;
-              border-bottom: 2px solid white;
               margin-right: 8px;
             }
 
@@ -203,6 +195,20 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
           }
         }
       }
+
+      #below-line-name {
+        display: flex;
+        flex-direction: row;
+
+        #designers-name {
+          display: flex;
+          height: $DESIGNERS_NAME_HEIGHT;
+          font-size: $FONT_SIZE_DESIGNER;
+          font-family: $FONT_SUBHEAD;
+          text-transform: uppercase;
+          letter-spacing: $SUBHEAD_TRACKING;
+        }
+      }
     }
   }
 
@@ -213,8 +219,8 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     // Gonna be totally honest I don't think this is _quite_ accurate to get 21px under the logo
     top: $TOP_MARGIN;
     right: $X_MARGIN/2;
-    width: 5.5vh;
-    height: 7.3vh;
+    width: 4.6vh;
+    height: 6.1vh;
     cursor: pointer;
     transition-duration: 1s;
 
@@ -223,10 +229,12 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     }
     &.desktop-landing-page-load, &.desktop-landing-page-cube-intro, &.desktop-line-page-load {
       opacity: 0;
+      pointer-events: none;
     }
     &.desktop-about-page-load, &.desktop-watch-page-load, &.desktop-people-page-load,
     &.desktop-about-page-open, &.desktop-watch-page-open, &.desktop-people-page-open {
       opacity: 0 !important;
+      pointer-events: none;
     }
   }
 }
