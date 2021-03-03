@@ -141,7 +141,7 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
   #back-button-wrapper {
     position: fixed;
     top: calc(#{$TITLE_MARGIN_TOP} + 40px);
-    left: $X_MARGIN/2;
+    left: calc(#{$X_MARGIN/4} + 14px + #{$BACK_BUTTON_SIZE/sqrt(2)});
 
     #back-button {
       width: $BACK_BUTTON_SIZE;
