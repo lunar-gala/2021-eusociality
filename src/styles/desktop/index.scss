@@ -76,8 +76,8 @@ p {
 
 // Common elements
 .title-theme {
-	position: absolute;
-	z-index: $Z_INDEX_HEADER;
+	position: fixed;
+	z-index: $Z_INDEX_GOD;
 	top: $TOP_MARGIN;
 	opacity: 0;
 	transition-duration: 1s;
