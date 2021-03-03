@@ -11,9 +11,7 @@ import DesktopSideNav from "../components/DesktopSideNav";
 
 // Images
 // TODO: there will be a lot of these, so probably a good idea to move this into a file and import everything in that file
-import MODEL_1 from "../../assets/img/examples/girl1.jpg";
 import MODEL_2 from "../../assets/img/examples/girl2.jpg";
-import MODEL_3 from "../../assets/img/examples/girl3.jpg";
 import MODEL_4 from "../../assets/img/examples/girl4.jpg";
 import NavbarLinePage from "../components/NavbarLinePage";
 import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
@@ -63,8 +61,10 @@ class LinePage extends React.Component {
   slidingImage(image, id) {
     return (
       <div className="pictures" id={id}>
-        <img
-          src={image}
+        <div
+          style={{
+            backgroundImage: `url(${image})`
+          }}
           className={`image`}
           key={this.state.selectedLineIdx}
           id={id}
@@ -112,20 +112,22 @@ class LinePage extends React.Component {
           </div>
 
           <div id="content">
-            <div id="description">
-              {line_info.description
-                ? line_info.description
-                : LINE_DATA.LINE_INFO[0].description}
-            </div>
-            <div id="models">
-              {this.slidingImage(MODEL_2, "a")}
-              {this.slidingImage(MODEL_4, "b")}
-            </div>
-          </div>
+            <div id="upper">
+              <div id="description">
+                {line_info.description
+                  ? line_info.description
+                  : LINE_DATA.LINE_INFO[0].description}
+              </div>
 
-          <div id="left-bar">
-            <div className="line" />
-            <div className="dot-basic" />
+              <div id="models">
+                {this.slidingImage(MODEL_2, "a")}
+                {this.slidingImage(MODEL_4, "b")}
+              </div>
+            </div>
+            <div id="left-bar">
+              <div className="line" />
+              <div className="dot-basic" />
+            </div>
           </div>
 
         </div>
