@@ -121,6 +121,12 @@
           animation-fill-mode: both;
           animation-name: slide-in;
         }
+
+        .bioWrapper {
+          animation-duration: 1s;
+          animation-fill-mode: both;
+          animation-name: blur-in;
+        }
       }
 
       &.unclicked {
