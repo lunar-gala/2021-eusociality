@@ -20,7 +20,7 @@ export default function TeamTab(props) {
     pictures = PEOPLE_BY_TEAMS[teamName].map((andrew_id) => {
       let entry = PEOPLE_DATA[andrew_id];
 
-      if (entry.image !== undefined) {
+      if (entry.image !== undefined && entry.image !== null) {
         return (
           <TeamBio
             imgSrc={entry.image}
@@ -31,7 +31,7 @@ export default function TeamTab(props) {
         );
       } else {
         notPictured.push(
-          <p>
+          <p key={andrew_id}>
             {entry.first_name} {entry.last_name}
           </p>
         );

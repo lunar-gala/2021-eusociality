@@ -1,8 +1,10 @@
 import React from "react";
-import * as CONSTANTS from "../constants";
 import { getRandomHeadshots } from "../data/people_data";
-import filter from "../../assets/img/filter.jpg";
+import filter from "../../assets/img/filter_blurred.jpg";
 
+/**
+ * NOTE: this is no longer being used
+ */
 class PeopleBackground extends React.Component {
   constructor(props) {
     super(props);

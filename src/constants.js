@@ -89,9 +89,11 @@ export const DESKTOP_WIDTH = 768;
 export const TEAM_NAMES = [
   "Creative",
   "Design",
+  "Production",
+  "Cinematography",
   "Model",
   "Public Relations",
-  "Dance",
+  "Entertainment",
 ];
 
 /** @brief Info for mobile nav menu links */
