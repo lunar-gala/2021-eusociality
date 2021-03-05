@@ -4,7 +4,8 @@
  * controlled by the landing page state.
  */
 
-$MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
+$MARGIN_HORIZONTAL_COUNTDOWN: 5vw;
+$SUBTEXT_FONT_SIZE: 8vw;
 
 #watch-page-desktop {
   position: absolute;
@@ -55,14 +56,14 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
 
       .number {
         font-family: 'Sprat Type Condensed';
-        font-size: 14.4vw;
+        font-size: 20vw;
         font-weight: 300;
         letter-spacing: -0.12em;
       }
 
       .label {
         font-family: $FONT_SUBHEAD;
-        font-size: 2.36vw;
+        font-size: 4.5vw;
         font-weight: 400;
         letter-spacing: $FONT_SPRAT_KERN;
       }
@@ -75,12 +76,12 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    bottom: 8vw;
+    bottom: 25vw;
     width: 100vw;
 
     #show-date-text {
       font-family: 'Sprat Type Condensed';
-      font-size: 4.44vw;
+      font-size: $SUBTEXT_FONT_SIZE;
       font-weight: 300;
       margin-left: $X_MARGIN*4/8;
       margin-right: 12px;
@@ -106,12 +107,12 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
     display: flex;
     flex-direction: row;
     align-items: center;
-    bottom: 3vw;
+    bottom: 10vw;
     width: 100vw;
 
     #show-time-text {
       font-family: 'Sprat Type Condensed';
-      font-size: 4.44vw;
+      font-size: $SUBTEXT_FONT_SIZE;
       font-weight: 300;
       letter-spacing: -0.12em;
       margin-right: $X_MARGIN*4/8;
