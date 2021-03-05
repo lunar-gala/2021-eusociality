@@ -4,6 +4,24 @@
 
 $TAB_TEXT_SIZE: 36px;
 
+@keyframes slide-in {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+
 #people-page.main-page {
   display: none;
   flex-direction: column;
