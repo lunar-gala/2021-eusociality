@@ -1,6 +1,6 @@
-
 // TODO: unsure why this font is so much smaller than figma
 $FONT_SIZE_TITLE: 48px;
+$LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
 
 /**
  * 3D model in the landing page.
@@ -55,12 +55,12 @@ $FONT_SIZE_TITLE: 48px;
 
   .title-theme {
     position: fixed;
-    font-size: $FONT_SIZE_TITLE;
-    // Vertically stretch the font
-    transform: scale(1, 1.5);
     transition-duration: 1s;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
     opacity: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
     // Title disappears on nav menu open
     &.mobile-nav-menu-open {
@@ -73,6 +73,22 @@ $FONT_SIZE_TITLE: 48px;
 
     &.mobile-line-menu-open {
       opacity: 0;
+    }
+
+    span {
+      font-size: $FONT_SIZE_TITLE;
+    }
+
+    #collectiva-logo {
+      margin-top: 4px;
+      margin-left: 4px;
+      height: $LOGO_SIZE;
+      width: $LOGO_SIZE;
+
+      svg {
+        height: 100%;
+        width: 100%;
+      }
     }
   }
 
