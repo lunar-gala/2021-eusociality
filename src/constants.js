@@ -87,13 +87,14 @@ export const DESKTOP_WIDTH = 768;
 
 /** @brief List of team names used in the people page */
 export const TEAM_NAMES = [
-  "Creative",
+  "Producers",
   "Design",
-  "Production",
-  "Cinematography",
   "Model",
-  "Public Relations",
   "Entertainment",
+  "Production",
+  "Creative",
+  "Public Relations",
+  "Cinematography",
 ];
 
 /** @brief Info for mobile nav menu links */
