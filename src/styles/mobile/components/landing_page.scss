@@ -118,6 +118,8 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
     bottom: 51px;
     width: 41px;
     height: 54px;
+    opacity: 1;
+    transition-duration: 500ms;
 
     &.mobile-about-page-open,
     &.mobile-people-page-open,
@@ -187,4 +189,10 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
   height: 50px;
   z-index: 10;
   right: 30px;
+  opacity: 0;
+  transition-duration: 500ms;
+
+  &.default {
+    opacity: 1;
+  }
 }

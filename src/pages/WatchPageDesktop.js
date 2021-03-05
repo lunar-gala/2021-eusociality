@@ -18,7 +18,7 @@ class WatchPageDesktop extends React.Component {
     return (
       <div
         id="watch-page-desktop"
-        className={`desktop ${this.props.landing_page_state}`}
+        className={`${this.props.landing_page_state}`}
       >
         <div id="countdown">
           {this.getCountdownComponent("DAYS", this.props.countdownState.days)}

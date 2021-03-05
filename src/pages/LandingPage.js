@@ -24,7 +24,7 @@ import MobileOpenMenu from "../components/MobileOpenMenu";
 import MobileMenuLineList from "../components/MobileMenuLineList";
 import MobileMenuNavList from "../components/MobileMenuNavList";
 import AboutPageMobile from "./AboutPageMobile";
-import GyroPrompt from '../components/GyroPrompt';
+import GyroPrompt from "../components/GyroPrompt";
 
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -238,8 +238,16 @@ class LandingPage extends React.Component {
   }
 
   startupAnimationSequenceMobile() {
-    if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LANDING_PAGE_LOAD) {
+    if (
+      this.state.landing_page_state ===
+      CONSTANTS.LANDING_PAGE_STATES.MOBILE_LANDING_PAGE_LOAD
+    ) {
       this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
+    } else if (
+      this.state.landing_page_state ===
+      CONSTANTS.LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
+    ) {
+      this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN);
     }
 
     let temp = function check_cube_progress() {
@@ -391,7 +399,11 @@ class LandingPage extends React.Component {
     );
 
     if (gesture === "Tap") {
-      console.log("[DEBUG] Tap (x, y):", this.state.current_touch[0].x, this.state.current_touch[0].y);
+      console.log(
+        "[DEBUG] Tap (x, y):",
+        this.state.current_touch[0].x,
+        this.state.current_touch[0].y
+      );
     } else if (
       this.state.landing_page_state ===
         CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN &&
@@ -427,7 +439,11 @@ class LandingPage extends React.Component {
         }
       } else {
         // Tapping the top of the default landing page opens the nav menu
-        if (gesture === "Tap" && this.state.current_touch[0].y < 90 && this.state.current_touch[0].x < 270) {
+        if (
+          gesture === "Tap" &&
+          this.state.current_touch[0].y < 90 &&
+          this.state.current_touch[0].x < 270
+        ) {
           this.handlerSetLandingPageState(
             CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
           );
@@ -586,7 +602,10 @@ class LandingPage extends React.Component {
     }
 
     // We need to start the countdown timer if we enter the watch page
-    if (state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN) {
+    if (
+      state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN ||
+      state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
+    ) {
       this.setState({
         countdownInterval: setInterval(this.updateCountdown, 1000),
         countdownState: UTIL.calculate_date_difference(CONSTANTS.SHOW_DATE),
@@ -615,9 +634,9 @@ class LandingPage extends React.Component {
    *
    * @param {bool} show The class to apply to the gyro prompt
    */
-  handlerShowGyroPrompt (gyro_class) {
+  handlerShowGyroPrompt(gyro_class) {
     this.setState({
-      mobile_show_gyro_prompt: gyro_class
+      mobile_show_gyro_prompt: gyro_class,
     });
   }
 
