@@ -5,6 +5,8 @@
 $MOBILE_MENU_OPEN_SIZE: 30px;
 $LEFT_MARGIN: 30px;
 $HEADER_HEIGHT: 90px;
+$HEADER_FONT_SIZE: 30px;
+$LOGO_SIZE: $HEADER_FONT_SIZE - 8px;
 
 #mobile-open-menu-wrapper {
   height: $HEADER_HEIGHT;
@@ -43,11 +45,29 @@ $HEADER_HEIGHT: 90px;
     opacity: 0;
     transition-duration: 1s;
 
-    #text {
-      font-family: 'Sprat Type Condensed';
-      font-weight: 300;
-      font-size: 30px;
-      letter-spacing: -0.12em;
+    #mobile-open-menu-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      #text {
+        font-family: 'Sprat Type Condensed';
+        font-weight: 300;
+        font-size: 30px;
+        letter-spacing: -0.12em;
+      }
+
+      #collectiva-logo {
+        margin-top: 4px;
+        margin-left: 4px;
+        height: $LOGO_SIZE;
+        width: $LOGO_SIZE;
+
+        svg {
+          height: 100%;
+          width: 100%;
+        }
+      }
     }
   }
 

@@ -5,6 +5,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as CONSTANTS from '../constants';
+import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
 
 class MobileOpenMenu extends React.Component {
   render() {
@@ -24,9 +25,14 @@ class MobileOpenMenu extends React.Component {
           DeviceOrientationEvent.requestPermission();
         }
       }}>
-        <span id='text'>
-          {CONSTANTS.LANDING_PAGE_TITLE}
-        </span>
+        <div id='mobile-open-menu-header'>
+          <span id='text'>
+            {CONSTANTS.LANDING_PAGE_TITLE}
+          </span>
+          <div id="collectiva-logo">
+            <COLLECTIVA_LOGO />
+          </div>
+        </div>
       </div>
     </div>;
   }
