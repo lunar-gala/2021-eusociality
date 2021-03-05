@@ -24,11 +24,11 @@ import MobileOpenMenu from "../components/MobileOpenMenu";
 import MobileMenuLineList from "../components/MobileMenuLineList";
 import MobileMenuNavList from "../components/MobileMenuNavList";
 import AboutPageMobile from "./AboutPageMobile";
+import GyroPrompt from '../components/GyroPrompt';
 
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { GUI } from "three/examples/jsm/libs/dat.gui.module";
 import cube_frag from "../../assets/models/cube_frag/reducedpoly_final.gltf";
 
 import * as TWEEN from "@tweenjs/tween.js";
@@ -185,6 +185,7 @@ class LandingPage extends React.Component {
       landing_page_animations_header: "",
       landing_page_animations_logo: "",
       landing_page_animations_middleTitle: "",
+      mobile_show_gyro_prompt: "",
       /** @brief Mouse position x */
       x: 0,
       /** @brief Mouse position y */
@@ -218,6 +219,7 @@ class LandingPage extends React.Component {
       cube_positions: [],
     };
 
+    this.handlerShowGyroPrompt = this.handlerShowGyroPrompt.bind(this);
     this.handleOrientation = this.handleOrientation.bind(this);
     this.handlerSetLandingPageState = this.handlerSetLandingPageState.bind(
       this
@@ -389,7 +391,7 @@ class LandingPage extends React.Component {
     );
 
     if (gesture === "Tap") {
-      console.log("[DEBUG] Tap", this.state.current_touch[0].y);
+      console.log("[DEBUG] Tap (x, y):", this.state.current_touch[0].x, this.state.current_touch[0].y);
     } else if (
       this.state.landing_page_state ===
         CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN &&
@@ -425,7 +427,7 @@ class LandingPage extends React.Component {
         }
       } else {
         // Tapping the top of the default landing page opens the nav menu
-        if (gesture === "Tap" && this.state.current_touch[0].y < 90) {
+        if (gesture === "Tap" && this.state.current_touch[0].y < 90 && this.state.current_touch[0].x < 270) {
           this.handlerSetLandingPageState(
             CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
           );
@@ -606,6 +608,17 @@ class LandingPage extends React.Component {
     } else {
       console.log(`[DEBUG] state ${state} has no constant`);
     }
+  }
+
+  /**
+   * Sets the class of the gyroscope prompt
+   *
+   * @param {bool} show The class to apply to the gyro prompt
+   */
+  handlerShowGyroPrompt (gyro_class) {
+    this.setState({
+      mobile_show_gyro_prompt: gyro_class
+    });
   }
 
   handlerSelectedLineIdx(index) {
@@ -896,24 +909,6 @@ class LandingPage extends React.Component {
       iridescence_texture_outline
     );
 
-    /**
-     * Add controls so we can tweak the asset
-     *
-     * TODO: remove this for the actual
-     */
-    const gui = new GUI();
-    gui.remember(iridescence_texture_main);
-    gui.remember(iridescence_material_main);
-    gui.add(iridescence_texture_main, "filmThickness").min(100).max(1000);
-    gui.add(iridescence_texture_main, "refractiveIndexFilm").min(1).max(5);
-    gui.add(iridescence_texture_main, "refractiveIndexBase").min(1).max(5);
-    gui.add(iridescence_material_main, "boost").min(1).max(50);
-    gui.add(iridescence_material_main, "iridescenceRatio").min(0).max(10);
-    gui.add(iridescence_material_main, "baseTextureRatio").min(0).max(10);
-    gui.add(iridescence_material_main, "brightness").min(0).max(10);
-    gui.add(iridescence_material_main, "textureZoom").min(0).max(2);
-    gui.close();
-
     gltf_loader.load(
       cube_frag,
       // called when resource is loaded
@@ -1198,7 +1193,11 @@ class LandingPage extends React.Component {
           landing_page_state={this.state.landing_page_state}
         />
         {/* Mobile Elements */}
-        <MobileOpenMenu landing_page_state={this.state.landing_page_state} />
+        <MobileOpenMenu
+          handlerShowGyroPrompt={this.handlerShowGyroPrompt}
+          landing_page_state={this.state.landing_page_state}
+          mobile_show_gyro_prompt={this.state.mobile_show_gyro_prompt}
+        />
         <MobileMenuLineList
           landing_page_state={this.state.landing_page_state}
         />
@@ -1207,6 +1206,9 @@ class LandingPage extends React.Component {
           handlerSetLandingPageState={this.handlerSetLandingPageState}
         />
         <AboutPageMobile landing_page_state={this.state.landing_page_state} />
+        <GyroPrompt
+          mobile_show_gyro_prompt={this.state.mobile_show_gyro_prompt}
+        />
         {/* Desktop Elements */}
         <AboutPageDesktop landing_page_state={this.state.landing_page_state} />
         <WatchPageDesktop
