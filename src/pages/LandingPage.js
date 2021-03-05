@@ -236,7 +236,9 @@ class LandingPage extends React.Component {
   }
 
   startupAnimationSequenceMobile() {
-    this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
+    if (this.state.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_LANDING_PAGE_LOAD) {
+      this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
+    }
 
     let temp = function check_cube_progress() {
       if (this.state.assetHasLoaded) {
