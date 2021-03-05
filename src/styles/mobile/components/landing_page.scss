@@ -29,7 +29,7 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
     opacity: 0;
   }
 
-  &.mobile-about-page-open {
+  &.mobile-about-page-open, &.mobile-people-page-open, &.mobile-watch-page-open {
     opacity: 0.6;
   }
 
@@ -67,7 +67,7 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
       opacity: 0;
     }
 
-    &.mobile-about-page-open {
+    &.mobile-about-page-open, &.mobile-people-page-open, &.mobile-watch-page-open {
       opacity: 0;
     }
 
@@ -115,7 +115,7 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
     width: 41px;
     height: 54px;
 
-    &.mobile-about-page-open {
+    &.mobile-about-page-open, &.mobile-people-page-open, &.mobile-watch-page-open {
       opacity: 0;
     }
   }
