@@ -38,10 +38,10 @@ class App extends React.Component {
         <Route
           render={({location}) => (
             <TransitionGroup id='transition-group'>
-              <CSSTransition timeout={1000} classNames="fade" key={location.pathname.includes('lines')}>
+              <CSSTransition timeout={1000} classNames="fade" key={location.pathname.includes('lines/')}>
                 <Switch location={location}>
                   <Route
-                    path="/lines/([1-9]|10|11|12|13|14|15|16|17)"
+                    exact path="/lines/([1-9]|10|11|12|13|14|15|16|17)"
                     render={(props) => (
                       <LinePage
                         {...props}
