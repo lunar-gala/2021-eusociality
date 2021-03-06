@@ -210,6 +210,12 @@ $TAB_TEXT_SIZE: 36px;
         width: 40vw;
         justify-self: flex-start;
 
+        &.right {
+          .headshot {
+            transform: scaleX(-1);
+          }
+        }
+
         .name {
           text-transform: uppercase;
           font-weight: 500;
