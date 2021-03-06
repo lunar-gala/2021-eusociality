@@ -143,15 +143,6 @@ class LinePage extends React.Component {
             landing_page_state={this.state.landing_page_state}
           />
         </div>
-        <div id="back-button-wrapper">
-          <div
-            id="back-button"
-            className={this.state.showBackButton ? "show" : ""}
-            onClick={() => {
-              this.props.history.goBack();
-            }}
-          />
-        </div>
       </div>
     );
   }
