@@ -5,6 +5,7 @@
  */
 
 $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
+$SUBTEXT_LETTER_SPACING: -0.07em;
 
 #watch-page-desktop {
   position: absolute;
@@ -57,7 +58,7 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
         font-family: 'Sprat Type Condensed';
         font-size: 14.4vw;
         font-weight: 300;
-        letter-spacing: -0.12em;
+        letter-spacing: $SUBTEXT_LETTER_SPACING;
       }
 
       .label {
@@ -113,7 +114,7 @@ $MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
       font-family: 'Sprat Type Condensed';
       font-size: 4.44vw;
       font-weight: 300;
-      letter-spacing: -0.12em;
+      letter-spacing: $SUBTEXT_LETTER_SPACING;
       margin-right: $X_MARGIN*4/8;
       margin-left: 12px;
       backface-visibility: hidden;
