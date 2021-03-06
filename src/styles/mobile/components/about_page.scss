@@ -14,9 +14,22 @@ $VERTICAL_MARGIN: 12px;
   opacity: 0;
   transition-duration: 1s;
 
+  #left-bar {
+    transform: translateX(-100%);
+  }
+
   &.mobile-about-page-open {
     z-index: $Z_INDEX_MAIN_UI;
     opacity: 1;
+
+    #right-bar {
+      animation: right-bar-slide-in $ANIMATION_DURATION_SLIDE_IN forwards;
+    }
+
+    #left-bar {
+      animation: left-bar-slide-in $ANIMATION_DURATION_SLIDE_IN forwards;
+      animation-delay: $ANIMATION_DURATION_SLIDE_IN;
+    }
   }
 
   #header-section {
