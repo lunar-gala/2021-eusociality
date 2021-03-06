@@ -28,12 +28,14 @@ $LOGO_SIZE: $HEADER_FONT_SIZE - 8px;
     background: $LANDING_PAGE_BACKGROUND_COLOR;
   }
 
-  &.mobile-nav-menu-open #title {
-    opacity: 1;
-  }
-
-  &.mobile-line-menu-open #title {
-    opacity: 1;
+  &.mobile-nav-menu-open,
+  &.mobile-line-menu-open,
+  &.mobile-about-page-open,
+  &.mobile-people-page-open,
+  &.mobile-watch-page-open {
+    #title {
+      opacity: 1;
+    }
   }
 
   #title {

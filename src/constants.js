@@ -53,6 +53,13 @@ export const PATH_TO_STATE = {
     people: LANDING_PAGE_STATES.MOBILE_PEOPLE_PAGE_OPEN,
     watch: LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN,
   },
+  mobile_nav: {
+    "": LANDING_PAGE_STATES.DEFAULT,
+    about: LANDING_PAGE_STATES.MOBILE_ABOUT_PAGE_OPEN,
+    lines: LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN,
+    people: LANDING_PAGE_STATES.MOBILE_PEOPLE_PAGE_OPEN,
+    watch: LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN,
+  },
   /**
    * For many of the desktop states, we start with the load state instead of
    * the open state, so we can trigger load animations.

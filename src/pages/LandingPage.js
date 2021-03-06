@@ -253,7 +253,9 @@ class LandingPage extends React.Component {
       this.state.landing_page_state ===
       CONSTANTS.LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
     ) {
-      this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN);
+      this.handlerSetLandingPageState(
+        CONSTANTS.LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
+      );
     }
 
     let temp = function check_cube_progress() {
@@ -397,6 +399,8 @@ class LandingPage extends React.Component {
   }
 
   touchEnd() {
+    return;
+
     let gesture = GESTURE.getGesture(
       this.state.first_touch[0].x,
       this.state.current_touch[0].x,
@@ -438,13 +442,15 @@ class LandingPage extends React.Component {
         this.state.landing_page_state ===
         CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
       ) {
-        if (gesture === "Tap" && this.state.current_touch[0].y < 90 && this.state.current_touch[0].x < 80) {
-          this.handlerSetLandingPageState(
-            this.state.landing_page_state_prev
-          );
+        if (
+          gesture === "Tap" &&
+          this.state.current_touch[0].y < 90 &&
+          this.state.current_touch[0].x < 80
+        ) {
+          this.handlerSetLandingPageState(this.state.landing_page_state_prev);
         } else if (gesture === "Tap" && this.state.current_touch[0].y < 90) {
           this.handlerSetLandingPageState(
-            CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
+            CONSTANTS.LANDING_PAGE_STATES.DEFAULT
           );
         }
       } else {
@@ -569,14 +575,16 @@ class LandingPage extends React.Component {
    * set.
    *
    * @param {state} state See constants.js for all states
+   * @param {bool} go_back If we triggered this handler from clicking the back
+   * button
    */
-  handlerSetLandingPageState(state) {
+  handlerSetLandingPageState(state, go_back = false) {
     if (state === this.state.landing_page_state) {
       return;
     }
 
     this.setState({
-      landing_page_state_prev: this.state.landing_page_state
+      landing_page_state_prev: this.state.landing_page_state,
     });
 
     console.log(
@@ -596,13 +604,6 @@ class LandingPage extends React.Component {
       this.setState({
         landing_page_animations_navbar: "",
       });
-
-      // Fix url paths
-      if (this.state.selectedLineIdx >= 0) {
-        this.props.history.replace("/");
-      } else {
-        this.props.history.push("/");
-      }
 
       // Reset lines info
       this.handlerSelectedLineIdx(-1);
@@ -630,16 +631,18 @@ class LandingPage extends React.Component {
 
     const { history } = this.props;
 
-    if (
-      CONSTANTS.STATE_TO_PATH[state] &&
-      this.props.location.pathname !== CONSTANTS.STATE_TO_PATH[state]
-    ) {
-      console.log(
-        `[DEBUG] state ${state} pushed to history, previous ${this.props.location.pathname}`
-      );
-      history.push(CONSTANTS.STATE_TO_PATH[state]);
-    } else {
-      console.log(`[DEBUG] state ${state} has no constant`);
+    if (!go_back) {
+      if (
+        CONSTANTS.STATE_TO_PATH[state] &&
+        this.props.location.pathname !== CONSTANTS.STATE_TO_PATH[state]
+      ) {
+        console.log(
+          `[DEBUG] state ${state} pushed to history, previous ${this.props.location.pathname}`
+        );
+        history.push(CONSTANTS.STATE_TO_PATH[state]);
+      } else {
+        console.log(`[DEBUG] state ${state} has no constant`);
+      }
     }
   }
 
@@ -655,7 +658,7 @@ class LandingPage extends React.Component {
     });
   }
 
-  handlerSelectedLineIdx(index) {
+  handlerSelectedLineIdx(index, go_back = false) {
     // This means we need to go to default landing page state
     if (index < 0) {
       this.setState({
@@ -695,7 +698,7 @@ class LandingPage extends React.Component {
           this.state.camera.position.set(
             curr_position.x + this.state.mouse_offset_x,
             curr_position.y + this.state.mouse_offset_y,
-            curr_position.z + this.state.mouse_offset_z,
+            curr_position.z + this.state.mouse_offset_z
           );
 
           this.setState({
@@ -717,9 +720,7 @@ class LandingPage extends React.Component {
      * 2. If a user navigates to the line page and then goes back, they should
      *    be able to go the line they came from
      */
-    if (this.state.selectedLineIdx >= 0) {
-      this.props.history.replace(`/${index + 1}`);
-    } else {
+    if (!go_back) {
       this.props.history.push(`/${index + 1}`);
     }
 
@@ -765,12 +766,10 @@ class LandingPage extends React.Component {
     let theta = (90 * offset_y * Math.PI) / 180;
     let kappa = ((90 + 90 * offset_x) * Math.PI) / 180;
 
-    let mouse_offset_x =
-          Math.sin(phi) * CAMERA_PAN_FACTOR_DESKTOP.x;
-    let mouse_offset_y =
-          Math.sin(theta) * CAMERA_PAN_FACTOR_DESKTOP.y;
+    let mouse_offset_x = Math.sin(phi) * CAMERA_PAN_FACTOR_DESKTOP.x;
+    let mouse_offset_y = Math.sin(theta) * CAMERA_PAN_FACTOR_DESKTOP.y;
     let mouse_offset_z =
-          - Math.pow(Math.cos(kappa), 2) * CAMERA_PAN_FACTOR_DESKTOP.z;
+      -Math.pow(Math.cos(kappa), 2) * CAMERA_PAN_FACTOR_DESKTOP.z;
 
     this.setState({
       mouse_offset_x: mouse_offset_x,
@@ -782,7 +781,7 @@ class LandingPage extends React.Component {
       this.state.camera.position.set(
         this.state.curr_camera_position.x + mouse_offset_x,
         this.state.curr_camera_position.y + mouse_offset_y,
-        this.state.curr_camera_position.z + mouse_offset_z,
+        this.state.curr_camera_position.z + mouse_offset_z
       );
     }
   }
@@ -856,12 +855,36 @@ class LandingPage extends React.Component {
     this.props.history.listen((loc, action) => {
       console.log(loc, action);
       if (action === "POP") {
-        console.log("[DEBUG] Back button pressed, POP: ", loc);
-        this.handlerSetLandingPageState(
-          CONSTANTS.PATH_TO_STATE["desktop_nav"][
-            UTIL.return_first_regex_match(regexFindPathName, loc.pathname)
-          ]
+        const currPathMatches = regexFindPathName.exec(
+          this.props.location.pathname
         );
+
+        /**
+         * Since going to the default state resets the selected line index, we
+         * have to reset it if we go back to a selected line index url
+         */
+        if (
+          currPathMatches !== null &&
+          currPathMatches.length >= 1 &&
+          !isNaN(currPathMatches[1])
+        ) {
+          const line_number = parseInt(currPathMatches[1]) - 1;
+
+          if (line_number >= 0 && line_number < LINE_DATA.LINE_INFO.length) {
+            this.handlerSelectedLineIdx(line_number, true);
+          }
+        } else {
+          this.handlerSetLandingPageState(
+            this.state.isMobile
+              ? CONSTANTS.PATH_TO_STATE["mobile_nav"][
+                  UTIL.return_first_regex_match(regexFindPathName, loc.pathname)
+                ]
+              : CONSTANTS.PATH_TO_STATE["desktop_nav"][
+                  UTIL.return_first_regex_match(regexFindPathName, loc.pathname)
+                ],
+            true
+          );
+        }
       }
     });
 
@@ -1241,9 +1264,11 @@ class LandingPage extends React.Component {
         />
         {/* Mobile Elements */}
         <MobileOpenMenu
+          handlerSetLandingPageState={this.handlerSetLandingPageState}
           handlerShowGyroPrompt={this.handlerShowGyroPrompt}
           has_seen_gyro_prompt={this.state.has_seen_gyro_prompt}
           landing_page_state={this.state.landing_page_state}
+          landing_page_state_prev={this.state.landing_page_state_prev}
           mobile_show_gyro_prompt={this.state.mobile_show_gyro_prompt}
         />
         <MobileMenuLineList
