@@ -168,7 +168,7 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 60vw;
+    width: 70vw;
     text-align: center;
   }
 
@@ -185,9 +185,10 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
   }
 
   #gyro-prompt-text {
+    font-family: $FONT_SUBHEAD;
     color: white;
     padding-top: 5vh;
-    font-size: 2rem;
+    font-size: 3vh;
   }
 }
 
