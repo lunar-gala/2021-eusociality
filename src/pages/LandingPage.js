@@ -71,7 +71,7 @@ const CAMERA_POSITION_MOBILE = {
 
 /** @brief Starting position of the object */
 const OBJECT_POSITION = {
-  x: 200,
+  x: 0,
   y: 0,
   z: 0,
 };
