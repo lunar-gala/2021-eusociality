@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import filter from '../../assets/img/filter_blurred.jpg';
 
 export default function TeamBio(props) {
-  const { imgSrc, name, title } = props;
+  const { imgSrc, name, title, parity } = props;
 
   return (
-    <div className="teamBio" key={`${name}-teamBio`}>
+    <div className={`teamBio ${parity ? "right" : "left"}`} key={`${name}-teamBio`}>
       <div
         className="headshot"
         style={{
@@ -25,5 +25,6 @@ TeamBio.propTypes = {
   imgSrc: PropTypes.string,
   /** @brief Shows if the tab is expanded or not */
   name: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  parity: PropTypes.bool.isRequired,
 };

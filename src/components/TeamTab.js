@@ -15,16 +15,20 @@ export default function TeamTab(props) {
 
   let pictures = [];
   let notPictured = [];
+  let parity = false;
 
   if (PEOPLE_BY_TEAMS[teamName] !== undefined) {
     pictures = PEOPLE_BY_TEAMS[teamName].map((andrew_id) => {
       let entry = PEOPLE_DATA[andrew_id];
 
       if (entry.image !== undefined && entry.image !== null) {
+        parity = !parity;
+
         return (
           <TeamBio
             imgSrc={entry.image}
             name={`${entry.first_name} ${entry.last_name}`}
+            parity={parity}
             title={entry.position}
             key={andrew_id}
           />

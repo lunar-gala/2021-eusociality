@@ -24,11 +24,11 @@ import MobileOpenMenu from "../components/MobileOpenMenu";
 import MobileMenuLineList from "../components/MobileMenuLineList";
 import MobileMenuNavList from "../components/MobileMenuNavList";
 import AboutPageMobile from "./AboutPageMobile";
+import GyroPrompt from "../components/GyroPrompt";
 
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { GUI } from "three/examples/jsm/libs/dat.gui.module";
 import cube_frag from "../../assets/models/cube_frag/reducedpoly_final.gltf";
 
 import * as TWEEN from "@tweenjs/tween.js";
@@ -71,7 +71,7 @@ const CAMERA_POSITION_MOBILE = {
 
 /** @brief Starting position of the object */
 const OBJECT_POSITION = {
-  x: 200,
+  x: 0,
   y: 0,
   z: 0,
 };
@@ -148,11 +148,13 @@ class LandingPage extends React.Component {
       /** @brief Current touch recorded by `touchMove` handler */
       current_touch: [],
       /**
-       * We have an FSM-like organization for states. We do a Moore-type
+       * @brief We have an FSM-like organization for states. We do a Moore-type
        * machine, where we perform actions and change states based on which
        * state we are in.
        */
       landing_page_state: landing_page_state,
+      /** @brief Previous landing page state. */
+      landing_page_state_prev: landing_page_state,
       /**
        * @brief Keeps track of how far we have scrolled in the mobile line menu.
        * We use this to figure out if we should close the mobile menu or not.
@@ -185,10 +187,15 @@ class LandingPage extends React.Component {
       landing_page_animations_header: "",
       landing_page_animations_logo: "",
       landing_page_animations_middleTitle: "",
+      mobile_show_gyro_prompt: "",
+      has_seen_gyro_prompt: false,
       /** @brief Mouse position x */
       x: 0,
       /** @brief Mouse position y */
       y: 0,
+      mouse_offset_x: 0,
+      mouse_offset_y: 0,
+      mouse_offset_z: 0,
       /** @brief Window width, including resizing */
       width: 0,
       /** @brief Window height, including resizing */
@@ -218,6 +225,7 @@ class LandingPage extends React.Component {
       cube_positions: [],
     };
 
+    this.handlerShowGyroPrompt = this.handlerShowGyroPrompt.bind(this);
     this.handleOrientation = this.handleOrientation.bind(this);
     this.handlerSetLandingPageState = this.handlerSetLandingPageState.bind(
       this
@@ -236,7 +244,17 @@ class LandingPage extends React.Component {
   }
 
   startupAnimationSequenceMobile() {
-    this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
+    if (
+      this.state.landing_page_state ===
+      CONSTANTS.LANDING_PAGE_STATES.MOBILE_LANDING_PAGE_LOAD
+    ) {
+      this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.DEFAULT);
+    } else if (
+      this.state.landing_page_state ===
+      CONSTANTS.LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
+    ) {
+      this.handlerSetLandingPageState(CONSTANTS.LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN);
+    }
 
     let temp = function check_cube_progress() {
       if (this.state.assetHasLoaded) {
@@ -387,7 +405,11 @@ class LandingPage extends React.Component {
     );
 
     if (gesture === "Tap") {
-      console.log("[DEBUG] Tap", this.state.current_touch[0].y);
+      console.log(
+        "[DEBUG] Tap (x, y):",
+        this.state.current_touch[0].x,
+        this.state.current_touch[0].y
+      );
     } else if (
       this.state.landing_page_state ===
         CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN &&
@@ -416,14 +438,22 @@ class LandingPage extends React.Component {
         this.state.landing_page_state ===
         CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
       ) {
-        if (gesture === "Tap" && this.state.current_touch[0].y < 90) {
+        if (gesture === "Tap" && this.state.current_touch[0].y < 90 && this.state.current_touch[0].x < 80) {
           this.handlerSetLandingPageState(
-            CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+            this.state.landing_page_state_prev
+          );
+        } else if (gesture === "Tap" && this.state.current_touch[0].y < 90) {
+          this.handlerSetLandingPageState(
+            CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
           );
         }
       } else {
         // Tapping the top of the default landing page opens the nav menu
-        if (gesture === "Tap" && this.state.current_touch[0].y < 90) {
+        if (
+          gesture === "Tap" &&
+          this.state.current_touch[0].y < 90 &&
+          this.state.current_touch[0].x < 270
+        ) {
           this.handlerSetLandingPageState(
             CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
           );
@@ -545,6 +575,10 @@ class LandingPage extends React.Component {
       return;
     }
 
+    this.setState({
+      landing_page_state_prev: this.state.landing_page_state
+    });
+
     console.log(
       `[DEBUG] Old State ${this.state.landing_page_state}, New State ${state}`
     );
@@ -582,7 +616,10 @@ class LandingPage extends React.Component {
     }
 
     // We need to start the countdown timer if we enter the watch page
-    if (state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN) {
+    if (
+      state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN ||
+      state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN
+    ) {
       this.setState({
         countdownInterval: setInterval(this.updateCountdown, 1000),
         countdownState: UTIL.calculate_date_difference(CONSTANTS.SHOW_DATE),
@@ -606,6 +643,18 @@ class LandingPage extends React.Component {
     }
   }
 
+  /**
+   * Sets the class of the gyroscope prompt
+   *
+   * @param {bool} show The class to apply to the gyro prompt
+   */
+  handlerShowGyroPrompt(gyro_class) {
+    this.setState({
+      mobile_show_gyro_prompt: gyro_class,
+      has_seen_gyro_prompt: true,
+    });
+  }
+
   handlerSelectedLineIdx(index) {
     // This means we need to go to default landing page state
     if (index < 0) {
@@ -625,7 +674,14 @@ class LandingPage extends React.Component {
       this.playCubeExpand(index);
     } else {
       let camera_index = index;
-      new TWEEN.Tween(this.state.camera.position)
+
+      let curr_position = {
+        x: this.state.curr_camera_position.x,
+        y: this.state.curr_camera_position.y,
+        z: this.state.curr_camera_position.z,
+      };
+
+      new TWEEN.Tween(curr_position)
         .to(
           {
             x: this.state.camera_positions[camera_index].position.x,
@@ -636,20 +692,17 @@ class LandingPage extends React.Component {
         )
         .easing(TWEEN.Easing.Cubic.InOut)
         .onUpdate(() => {
+          this.state.camera.position.set(
+            curr_position.x + this.state.mouse_offset_x,
+            curr_position.y + this.state.mouse_offset_y,
+            curr_position.z + this.state.mouse_offset_z,
+          );
+
           this.setState({
             curr_camera_position: {
-              x: this.state.camera.position.x,
-              y: this.state.camera.position.y,
-              z: this.state.camera.position.z,
-            },
-          });
-        })
-        .onComplete(() => {
-          this.setState({
-            curr_camera_position: {
-              x: this.state.camera_positions[camera_index].position.x,
-              y: this.state.camera_positions[camera_index].position.y,
-              z: this.state.camera_positions[camera_index].position.z,
+              x: curr_position.x,
+              y: curr_position.y,
+              z: curr_position.z,
             },
           });
         })
@@ -712,15 +765,24 @@ class LandingPage extends React.Component {
     let theta = (90 * offset_y * Math.PI) / 180;
     let kappa = ((90 + 90 * offset_x) * Math.PI) / 180;
 
-    // TODO: animate this movement so it is smoother
+    let mouse_offset_x =
+          Math.sin(phi) * CAMERA_PAN_FACTOR_DESKTOP.x;
+    let mouse_offset_y =
+          Math.sin(theta) * CAMERA_PAN_FACTOR_DESKTOP.y;
+    let mouse_offset_z =
+          - Math.pow(Math.cos(kappa), 2) * CAMERA_PAN_FACTOR_DESKTOP.z;
+
+    this.setState({
+      mouse_offset_x: mouse_offset_x,
+      mouse_offset_y: mouse_offset_y,
+      mouse_offset_z: mouse_offset_z,
+    });
+
     if (this.state.curr_camera_position) {
       this.state.camera.position.set(
-        this.state.curr_camera_position.x +
-          Math.sin(phi) * CAMERA_PAN_FACTOR_DESKTOP.x,
-        this.state.curr_camera_position.y +
-          Math.sin(theta) * CAMERA_PAN_FACTOR_DESKTOP.y,
-        this.state.curr_camera_position.z -
-          Math.pow(Math.cos(kappa), 2) * CAMERA_PAN_FACTOR_DESKTOP.z
+        this.state.curr_camera_position.x + mouse_offset_x,
+        this.state.curr_camera_position.y + mouse_offset_y,
+        this.state.curr_camera_position.z + mouse_offset_z,
       );
     }
   }
@@ -893,24 +955,6 @@ class LandingPage extends React.Component {
       CONSTANTS.IRIDESCENCE_SETTINGS_OUTLINE.BOOST,
       iridescence_texture_outline
     );
-
-    /**
-     * Add controls so we can tweak the asset
-     *
-     * TODO: remove this for the actual
-     */
-    const gui = new GUI();
-    gui.remember(iridescence_texture_main);
-    gui.remember(iridescence_material_main);
-    gui.add(iridescence_texture_main, "filmThickness").min(100).max(1000);
-    gui.add(iridescence_texture_main, "refractiveIndexFilm").min(1).max(5);
-    gui.add(iridescence_texture_main, "refractiveIndexBase").min(1).max(5);
-    gui.add(iridescence_material_main, "boost").min(1).max(50);
-    gui.add(iridescence_material_main, "iridescenceRatio").min(0).max(10);
-    gui.add(iridescence_material_main, "baseTextureRatio").min(0).max(10);
-    gui.add(iridescence_material_main, "brightness").min(0).max(10);
-    gui.add(iridescence_material_main, "textureZoom").min(0).max(2);
-    gui.close();
 
     gltf_loader.load(
       cube_frag,
@@ -1196,7 +1240,12 @@ class LandingPage extends React.Component {
           landing_page_state={this.state.landing_page_state}
         />
         {/* Mobile Elements */}
-        <MobileOpenMenu landing_page_state={this.state.landing_page_state} />
+        <MobileOpenMenu
+          handlerShowGyroPrompt={this.handlerShowGyroPrompt}
+          has_seen_gyro_prompt={this.state.has_seen_gyro_prompt}
+          landing_page_state={this.state.landing_page_state}
+          mobile_show_gyro_prompt={this.state.mobile_show_gyro_prompt}
+        />
         <MobileMenuLineList
           landing_page_state={this.state.landing_page_state}
         />
@@ -1205,6 +1254,9 @@ class LandingPage extends React.Component {
           handlerSetLandingPageState={this.handlerSetLandingPageState}
         />
         <AboutPageMobile landing_page_state={this.state.landing_page_state} />
+        <GyroPrompt
+          mobile_show_gyro_prompt={this.state.mobile_show_gyro_prompt}
+        />
         {/* Desktop Elements */}
         <AboutPageDesktop landing_page_state={this.state.landing_page_state} />
         <WatchPageDesktop

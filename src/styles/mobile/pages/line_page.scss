@@ -3,7 +3,8 @@
  */
 $LEFT_MARGIN: $X_MARGIN/2;
 $RIGHT_MARGIN: $X_MARGIN/2;
-
+$FONT_SIZE_TITLE: 36px;
+$LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
 
 $SLIDE_IMG_WIDTH: 41.3vw;
 $SLIDE_IMG_HEIGHT: 61vw;
@@ -60,11 +61,31 @@ $SLIDE_AMOUNT_B: -14.38vw;
     align-items: center;
     width: 100vw;
     margin-top: $TOP_MARGIN_MOBILE;
-    font-family: 'Sprat Type Condensed';
-    font-size: 24px;
-    font-weight: 100;
-    letter-spacing: -0.05em;
     text-decoration: none;
+
+    #top-title-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      span {
+        font-family: 'Sprat Type Condensed';
+        font-size: $FONT_SIZE_TITLE;
+        font-weight: 100;
+        letter-spacing: -0.05em;
+      }
+
+      #collectiva-logo {
+        margin-top: 4px;
+        margin-left: 4px;
+        height: $LOGO_SIZE;
+        width: $LOGO_SIZE;
+
+        svg {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
   }
 
   .main-content {

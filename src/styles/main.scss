@@ -8,10 +8,10 @@
 @import './constants.scss';
 @import './fonts.scss';
 @import './common.scss';
+@import './desktop/animations/common_animations.scss';
 
 // Desktop styles
 @media (min-width: $DESKTOP_WIDTH) {
-  @import './desktop/animations/common_animations.scss';
   @import './desktop/desktop_constants.scss';
   @import './desktop/index.scss';
   @import './desktop/components/dots_lines.scss';
@@ -40,4 +40,6 @@
   @import './mobile/components/mobile_open_menu.scss';
   @import './mobile/components/mobile_menu_line_list.scss';
   @import './mobile/components/mobile_menu_nav_list.scss';
+  @import './mobile/pages/people_page.scss';
+  @import './mobile/pages/watch_page.scss';
 }

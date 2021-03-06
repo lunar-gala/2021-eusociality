@@ -37,7 +37,7 @@ class App extends React.Component {
         <ScrollToTop />
         <Route
           render={({location}) => (
-            <TransitionGroup>
+            <TransitionGroup id='transition-group'>
               <CSSTransition timeout={1000} classNames="fade" key={location.pathname.includes('lines')}>
                 <Switch location={location}>
                   <Route

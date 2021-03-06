@@ -4,7 +4,8 @@
  * controlled by the landing page state.
  */
 
-$MARGIN_HORIZONTAL_COUNTDOWN: 10vw;
+$MARGIN_HORIZONTAL_COUNTDOWN: 5vw;
+$SUBTEXT_FONT_SIZE: 8vw;
 $SUBTEXT_LETTER_SPACING: -0.07em;
 
 #watch-page-desktop {
@@ -14,14 +15,14 @@ $SUBTEXT_LETTER_SPACING: -0.07em;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   opacity: 0;
 
   .left-bar {
     transform: translateX(-100%);
   }
 
-  &.desktop-watch-page-open {
+  &.mobile-watch-page-open {
     opacity: 1;
 
     .right-bar {
@@ -53,17 +54,18 @@ $SUBTEXT_LETTER_SPACING: -0.07em;
       flex-direction: column;
       align-items: center;
       width: 25%;
+      margin-bottom: 24px;
 
       .number {
         font-family: 'Sprat Type Condensed';
-        font-size: 14.4vw;
+        font-size: 20vw;
         font-weight: 300;
         letter-spacing: $SUBTEXT_LETTER_SPACING;
       }
 
       .label {
         font-family: $FONT_SUBHEAD;
-        font-size: 2.36vw;
+        font-size: 4.5vw;
         font-weight: 400;
         letter-spacing: $FONT_SPRAT_KERN;
       }
@@ -76,12 +78,12 @@ $SUBTEXT_LETTER_SPACING: -0.07em;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    bottom: 8vw;
+    bottom: 30vw;
     width: 100vw;
 
     #show-date-text {
       font-family: 'Sprat Type Condensed';
-      font-size: 4.44vw;
+      font-size: $SUBTEXT_FONT_SIZE;
       font-weight: 300;
       margin-left: $X_MARGIN*4/8;
       margin-right: 12px;
@@ -107,12 +109,12 @@ $SUBTEXT_LETTER_SPACING: -0.07em;
     display: flex;
     flex-direction: row;
     align-items: center;
-    bottom: 3vw;
+    bottom: 15vw;
     width: 100vw;
 
     #show-time-text {
       font-family: 'Sprat Type Condensed';
-      font-size: 4.44vw;
+      font-size: $SUBTEXT_FONT_SIZE;
       font-weight: 300;
       letter-spacing: $SUBTEXT_LETTER_SPACING;
       margin-right: $X_MARGIN*4/8;

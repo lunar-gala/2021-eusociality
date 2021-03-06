@@ -3,6 +3,7 @@
  */
 
 $HORIZONTAL_MARGIN: 25px;
+$VERTICAL_MARGIN: 12px;
 
 #about-page-mobile {
   position: absolute;
@@ -52,7 +53,8 @@ $HORIZONTAL_MARGIN: 25px;
   .text-box {
     margin-left: $HORIZONTAL_MARGIN;
     margin-right: $HORIZONTAL_MARGIN;
-    margin-top: 24px;
+    margin-top: $VERTICAL_MARGIN;
+    margin-bottom: $VERTICAL_MARGIN;
     font-family: $FONT_BODY;
   }
 }

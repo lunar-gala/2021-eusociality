@@ -1,12 +1,13 @@
 /**
- * The people page for desktop
+ * The people page for mobile
  */
+
+$TAB_TEXT_SIZE: 36px;
 
 @keyframes slide-in {
   from {
     transform: translateX(100vw);
   }
-
   to {
     transform: translateX(0);
   }
@@ -16,21 +17,25 @@
   from {
     transform: translateX(0);
   }
-
   to {
     transform: translateX(100vw);
   }
 }
 
 #people-page.main-page {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
-  display: none;
+  // Enable scroll on this page
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  top: $LANDING_PAGE_HEADER_HEIGHT;
 
-  &.desktop-people-page-open {
-    display: block;
+  &.mobile-people-page-open {
+    display: flex;
 
     .page-background,
     #team-accordion {
@@ -47,20 +52,11 @@
   }
 
   .headshot {
-    width: 20vw;
-    height: 21.3vw;
+    width: 35vw;
+    height: 42.6vw;
     background-size: cover;
     background-repeat: no-repeat;
     background-blend-mode: color;
-  }
-
-  .page-background {
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    opacity: 0;
   }
 
   .wrapper {
@@ -69,9 +65,7 @@
     left: 0;
     right: 0;
     height: 30vh;
-    background: linear-gradient(180deg,
-        rgba(20, 20, 20, 1) 40%,
-        rgba(20, 20, 20, 0) 100%);
+    background: linear-gradient(180deg, rgba(20, 20, 20, 1) 40%, rgba(20, 20, 20, 0) 100%);
     z-index: 100;
     padding: 0;
 
@@ -84,16 +78,23 @@
     }
   }
 
+  .title-theme {
+    position: fixed;
+    font-family: $FONT_DISPLAY;
+    letter-spacing: $FONT_SPRAT_KERN;
+    font-weight: $FONT_SPRAT_WEIGHT;
+    top: 25px;
+    font-size: 40px; // centers text relative to 90px mobile menu element
+  }
+
   #team-accordion {
     position: absolute;
     left: $X_MARGIN/2;
     display: block;
-    top: 25%;
     background: none;
     box-shadow: none;
-    opacity: 0;
-    z-index: $Z_INDEX_MAIN_UI;
-    padding-bottom: 200px;
+    overflow-y: auto;
+    padding-bottom: 15vh;
 
     .Mui-expanded {
       margin: 0;
@@ -105,7 +106,7 @@
       text-transform: uppercase;
       letter-spacing: $FONT_SPRAT_KERN;
       font-weight: $FONT_SPRAT_WEIGHT;
-      font-size: 10vh; // TODO: May need to be bigger
+      font-size: 11.5vw;
       margin: 0;
       padding: 0;
     }
@@ -143,24 +144,12 @@
           animation-fill-mode: both;
           animation-name: slide-out;
         }
-
-        &:hover {
-
-          .display_circle,
-          .display_line {
-            opacity: 1;
-            animation-duration: 0.2s;
-            animation-fill-mode: both;
-            animation-name: slide-in;
-          }
-        }
       }
     }
 
     .tab-header {
       font-family: $FONT_DISPLAY;
       font-weight: $FONT_SPRAT_WEIGHT;
-      // font-size: 20vh;
       padding: 0;
       flex: 1;
       box-shadow: none;
@@ -199,36 +188,26 @@
       width: 100vw - $X_MARGIN;
       padding: 0;
       padding-top: 40px;
+      flex-direction: row;
+      justify-content: flex-start;
       flex-wrap: wrap;
+      box-shadow: none;
       border: none;
 
-      .bioWrapper {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        box-shadow: none;
-      }
-
       .notPictured {
-        h2 {
-          margin-bottom: 10px;
-          font-size: 46;
-        }
-
         p {
           text-transform: uppercase;
-          font-size: 18;
-          margin-bottom: 2px;
+          font-size: 14px;
         }
       }
 
       .teamBio {
-        margin-top: 30px;
-        margin-bottom: 30px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 2.5vw;
         margin-right: 2.5vw;
         display: block;
-        width: 20vw;
+        width: 40vw;
         justify-self: flex-start;
 
         &.right {
@@ -240,7 +219,7 @@
         .name {
           text-transform: uppercase;
           font-weight: 500;
-          font-size: 18px;
+          font-size: 14px;
           margin: 0;
           margin-top: 1em;
         }
@@ -248,9 +227,10 @@
         .title {
           text-transform: uppercase;
           font-weight: 300;
-          font-size: 18px;
+          font-size: 14px;
           margin: 0;
         }
+
       }
     }
   }

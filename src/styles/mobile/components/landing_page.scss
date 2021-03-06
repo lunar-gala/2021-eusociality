@@ -1,6 +1,6 @@
-
 // TODO: unsure why this font is so much smaller than figma
 $FONT_SIZE_TITLE: 48px;
+$LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
 
 /**
  * 3D model in the landing page.
@@ -29,7 +29,9 @@ $FONT_SIZE_TITLE: 48px;
     opacity: 0;
   }
 
-  &.mobile-about-page-open {
+  &.mobile-about-page-open,
+  &.mobile-people-page-open,
+  &.mobile-watch-page-open {
     opacity: 0.6;
   }
 
@@ -55,24 +57,42 @@ $FONT_SIZE_TITLE: 48px;
 
   .title-theme {
     position: fixed;
-    font-size: $FONT_SIZE_TITLE;
-    // Vertically stretch the font
-    transform: scale(1, 1.5);
     transition-duration: 1s;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
     opacity: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
     // Title disappears on nav menu open
     &.mobile-nav-menu-open {
       opacity: 0;
     }
 
-    &.mobile-about-page-open {
+    &.mobile-about-page-open,
+    &.mobile-people-page-open,
+    &.mobile-watch-page-open {
       opacity: 0;
     }
 
     &.mobile-line-menu-open {
       opacity: 0;
+    }
+
+    span {
+      font-size: $FONT_SIZE_TITLE;
+    }
+
+    #collectiva-logo {
+      margin-top: 4px;
+      margin-left: 4px;
+      height: $LOGO_SIZE;
+      width: $LOGO_SIZE;
+
+      svg {
+        height: 100%;
+        width: 100%;
+      }
     }
   }
 
@@ -98,9 +118,101 @@ $FONT_SIZE_TITLE: 48px;
     bottom: 51px;
     width: 41px;
     height: 54px;
+    opacity: 1;
+    transition-duration: 500ms;
 
-    &.mobile-about-page-open {
+    &.mobile-line-menu-open,
+    &.mobile-about-page-open,
+    &.mobile-people-page-open,
+    &.mobile-watch-page-open {
       opacity: 0;
     }
+  }
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+#gyro-prompt-overlay {
+  width: 100vw;
+  height: 100%;
+
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  z-index: $Z_INDEX_HEADER;
+  opacity: 0;
+
+  background-color: black;
+
+  pointer-events: none;
+
+  &.animate-show {
+    animation: fade-in-out 3s forwards;
+  }
+
+  #gyro-prompt-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70vw;
+    text-align: center;
+  }
+
+  #gyro-prompt-icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30vw;
+
+    #gyro-prompt-icon {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  #gyro-prompt-text {
+    font-family: $FONT_SUBHEAD;
+    color: white;
+    padding-top: 5vh;
+    font-size: 3vh;
+  }
+}
+
+#rotate-icon-wrapper {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  z-index: 10;
+  right: 30px;
+  opacity: 0;
+  transition-duration: 500ms;
+
+  &.default {
+    opacity: 1;
+  }
+
+  &.hide {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 }
