@@ -102,8 +102,8 @@ $BOTTOM_DESCRIPTOR_LINE_WIDTH: 44.3vw;
       font-family: 'Sprat Type Condensed';
       font-weight: 100;
       letter-spacing: -0.12em;
-      font-size: 7vw;
-      width: 55vw;
+      font-size: 5.6vw;
+      width: 45vw;
       word-spacing: 0.1em;
     }
 
@@ -112,6 +112,7 @@ $BOTTOM_DESCRIPTOR_LINE_WIDTH: 44.3vw;
       flex-direction: row;
       align-items: center;
       flex-grow: 1;
+      margin-left: 36px;
 
       .dot-basic {
         display: flex;
