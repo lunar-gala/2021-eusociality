@@ -148,11 +148,13 @@ class LandingPage extends React.Component {
       /** @brief Current touch recorded by `touchMove` handler */
       current_touch: [],
       /**
-       * We have an FSM-like organization for states. We do a Moore-type
+       * @brief We have an FSM-like organization for states. We do a Moore-type
        * machine, where we perform actions and change states based on which
        * state we are in.
        */
       landing_page_state: landing_page_state,
+      /** @brief Previous landing page state. */
+      landing_page_state_prev: landing_page_state,
       /**
        * @brief Keeps track of how far we have scrolled in the mobile line menu.
        * We use this to figure out if we should close the mobile menu or not.
@@ -437,7 +439,7 @@ class LandingPage extends React.Component {
       ) {
         if (gesture === "Tap" && this.state.current_touch[0].y < 90) {
           this.handlerSetLandingPageState(
-            CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+            this.state.landing_page_state_prev
           );
         }
       } else {
@@ -567,6 +569,10 @@ class LandingPage extends React.Component {
     if (state === this.state.landing_page_state) {
       return;
     }
+
+    this.setState({
+      landing_page_state_prev: this.state.landing_page_state
+    });
 
     console.log(
       `[DEBUG] Old State ${this.state.landing_page_state}, New State ${state}`
