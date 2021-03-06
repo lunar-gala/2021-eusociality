@@ -12,7 +12,7 @@ $VERTICAL_MARGIN: 12px;
   top: $LANDING_PAGE_HEADER_HEIGHT;
 
   opacity: 0;
-  transition-duration: 1s;
+  z-index: 1;
 
   #left-bar {
     transform: translateX(-100%);
@@ -21,6 +21,7 @@ $VERTICAL_MARGIN: 12px;
   &.mobile-about-page-open {
     z-index: $Z_INDEX_MAIN_UI;
     opacity: 1;
+    transition-duration: 500ms;
 
     #right-bar {
       animation: right-bar-slide-in $ANIMATION_DURATION_SLIDE_IN forwards;
