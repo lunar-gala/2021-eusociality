@@ -26,7 +26,7 @@ class MobileMenuLineList extends React.Component {
       to={`/lines/${index+1}`}>
       <div className='line-element-body'>
         <div className='title'>
-          {`${UTIL.line_number_formatter(index)}|${line_info_element.name}`}
+          {`${UTIL.line_number_formatter(index)} | ${line_info_element.name}`}
         </div>
         <div className='designers'>
           {UTIL.name_list_formatter(line_info_element.designers)}
