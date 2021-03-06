@@ -6,7 +6,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as CONSTANTS from "../constants";
 import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
-import RotateIcon from "../../assets/img/rotate_icon.png";
+import RotateIcon from "../../assets/img/rotate_icon_svg.svg";
 
 class MobileOpenMenu extends React.Component {
   render() {
@@ -32,9 +32,8 @@ class MobileOpenMenu extends React.Component {
             </div>
           </div>
         </div>
-        <img
-          src={RotateIcon}
-          id="rotate-icon"
+        <div
+          id="rotate-icon-wrapper"
           className={`${this.props.mobile_show_gyro_prompt} ${this.props.landing_page_state}`}
           onClick={(event) => {
             event.stopPropagation();
@@ -53,7 +52,9 @@ class MobileOpenMenu extends React.Component {
               DeviceOrientationEvent.requestPermission();
             }
           }}
-        ></img>
+        >
+          <RotateIcon id="rotate-icon" />
+        </div>
       </div>
     );
   }

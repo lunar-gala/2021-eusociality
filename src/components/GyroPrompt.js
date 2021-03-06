@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import RotateIcon from "../../assets/img/rotate_icon.png";
+import RotateIcon from "../../assets/img/rotate_icon_svg.svg";
 
 /**
  * Prompt that pops up when you enable gyroscope data access by the web app.
@@ -12,7 +12,9 @@ class GyroPrompt extends React.Component {
     return (
       <div id="gyro-prompt-overlay" className={`mobile ${this.props.mobile_show_gyro_prompt}`}>
         <div id="gyro-prompt-content">
-          <img src={RotateIcon} id="gyro-prompt-icon"></img>
+          <div id="gyro-prompt-icon-wrapper">
+            <RotateIcon id="gyro-prompt-icon"/>
+          </div>
           <p id="gyro-prompt-text">
             ROTATE PHONE SIDE TO SIDE TO SEE THE OBJECT ROTATE
           </p>
