@@ -190,6 +190,9 @@ class LandingPage extends React.Component {
       x: 0,
       /** @brief Mouse position y */
       y: 0,
+      mouse_offset_x: 0,
+      mouse_offset_y: 0,
+      mouse_offset_z: 0,
       /** @brief Window width, including resizing */
       width: 0,
       /** @brief Window height, including resizing */
@@ -659,7 +662,14 @@ class LandingPage extends React.Component {
       this.playCubeExpand(index);
     } else {
       let camera_index = index;
-      new TWEEN.Tween(this.state.camera.position)
+
+      let curr_position = {
+        x: this.state.curr_camera_position.x,
+        y: this.state.curr_camera_position.y,
+        z: this.state.curr_camera_position.z,
+      };
+
+      new TWEEN.Tween(curr_position)
         .to(
           {
             x: this.state.camera_positions[camera_index].position.x,
@@ -670,20 +680,17 @@ class LandingPage extends React.Component {
         )
         .easing(TWEEN.Easing.Cubic.InOut)
         .onUpdate(() => {
+          this.state.camera.position.set(
+            curr_position.x + this.state.mouse_offset_x,
+            curr_position.y + this.state.mouse_offset_y,
+            curr_position.z + this.state.mouse_offset_z,
+          );
+
           this.setState({
             curr_camera_position: {
-              x: this.state.camera.position.x,
-              y: this.state.camera.position.y,
-              z: this.state.camera.position.z,
-            },
-          });
-        })
-        .onComplete(() => {
-          this.setState({
-            curr_camera_position: {
-              x: this.state.camera_positions[camera_index].position.x,
-              y: this.state.camera_positions[camera_index].position.y,
-              z: this.state.camera_positions[camera_index].position.z,
+              x: curr_position.x,
+              y: curr_position.y,
+              z: curr_position.z,
             },
           });
         })
@@ -746,15 +753,24 @@ class LandingPage extends React.Component {
     let theta = (90 * offset_y * Math.PI) / 180;
     let kappa = ((90 + 90 * offset_x) * Math.PI) / 180;
 
-    // TODO: animate this movement so it is smoother
+    let mouse_offset_x =
+          Math.sin(phi) * CAMERA_PAN_FACTOR_DESKTOP.x;
+    let mouse_offset_y =
+          Math.sin(theta) * CAMERA_PAN_FACTOR_DESKTOP.y;
+    let mouse_offset_z =
+          - Math.pow(Math.cos(kappa), 2) * CAMERA_PAN_FACTOR_DESKTOP.z;
+
+    this.setState({
+      mouse_offset_x: mouse_offset_x,
+      mouse_offset_y: mouse_offset_y,
+      mouse_offset_z: mouse_offset_z,
+    });
+
     if (this.state.curr_camera_position) {
       this.state.camera.position.set(
-        this.state.curr_camera_position.x +
-          Math.sin(phi) * CAMERA_PAN_FACTOR_DESKTOP.x,
-        this.state.curr_camera_position.y +
-          Math.sin(theta) * CAMERA_PAN_FACTOR_DESKTOP.y,
-        this.state.curr_camera_position.z -
-          Math.pow(Math.cos(kappa), 2) * CAMERA_PAN_FACTOR_DESKTOP.z
+        this.state.curr_camera_position.x + mouse_offset_x,
+        this.state.curr_camera_position.y + mouse_offset_y,
+        this.state.curr_camera_position.z + mouse_offset_z,
       );
     }
   }
