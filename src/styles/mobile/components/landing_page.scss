@@ -121,6 +121,7 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
     opacity: 1;
     transition-duration: 500ms;
 
+    &.mobile-line-menu-open,
     &.mobile-about-page-open,
     &.mobile-people-page-open,
     &.mobile-watch-page-open {
