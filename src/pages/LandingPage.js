@@ -188,6 +188,7 @@ class LandingPage extends React.Component {
       landing_page_animations_logo: "",
       landing_page_animations_middleTitle: "",
       mobile_show_gyro_prompt: "",
+      has_seen_gyro_prompt: false,
       /** @brief Mouse position x */
       x: 0,
       /** @brief Mouse position y */
@@ -650,6 +651,7 @@ class LandingPage extends React.Component {
   handlerShowGyroPrompt(gyro_class) {
     this.setState({
       mobile_show_gyro_prompt: gyro_class,
+      has_seen_gyro_prompt: true,
     });
   }
 
@@ -1240,6 +1242,7 @@ class LandingPage extends React.Component {
         {/* Mobile Elements */}
         <MobileOpenMenu
           handlerShowGyroPrompt={this.handlerShowGyroPrompt}
+          has_seen_gyro_prompt={this.state.has_seen_gyro_prompt}
           landing_page_state={this.state.landing_page_state}
           mobile_show_gyro_prompt={this.state.mobile_show_gyro_prompt}
         />
