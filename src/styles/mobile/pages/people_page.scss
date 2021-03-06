@@ -94,6 +94,7 @@ $TAB_TEXT_SIZE: 36px;
     background: none;
     box-shadow: none;
     overflow-y: auto;
+    padding-bottom: 15vh;
 
     .Mui-expanded {
       margin: 0;
@@ -105,7 +106,7 @@ $TAB_TEXT_SIZE: 36px;
       text-transform: uppercase;
       letter-spacing: $FONT_SPRAT_KERN;
       font-weight: $FONT_SPRAT_WEIGHT;
-      font-size: 12vw;
+      font-size: 11.5vw;
       margin: 0;
       padding: 0;
     }
@@ -193,6 +194,13 @@ $TAB_TEXT_SIZE: 36px;
       box-shadow: none;
       border: none;
 
+      .notPictured {
+        p {
+          text-transform: uppercase;
+          font-size: 14px;
+        }
+      }
+
       .teamBio {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -202,12 +210,10 @@ $TAB_TEXT_SIZE: 36px;
         width: 40vw;
         justify-self: flex-start;
 
-
-
         .name {
           text-transform: uppercase;
           font-weight: 500;
-          font-size: 18px;
+          font-size: 14px;
           margin: 0;
           margin-top: 1em;
         }
@@ -215,7 +221,7 @@ $TAB_TEXT_SIZE: 36px;
         .title {
           text-transform: uppercase;
           font-weight: 300;
-          font-size: 18px;
+          font-size: 14px;
           margin: 0;
         }
 
