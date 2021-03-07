@@ -49,23 +49,23 @@ $PICTURE_LEFT_MARGIN: 3vw;
   #background {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     top: 0;
     z-index: -1;
+    width: 100%;
+    height: 100%;
 
-    .videoTag {
-      position: absolute;
-      width: 100vw;
-      height: 100vh;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      margin: 0;
-      padding: 0;
-      background-color: grey;
+    #player {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100% !important;
+      width: 177.77777778vh !important; /* 100 * 16 / 9 */
+      min-width: 100% !important;
+      min-height: 56.25vw !important; /* 100 * 9 / 16 */
       opacity: 0.5;
-      z-index: 0;
     }
   }
 
