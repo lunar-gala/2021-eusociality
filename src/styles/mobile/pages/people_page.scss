@@ -1,0 +1,239 @@
+/**
+ * The people page for mobile
+ */
+
+$TAB_TEXT_SIZE: 36px;
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100vw);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100vw);
+  }
+}
+
+#people-page.main-page {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  // Enable scroll on this page
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  top: $LANDING_PAGE_HEADER_HEIGHT;
+
+  &.mobile-people-page-open {
+    display: flex;
+
+    .page-background,
+    #team-accordion {
+      animation: blur-in $ANIMATION_DURATION_BLUR forwards;
+      backface-visibility: hidden;
+      z-index: $Z_INDEX_HEADER;
+    }
+  }
+
+  .headshotImg {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: color;
+  }
+
+  .headshot {
+    width: 35vw;
+    height: 42.6vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: color;
+  }
+
+  .wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30vh;
+    background: linear-gradient(180deg, rgba(20, 20, 20, 1) 40%, rgba(20, 20, 20, 0) 100%);
+    z-index: 100;
+    padding: 0;
+
+    .header {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .title-theme {
+    position: fixed;
+    font-family: $FONT_DISPLAY;
+    letter-spacing: $FONT_SPRAT_KERN;
+    font-weight: $FONT_SPRAT_WEIGHT;
+    top: 25px;
+    font-size: 40px; // centers text relative to 90px mobile menu element
+  }
+
+  #team-accordion {
+    position: absolute;
+    left: $X_MARGIN/2;
+    display: block;
+    background: none;
+    box-shadow: none;
+    overflow-y: auto;
+    padding-bottom: 15vh;
+
+    .Mui-expanded {
+      margin: 0;
+      padding: 0;
+    }
+
+    .team-title {
+      font-family: $FONT_DISPLAY;
+      text-transform: uppercase;
+      letter-spacing: $FONT_SPRAT_KERN;
+      font-weight: $FONT_SPRAT_WEIGHT;
+      font-size: 11.5vw;
+      margin: 0;
+      padding: 0;
+    }
+
+    .tab-main {
+      background-color: transparent;
+      color: white;
+      padding: 0;
+      box-shadow: none;
+      border: none;
+
+      &.clicked {
+
+        .display_circle,
+        .display_line {
+          opacity: 1;
+          animation-duration: 0.2s;
+          animation-fill-mode: both;
+          animation-name: slide-in;
+        }
+
+        .bioWrapper {
+          animation-duration: 1s;
+          animation-fill-mode: both;
+          animation-name: blur-in;
+        }
+      }
+
+      &.unclicked {
+
+        .display_circle,
+        .display_line {
+          opacity: 1;
+          animation-duration: 0.2s;
+          animation-fill-mode: both;
+          animation-name: slide-out;
+        }
+      }
+    }
+
+    .tab-header {
+      font-family: $FONT_DISPLAY;
+      font-weight: $FONT_SPRAT_WEIGHT;
+      padding: 0;
+      flex: 1;
+      box-shadow: none;
+      border: none;
+
+      .animatedSlide {
+        animation-duration: 0.2s;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-name: slide-in;
+      }
+
+      .display_circle {
+        display: block;
+        margin: auto;
+        margin-left: 50px;
+        margin-right: 0;
+        width: $CIRCLE_RAD;
+        height: $CIRCLE_RAD;
+        background-color: white;
+        border-radius: 100%;
+      }
+
+      .display_line {
+        flex: 1;
+        display: block;
+        border-bottom: 1px solid white;
+        margin: auto;
+        margin-left: 0;
+        margin-right: -$X_MARGIN/2 * 0.75;
+        overflow: hidden;
+      }
+    }
+
+    .tab-body {
+      width: 100vw - $X_MARGIN;
+      padding: 0;
+      padding-top: 40px;
+      flex-direction: row;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      box-shadow: none;
+      border: none;
+
+      .notPictured {
+        p {
+          text-transform: uppercase;
+          font-size: 14px;
+        }
+      }
+
+      .teamBio {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 2.5vw;
+        margin-right: 2.5vw;
+        display: block;
+        width: 40vw;
+        justify-self: flex-start;
+
+        &.right {
+          .headshot {
+            transform: scaleX(-1);
+          }
+        }
+
+        .name {
+          text-transform: uppercase;
+          font-weight: 500;
+          font-size: 14px;
+          margin: 0;
+          margin-top: 1em;
+        }
+
+        .title {
+          text-transform: uppercase;
+          font-weight: 300;
+          font-size: 14px;
+          margin: 0;
+        }
+
+      }
+    }
+  }
+}
