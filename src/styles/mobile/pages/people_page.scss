@@ -24,13 +24,16 @@ $TAB_TEXT_SIZE: 36px;
   }
 }
 
+#people-page {
+  overflow-x: hidden;
+}
+
 #people-page.main-page {
   display: none;
   flex-direction: column;
   align-items: center;
   // Enable scroll on this page
   overflow-y: auto;
-  overflow-x: hidden;
   position: absolute;
   width: 100vw;
   height: 100%;
@@ -156,6 +159,7 @@ $TAB_TEXT_SIZE: 36px;
       flex: 1;
       box-shadow: none;
       border: none;
+      overflow-x: hidden;
 
       .animatedSlide {
         animation-duration: 0.2s;
