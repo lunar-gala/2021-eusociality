@@ -41,7 +41,7 @@ class App extends React.Component {
               <CSSTransition timeout={1000} classNames="fade" key={location.pathname.includes('lines/')}>
                 <Switch location={location}>
                   <Route
-                    exact path="/lines/([1-9]|10|11|12|13|14|15|16|17)"
+                    exact path="/lines/([1-9]|10|11|12|13|14|15|16)"
                     render={(props) => (
                       <LinePage
                         {...props}

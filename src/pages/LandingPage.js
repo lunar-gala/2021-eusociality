@@ -677,7 +677,8 @@ class LandingPage extends React.Component {
       });
       this.playCubeExpand(index);
     } else {
-      let camera_index = index;
+    // Since Lorelei dropped out, we have to do this custom index change
+      let camera_index = index > 0 ? index + 1 : index;
 
       let curr_position = {
         x: this.state.curr_camera_position.x,

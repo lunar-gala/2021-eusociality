@@ -15,13 +15,6 @@ export const LINE_INFO = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras cursus iaculis leo, quis mollis ligula ultrices condimentum. Donec sagittis, sem vitae scelerisque porta, eros libero volutpat orci, quis placerat sapien lacus at quam. Quisque maximus vel enim sit amet blandit. Curabitur tempus nisl a ex aliquet, et lobortis metus rhoncus. Vestibulum sit amet lobortis augue, viverra feugiat nisi. Ut in ultrices risus. Morbi placerat diam semper dapibus rhoncus. Nam ut convallis dui. Praesent dictum erat tincidunt sapien molestie, sed rhoncus est posuere. Morbi placerat diam semper dapibus rhoncus. Nam ut convallis dui. Praesent dictum erat tincidunt sapien molestie, sed rhoncus.',
   },
   {
-    name: 'Lorelei',
-    designers: [
-      'Lena Li',
-      'Linda Lin'
-    ]
-  },
-  {
     name: 'Nexus',
     designers: [
       'Annalisa Pao'
