@@ -6,7 +6,7 @@ $MOBILE_MENU_OPEN_SIZE: 30px;
 $LEFT_MARGIN: 30px;
 $HEADER_HEIGHT: 90px;
 $HEADER_FONT_SIZE: 30px;
-$LOGO_SIZE: $HEADER_FONT_SIZE - 8px;
+$LOGO_SIZE: $HEADER_FONT_SIZE - 5px;
 
 #mobile-open-menu-wrapper {
   height: $HEADER_HEIGHT;
@@ -28,12 +28,14 @@ $LOGO_SIZE: $HEADER_FONT_SIZE - 8px;
     background: $LANDING_PAGE_BACKGROUND_COLOR;
   }
 
-  &.mobile-nav-menu-open #title {
-    opacity: 1;
-  }
-
-  &.mobile-line-menu-open #title {
-    opacity: 1;
+  &.mobile-nav-menu-open,
+  &.mobile-line-menu-open,
+  &.mobile-about-page-open,
+  &.mobile-people-page-open,
+  &.mobile-watch-page-open {
+    #title {
+      opacity: 1;
+    }
   }
 
   #title {
@@ -59,7 +61,7 @@ $LOGO_SIZE: $HEADER_FONT_SIZE - 8px;
 
       #collectiva-logo {
         margin-top: 4px;
-        margin-left: 4px;
+        margin-left: 6px;
         height: $LOGO_SIZE;
         width: $LOGO_SIZE;
 

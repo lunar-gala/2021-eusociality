@@ -120,12 +120,15 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
     height: 54px;
     opacity: 1;
     transition-duration: 500ms;
+    z-index: $Z_INDEX_HEADER;
 
+    &.mobile-nav-menu-open,
     &.mobile-line-menu-open,
     &.mobile-about-page-open,
     &.mobile-people-page-open,
     &.mobile-watch-page-open {
       opacity: 0;
+      pointer-events: none;
     }
   }
 }

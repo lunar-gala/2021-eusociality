@@ -16,7 +16,7 @@
 
   &.mobile-nav-menu-open {
     opacity: 1;
-    z-index: 2;
+    z-index: $Z_INDEX_HEADER;
   }
 
   .nav-element {

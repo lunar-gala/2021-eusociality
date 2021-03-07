@@ -15,7 +15,22 @@ class MobileOpenMenu extends React.Component {
         id="mobile-open-menu-wrapper"
         className={this.props.landing_page_state + " mobile"}
       >
-        <div id="mobile-open-menu" className="mobile">
+        <div id="mobile-open-menu" className="mobile"
+          onTouchStart={
+            () => {
+              console.log("[DEBUG] mobile open menu touched")
+              if (this.props.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN) {
+                this.props.handlerSetLandingPageState(
+                  this.props.landing_page_state_prev
+                );
+              } else {
+                this.props.handlerSetLandingPageState(
+                  CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
+                )
+              }
+            }
+          }
+        >
           <div id="mobile-open-menu-sign">
             {this.props.landing_page_state ===
             CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
@@ -24,7 +39,14 @@ class MobileOpenMenu extends React.Component {
           </div>
           <div id="mobile-open-menu-border"></div>
         </div>
-        <div id="title">
+        <div
+          id="title"
+          onTouchStart={() =>
+            this.props.handlerSetLandingPageState(
+              CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+            )
+          }
+        >
           <div id="mobile-open-menu-header">
             <span id="text">{CONSTANTS.LANDING_PAGE_TITLE}</span>
             <div id="collectiva-logo">
@@ -37,7 +59,7 @@ class MobileOpenMenu extends React.Component {
           className={`${this.props.mobile_show_gyro_prompt} ${
             this.props.landing_page_state
           } ${this.props.has_seen_gyro_prompt ? "hide" : ""}`}
-          onClick={(event) => {
+          onTouchStart={(event) => {
             event.stopPropagation();
             console.log("[DEBUG] Clicked gyroscope prompt");
             this.props.handlerShowGyroPrompt("animate-show");
@@ -63,10 +85,12 @@ class MobileOpenMenu extends React.Component {
 }
 
 MobileOpenMenu.propTypes = {
+  handlerSetLandingPageState: PropTypes.func.isRequired,
   handlerShowGyroPrompt: PropTypes.func.isRequired,
   has_seen_gyro_prompt: PropTypes.bool.isRequired,
   /** @brief Indicates if the menu is open or not, controlled by the parent */
   landing_page_state: PropTypes.string.isRequired,
+  landing_page_state_prev: PropTypes.string.isRequired,
   mobile_show_gyro_prompt: PropTypes.string.isRequired,
 };
 
