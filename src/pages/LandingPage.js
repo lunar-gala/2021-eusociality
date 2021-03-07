@@ -197,6 +197,7 @@ class LandingPage extends React.Component {
       mouse_offset_x: 0,
       mouse_offset_y: 0,
       mouse_offset_z: 0,
+      enable_mouse_hover: true,
       /** @brief Window width, including resizing */
       width: 0,
       /** @brief Window height, including resizing */
@@ -753,6 +754,10 @@ class LandingPage extends React.Component {
    * @param {MouseEvent} e The mouse movement event
    */
   _onMouseMove(e) {
+    if (!this.state.enable_mouse_hover) {
+      return;
+    }
+
     let x = e.screenX;
     let y = e.screenY;
     let width = this.state.width;
@@ -1147,6 +1152,18 @@ class LandingPage extends React.Component {
     gui.add(camera.position, 'x', -1000,1000).step(1);
     gui.add(camera.position, 'y', -1000,1000).step(1);
     gui.add(camera.position, 'z', -1000,1000).step(1);
+    gui.add(this.state, "enable_mouse_hover").name("mouse hover").onChange((newValue) => {
+      this.setState({
+        enable_mouse_hover: newValue
+      });
+    });
+    gui.add(iridescence_texture_outline, 'filmThickness').min(100).max(1000);
+    gui.add(iridescence_texture_outline, 'refractiveIndexFilm').min(1).max(5);
+    gui.add(iridescence_texture_outline, 'refractiveIndexBase').min(1).max(5);
+    gui.add(iridescence_material_outline, 'boost').min(1).max(50);
+    gui.add(iridescence_material_outline, 'iridescenceRatio').min(0).max(10);
+    gui.add(iridescence_material_outline, 'baseTextureRatio').min(0).max(10);
+    gui.add(iridescence_material_outline, 'brightness').min(0).max(10);
     gui.close();
 
     requestAnimationFrame(this.render_cube);
