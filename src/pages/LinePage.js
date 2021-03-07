@@ -88,6 +88,16 @@ class LinePage extends React.Component {
             />
           </video>
         </div>
+        <div id="background2">
+          <video className="videoTag" autoPlay loop muted>
+            <source
+              src={
+                "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+              }
+              type="video/mp4"
+            />
+          </video>
+        </div>
         <Link id="top-title" to={"/"}>
           {CONSTANTS.LANDING_PAGE_TITLE}
         </Link>

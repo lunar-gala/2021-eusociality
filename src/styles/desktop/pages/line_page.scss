@@ -103,6 +103,29 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
   width: 100vw;
   padding-bottom: 2.5vh;
 
+  #background2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    top: 100vh;
+    z-index: -1;
+
+    .videoTag {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      opacity: 0.5;
+      z-index: 0;
+    }
+  }
+
   #background {
     display: flex;
     flex-direction: column;
@@ -120,7 +143,7 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
       bottom: 0;
       margin: 0;
       padding: 0;
-      background-color: grey;
+      background-color: black;
       opacity: 0.5;
       z-index: 0;
     }
@@ -144,7 +167,7 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
 
   #back-button-wrapper {
     position: fixed;
-    top: calc(#{$TITLE_MARGIN_TOP} + 40px);
+    top: calc(#{$TITLE_MARGIN_TOP} + 50px);
     left: $X_MARGIN/2;
 
     #back-button {
@@ -185,6 +208,7 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
     align-items: flex-start;
     margin-left: $LEFT_MARGIN;
     pointer-events: none;
+    margin-top: 100vh;
 
     #name {
       // TODO: this is really bad style for font sizes and letter spacing. Not
@@ -249,8 +273,6 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
         justify-items: flex-end;
         align-items: center;
 
-
-
         .pictures {
           display: flex;
           flex-direction: row;
@@ -268,7 +290,6 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
           }
 
           .frame {
-
             width: 16vw;
             height: 23.8vw;
             border: 1px solid white;
@@ -296,6 +317,5 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
         height: 1px;
       }
     }
-
   }
 }
