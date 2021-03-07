@@ -111,6 +111,7 @@ export const LINE_INFO = [
       'Cassie Scheirer',
       'Madi Davis'
     ],
+    video_ready: 'https://streamable.com/4l78dp',
   },
   {
     name: 'Icarus',

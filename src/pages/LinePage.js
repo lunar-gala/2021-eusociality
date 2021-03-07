@@ -32,9 +32,11 @@ class LinePage extends React.Component {
       landing_page_state: CONSTANTS.LANDING_PAGE_STATES.LINE_PAGE,
       selectedLineIdx: currLineNumber - 1,
       showBackButton: true,
+      curr_video: "hide",
     };
 
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
+    this.handlerVideoLoad = this.handlerVideoLoad.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
 
     // We need to trigger this to tell the App to allow transitions to happen on the main page
@@ -58,7 +60,7 @@ class LinePage extends React.Component {
   }
 
   handlerSelectedLineIdx(index) {
-    this.setState({ selectedLineIdx: index });
+    this.setState({ selectedLineIdx: index, curr_video: "hide" });
   }
 
   slidingImage(image, id) {
@@ -77,9 +79,15 @@ class LinePage extends React.Component {
     );
   }
 
+  handlerVideoLoad() {
+    console.log("ready");
+    this.setState({ curr_video: "show" });
+  }
+
   render() {
     let line_info = LINE_DATA.LINE_INFO[this.state.selectedLineIdx];
 
+    // TODO: this is a filler video for now. Remove when the real videos are ready.
     let video_link =
       "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4";
 
@@ -89,15 +97,19 @@ class LinePage extends React.Component {
     return (
       <div id="line-page">
         <div id="background">
-          <ReactPlayer
-            id="player"
-            url={video_link}
-            playing={true}
-            volume={0}
-            muted={true}
-            loop={true}
-            controls={false}
-          />
+          <div id="player-wrapper" className={`${this.state.curr_video}`}>
+            <ReactPlayer
+              id="player"
+              url={video_link}
+              playing={true}
+              volume={0}
+              muted={true}
+              loop={true}
+              controls={false}
+              playIcon={<button></button>}
+              onStart={this.handlerVideoLoad}
+            />
+          </div>
         </div>
         <Link id="top-title" to={"/"}>
           <div id="top-title-wrapper">

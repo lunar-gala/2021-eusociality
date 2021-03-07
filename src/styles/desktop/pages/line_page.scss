@@ -57,6 +57,19 @@ $PICTURE_LEFT_MARGIN: 3vw;
     width: 100%;
     height: 100%;
 
+    #player-wrapper {
+      width: 100%;
+      height: 100%;
+
+      transition-duration: 1s;
+      &.hide {
+        opacity: 0;
+      }
+      &.show {
+        opacity: 0.5;
+      }
+    }
+
     #player {
       flex-direction: column;
       align-items: center;
@@ -65,7 +78,6 @@ $PICTURE_LEFT_MARGIN: 3vw;
       width: 177.77777778vh !important; /* 100 * 16 / 9 */
       min-width: 100% !important;
       min-height: 56.25vw !important; /* 100 * 9 / 16 */
-      opacity: 0.5;
     }
   }
 
