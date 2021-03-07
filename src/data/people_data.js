@@ -520,7 +520,7 @@ export const PEOPLE_DATA = {
     first_name: "Olivia Luk",
     last_name: "Luk",
     team: "Design",
-    position: "Designer - Invation",
+    position: "Designer - Invasion",
     filename: "Olivia Luk.jpg",
     image: oluk,
   },
