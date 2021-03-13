@@ -3,7 +3,7 @@
  */
 
 $LEFT_MARGIN: 20vw;
-$TITLE_MARGIN_TOP: 10vh;
+$TITLE_MARGIN_TOP: 15vh;
 
 $SLIDE_AMOUNT_A: 40px;
 $SLIDE_AMOUNT_B: 40px;
@@ -11,7 +11,7 @@ $BACK_BUTTON_SIZE: 24px;
 $BACK_BUTTON_STROKE_WIDTH: 3px;
 $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
 
-$PICTURE_WIDTH: 18vw;
+$PICTURE_WIDTH: 16vw;
 $PICTURE_HEIGHT: 40vh;
 $PICTURE_LEFT_MARGIN: 3vw;
 
@@ -117,10 +117,10 @@ $PICTURE_LEFT_MARGIN: 3vw;
       flex-direction: row;
       align-items: center;
       span {
-        font-family: "Sprat Type Condensed";
+        font-family: $FONT_DISPLAY;
         font-size: $FONT_SIZE_TITLE;
-        font-weight: 100;
-        letter-spacing: -0.05em;
+        font-weight: $FONT_SPRAT_WEIGHT;
+        letter-spacing: $FONT_SPRAT_KERN;
       }
 
       #collectiva-logo {
@@ -148,12 +148,12 @@ $PICTURE_LEFT_MARGIN: 3vw;
       // TODO: this is really bad style for font sizes and letter spacing. Not
       // scalable
       margin-top: $TITLE_MARGIN_TOP;
-      font-family: "Sprat Type Condensed";
+      font-family: $FONT_DISPLAY;
       font-size: $FONT_SIZE_LINE_PAGE_NAME;
-      font-weight: 100;
-      letter-spacing: -0.12em;
-      text-transform: uppercase;
+      font-weight: $FONT_WEIGHT_LIGHT;
+      letter-spacing: $FONT_SPRAT_KERN;
       word-spacing: $HEADER_WORD_SPACING;
+      text-transform: uppercase;
     }
 
     #designers {
@@ -166,9 +166,9 @@ $PICTURE_LEFT_MARGIN: 3vw;
       #designers-text {
         display: flex;
         font-family: $FONT_SUBHEAD;
-        font-weight: 400;
-        font-size: 24px;
+        font-weight: $FONT_SPRAT_WEIGHT;
         text-transform: uppercase;
+        font-size: 1.5em;
       }
 
       #right-bar {
@@ -203,6 +203,7 @@ $PICTURE_LEFT_MARGIN: 3vw;
         margin-top: 5vh;
         font-family: $FONT_BODY;
         font-size: $FONT_SIZE_BODY;
+        line-height: 26px;
       }
 
       #models {

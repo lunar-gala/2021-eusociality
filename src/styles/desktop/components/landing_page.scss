@@ -97,11 +97,11 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
         align-items: center;
 
         #line-name {
-          font-family: 'Sprat Type Condensed';
+          font-family: $FONT_DISPLAY;
           font-size: $FONT_SIZE_LINE;
           text-transform: uppercase;
-          font-weight: $FONT_SPRAT_WEIGHT;
-          letter-spacing: $HEADER_TRACKING;
+          font-weight: $FONT_WEIGHT_LIGHT;
+          letter-spacing: $FONT_SPRAT_KERN;
           word-spacing: $HEADER_WORD_SPACING;
           pointer-events: none;
         }
@@ -142,7 +142,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
               font-family: $FONT_SUBHEAD;
               text-transform: uppercase;
               font-size: $FONT_SIZE_LABEL;
-              font-weight: $FONT_LABEL_WEIGHT;
+              font-weight: $FONT_WEIGHT_LIGHT;
               margin-right: 8px;
             }
 

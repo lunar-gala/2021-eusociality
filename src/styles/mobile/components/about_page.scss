@@ -35,11 +35,11 @@ $VERTICAL_MARGIN: 12px;
 
   #header-section {
     #header-text {
-      font-family: 'Sprat Type Condensed';
-      font-weight: 100;
-      font-size: 9.6vw;
-      letter-spacing: -0.11em;
+      font-family: $FONT_DISPLAY;
+      font-weight: $FONT_SPRAT_WEIGHT;
+      letter-spacing: $FONT_SPRAT_KERN;
       text-transform: uppercase;
+      font-size: 2.5em;
     }
 
     .bar {
@@ -57,6 +57,7 @@ $VERTICAL_MARGIN: 12px;
 
     #right-bar {
       margin-left: $HORIZONTAL_MARGIN;
+      margin-top: 25px;
     }
 
     #left-bar {
