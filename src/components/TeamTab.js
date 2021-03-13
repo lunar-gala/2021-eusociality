@@ -45,7 +45,11 @@ export default function TeamTab(props) {
   }
 
   return (
-    <Accordion className={`tab-main ${curClicked ? 'clicked' : 'unclicked'}`} expanded={expanded} onChange={handleChange}>
+    <Accordion
+      className={`tab-main ${curClicked ? "clicked" : "unclicked"}`}
+      expanded={expanded}
+      onChange={handleChange}
+    >
       <AccordionSummary
         className="tab-header"
         aria-controls="panel1d-content"
@@ -59,6 +63,7 @@ export default function TeamTab(props) {
       <AccordionDetails className="tab-body">
         <div className="bioWrapper">{pictures}</div>
 
+        {
         <div className="notPictured">
           {notPictured.length > 0 && (
             <>
@@ -67,6 +72,7 @@ export default function TeamTab(props) {
             </>
           )}
         </div>
+        }
       </AccordionDetails>
     </Accordion>
   );
