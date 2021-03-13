@@ -8,7 +8,7 @@
   transition-duration: 1s;
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
   left: 50px;
-  top: 73px;
+  top: 80px;
 
   // Initially, the line menu is hidden and below
   opacity: 0;
@@ -27,7 +27,7 @@
     background-color: black;
     cursor: pointer;
     text-decoration: none;
-    margin-top: 33px;
+    margin-top: 20px;
 
     &.active .nav-element-body {
       .title {
@@ -48,11 +48,12 @@
       .title {
         display: flex;
         margin-right: 30px;
-
+        font-family: $FONT_DISPLAY;
+        font-weight: $FONT_WEIGHT_LIGHT;
+        letter-spacing: $FONT_SPRAT_KERN;
+        text-transform: uppercase;
+        font-size: 3em;
         color: white;
-        font-size: 48px;
-        transform: scale(1, 1.2);
-
         opacity: 0.65;
       }
 

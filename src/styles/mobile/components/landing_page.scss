@@ -80,7 +80,10 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
     }
 
     span {
+      font-family: $FONT_DISPLAY;
       font-size: $FONT_SIZE_TITLE;
+      font-weight: $FONT_SPRAT_WEIGHT;
+      letter-spacing: $FONT_SPRAT_KERN;
     }
 
     #collectiva-logo {

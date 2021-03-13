@@ -68,10 +68,10 @@ $SLIDE_AMOUNT_B: -14.38vw;
       flex-direction: row;
       align-items: center;
       span {
-        font-family: 'Sprat Type Condensed';
+        font-family: $FONT_DISPLAY;
         font-size: $FONT_SIZE_TITLE;
         font-weight: 100;
-        letter-spacing: -0.05em;
+        letter-spacing: $FONT_SPRAT_KERN;
       }
 
       #collectiva-logo {
@@ -99,7 +99,7 @@ $SLIDE_AMOUNT_B: -14.38vw;
       // TODO: this is really bad style for font sizes and letter spacing. Not
       // scalable
       margin-top: 38px;
-      font-family: 'Sprat Type Condensed';
+      font-family: $FONT_DISPLAY;
       font-size: 48px;
       font-weight: 100;
       letter-spacing: -0.12em;
