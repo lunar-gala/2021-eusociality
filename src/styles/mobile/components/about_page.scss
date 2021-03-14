@@ -31,6 +31,12 @@ $VERTICAL_MARGIN: 12px;
       animation: left-bar-slide-in $ANIMATION_DURATION_SLIDE_IN forwards;
       animation-delay: $ANIMATION_DURATION_SLIDE_IN;
     }
+
+    #header-text, #main-text {
+      opacity: 0;
+      animation: blur-in $ANIMATION_DURATION_BLUR forwards;
+      animation-delay: $ANIMATION_DURATION_SLIDE_IN*2;
+    }
   }
 
   #header-section {

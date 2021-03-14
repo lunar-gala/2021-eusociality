@@ -15,21 +15,24 @@ class MobileOpenMenu extends React.Component {
         id="mobile-open-menu-wrapper"
         className={this.props.landing_page_state + " mobile"}
       >
-        <div id="mobile-open-menu" className="mobile"
-          onTouchStart={
-            () => {
-              console.log("[DEBUG] mobile open menu touched")
-              if (this.props.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN) {
-                this.props.handlerSetLandingPageState(
-                  this.props.landing_page_state_prev
-                );
-              } else {
-                this.props.handlerSetLandingPageState(
-                  CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
-                )
-              }
+        <div
+          id="mobile-open-menu"
+          className="mobile"
+          onTouchStart={() => {
+            console.log("[DEBUG] mobile open menu touched");
+            if (
+              this.props.landing_page_state ===
+              CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
+            ) {
+              this.props.handlerSetLandingPageState(
+                this.props.landing_page_state_prev
+              );
+            } else {
+              this.props.handlerSetLandingPageState(
+                CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
+              );
             }
-          }
+          }}
         >
           <div id="mobile-open-menu-sign">
             {this.props.landing_page_state ===
@@ -59,7 +62,7 @@ class MobileOpenMenu extends React.Component {
           className={`${this.props.mobile_show_gyro_prompt} ${
             this.props.landing_page_state
           } ${this.props.has_seen_gyro_prompt ? "hide" : ""}`}
-          onTouchStart={(event) => {
+          onClick={(event) => {
             event.stopPropagation();
             console.log("[DEBUG] Clicked gyroscope prompt");
             this.props.handlerShowGyroPrompt("animate-show");
@@ -73,7 +76,18 @@ class MobileOpenMenu extends React.Component {
             if (
               typeof DeviceOrientationEvent.requestPermission === "function"
             ) {
-              DeviceOrientationEvent.requestPermission();
+              console.log("[DEBUG] Asked for permission");
+              DeviceOrientationEvent.requestPermission()
+                .then((response) => {
+                  if (response == "granted") {
+                    console.log("permission granted");
+                  } else {
+                    console.log("Permission Error", response);
+                  }
+                })
+                .catch((e) => console.log("rejection", e));
+            } else {
+              console.log("[DEBUG] No rotation permission exists.");
             }
           }}
         >

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import ReactPlayer from "react-player";
 
 import * as CONSTANTS from "../constants";
 import * as LINE_DATA from "../data/line_data";
@@ -31,9 +32,11 @@ class LinePage extends React.Component {
       landing_page_state: CONSTANTS.LANDING_PAGE_STATES.LINE_PAGE,
       selectedLineIdx: currLineNumber - 1,
       showBackButton: true,
+      curr_video: "hide",
     };
 
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
+    this.handlerVideoLoad = this.handlerVideoLoad.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
 
     // We need to trigger this to tell the App to allow transitions to happen on the main page
@@ -57,7 +60,7 @@ class LinePage extends React.Component {
   }
 
   handlerSelectedLineIdx(index) {
-    this.setState({ selectedLineIdx: index });
+    this.setState({ selectedLineIdx: index, curr_video: "hide" });
   }
 
   slidingImage(image, id) {
@@ -65,7 +68,7 @@ class LinePage extends React.Component {
       <div className="pictures" id={id}>
         <div
           style={{
-            backgroundImage: `url(${image})`
+            backgroundImage: `url(${image})`,
           }}
           className={`image`}
           key={this.state.selectedLineIdx}
@@ -76,38 +79,69 @@ class LinePage extends React.Component {
     );
   }
 
-  render() {
-    const line_info = LINE_DATA.LINE_INFO[this.state.selectedLineIdx];
+  handlerVideoLoad() {
+    console.log("ready");
+    this.setState({ curr_video: "show" });
+  }
 
+  render() {
+    let line_info = LINE_DATA.LINE_INFO[this.state.selectedLineIdx];
+
+    // TODO: this is a filler video for now. Remove when the real videos are ready.
+    let video_link =
+      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4";
+
+    video_link = line_info.video_ready ? line_info.video_ready : video_link;
+
+    // TODO: The video player currently has a play button temporarily when it is not loaded
     return (
       <div id="line-page">
         <div id="background">
-          <video className="videoTag" autoPlay loop muted>
-            <source
-              src={
-                "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
-              }
-              type="video/mp4"
+          <div id="player-wrapper" className={`${this.state.curr_video}`}>
+            <ReactPlayer
+              id="player"
+              url={video_link}
+              playing={true}
+              volume={0}
+              muted={true}
+              loop={true}
+              controls={false}
+              playIcon={<button></button>}
+              onStart={this.handlerVideoLoad}
             />
-          </video>
+          </div>
         </div>
         <Link id="top-title" to={"/"}>
           <div id="top-title-wrapper">
-            <span>
-              {CONSTANTS.LANDING_PAGE_TITLE}
-            </span>
+            <span>{CONSTANTS.LANDING_PAGE_TITLE}</span>
             <div id="collectiva-logo">
               <COLLECTIVA_LOGO />
             </div>
           </div>
         </Link>
         <div className="main-content">
-          <div id="name" className={this.state.animation_blur} key={line_info.name}>{line_info.name}</div>
+          <div
+            id="name"
+            className={this.state.animation_blur}
+            key={line_info.name}
+          >
+            {line_info.name}
+          </div>
           <div id="designers">
-            <div id="designers-text" className={this.state.animation_blur} key={line_info.designers}>
+            <div
+              id="designers-text"
+              className={this.state.animation_blur}
+              key={line_info.designers}
+            >
               {UTIL.name_list_formatter(line_info.designers)}
             </div>
-            <div id="right-bar" className={this.state.animation_slide ? "right-bar-slide-in-animation" : ""} key={this.state.selectedLineIdx}>
+            <div
+              id="right-bar"
+              className={
+                this.state.animation_slide ? "right-bar-slide-in-animation" : ""
+              }
+              key={this.state.selectedLineIdx}
+            >
               <div className="dot-basic" />
               <div className="line" />
             </div>
@@ -115,23 +149,36 @@ class LinePage extends React.Component {
 
           <div id="content">
             <div id="upper">
-              <div id="description" className={this.state.animation_blur} key={line_info.name}>
+              <div
+                id="description"
+                className={this.state.animation_blur}
+                key={line_info.name}
+              >
                 {line_info.description
                   ? line_info.description
                   : LINE_DATA.LINE_INFO[0].description}
               </div>
 
-              <div id="models" className={this.state.animation_blur} key={this.state.selectedLineIdx}>
+              <div
+                id="models"
+                className={this.state.animation_blur}
+                key={this.state.selectedLineIdx}
+              >
                 {this.slidingImage(MODEL_2, "a")}
                 {this.slidingImage(MODEL_4, "b")}
               </div>
             </div>
-            <div id="left-bar" className={this.state.animation_slide ? "left-bar-slide-in-animation" : ""} key={this.state.selectedLineIdx}>
+            <div
+              id="left-bar"
+              className={
+                this.state.animation_slide ? "left-bar-slide-in-animation" : ""
+              }
+              key={this.state.selectedLineIdx}
+            >
               <div className="line" />
               <div className="dot-basic" />
             </div>
           </div>
-
         </div>
         <NavbarLinePage
           selectedLineIdx={this.state.selectedLineIdx}
@@ -139,9 +186,7 @@ class LinePage extends React.Component {
         />
         {/* Additional overlay components */}
         <div className="fixed-overlay">
-          <DesktopSideNav
-            landing_page_state={this.state.landing_page_state}
-          />
+          <DesktopSideNav landing_page_state={this.state.landing_page_state} />
         </div>
       </div>
     );
