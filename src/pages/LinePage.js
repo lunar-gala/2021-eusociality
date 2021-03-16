@@ -89,7 +89,7 @@ class LinePage extends React.Component {
 
     // TODO: this is a filler video for now. Remove when the real videos are ready.
     let video_link =
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4";
+      "https://streamable.com/fjsba8";
 
     video_link = line_info.video_ready ? line_info.video_ready : video_link;
 

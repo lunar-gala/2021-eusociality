@@ -69,9 +69,11 @@
     left: 0;
     right: 0;
     height: 30vh;
-    background: linear-gradient(180deg,
-        rgba(20, 20, 20, 1) 40%,
-        rgba(20, 20, 20, 0) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(20, 20, 20, 1) 40%,
+      rgba(20, 20, 20, 0) 100%
+    );
     z-index: 100;
     padding: 0;
 
@@ -118,7 +120,6 @@
       border: none;
 
       &.clicked {
-
         .display_circle,
         .display_line {
           opacity: 1;
@@ -135,7 +136,6 @@
       }
 
       &.unclicked {
-
         .display_circle,
         .display_line {
           opacity: 1;
@@ -145,7 +145,6 @@
         }
 
         &:hover {
-
           .display_circle,
           .display_line {
             opacity: 1;
@@ -211,6 +210,7 @@
       }
 
       .notPictured {
+
         h2 {
           margin-bottom: 10px;
           font-size: 46;
