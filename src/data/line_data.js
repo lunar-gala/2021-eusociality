@@ -20,7 +20,6 @@ export const LINE_INFO = [
     designers: [
       'Annalisa Pao'
     ],
-    description: 'Regardless of gender identity, hardness and softness coexist in each of us through masculine and feminine energy. The looks in Nexus embrace the varying balances of hardness and softness in people but also work to challenge the constructed ideas of traditional masculinity and femininity.',
     video_ready: 'https://streamable.com/9furjq',
     description :'Regardless of gender identity, hardness and softness coexist in each of us through masculine and feminine energy. The looks in Nexus embrace the varying balances of hardness and softness in people but also work to challenge the constructed ideas of traditional masculinity and femininity.',
   },
@@ -90,7 +89,6 @@ export const LINE_INFO = [
       'Owen Haft',
       'Carmen Yu',
     ],
-    description: 'Bound juxtaposes the preconceptions of chains and metal with the lightness and transparency of a veil. Metal and chains are assumed as rigid and restrictive. We seek to counter that view by demonstrating an exaggerated form of and around the human body by keeping a sense of lightness to the garments, through the use of handmade metal chains, metallic wire, and black fabrics that accentuate some, while covering other parts of the human form. We aim to create beautifully embellished garments that evoke and challenge the seriousness that comes with metal chains. ',
     video_ready: 'https://streamable.com/bnk0lt',
     description: 'Bound juxtaposes the preconceptions of chains and metal with the lightness and transparency of a veil. Metal and chains are assumed as rigid and restrictive. We seek to counter that view by demonstrating an exaggerated form of and around the human body by keeping a sense of lightness to the garments, through the use of handmade metal chains, metallic wire, and black fabrics that accentuate some, while covering other parts of the human form. We aim to create beautifully embellished garments that evoke and challenge the seriousness that comes with metal chains.',
   },
@@ -107,7 +105,6 @@ export const LINE_INFO = [
     designers: [
       'Jessa Westheimer'
     ],
-    description: 'Somatic considers the relationship we have with our bodies, especially with what is beneath our skin. It is important to reflect on the way we are designed as well as the structures, systems, and forms  which sustain us. We are not at all the Vitruvian Man or an illustration in an anatomy textbook or a Photoshopped photo in a magazine. We are imperfect and beautiful, and somehow, all the parts of our bodies keep us moving and living.',
     video_ready: 'https://streamable.com/ssifa5',
     description: 'Somatic considers the relationship we have with our bodies, especially with what is beneath our skin. It is important to reflect on the way we are designed as well as the structures, systems, and forms  which sustain us. We are not at all the Vitruvian Man or an illustration in an anatomy textbook or a Photoshopped photo in a magazine. We are imperfect and beautiful, and somehow, all the parts of our bodies keep us moving and living.',
   },
@@ -126,7 +123,6 @@ export const LINE_INFO = [
       'Cassie Scheirer',
       'Madi Davis'
     ],
-    description: 'Before 2020, we dreamed of an immersive, virtual future, of automata and instancy and the superhuman, but none of it was necessary. Today, as a result of the pandemic, we have finally gotten a taste of a virtual future — and it has notes of danger. Virtuality dictates our working, learning, socializing, and entertainment, harming our minds, bodies, and goals, and Digital Warfare is a call to revolt. We illustrate eight bright, dauntless, and forceful leaders in the movement, each representing a negative impact of technology, who seek a return and adherence to traditional reality. ',
     video_ready: 'https://streamable.com/4l78dp',
     description: 'Before 2020, we dreamed of an immersive, virtual future, of automata and instancy and the superhuman, but none of it was necessary. Today, as a result of the pandemic, we have finally gotten a taste of a virtual future — and it has notes of danger. Virtuality dictates our working, learning, socializing, and entertainment, harming our minds, bodies, and goals, and Digital Warfare is a call to revolt. We illustrate eight bright, dauntless, and forceful leaders in the movement, each representing a negative impact of technology, who seek a return and adherence to traditional reality.',
   },
@@ -147,7 +143,6 @@ export const LINE_INFO = [
     ],
     video_ready: 'https://streamable.com/3z2z9z',
     description: 'Two talented alumni have returned to design the Alumni Line, a celebration of CMU graduates who we’ve stayed connected to. Our first alumna is Grace Kao, whose line will be androgynous and soft, pulled together by the color white, which will represent a blank slate and hopeful new beginning for 2021. Next, Terry Boyd will infuse the 90’s in his line of male streetwear, incorporating pieces from the Spice Girls, his first musical love. He will work in black and white, embroidery, and gold leaf. We are glad to have them back in the community and designing for Lunar Gala.',
-
   }
 ];
 
