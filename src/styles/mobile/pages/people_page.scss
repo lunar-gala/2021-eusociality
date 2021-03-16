@@ -3,6 +3,9 @@
  */
 
 $TAB_TEXT_SIZE: 36px;
+$HEIGHT_TO_WIDTH_RATIO_HEADSHOT: 1.21;
+$SIDE_MARGIN: $X_MARGIN/2;
+$HEADSHOT_WIDTH: (100vw - 3*$SIDE_MARGIN)/2;
 
 @keyframes slide-in {
   from {
@@ -57,8 +60,8 @@ $TAB_TEXT_SIZE: 36px;
   }
 
   .headshot {
-    width: 35vw;
-    height: 42.6vw;
+    width: $HEADSHOT_WIDTH;
+    height: $HEIGHT_TO_WIDTH_RATIO_HEADSHOT*$HEADSHOT_WIDTH;
     background-size: cover;
     background-repeat: no-repeat;
     background-blend-mode: color;
@@ -203,9 +206,10 @@ $TAB_TEXT_SIZE: 36px;
       .bioWrapper {
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: space-between;
         flex-wrap: wrap;
         box-shadow: none;
+        width: 100%;
       }
 
       .notPictured {
@@ -219,9 +223,8 @@ $TAB_TEXT_SIZE: 36px;
       .teamBio {
         margin-top: 20px;
         margin-bottom: 20px;
-        margin-right: 5vw;
         display: block;
-        width: 40vw;
+        width: 42.5vw;
         justify-self: flex-start;
 
         &.right {

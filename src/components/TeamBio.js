@@ -27,5 +27,4 @@ TeamBio.propTypes = {
   name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   parity: PropTypes.bool.isRequired,
-  isMobile: PropTypes.string.isRequired,
 };
