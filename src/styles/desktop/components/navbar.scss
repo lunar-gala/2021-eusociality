@@ -139,6 +139,10 @@ $NAVBALL_SIZE: 10px;
       transition: $MEDIUM_ANIMATION_DURATION;
     }
 
+    &:hover .navBall {
+      opacity: 1;
+    }
+
     &.selected {
       .navBall {
         opacity: 1;
