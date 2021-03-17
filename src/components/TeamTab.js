@@ -7,6 +7,7 @@ import {
 } from "@material-ui/core";
 import TeamBio from "../components/TeamBio";
 import { PEOPLE_DATA, PEOPLE_BY_TEAMS } from "../data/people_data";
+import Fade from 'react-reveal/Fade';
 
 export default function TeamTab(props) {
   const { expanded, handleChange, teamName } = props;
@@ -25,13 +26,15 @@ export default function TeamTab(props) {
         parity = !parity;
 
         return (
-          <TeamBio
-            imgSrc={entry.image}
-            name={`${entry.first_name} ${entry.last_name}`}
-            parity={parity}
-            title={entry.position}
-            key={andrew_id}
-          />
+          <Fade>
+            <TeamBio
+              imgSrc={entry.image}
+              name={`${entry.first_name} ${entry.last_name}`}
+              parity={parity}
+              title={entry.position}
+              key={andrew_id}
+            />
+          </Fade>
         );
       } else {
         notPictured.push(
