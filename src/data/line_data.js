@@ -3,6 +3,8 @@
  */
 
 export const GITHUB_BASE_URL = 'https://github.com/lunar-gala/2021-eusociality-videos/raw/master/';
+import MODEL_2 from "../../assets/img/examples/girl2.jpg";
+import MODEL_4 from "../../assets/img/examples/girl4.jpg";
 
 /** @brief Line names in order, with their respective designers */
 export const LINE_INFO = [
@@ -14,6 +16,8 @@ export const LINE_INFO = [
     ],
     video_ready: 'https://streamable.com/9z91c9',
     description: 'Gossamer Idle is a combination between the grandeur of the Renaissance and modern day elegance. This idea stems from our luna moth motif — representing the renewal of body and spirit regeneration and ties in to our intent to create a new version of an old trend. With flowy and translucent material paired with harsher metals and leather, we create a sense of duality between femininity and masculinity in each look. Instead of following the distinct binary roles from old Europe, we believe that fashion is not a performance but performative, and we can use fashion to undermine gender stereotypes.',
+    img_1: MODEL_2,
+    img_2: MODEL_4,
   },
   {
     name: 'Nexus',
