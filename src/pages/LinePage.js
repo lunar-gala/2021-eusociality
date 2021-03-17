@@ -87,11 +87,6 @@ class LinePage extends React.Component {
   render() {
     let line_info = LINE_DATA.LINE_INFO[this.state.selectedLineIdx];
 
-    // TODO: this is a filler video for now. Remove when the real videos are ready.
-    let video_link = "https://streamable.com/fjsba8";
-
-    video_link = line_info.video_ready ? line_info.video_ready : video_link;
-
     // TODO: The video player currently has a play button temporarily when it is not loaded
     return (
       <div id="line-page">
@@ -99,7 +94,7 @@ class LinePage extends React.Component {
           <div id="player-wrapper" className={`${this.state.curr_video}`}>
             <ReactPlayer
               id="player"
-              url={video_link}
+              url={line_info.video_ready}
               playing={true}
               volume={0}
               muted={true}
