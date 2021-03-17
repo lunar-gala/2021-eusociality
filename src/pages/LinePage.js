@@ -88,8 +88,7 @@ class LinePage extends React.Component {
     let line_info = LINE_DATA.LINE_INFO[this.state.selectedLineIdx];
 
     // TODO: this is a filler video for now. Remove when the real videos are ready.
-    let video_link =
-      "https://streamable.com/fjsba8";
+    let video_link = "https://streamable.com/fjsba8";
 
     video_link = line_info.video_ready ? line_info.video_ready : video_link;
 
@@ -111,7 +110,10 @@ class LinePage extends React.Component {
             />
           </div>
         </div>
-        <Link id="top-title" to={"/"}>
+        <Link
+          id="top-title"
+          to={`/${this.state.selectedLineIdx+1}`}
+        >
           <div id="top-title-wrapper">
             <span>{CONSTANTS.LANDING_PAGE_TITLE}</span>
             <div id="collectiva-logo">
