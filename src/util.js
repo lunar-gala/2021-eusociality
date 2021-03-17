@@ -50,7 +50,8 @@ export function name_list_formatter(name_list) {
     for (let i = 0; i < len - 1; i++) {
       format.push(
         <span>
-        <span className="unbreakable-name">{`${name_list[i]}, `}</span>
+        <span className="unbreakable-name">{`${name_list[i]},`}</span>
+        <span className="preserve-whitespace">{" "}</span>
         <wbr/>
         </span>
       );

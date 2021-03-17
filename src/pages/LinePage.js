@@ -26,9 +26,12 @@ class LinePage extends React.Component {
       this.props.location.pathname
     )[1];
 
+    const isMobile = window.innerWidth < CONSTANTS.DESKTOP_WIDTH;
+
     this.state = {
       animation_blur: "blur",
       animation_slide: true,
+      isMobile: isMobile,
       landing_page_state: CONSTANTS.LANDING_PAGE_STATES.LINE_PAGE,
       selectedLineIdx: currLineNumber - 1,
       showBackButton: true,
@@ -107,7 +110,7 @@ class LinePage extends React.Component {
         </div>
         <Link
           id="top-title"
-          to={`/${this.state.selectedLineIdx+1}`}
+          to={this.state.isMobile ? '/' : `/${this.state.selectedLineIdx+1}`}
         >
           <div id="top-title-wrapper">
             <span>{CONSTANTS.LANDING_PAGE_TITLE}</span>

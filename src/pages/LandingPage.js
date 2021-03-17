@@ -1377,9 +1377,9 @@ class LandingPage extends React.Component {
             <div id="below-line-name">
               <div id="designers-name">
                 {this.state.selectedLineIdx >= 0
-                  ? `${UTIL.name_list_formatter(
+                  ? UTIL.name_list_formatter(
                       LINE_DATA.LINE_INFO[this.state.selectedLineIdx].designers
-                    )}`
+                    )
                   : ""}
               </div>
             </div>
