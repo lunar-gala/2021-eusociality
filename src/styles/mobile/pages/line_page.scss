@@ -204,27 +204,11 @@ $SLIDE_AMOUNT_B: -14.38vw;
       margin-top: 16.2vw;
       font-family: $FONT_BODY;
       font-weight: 400;
-      font-size: $FONT_SIZE_BODY;
+      font-size: 5vw;
     }
 
     #left-bar {
-      margin-top: 6.26vw;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      flex-grow: 1;
-      margin-left: -25vw;
-
-      .dot-basic {
-        margin-left: -1px;
-      }
-
-      .line {
-        width: 60vw;
-        flex-grow: 1;
-        border-bottom: 2px solid white;
-        height: 1px;
-      }
+      display: none;
     }
 
     #pictures-bottom {
