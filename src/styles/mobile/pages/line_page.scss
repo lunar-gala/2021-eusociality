@@ -131,14 +131,11 @@ $SLIDE_AMOUNT_B: -14.38vw;
     }
 
     #designers {
-      display: flex;
-      flex-direction: row;
-      align-items: stretch;
+      display: block;
       margin-top: 10px;
       width: 100%;
 
       #designers-text {
-        display: flex;
         font-family: $FONT_SUBHEAD;
         font-weight: normal;
         font-size: 20px;
