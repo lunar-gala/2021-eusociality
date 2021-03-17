@@ -139,7 +139,8 @@ export const LINE_INFO = [
   {
     name: 'Alumni',
     designers: [
-      'TBD'
+      'Terrence Boyd',
+      'Grace Kao',
     ],
     video_ready: 'https://streamable.com/3z2z9z',
     description: 'Two talented alumni have returned to design the Alumni Line, a celebration of CMU graduates who we’ve stayed connected to. Our first alumna is Grace Kao, whose line will be androgynous and soft, pulled together by the color white, which will represent a blank slate and hopeful new beginning for 2021. Next, Terry Boyd will infuse the 90’s in his line of male streetwear, incorporating pieces from the Spice Girls, his first musical love. He will work in black and white, embroidery, and gold leaf. We are glad to have them back in the community and designing for Lunar Gala.',
