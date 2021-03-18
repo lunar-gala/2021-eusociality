@@ -12,8 +12,8 @@ import DesktopSideNav from "../components/DesktopSideNav";
 
 // Images
 // TODO: there will be a lot of these, so probably a good idea to move this into a file and import everything in that file
-import MODEL_2 from "../../assets/img/examples/girl2.jpg";
-import MODEL_4 from "../../assets/img/examples/girl4.jpg";
+import MODEL_2 from "../../assets/img/lines/Invasion_1.jpg";
+import MODEL_4 from "../../assets/img/lines/Invasion_2.jpg";
 import NavbarLinePage from "../components/NavbarLinePage";
 import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
 

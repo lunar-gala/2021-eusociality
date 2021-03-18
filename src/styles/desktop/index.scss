@@ -34,8 +34,8 @@ body {
 
 /* Display font */
 h1{
-  font-family: 'Sprat Type Condensed';
-  font-weight: 100;
+  	font-family: 'Sprat Type Condensed';
+  	font-weight: 100;
 	font-size: 4em;
 	letter-spacing: -.11em;
 	word-spacing: .1em;
@@ -45,13 +45,13 @@ h1{
 
 /* Subheader 1 */
 h2 {
-  font-family: 'Sprat Type Condensed';
-  font-weight: normal;
-	font-size: 1.5em;
-	letter-spacing: -.01em;
+	font-family: $FONT_DISPLAY;
+    letter-spacing: $FONT_SPRAT_KERN;
+    font-weight: 600;
+    font-size: 3em;
+    text-transform: uppercase;
 	margin-top: 0;
-	margin-bottom: 1em;
-	text-transform: uppercase;
+	margin-bottom: 2em;
 }
 
 /* Subheader 2 */

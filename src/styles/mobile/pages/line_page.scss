@@ -125,8 +125,8 @@ $SLIDE_AMOUNT_B: -14.38vw;
       font-family: $FONT_DISPLAY;
       font-size: 48px;
       font-weight: 100;
-      letter-spacing: -0.12em;
       text-transform: uppercase;
+      letter-spacing: $FONT_SPRAT_KERN;
       word-spacing: $HEADER_WORD_SPACING;
     }
 
@@ -141,8 +141,8 @@ $SLIDE_AMOUNT_B: -14.38vw;
         display: flex;
         font-family: $FONT_SUBHEAD;
         font-weight: normal;
-        font-size: 20px;
-        letter-spacing: -0.05em;
+        font-size: 1.5em;
+        letter-spacing: $FONT_SPRAT_KERN;
         text-transform: uppercase;
       }
 

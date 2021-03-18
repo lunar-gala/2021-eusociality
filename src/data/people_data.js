@@ -96,7 +96,6 @@ import radeoti from '../../assets/img/people/Remi Adeoti.jpg';
 // import sophiale from '../../assets/img/people/null';
 import tbournia from "../../assets/img/people/Themistokles Bournias.jpg";
 import thk1 from "../../assets/img/people/Tiffany Kim.jpg";
-import whliu from "../../assets/img/people/Hongfu Liu.jpg";
 import mkimkim from "../../assets/img/people/Min Ji Kim Kim.jpg";
 import lannal from "../../assets/img/people/Lanna Lang.jpg";
 import sspektor from "../../assets/img/people/Sabina Spektor.jpg";
@@ -212,7 +211,7 @@ export const PEOPLE_DATA = {
   },
   flg: {
     first_name: "Franklin",
-    last_name: "Gutman",
+    last_name: "Guttman",
     team: "Creative",
     position: "Motion Designer",
     filename: null,
@@ -560,14 +559,6 @@ export const PEOPLE_DATA = {
     filename: "Audry Stuart.jpg",
     image: aestuart,
   },
-  lingfeng: {
-    first_name: "Bill",
-    last_name: "Gao",
-    team: "Model",
-    position: "Model",
-    filename: "Lingfeng Gao.jpg",
-    image: lingfeng,
-  },
   csinagra: {
     first_name: "Chloe",
     last_name: "Sinagra",
@@ -809,14 +800,6 @@ export const PEOPLE_DATA = {
     position: "Model",
     filename: "Tiffany Kim.jpg",
     image: thk1,
-  },
-  whliu: {
-    first_name: "Wilford",
-    last_name: "Liu",
-    team: "Model",
-    position: "Model, Composer",
-    filename: "Hongfu Liu.jpg",
-    image: whliu,
   },
   mkimkim: {
     first_name: "Aris",
@@ -1160,7 +1143,6 @@ export const PEOPLE_BY_TEAMS = {
     "minjael2",
     "sophiale",
     "christi5",
-    "whliu",
     "maxliu",
     "sammiep",
     "csinagra",

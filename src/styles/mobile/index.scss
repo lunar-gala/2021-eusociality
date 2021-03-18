@@ -37,13 +37,12 @@ h1{
 
 /* Subheader 1 */
 h2 {
-  font-family: 'Sprat Type Condensed';
-  font-weight: normal;
-	font-size: 1.5em;
-	letter-spacing: -.01em;
+	font-family: $FONT_DISPLAY;
+    letter-spacing: $FONT_SPRAT_KERN;
+    font-weight: $FONT_SPRAT_WEIGHT;
+    font-size: 2em;
+    text-transform: uppercase;
 	margin-top: 0;
-	margin-bottom: 1em;
-	text-transform: uppercase;
 }
 
 /* Subheader 2 */
