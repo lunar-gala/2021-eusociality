@@ -63,7 +63,6 @@ export default function TeamTab(props) {
       <AccordionDetails className="tab-body">
         <div className="bioWrapper">{pictures}</div>
 
-        {
         <div className="notPictured">
           {notPictured.length > 0 && (
             <>
@@ -72,7 +71,6 @@ export default function TeamTab(props) {
             </>
           )}
         </div>
-        }
       </AccordionDetails>
     </Accordion>
   );
