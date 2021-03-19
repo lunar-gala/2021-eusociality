@@ -129,17 +129,19 @@ export const NAV_LINK_INFO = [
 ];
 
 export const ABOUT_TEXT =
-  "Lunar Gala 2021: COLLECTIVA explores everyone’s role in an \
-  interdependent society.   Each of our actions ricochet throughout the world, \
-  impacting faraway places and people who we don’t know.   Sometimes it can    \
-  be hard to forget that we’re not alone, that we’re part of a complex and     \
-  connected world. Our communities function as networks that would collapse    \
-  without the everyday work of others. Instead of erasing anyone, we want to   \
-  honor them and uplift their hard work. Imagine a world where everyone is     \
-  not only remembered but celebrated in COLLECTIVA.";
+  "Lunar Gala 2021: COLLECTIVA explores everyone’s role in an interdependent \
+  society. Each of our actions ricochet throughout the world, impacting      \
+  faraway places and people who we don’t know. Sometimes it can be hard to   \
+  forget that we’re not alone, that we’re part of a complex and connected    \
+  world. Our communities function as networks that would collapse without    \
+  the everyday work of others. Instead of erasing anyone, we want to honor   \
+  them and uplift their hard work. Imagine a world where everyone is not     \
+  only remembered but celebrated as an essential node in a greater           \
+  network of COLLECTIVA.";
 
 export const ABOUT_HEADER_TEXT =
-  "COLLECTIVA explores the interdependence of our community.";
+  "Existence is interdependent."
+  // "COLLECTIVA explores the interdependence of our community.";
 
 /** @brief Three.js environment settings */
 export const LANDING_PAGE_BACKGROUND_COLOR = 0x000000;
