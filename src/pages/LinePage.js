@@ -160,14 +160,22 @@ class LinePage extends React.Component {
                   : LINE_DATA.LINE_INFO[0].description}
               </div>
 
-              <div
-                id="models"
-                className={this.state.animation_blur}
-                key={this.state.selectedLineIdx}
-              >
-                {this.slidingImage(line_info.img_1 ? line_info.img_1 : MODEL_2, "a")}
-                {this.slidingImage(line_info.img_2 ? line_info.img_2 : MODEL_4, "b")}
-              </div>
+              {line_info.img_1 != null ? (
+                <div
+                  id="models"
+                  className={this.state.animation_blur}
+                  key={this.state.selectedLineIdx}
+                >
+                  {this.slidingImage(
+                    line_info.img_1 ? line_info.img_1 : MODEL_2,
+                    "a"
+                  )}
+                  {this.slidingImage(
+                    line_info.img_2 ? line_info.img_2 : MODEL_4,
+                    "b"
+                  )}
+                </div>
+              ) : null}
             </div>
             <div
               id="left-bar"
