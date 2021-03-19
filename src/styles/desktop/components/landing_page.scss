@@ -99,10 +99,10 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
         #line-name {
           font-family: $FONT_DISPLAY;
           font-size: $FONT_SIZE_LINE;
-          text-transform: uppercase;
           font-weight: $FONT_WEIGHT_LIGHT;
           letter-spacing: $FONT_SPRAT_KERN;
           word-spacing: $HEADER_WORD_SPACING;
+          text-transform: uppercase;
           pointer-events: none;
         }
 
