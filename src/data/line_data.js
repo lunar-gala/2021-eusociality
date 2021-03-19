@@ -25,16 +25,16 @@ import BOUND_1 from "../../assets/img/lines/Bound_1.jpg";
 import BOUND_2 from "../../assets/img/lines/Bound_2.jpg";
 import INVASION_1 from "../../assets/img/lines/Invasion_1.jpg";
 import INVASION_2 from "../../assets/img/lines/Invasion_2.jpg";
-import SOMATIC_1 from "../../assets/img/lines/Somatic_1.jpg";
-import SOMATIC_2 from "../../assets/img/lines/Somatic_2.jpg";
+// import SOMATIC_1 from "../../assets/img/lines/Somatic_1.jpg";
+// import SOMATIC_2 from "../../assets/img/lines/Somatic_2.jpg";
 import RELINQUO_1 from "../../assets/img/lines/Relinquo_1.jpg";
 import RELINQUO_2 from "../../assets/img/lines/Relinquo_2.jpg";
 import DIGITALWARFARE_1 from "../../assets/img/lines/DigitalWarfare_1.jpg";
 import DIGITALWARFARE_2 from "../../assets/img/lines/DigitalWarfare_2.jpg";
 import ICARUS_1 from "../../assets/img/lines/Icarus_1.jpg";
 import ICARUS_2 from "../../assets/img/lines/Icarus_2.jpg";
-import ALUM_1 from "../../assets/img/lines/Alum_1.jpg";
-import ALUM_2 from "../../assets/img/lines/Alum_2.jpg";
+// import ALUM_1 from "../../assets/img/lines/Alum_1.jpg";
+// import ALUM_2 from "../../assets/img/lines/Alum_2.jpg";
 
 /** @brief Line names in order, with their respective designers */
 export const LINE_INFO = [
@@ -161,8 +161,8 @@ export const LINE_INFO = [
     ],
     video_ready: 'https://streamable.com/ssifa5',
     description: 'Somatic considers the relationship we have with our bodies, especially with what is beneath our skin. It is important to reflect on the way we are designed as well as the structures, systems, and forms  which sustain us. We are not at all the Vitruvian Man or an illustration in an anatomy textbook or a Photoshopped photo in a magazine. We are imperfect and beautiful, and somehow, all the parts of our bodies keep us moving and living.',
-    img_1: SOMATIC_1,
-    img_2: SOMATIC_2,
+    img_1: null,
+    img_2: null,
   },
   {
     name: 'Relinquo',
@@ -206,9 +206,9 @@ export const LINE_INFO = [
     ],
     video_ready: 'https://streamable.com/3z2z9z',
     description: 'Two talented alumni have returned to design the Alumni Line, a celebration of CMU graduates who we’ve stayed connected to. Our first alumna is Grace Kao, whose line will be androgynous and soft, pulled together by the color white, which will represent a blank slate and hopeful new beginning for 2021. Next, Terry Boyd will infuse the 90’s in his line of male streetwear, incorporating pieces from the Spice Girls, his first musical love. He will work in black and white, embroidery, and gold leaf. We are glad to have them back in the community and designing for Lunar Gala.',
-    img_1: ALUM_1,
-    img_2: ALUM_2,
-  
+    img_1: null,
+    img_2: null,
+  }
 ];
 
 

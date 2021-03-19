@@ -242,7 +242,7 @@ $PICTURE_FRAME_MARGIN_TOP: 48px;
             width: $PICTURE_WIDTH;
             height: $PICTURE_HEIGHT;
             background-size: cover;
-            margin-top: -$PICTURE_FRAME_MARGIN_TOP - 17px - $SLIDE_AMOUNT_IMAGE;
+            margin-top: -$PICTURE_FRAME_MARGIN_TOP - 20px - $SLIDE_AMOUNT_IMAGE;
 
             &#a {
               animation: slide-image 500ms forwards;
