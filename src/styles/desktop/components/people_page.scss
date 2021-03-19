@@ -97,6 +97,10 @@
     z-index: $Z_INDEX_MAIN_UI;
     padding-bottom: 200px;
 
+    .MuiAccordionSummary-content{
+      padding: 10px 0;
+    }
+
     .Mui-expanded {
       margin: 0;
       padding: 0;
@@ -211,15 +215,22 @@
       }
 
       .notPictured {
+        margin-bottom: 30px;
+
         h2 {
+          font-family: $FONT_DISPLAY;
+          font-weight: $FONT_WEIGHT_REGULAR;
+          font-size: 1.8em;
+          letter-spacing: -.05em;
+          word-spacing: $HEADER_WORD_SPACING;
+          text-transform: uppercase;
           margin-bottom: 10px;
-          font-size: 46;
         }
 
         p {
+          font-size: $FONT_SIZE_BODY;
           text-transform: uppercase;
-          font-size: 18;
-          margin-bottom: 2px;
+          margin-bottom: -1px;
         }
       }
 
@@ -240,7 +251,7 @@
         .name {
           text-transform: uppercase;
           font-weight: 500;
-          font-size: 18px;
+          font-size: $FONT_SIZE_BODY;
           margin: 0;
           margin-top: 1em;
         }
@@ -248,7 +259,7 @@
         .title {
           text-transform: uppercase;
           font-weight: 300;
-          font-size: 18px;
+          font-size: $FONT_SIZE_BODY;
           margin: 0;
         }
       }

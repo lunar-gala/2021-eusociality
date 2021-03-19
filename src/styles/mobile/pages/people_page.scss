@@ -104,6 +104,10 @@ $HEADSHOT_WIDTH: (100vw - 3*$SIDE_MARGIN)/2;
     overflow-y: auto;
     padding-bottom: 15vh;
 
+    .MuiAccordionSummary-content{
+      margin: 8px 0;
+    }
+
     .Mui-expanded {
       margin: 0;
       padding: 0;
@@ -114,7 +118,7 @@ $HEADSHOT_WIDTH: (100vw - 3*$SIDE_MARGIN)/2;
       text-transform: uppercase;
       letter-spacing: $FONT_SPRAT_KERN;
       font-weight: $FONT_SPRAT_WEIGHT;
-      font-size: 2em;
+      font-size: 2.5em;
       margin: 0;
       padding: 0;
     }
@@ -196,7 +200,6 @@ $HEADSHOT_WIDTH: (100vw - 3*$SIDE_MARGIN)/2;
     .tab-body {
       width: 100vw - $X_MARGIN;
       padding: 0;
-      padding-top: 40px;
       flex-direction: row;
       justify-content: flex-start;
       flex-wrap: wrap;
@@ -213,6 +216,19 @@ $HEADSHOT_WIDTH: (100vw - 3*$SIDE_MARGIN)/2;
       }
 
       .notPictured {
+        margin-bottom: 35px;
+
+        h2 {          
+          font-family: $FONT_DISPLAY;
+          font-weight: $FONT_WEIGHT_REGULAR;
+          font-size: 1.5em;
+          letter-spacing: -.05em;
+          word-spacing: $HEADER_WORD_SPACING;
+          text-transform: uppercase;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+
         p {
           text-transform: uppercase;
           font-size: 14px;

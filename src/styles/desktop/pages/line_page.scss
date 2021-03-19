@@ -180,7 +180,7 @@ $PICTURE_LEFT_MARGIN: 3vw;
         font-family: $FONT_SUBHEAD;
         font-weight: $FONT_SPRAT_WEIGHT;
         text-transform: uppercase;
-        font-size: 1.5em;
+        font-size: $FONT_SIZE_DESIGNER;
       }
 
       #right-bar {
@@ -215,7 +215,7 @@ $PICTURE_LEFT_MARGIN: 3vw;
         margin-top: 5vh;
         font-family: $FONT_BODY;
         font-size: $FONT_SIZE_BODY;
-        line-height: 26px;
+        line-height: $FONT_SIZE_LINEHEIGHT;
       }
 
       #models {

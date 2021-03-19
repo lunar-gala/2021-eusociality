@@ -99,10 +99,10 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
         #line-name {
           font-family: $FONT_DISPLAY;
           font-size: $FONT_SIZE_LINE;
-          text-transform: uppercase;
           font-weight: $FONT_WEIGHT_LIGHT;
           letter-spacing: $FONT_SPRAT_KERN;
           word-spacing: $HEADER_WORD_SPACING;
+          text-transform: uppercase;
           pointer-events: none;
         }
 
@@ -121,11 +121,13 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
           right: $SEE_MORE_WRAPPER_MARGIN;
 
           opacity: 0;
+          pointer-events: none;
           transition-duration: 1s;
           transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 
           &.show {
             opacity: 1;
+            pointer-events: all;
           }
 
           #more-info {
@@ -137,6 +139,7 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
             bottom: 55%;
             text-decoration: none;
             cursor: pointer;
+            z-index: $Z_INDEX_HEADER;
 
             #more-info-text {
               font-family: $FONT_SUBHEAD;
