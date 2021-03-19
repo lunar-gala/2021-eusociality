@@ -678,7 +678,7 @@ class LandingPage extends React.Component {
       });
       this.playCubeExpand(index);
     } else {
-    // Since Lorelei dropped out, we have to do this custom index change
+      // Since Lorelei dropped out, we have to do this custom index change
       let camera_index = index > 0 ? index + 1 : index;
 
       let curr_position = {
@@ -1147,25 +1147,29 @@ class LandingPage extends React.Component {
       }
     );
 
-    var gui = new GUI();
+    if (!this.state.isMobile) {
+      let gui = new GUI();
 
-    gui.add(camera.position, 'x', -1000,1000).step(1);
-    gui.add(camera.position, 'y', -1000,1000).step(1);
-    gui.add(camera.position, 'z', -1000,1000).step(1);
-    gui.add(this.state, "enable_mouse_hover").name("mouse hover").onChange((newValue) => {
-      this.setState({
-        enable_mouse_hover: newValue
-      });
-    });
-    gui.add(iridescence_texture_outline, 'filmThickness').min(100).max(1000);
-    gui.add(iridescence_texture_outline, 'refractiveIndexFilm').min(1).max(5);
-    gui.add(iridescence_texture_outline, 'refractiveIndexBase').min(1).max(5);
-    gui.add(iridescence_material_outline, 'boost').min(1).max(50);
-    gui.add(iridescence_material_outline, 'iridescenceRatio').min(0).max(10);
-    gui.add(iridescence_material_outline, 'baseTextureRatio').min(0).max(10);
-    gui.add(iridescence_material_outline, 'brightness').min(0).max(10);
-    gui.close();
-
+      gui.add(camera.position, "x", -1000, 1000).step(1);
+      gui.add(camera.position, "y", -1000, 1000).step(1);
+      gui.add(camera.position, "z", -1000, 1000).step(1);
+      gui
+        .add(this.state, "enable_mouse_hover")
+        .name("mouse hover")
+        .onChange((newValue) => {
+          this.setState({
+            enable_mouse_hover: newValue,
+          });
+        });
+      gui.add(iridescence_texture_outline, "filmThickness").min(100).max(1000);
+      gui.add(iridescence_texture_outline, "refractiveIndexFilm").min(1).max(5);
+      gui.add(iridescence_texture_outline, "refractiveIndexBase").min(1).max(5);
+      gui.add(iridescence_material_outline, "boost").min(1).max(50);
+      gui.add(iridescence_material_outline, "iridescenceRatio").min(0).max(10);
+      gui.add(iridescence_material_outline, "baseTextureRatio").min(0).max(10);
+      gui.add(iridescence_material_outline, "brightness").min(0).max(10);
+      gui.close();
+    }
     requestAnimationFrame(this.render_cube);
   }
 
@@ -1373,9 +1377,9 @@ class LandingPage extends React.Component {
             <div id="below-line-name">
               <div id="designers-name">
                 {this.state.selectedLineIdx >= 0
-                  ? `${UTIL.name_list_formatter(
+                  ? UTIL.name_list_formatter(
                       LINE_DATA.LINE_INFO[this.state.selectedLineIdx].designers
-                    )}`
+                    )
                   : ""}
               </div>
             </div>

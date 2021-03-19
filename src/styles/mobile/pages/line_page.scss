@@ -30,12 +30,12 @@ $SLIDE_AMOUNT_B: -14.38vw;
 
 #line-page {
   width: 100vw;
-  padding-bottom: 34vw;
+  overflow-x: hidden;
 
   #background {
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     top: 0;
     z-index: -1;
     height: 100%;
@@ -46,6 +46,7 @@ $SLIDE_AMOUNT_B: -14.38vw;
     #player-wrapper {
       width: 100%;
       height: 100%;
+      overflow: hidden;
 
       transition-duration: 1s;
       &.hide {
@@ -64,6 +65,7 @@ $SLIDE_AMOUNT_B: -14.38vw;
       width: 177.77777778vh !important; /* 100 * 16 / 9 */
       min-width: 100% !important;
       min-height: 56.25vw !important; /* 100 * 9 / 16 */
+      margin-left: -50vw; // For some reason mobile videos iframe displays weird
     }
 
     // TODO: did we want to do a gradual opacity fade for the background?
@@ -131,14 +133,11 @@ $SLIDE_AMOUNT_B: -14.38vw;
     }
 
     #designers {
-      display: flex;
-      flex-direction: row;
-      align-items: stretch;
+      display: block;
       margin-top: 10px;
       width: 100%;
 
       #designers-text {
-        display: flex;
         font-family: $FONT_SUBHEAD;
         font-weight: normal;
         font-size: 20px;
@@ -204,27 +203,11 @@ $SLIDE_AMOUNT_B: -14.38vw;
       margin-top: 16.2vw;
       font-family: $FONT_BODY;
       font-weight: 400;
-      font-size: $FONT_SIZE_BODY;
+      font-size: 5vw;
     }
 
     #left-bar {
-      margin-top: 6.26vw;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      flex-grow: 1;
-      margin-left: -25vw;
-
-      .dot-basic {
-        margin-left: -1px;
-      }
-
-      .line {
-        width: 60vw;
-        flex-grow: 1;
-        border-bottom: 2px solid white;
-        height: 1px;
-      }
+      display: none;
     }
 
     #pictures-bottom {

@@ -19,6 +19,8 @@ body {
 	&::-webkit-scrollbar {
 		display: none;
 	}
+
+	overflow-x: hidden;
 }
 
 .mobile {

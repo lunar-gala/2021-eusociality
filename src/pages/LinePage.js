@@ -26,9 +26,12 @@ class LinePage extends React.Component {
       this.props.location.pathname
     )[1];
 
+    const isMobile = window.innerWidth < CONSTANTS.DESKTOP_WIDTH;
+
     this.state = {
       animation_blur: "blur",
       animation_slide: true,
+      isMobile: isMobile,
       landing_page_state: CONSTANTS.LANDING_PAGE_STATES.LINE_PAGE,
       selectedLineIdx: currLineNumber - 1,
       showBackButton: true,
@@ -87,12 +90,6 @@ class LinePage extends React.Component {
   render() {
     let line_info = LINE_DATA.LINE_INFO[this.state.selectedLineIdx];
 
-    // TODO: this is a filler video for now. Remove when the real videos are ready.
-    let video_link =
-      "https://streamable.com/fjsba8";
-
-    video_link = line_info.video_ready ? line_info.video_ready : video_link;
-
     // TODO: The video player currently has a play button temporarily when it is not loaded
     return (
       <div id="line-page">
@@ -100,7 +97,7 @@ class LinePage extends React.Component {
           <div id="player-wrapper" className={`${this.state.curr_video}`}>
             <ReactPlayer
               id="player"
-              url={video_link}
+              url={line_info.video_ready}
               playing={true}
               volume={0}
               muted={true}
@@ -111,7 +108,10 @@ class LinePage extends React.Component {
             />
           </div>
         </div>
-        <Link id="top-title" to={"/"}>
+        <Link
+          id="top-title"
+          to={this.state.isMobile ? '/' : `/${this.state.selectedLineIdx+1}`}
+        >
           <div id="top-title-wrapper">
             <span>{CONSTANTS.LANDING_PAGE_TITLE}</span>
             <div id="collectiva-logo">

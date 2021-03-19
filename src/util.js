@@ -1,6 +1,7 @@
 /**
  * Utility functions
  */
+import React from "react";
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 const _MS_PER_HOUR = 1000 * 60 * 60;
@@ -42,15 +43,25 @@ export function line_number_formatter(index) {
 export function name_list_formatter(name_list) {
   let len = name_list.length;
   if (len === 1) {
-    return name_list[0];
+    return <span className="unbreakable-name">{name_list[0]}</span>;
   } else if (len >= 2) {
-    let format = "";
+    let format = [];
 
     for (let i = 0; i < len - 1; i++) {
-      format += `${name_list[i]}, `;
+      format.push(
+        <span>
+        <span className="unbreakable-name">{`${name_list[i]},`}</span>
+        <span className="preserve-whitespace">{" "}</span>
+        <wbr/>
+        </span>
+      );
     }
 
-    return `${format} ${name_list[len - 1]}`;
+    format.push(
+      <span className="unbreakable-name">{`${name_list[len - 1]}`}</span>
+    );
+
+    return format;
   }
 
   // List is empty
@@ -103,10 +114,8 @@ export function format_date(date) {
   };
 }
 
-export function return_first_regex_match (regex, string) {
-  const currPathMatches = regex.exec(
-    string
-  );
+export function return_first_regex_match(regex, string) {
+  const currPathMatches = regex.exec(string);
 
   if (currPathMatches == null) {
     return "";

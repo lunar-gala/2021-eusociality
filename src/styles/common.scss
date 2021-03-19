@@ -15,3 +15,11 @@ body {
 a {
   color: white;
 }
+
+.unbreakable-name {
+  white-space: nowrap;
+}
+
+.preserve-whitespace {
+  white-space: pre;
+}

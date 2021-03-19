@@ -5,15 +5,14 @@
 #mobile-menu-line-list {
   position: absolute;
   top: $LANDING_PAGE_HEADER_HEIGHT;
-  transition-duration: 1s;
+  transition-duration: 500ms;
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-
-  // Initially, the line menu is hidden to the right
-  transform: translateX(100vw);
+  opacity: 0;
+  width: 100vw;
 
   &.mobile-line-menu-open {
     z-index: 3;
-    transform: translateX(0);
+    opacity: 1;
   }
 
   .line-element {
@@ -38,7 +37,7 @@
         letter-spacing: $FONT_SPRAT_KERN;
         text-transform: uppercase;
         font-size: 2.5em;
-        
+
       }
 
       .designers {
