@@ -212,7 +212,7 @@ export const PEOPLE_DATA = {
   },
   flg: {
     first_name: "Franklin",
-    last_name: "Gutman",
+    last_name: "Guttman",
     team: "Creative",
     position: "Motion Designer",
     filename: null,
