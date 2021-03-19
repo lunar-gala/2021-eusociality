@@ -129,15 +129,14 @@ export const NAV_LINK_INFO = [
 ];
 
 export const ABOUT_TEXT =
-  "Nobody is ever entirely independent. We all make \
-up nodes in the dense, massively complex network that is our global society. \
-We rely on the contributions of countless other people to carry out even the \
-basic tasks of our everyday lives, and there is almost nothing we do that    \
-doesn’t affect someone else. Lunar Gala 2021: COLLECTIVA invites us not only \
-to recognize and celebrate the work that others have done to allow us to     \
-carry out our lives, but also to pause and reflect on a system that so often \
-ignores, forgets, and devalues the so much fundamental work necessary to its \
-existence.";
+  "Lunar Gala 2021: COLLECTIVA explores everyone’s role in an \
+  interdependent society.   Each of our actions ricochet throughout the world, \
+  impacting faraway places and people who we don’t know.   Sometimes it can    \
+  be hard to forget that we’re not alone, that we’re part of a complex and     \
+  connected world. Our communities function as networks that would collapse    \
+  without the everyday work of others. Instead of erasing anyone, we want to   \
+  honor them and uplift their hard work. Imagine a world where everyone is     \
+  not only remembered but celebrated in COLLECTIVA.";
 
 export const ABOUT_HEADER_TEXT =
   "COLLECTIVA explores the interdependence of our community.";
@@ -174,4 +173,4 @@ export const IRIDESCENCE_SETTINGS_OUTLINE = {
 };
 
 /** @brief Date of the show. Used in the watch page to calculate the countdown. */
-export const SHOW_DATE = new Date(Date.parse("10 Apr 2021 19:00:00 EDT"));
+export const SHOW_DATE = new Date(Date.parse("10 Apr 2021 20:30:00 EDT"));

@@ -99,9 +99,9 @@ $BOTTOM_DESCRIPTOR_LINE_WIDTH: 44.3vw;
 
     #headline-text {
       margin-left: $X_MARGIN/2;
-      font-family: 'Sprat Type Condensed';
-      font-weight: 100;
-      letter-spacing: -0.12em;
+      font-family: $FONT_DISPLAY;
+      font-weight: $FONT_WEIGHT_LIGHT;
+      letter-spacing: $FONT_SPRAT_KERN;
       font-size: 5.6vw;
       width: 45vw;
       word-spacing: 0.1em;

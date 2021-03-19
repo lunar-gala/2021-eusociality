@@ -42,10 +42,10 @@ $VERTICAL_MARGIN: 12px;
   #header-section {
     #header-text {
       font-family: $FONT_DISPLAY;
-      font-weight: $FONT_SPRAT_WEIGHT;
-      letter-spacing: $FONT_SPRAT_KERN;
+      font-weight: $FONT_WEIGHT_REGULAR;
+      letter-spacing: -.04em;
       text-transform: uppercase;
-      font-size: 2.5em;
+      font-size: 2.2em;
     }
 
     .bar {

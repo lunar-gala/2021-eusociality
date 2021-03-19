@@ -11,7 +11,7 @@ $BACK_BUTTON_STROKE_WIDTH: 3px;
 $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
 
 $PICTURE_WIDTH: 16vw;
-$PICTURE_HEIGHT: 40vh;
+$PICTURE_HEIGHT: 35vh;
 $PICTURE_LEFT_MARGIN: 3vw;
 $PICTURE_FRAME_MARGIN_TOP: 48px;
 
@@ -242,7 +242,7 @@ $PICTURE_FRAME_MARGIN_TOP: 48px;
             width: $PICTURE_WIDTH;
             height: $PICTURE_HEIGHT;
             background-size: cover;
-            margin-top: -$PICTURE_FRAME_MARGIN_TOP - 20px - $SLIDE_AMOUNT_IMAGE;
+            margin-top: -$PICTURE_FRAME_MARGIN_TOP - 19px - $SLIDE_AMOUNT_IMAGE;
 
             &#a {
               animation: slide-image 500ms forwards;
