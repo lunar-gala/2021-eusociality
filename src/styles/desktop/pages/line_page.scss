@@ -5,8 +5,7 @@
 $LEFT_MARGIN: 20vw;
 $TITLE_MARGIN_TOP: 15vh;
 
-$SLIDE_AMOUNT_A: 40px;
-$SLIDE_AMOUNT_B: 40px;
+$SLIDE_AMOUNT_IMAGE: 40px;
 $BACK_BUTTON_SIZE: 24px;
 $BACK_BUTTON_STROKE_WIDTH: 3px;
 $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
@@ -14,25 +13,16 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
 $PICTURE_WIDTH: 16vw;
 $PICTURE_HEIGHT: 40vh;
 $PICTURE_LEFT_MARGIN: 3vw;
+$PICTURE_FRAME_MARGIN_TOP: 48px;
 
 // Animations
-@keyframes slide-image-a {
+@keyframes slide-image {
   from {
     transform: translateY(0);
   }
 
   to {
-    transform: translateY($SLIDE_AMOUNT_A);
-  }
-}
-
-@keyframes slide-image-b {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY($SLIDE_AMOUNT_B);
+    transform: translateY($SLIDE_AMOUNT_IMAGE);
   }
 }
 
@@ -237,28 +227,31 @@ $PICTURE_LEFT_MARGIN: 3vw;
           width: $PICTURE_WIDTH;
           height: $PICTURE_HEIGHT;
           margin-left: $PICTURE_LEFT_MARGIN;
-          margin-top: 48px;
+          margin-top: $PICTURE_FRAME_MARGIN_TOP;
+
+          .image-wrapper {
+            border: 1px solid white;
+            width: $PICTURE_WIDTH;
+            height: $PICTURE_HEIGHT;
+            margin-top: -2*$SLIDE_AMOUNT_IMAGE;
+            animation: slide-image 500ms forwards;
+            animation-delay: 1s;
+          }
 
           .image {
             width: $PICTURE_WIDTH;
             height: $PICTURE_HEIGHT;
             background-size: cover;
+            margin-top: -$PICTURE_FRAME_MARGIN_TOP - 20px - $SLIDE_AMOUNT_IMAGE;
 
             &#a {
-              animation: slide-image-a 500ms forwards;
+              animation: slide-image 500ms forwards;
               animation-delay: 1s;
             }
             &#b {
-              animation: slide-image-b 500ms forwards;
+              animation: slide-image 500ms forwards;
               animation-delay: 1s;
             }
-          }
-
-          .frame {
-            position: absolute;
-            width: $PICTURE_WIDTH;
-            height: $PICTURE_HEIGHT;
-            border: 1px solid white;
           }
         }
       }

@@ -12,8 +12,8 @@ import DesktopSideNav from "../components/DesktopSideNav";
 
 // Images
 // TODO: there will be a lot of these, so probably a good idea to move this into a file and import everything in that file
-import MODEL_2 from "../../assets/img/examples/girl2.jpg";
-import MODEL_4 from "../../assets/img/examples/girl4.jpg";
+import MODEL_2 from "../../assets/img/examples/girl1.jpg";
+import MODEL_4 from "../../assets/img/examples/girl3.jpg";
 import NavbarLinePage from "../components/NavbarLinePage";
 import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
 
@@ -69,15 +69,16 @@ class LinePage extends React.Component {
   slidingImage(image, id) {
     return (
       <div className="pictures" id={id}>
-        <div
-          style={{
-            backgroundImage: `url(${image})`,
-          }}
-          className={`image`}
-          key={this.state.selectedLineIdx}
-          id={id}
-        />
-        <div className="frame" />
+        <div className="image-wrapper">
+          <div
+            style={{
+              backgroundImage: `url(${image})`,
+            }}
+            className={`image`}
+            key={this.state.selectedLineIdx}
+            id={id}
+          />
+        </div>
       </div>
     );
   }
@@ -159,14 +160,22 @@ class LinePage extends React.Component {
                   : LINE_DATA.LINE_INFO[0].description}
               </div>
 
-              <div
-                id="models"
-                className={this.state.animation_blur}
-                key={this.state.selectedLineIdx}
-              >
-                {this.slidingImage(MODEL_2, "a")}
-                {this.slidingImage(MODEL_4, "b")}
-              </div>
+              {line_info.img_1 != null ? (
+                <div
+                  id="models"
+                  className={this.state.animation_blur}
+                  key={this.state.selectedLineIdx}
+                >
+                  {this.slidingImage(
+                    line_info.img_1 ? line_info.img_1 : MODEL_2,
+                    "a"
+                  )}
+                  {this.slidingImage(
+                    line_info.img_2 ? line_info.img_2 : MODEL_4,
+                    "b"
+                  )}
+                </div>
+              ) : null}
             </div>
             <div
               id="left-bar"
