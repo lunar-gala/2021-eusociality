@@ -508,7 +508,7 @@ export const PEOPLE_DATA = {
     image: lkendric,
   },
   hsiaotyp: {
-    first_name: "Tyng Peck",
+    first_name: "Tyng",
     last_name: "Peck",
     team: "Design",
     position: "Designer: Icarus",
