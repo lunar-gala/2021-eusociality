@@ -69,15 +69,16 @@ class LinePage extends React.Component {
   slidingImage(image, id) {
     return (
       <div className="pictures" id={id}>
-        <div
-          style={{
-            backgroundImage: `url(${image})`,
-          }}
-          className={`image`}
-          key={this.state.selectedLineIdx}
-          id={id}
-        />
-        <div className="frame" />
+        <div className="image-wrapper">
+          <div
+            style={{
+              backgroundImage: `url(${image})`,
+            }}
+            className={`image`}
+            key={this.state.selectedLineIdx}
+            id={id}
+          />
+        </div>
       </div>
     );
   }
