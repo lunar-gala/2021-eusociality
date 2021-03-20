@@ -39,7 +39,7 @@ export default function TeamTab(props) {
       } else {
         notPictured.push(
           <p key={andrew_id}>
-            {entry.first_name} {entry.last_name}
+            {entry.first_name} {entry.last_name} {'— '} {entry.position}
           </p>
         );
         return <></>;

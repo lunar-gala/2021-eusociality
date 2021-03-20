@@ -40,8 +40,6 @@ import vderienz from "../../assets/img/people/Vincent DeRienzo.jpg";
 import seyoungc from '../../assets/img/people/Seyoung Choo.jpg';
 import mpandura from "../../assets/img/people/Maya Pandurangan.jpg";
 import abhartia from "../../assets/img/people/Aadya Bhartia.jpg";
-import lenal from "../../assets/img/people/Lena Li.jpg";
-import zhehuil from "../../assets/img/people/Zhehui Lin.jpg";
 import odh from "../../assets/img/people/Owen Haft.jpg";
 import carmeny from "../../assets/img/people/Carmen Yu.jpg";
 import abandi from "../../assets/img/people/Arushi Bandi.jpg";
@@ -64,7 +62,6 @@ import cscheire from '../../assets/img/people/Cassandra Scheirer.jpg';
 // import madelind from '../../assets/img/people/null';
 import adriennw from "../../assets/img/people/Adrienne Wang.jpg";
 import aestuart from "../../assets/img/people/Audry Stuart.jpg";
-import lingfeng from "../../assets/img/people/Lingfeng Gao.jpg";
 import csinagra from "../../assets/img/people/Chloe Sinagra.jpg";
 import christi5 from "../../assets/img/people/Christina Li.jpg";
 import cmedward from "../../assets/img/people/Clayton Edwards.jpg";
@@ -96,7 +93,6 @@ import radeoti from '../../assets/img/people/Remi Adeoti.jpg';
 // import sophiale from '../../assets/img/people/null';
 import tbournia from "../../assets/img/people/Themistokles Bournias.jpg";
 import thk1 from "../../assets/img/people/Tiffany Kim.jpg";
-import whliu from "../../assets/img/people/Hongfu Liu.jpg";
 import mkimkim from "../../assets/img/people/Min Ji Kim Kim.jpg";
 import lannal from "../../assets/img/people/Lanna Lang.jpg";
 import sspektor from "../../assets/img/people/Sabina Spektor.jpg";
@@ -171,7 +167,7 @@ export const PEOPLE_DATA = {
     image: sophiaki,
   },
   rickyche: {
-    first_name: "Ricky ",
+    first_name: "Ricky",
     last_name: "Chen",
     team: "Creative",
     position: "Web Designer",
@@ -336,7 +332,7 @@ export const PEOPLE_DATA = {
     first_name: "Vincent",
     last_name: "DeRienzo",
     team: "Design",
-    position: "Design Coordinator",
+    position: "Head Design Coordinator",
     filename: "Vincent DeRienzo.jpg",
     image: vderienz
   },
@@ -370,22 +366,6 @@ export const PEOPLE_DATA = {
     position: "Designer: Renasci",
     filename: "Aadya Bhartia.jpg",
     image: abhartia,
-  },
-  lenal: {
-    first_name: "Lena",
-    last_name: "Li",
-    team: "Design",
-    position: "Designer: Heroine",
-    filename: "Lena Li.jpg",
-    image: lenal,
-  },
-  zhehuil: {
-    first_name: "Linda",
-    last_name: "Lin",
-    team: "Design",
-    position: "Designer: Heroine",
-    filename: "Zhehui Lin.jpg",
-    image: zhehuil,
   },
   odh: {
     first_name: "Owen",
@@ -559,14 +539,6 @@ export const PEOPLE_DATA = {
     position: "Model",
     filename: "Audry Stuart.jpg",
     image: aestuart,
-  },
-  lingfeng: {
-    first_name: "Bill",
-    last_name: "Gao",
-    team: "Model",
-    position: "Model",
-    filename: "Lingfeng Gao.jpg",
-    image: lingfeng,
   },
   csinagra: {
     first_name: "Chloe",
@@ -809,14 +781,6 @@ export const PEOPLE_DATA = {
     position: "Model",
     filename: "Tiffany Kim.jpg",
     image: thk1,
-  },
-  whliu: {
-    first_name: "Wilford",
-    last_name: "Liu",
-    team: "Model",
-    position: "Model, Composer",
-    filename: "Hongfu Liu.jpg",
-    image: whliu,
   },
   mkimkim: {
     first_name: "Aris",
@@ -1117,8 +1081,6 @@ export const PEOPLE_BY_TEAMS = {
     "patriciy",
     "ejchapma",
     "jlai2",
-    "lenal",
-    "zhehuil",
     "lkendric",
     "hsiaotyp",
     "oluk",
@@ -1145,7 +1107,6 @@ export const PEOPLE_BY_TEAMS = {
     "morganbo",
     "mcornwal",
     "cmedward",
-    "lingfeng",
     "pgao1",
     "dgardilc",
     "lgunasek",
@@ -1160,7 +1121,6 @@ export const PEOPLE_BY_TEAMS = {
     "minjael2",
     "sophiale",
     "christi5",
-    "whliu",
     "maxliu",
     "sammiep",
     "csinagra",
