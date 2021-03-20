@@ -16,8 +16,8 @@ class DesktopSideNav extends React.Component {
       >
         <div
           className={`link-wrapper ${
-            this.props.landing_page_state ===
-            CONSTANTS.LANDING_PAGE_STATES.DEFAULT || CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LINE_PAGE_OPEN
+            this.props.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.DEFAULT || 
+            this.props.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LINE_PAGE_OPEN
               ? "selected"
               : ""
           }`}
