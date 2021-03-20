@@ -17,6 +17,31 @@ class DesktopSideNav extends React.Component {
         <div
           className={`link-wrapper ${
             this.props.landing_page_state ===
+            CONSTANTS.LANDING_PAGE_STATES.DEFAULT || CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LINE_PAGE_OPEN
+              ? "selected"
+              : ""
+          }`}
+        >
+          <div className="left-bar">
+            <div className="line" />
+            <div className="dot-basic" />
+          </div>
+          <Link
+            className="link"
+            to="/"
+            onClick={() => {
+              this.props.handlerSetLandingPageState ?
+              this.props.handlerSetLandingPageState(this.props.landing_page_state ===
+                CONSTANTS.LANDING_PAGE_STATES.DEFAULT || CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LINE_PAGE_OPEN
+              ) : null
+            }}
+          >
+            Lines
+          </Link>
+        </div>
+        <div
+          className={`link-wrapper ${
+            this.props.landing_page_state ===
             CONSTANTS.LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN
               ? "selected"
               : ""
@@ -67,7 +92,7 @@ class DesktopSideNav extends React.Component {
         <div
           className={`link-wrapper ${
             this.props.landing_page_state ===
-            CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN
+            CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN 
               ? "selected"
               : ""
           }`}
