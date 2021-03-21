@@ -63,7 +63,9 @@ class LinePage extends React.Component {
   }
 
   handlerSelectedLineIdx(index) {
-    this.setState({ selectedLineIdx: index, curr_video: "hide" });
+    if (this.state.selectedLineIdx !== index) {
+      this.setState({ selectedLineIdx: index, curr_video: "hide" });
+    }
   }
 
   slidingImage(image, id) {
