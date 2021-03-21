@@ -124,7 +124,7 @@ export const LINE_INFO = [
     img_2: BlOOM_2,
   },
   {
-    name: 'Rensaci',
+    name: 'Renasci',
     designers: [
       'Aadya Bhartia',
     ],
