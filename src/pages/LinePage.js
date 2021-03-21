@@ -68,16 +68,15 @@ class LinePage extends React.Component {
 
   slidingImage(image, id) {
     return (
-      <div className="pictures" id={id}>
-        <div className="image-wrapper">
-          <div
-            style={{
-              backgroundImage: `url(${image})`,
-            }}
-            className={`image`}
-            key={this.state.selectedLineIdx}
-            id={id}
-          />
+      <div className="pictures" id={id} key={this.state.selectedLineIdx}>
+        <div
+          style={{
+            backgroundImage: `url(${image})`,
+          }}
+          className={`image`}
+          id={id}
+        >
+          <div className="image-border" id={id} />
         </div>
       </div>
     );
@@ -111,7 +110,7 @@ class LinePage extends React.Component {
         </div>
         <Link
           id="top-title"
-          to={this.state.isMobile ? '/' : `/${this.state.selectedLineIdx+1}`}
+          to={this.state.isMobile ? "/" : `/${this.state.selectedLineIdx + 1}`}
         >
           <div id="top-title-wrapper">
             <span>{CONSTANTS.LANDING_PAGE_TITLE}</span>

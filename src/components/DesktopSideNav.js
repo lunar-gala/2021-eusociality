@@ -10,10 +10,39 @@ import * as CONSTANTS from "../constants";
 class DesktopSideNav extends React.Component {
   render() {
     // TODO: reuse code here
+
+    let select_line =
+      this.props.landing_page_state === CONSTANTS.LANDING_PAGE_STATES.DEFAULT ||
+      this.props.landing_page_state ===
+        CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LINE_PAGE_LOAD ||
+      this.props.landing_page_state ===
+        CONSTANTS.LANDING_PAGE_STATES.DESKTOP_LINE_PAGE_OPEN;
+
     return (
       <div
         className={`links desktop ${this.props.landing_page_state} ${this.props.landing_page_animations_header}`}
       >
+        <div className={`link-wrapper ${select_line ? "selected" : ""}`}>
+          <div className="left-bar">
+            <div className="line" />
+            <div className="dot-basic" />
+          </div>
+          <Link
+            className="link"
+            to="/"
+            onClick={() => {
+              this.props.handlerSetLandingPageState
+                ? select_line
+                  ? null
+                  : this.props.handlerSetLandingPageState(
+                      CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+                    )
+                : null;
+            }}
+          >
+            Lines
+          </Link>
+        </div>
         <div
           className={`link-wrapper ${
             this.props.landing_page_state ===
@@ -30,10 +59,11 @@ class DesktopSideNav extends React.Component {
             className="link"
             to="/about"
             onClick={() => {
-              this.props.handlerSetLandingPageState ?
-              this.props.handlerSetLandingPageState(
-                CONSTANTS.LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN
-              ) : null
+              this.props.handlerSetLandingPageState
+                ? this.props.handlerSetLandingPageState(
+                    CONSTANTS.LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN
+                  )
+                : null;
             }}
           >
             About
@@ -55,10 +85,11 @@ class DesktopSideNav extends React.Component {
             className="link"
             to="/people"
             onClick={() => {
-              this.props.handlerSetLandingPageState ?
-              this.props.handlerSetLandingPageState(
-                CONSTANTS.LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_OPEN
-              ) : null
+              this.props.handlerSetLandingPageState
+                ? this.props.handlerSetLandingPageState(
+                    CONSTANTS.LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_OPEN
+                  )
+                : null;
             }}
           >
             People
@@ -80,10 +111,11 @@ class DesktopSideNav extends React.Component {
             className="link"
             to="/watch"
             onClick={() => {
-              this.props.handlerSetLandingPageState ?
-              this.props.handlerSetLandingPageState(
-                CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN
-              ) : null
+              this.props.handlerSetLandingPageState
+                ? this.props.handlerSetLandingPageState(
+                    CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN
+                  )
+                : null;
             }}
           >
             Watch
