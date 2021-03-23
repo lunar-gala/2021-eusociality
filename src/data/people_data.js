@@ -818,7 +818,7 @@ export const PEOPLE_DATA = {
     first_name: "Patricia",
     last_name: "Yu",
     team: "Design",
-    position: "Designer: Duration",
+    position: "Designer: Salvos",
     filename: "Patricia Yu.jpg",
     image: patriciy,
   },
@@ -1054,6 +1054,13 @@ export const PEOPLE_DATA = {
     position: "Copywriter",
     image: null,
   },
+  annien: {
+    first_name: "Annie",
+    last_name: "Nguyen",
+    team: "Production",
+    position: "Assist Sound Designer",
+    image: null,
+  },
 };
 
 /**
@@ -1144,6 +1151,7 @@ export const PEOPLE_BY_TEAMS = {
   Production: [
     "asegar",
     "ebrunner",
+    "annien",
     "rnymeyer",
     "bsforza",
     "oadisa",
