@@ -393,7 +393,7 @@ export const PEOPLE_DATA = {
   },
   knandgao: {
     first_name: "Khushi",
-    last_name: "Nanddgaonkar",
+    last_name: "Nandgaonkar",
     team: "Design",
     position: "Designer: Mirror",
     filename: "Khushi Nandgaonkar.jpg",
