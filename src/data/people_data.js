@@ -28,7 +28,7 @@ import elizabew from "../../assets/img/people/Elizabeth Wang.jpg";
 import ahl2 from "../../assets/img/people/Angela Lee.jpg";
 // import alcai from '../../assets/img/people/null';
 // import ehyang from '../../assets/img/people/null';
-// import ertsai from '../../assets/img/people/null';
+import ertsai from "../../assets/img/people/Elysha Tsai.jpg";
 import chsong from "../../assets/img/people/Caroline Song.jpg";
 import puxins from "../../assets/img/people/Clytze Sun.jpg";
 import ddomalik from "../../assets/img/people/David Domalik.jpg";
@@ -107,6 +107,9 @@ import emao1 from "../../assets/img/people/Eileen Mao.jpg";
 import reshin from "../../assets/img/people/Rachel Shin.jpg";
 import asegar from "../../assets/img/people/Andre Segar.jpg";
 import ebrunner from "../../assets/img/people/Emily Brunner.jpg";
+import aranders from "../../assets/img/people/Anna Anderson.jpg";
+import loberman from "../../assets/img/people/Lily Oberman.jpg";
+import hsiaotyp from "../../assets/img/people/Hsiao Tyng Peck.jpg";
 
 import bboxer from "../../assets/img/people/Ben Boxer.jpg";
 import jhopper from "../../assets/img/people/J.D. Hopper.jpg";
@@ -143,7 +146,7 @@ export const PEOPLE_DATA = {
     image: szhai,
   },
   jsaik: {
-    first_name: "Jaclyn ",
+    first_name: "Jaclyn",
     last_name: "Saik",
     team: "Creative",
     position: "Web Designer",
@@ -279,7 +282,7 @@ export const PEOPLE_DATA = {
     last_name: "Tsai",
     team: "Creative",
     position: "Print Designer",
-    filename: null,
+    image: ertsai,
   },
   chsong: {
     first_name: "Caroline",
@@ -492,7 +495,7 @@ export const PEOPLE_DATA = {
     last_name: "Peck",
     team: "Design",
     position: "Designer: Icarus",
-    filename: null,
+    image: hsiaotyp,
   },
   jwesthei: {
     first_name: "Jessa",
@@ -625,7 +628,7 @@ export const PEOPLE_DATA = {
     last_name: "Balenzano",
     team: "Model",
     position: "Model",
-    filename: "Kyra Balenzano.jpg",
+    filename: "Kyra Balenzano.jpg", 
     image: kbalenza,
   },
   lgunasek: {
@@ -827,14 +830,14 @@ export const PEOPLE_DATA = {
     last_name: "Oberman",
     team: "Design",
     position: "Designer: The Marianas Trench",
-    filename: null,
-    image: null,
+    filename: "Lily Oberman.jpg",
+    image: loberman,
   },
   ddelgad1: {
     first_name: "Daniela",
     last_name: "Delgado",
     team: "Producers",
-    position: "Producer",
+    position: "Former Producer & Contributor",
     image: ddelgad1,
   },
   yuxilee: {
@@ -1052,13 +1055,20 @@ export const PEOPLE_DATA = {
     last_name: "Anderson",
     team: "Public Relations",
     position: "Copywriter",
-    image: null,
+    image: aranders,
   },
   annien: {
     first_name: "Annie",
     last_name: "Nguyen",
     team: "Production",
     position: "Assist Sound Designer",
+    image: null,
+  },
+  jhelms: {
+    first_name: "Tucker",
+    last_name: "Helms",
+    team: "Production",
+    position: "Composer",
     image: null,
   },
 };
@@ -1167,6 +1177,7 @@ export const PEOPLE_BY_TEAMS = {
     "kwalsh",
     "traviswr",
     "mzwiebel",
+    "jhelms",
   ],
   Creative: [
     "scarpent",

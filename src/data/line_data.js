@@ -72,7 +72,7 @@ export const LINE_INFO = [
   {
     name: 'Mirror',
     designers: [
-      'Khushi Nandgoankar',
+      'Khushi Nandgaonkar',
       'Kathy Zhang'
     ],
     video_ready: 'https://streamable.com/zaclht',
@@ -108,7 +108,7 @@ export const LINE_INFO = [
       'Patricia Yu'
     ],
     video_ready: 'https://streamable.com/fjsba8',
-    description: 'Different reactions were taken towards a shared experience recently. Whether it was advantageous or a catastrophe, Salvos embodies this moment in history - each costume reflects methods and values of “survival” that people have taken. The entropy of the pursuit of survival in action is intense, and may seem counterintuitive when seen individually. But when together, the spirit is strong and harmonious, giving hope to new beginnings.',
+    description: 'Many events that happened since 2019 has shown us how people have reacted differently towards a common situation. Although we share an experience, our actions are disorganized and chaotic. Whether that is an advantage or a catastrophe, we have seen a range of means for survival due to everyone’s unique environment and worldviews. I wanted to embody this where each outfit reflects the methods and values of “survival” that people have taken.',
     img_1: SALVOS_1,
     img_2: SALVOS_2,
   },
