@@ -101,3 +101,4 @@ This is because `git` doesn't want to override your changes. What you want to do
 ## Acknowledgments
 
 - [https://github.com/DerSchmale/threejs-thin-film-iridescence] for iridescence texture
+- [https://github.com/EthanNakache/Sprat-type] Sprat Type font used on the site
