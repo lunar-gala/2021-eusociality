@@ -74,6 +74,7 @@ export function name_list_formatter(name_list) {
  */
 export function calculate_date_difference(target_date) {
   let difference = target_date - Date.now();
+  let is_past = difference <= 0;
 
   let num_days = Math.floor(difference / _MS_PER_DAY);
   difference = difference - num_days * _MS_PER_DAY;
@@ -88,6 +89,8 @@ export function calculate_date_difference(target_date) {
     hours: num_hours,
     minutes: num_minutes,
     seconds: num_seconds,
+    // This indicates whether we have passed the countdown date
+    is_past: is_past,
   };
 }
 

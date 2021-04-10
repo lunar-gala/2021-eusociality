@@ -176,3 +176,5 @@ export const IRIDESCENCE_SETTINGS_OUTLINE = {
 
 /** @brief Date of the show. Used in the watch page to calculate the countdown. */
 export const SHOW_DATE = new Date(Date.parse("10 Apr 2021 20:30:00 EDT"));
+
+export const SHOW_VIDEO_LINK = "https://www.youtube.com/watch?v=5qap5aO4i9A";
