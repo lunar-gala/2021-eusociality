@@ -30,6 +30,8 @@ class WatchPageDesktop extends React.Component {
               controls={true}
               playIcon={<button></button>}
               onStart={this.handlerVideoLoad}
+              width='100%'
+              height='100%'
             />
           </div>
         ) : (
