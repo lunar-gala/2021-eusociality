@@ -136,3 +136,14 @@ $SUBTEXT_LETTER_SPACING: -0.07em;
     }
   }
 }
+
+$VIDEO_ASPECT: 1.77;
+$VIDEO_WIDTH: 100vw;
+
+#player-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $VIDEO_WIDTH;
+  height: $VIDEO_WIDTH/$VIDEO_ASPECT;
+}

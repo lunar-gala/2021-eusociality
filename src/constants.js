@@ -176,3 +176,11 @@ export const IRIDESCENCE_SETTINGS_OUTLINE = {
 
 /** @brief Date of the show. Used in the watch page to calculate the countdown. */
 export const SHOW_DATE = new Date(Date.parse("10 Apr 2021 20:30:00 EDT"));
+
+/** @brief Livestream link for the show. This is not encrypted, so anybody can
+ * technically find this link. It doesn't matter though, because we are
+ * premiering this, so YouTube won't show this live until it premieres.
+ *
+ * TODO: replace with real link
+ */
+export const SHOW_VIDEO_LINK = "https://www.youtube.com/watch?v=dEj6rc5ifhg&ab_channel=LunarGala";
