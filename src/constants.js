@@ -183,4 +183,4 @@ export const SHOW_DATE = new Date(Date.parse("10 Apr 2021 20:30:00 EDT"));
  *
  * TODO: replace with real link
  */
-export const SHOW_VIDEO_LINK = "https://www.youtube.com/watch?v=5qap5aO4i9A";
+export const SHOW_VIDEO_LINK = "https://www.youtube.com/watch?v=dEj6rc5ifhg&ab_channel=LunarGala";
