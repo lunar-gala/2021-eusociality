@@ -8,7 +8,7 @@ $UNDERLINE_CIRCLE_TRANSLATE_X: $UNDERLINE_WIDTH/2;
 $TOOLTIP_CIRCLE_WIDTH: 9px;
 $TOOLTIP_CIRCLE_HEIGHT: 9px;
 $TOOLTIP_MARGIN: 10px;
-$TOOLTIP_TICK_LENGTH: 4.5vh;
+$TOOLTIP_TICK_LENGTH: 6vh;
 $NAVBALL_SIZE: 10px;
 
 @keyframes underline-animation {
@@ -45,8 +45,6 @@ $NAVBALL_SIZE: 10px;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
 
-  position: fixed;
-  bottom: 2.5vh;
   padding-top: 2.5vh;
   padding-bottom: 2.5vh;
 
@@ -150,7 +148,7 @@ $NAVBALL_SIZE: 10px;
       align-items: center;
       position: absolute;
       opacity: 0;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       bottom: 63px;
       transition-duration: 200ms;
 

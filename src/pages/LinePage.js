@@ -70,7 +70,7 @@ class LinePage extends React.Component {
 
   slidingImage(image, id) {
     return (
-      <div className="pictures" id={id} key={this.state.selectedLineIdx}>
+      <div className="pictures" id={id} key={`${this.state.selectedLineIdx} ${id}`}>
         <div
           style={{
             backgroundImage: `url(${image})`,
@@ -78,8 +78,8 @@ class LinePage extends React.Component {
           className={`image`}
           id={id}
         >
-          <div className="image-border" id={id} />
         </div>
+        <div className="image-border" id={id} />
       </div>
     );
   }
@@ -121,7 +121,7 @@ class LinePage extends React.Component {
             </div>
           </div>
         </Link>
-        <div className="main-content">
+        <div id="main-content" className="section">
           <div
             id="name"
             className={this.state.animation_blur}
@@ -190,10 +190,58 @@ class LinePage extends React.Component {
             </div>
           </div>
         </div>
-        <NavbarLinePage
-          selectedLineIdx={this.state.selectedLineIdx}
-          handlerSelectedLineIdx={this.handlerSelectedLineIdx}
-        />
+        <div id="middle-content" className="section">
+          {/* TODO: replace with real show images */}
+          <div
+            id="models"
+            className={this.state.animation_blur}
+            key={this.state.selectedLineIdx}
+          >
+            {this.slidingImage(MODEL_2, "c")}
+            {this.slidingImage(MODEL_4, "d")}
+          </div>
+        </div>
+        <div id="right-bar-wrapper">
+          <div id="right-bar-fill"/>
+          <div
+            id="right-bar"
+            className={
+              this.state.animation_slide ? "right-bar-slide-in-animation" : ""
+            }
+          >
+            <div className="dot-basic" />
+            <div className="line" />
+          </div>
+        </div>
+        <div id="video-content" className="section">
+          <ReactPlayer
+            id="player-line"
+            url={CONSTANTS.SHOW_VIDEO_LINK}
+            playing={false}
+            volume={100}
+            controls={true}
+            width={"100vw"}
+            height={"100vh"}
+          />
+        </div>
+        <div id="left-bar-wrapper">
+          <div
+            id="left-bar"
+            className={
+              this.state.animation_slide ? "left-bar-slide-in-animation" : ""
+            }
+          >
+            <div className="line" />
+            <div className="dot-basic" />
+          </div>
+          <div id="left-bar-fill"/>
+        </div>
+        <div id="navbar-wrapper">
+          <NavbarLinePage
+            selectedLineIdx={this.state.selectedLineIdx}
+            handlerSelectedLineIdx={this.handlerSelectedLineIdx}
+          />
+        </div>
         {/* Additional overlay components */}
         <div className="fixed-overlay">
           <DesktopSideNav landing_page_state={this.state.landing_page_state} />
