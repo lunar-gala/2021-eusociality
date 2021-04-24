@@ -21,7 +21,11 @@ class WatchPageDesktop extends React.Component {
         id="watch-page-desktop"
         className={`${this.props.landing_page_state}`}
       >
-        {this.props.countdownState.is_past ? (
+        {this.props.countdownState.is_past &&
+        (this.props.landing_page_state ===
+          CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN ||
+          this.props.landing_page_state ===
+            CONSTANTS.LANDING_PAGE_STATES.MOBILE_WATCH_PAGE_OPEN) ? (
           <div id="player-wrapper">
             <ReactPlayer
               id="player"
@@ -30,8 +34,8 @@ class WatchPageDesktop extends React.Component {
               controls={true}
               playIcon={<button></button>}
               onStart={this.handlerVideoLoad}
-              width='100%'
-              height='100%'
+              width="100%"
+              height="100%"
             />
           </div>
         ) : (
