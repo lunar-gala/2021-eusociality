@@ -34,7 +34,9 @@ $SUBTEXT_LETTER_SPACING: -0.07em;
       animation-delay: $ANIMATION_DURATION_SLIDE_IN;
     }
 
-    #countdown, #show-date-text, #show-time-text {
+    #countdown,
+    #show-date-text,
+    #show-time-text {
       opacity: 0;
       animation: blur-in $ANIMATION_DURATION_BLUR forwards;
       animation-delay: $ANIMATION_DURATION_SLIDE_IN*2;
@@ -135,15 +137,16 @@ $SUBTEXT_LETTER_SPACING: -0.07em;
       }
     }
   }
-}
 
-$VIDEO_ASPECT: 1.77;
-$VIDEO_WIDTH: 100vw;
+  $VIDEO_ASPECT: 1.77;
+  $VIDEO_WIDTH: 100vw;
 
-#player-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: $VIDEO_WIDTH;
-  height: $VIDEO_WIDTH/$VIDEO_ASPECT;
+  #player-wrapper {
+    z-index: $Z_INDEX_HEADER;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $VIDEO_WIDTH;
+    height: $VIDEO_WIDTH/$VIDEO_ASPECT;
+  }
 }

@@ -33,7 +33,9 @@ $SUBTEXT_LETTER_SPACING: -0.07em;
       animation-delay: $ANIMATION_DURATION_SLIDE_IN;
     }
 
-    #countdown, #show-date-text, #show-time-text {
+    #countdown,
+    #show-date-text,
+    #show-time-text {
       opacity: 0;
       animation: blur-in $ANIMATION_DURATION_BLUR forwards;
       animation-delay: $ANIMATION_DURATION_SLIDE_IN*2;
@@ -133,17 +135,18 @@ $SUBTEXT_LETTER_SPACING: -0.07em;
       }
     }
   }
-}
 
-$VIDEO_ASPECT: 1.77;
-$VIDEO_WIDTH: 80vw;
+  $VIDEO_ASPECT: 1.77;
+  $VIDEO_WIDTH: 80vw;
 
-#player-wrapper {
-  top: calc(100px + 5vh);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: $VIDEO_WIDTH;
-  height: $VIDEO_WIDTH/$VIDEO_ASPECT;
-  max-height: calc(85vh - 100px);
+  #player-wrapper {
+    z-index: $Z_INDEX_HEADER;
+    top: calc(100px + 5vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $VIDEO_WIDTH;
+    height: $VIDEO_WIDTH/$VIDEO_ASPECT;
+    max-height: calc(85vh - 100px);
+  }
 }

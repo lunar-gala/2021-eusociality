@@ -26,7 +26,7 @@ class WatchPageDesktop extends React.Component {
             <ReactPlayer
               id="player"
               url={CONSTANTS.SHOW_VIDEO_LINK}
-              playing={true}
+              playing={false}
               controls={true}
               playIcon={<button></button>}
               onStart={this.handlerVideoLoad}
