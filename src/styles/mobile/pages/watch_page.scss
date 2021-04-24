@@ -140,6 +140,7 @@ $SUBTEXT_LETTER_SPACING: -0.07em;
   $VIDEO_WIDTH: 100vw;
 
   #player-wrapper {
+    z-index: $Z_INDEX_HEADER;
     display: flex;
     justify-content: center;
     align-items: center;
