@@ -92,6 +92,23 @@ class LinePage extends React.Component {
   render() {
     let line_info = LINE_DATA.LINE_INFO[this.state.selectedLineIdx];
 
+    let top_img_left;
+    let top_img_right;
+    let bot_img_left;
+    let bot_img_right;
+
+    if (line_info.post_show_img.length > 2) {
+      top_img_left = line_info.post_show_img[0][0];
+      top_img_right = line_info.post_show_img[1][0];
+      bot_img_left = line_info.post_show_img[2][0];
+      bot_img_right = line_info.post_show_img[3][0];
+    } else {
+      top_img_left = line_info.img_1;
+      top_img_right = line_info.img_2;
+      bot_img_left = line_info.post_show_img[0][0];
+      bot_img_right = line_info.post_show_img[1][0];
+    }
+
     // TODO: The video player currently has a play button temporarily when it is not loaded
     return (
       <div id="line-page">
@@ -161,18 +178,18 @@ class LinePage extends React.Component {
                   : LINE_DATA.LINE_INFO[0].description}
               </div>
 
-              {line_info.img_1 != null ? (
+              {top_img_left != null ? (
                 <div
                   id="models"
                   className={this.state.animation_blur}
                   key={this.state.selectedLineIdx}
                 >
                   {this.slidingImage(
-                    line_info.img_1 ? line_info.img_1 : MODEL_2,
+                    top_img_left ? top_img_left : MODEL_2,
                     "a"
                   )}
                   {this.slidingImage(
-                    line_info.img_2 ? line_info.img_2 : MODEL_4,
+                    top_img_right ? top_img_right : MODEL_4,
                     "b"
                   )}
                 </div>
@@ -197,8 +214,8 @@ class LinePage extends React.Component {
             className={this.state.animation_blur}
             key={this.state.selectedLineIdx}
           >
-            {this.slidingImage(MODEL_2, "c")}
-            {this.slidingImage(MODEL_4, "d")}
+            {this.slidingImage(bot_img_left, "c")}
+            {this.slidingImage(bot_img_right, "d")}
           </div>
         </div>
         <div id="right-bar-wrapper">
