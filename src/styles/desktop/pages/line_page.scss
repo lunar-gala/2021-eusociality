@@ -75,6 +75,12 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
 #line-page {
   width: 100vw;
 
+  .pictures {
+    .image {
+      transition: background-image 0.5s ease-in-out;
+    }
+  }
+
   .section {
     height: 100vh;
   }
@@ -193,7 +199,6 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
     flex-direction: column;
     align-items: flex-start;
     margin-left: $LEFT_MARGIN;
-    pointer-events: none;
 
     #name {
       // TODO: this is really bad style for font sizes and letter spacing. Not
@@ -275,6 +280,10 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
           height: $PICTURE_HEIGHT;
           margin-left: $PICTURE_LEFT_MARGIN;
 
+          &.clickable {
+            cursor: pointer;
+          }
+
           &#a {
             margin-top: $PICTURE_VERTICAL_OFFSET_A;
 
@@ -348,6 +357,10 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
         justify-items: flex-end;
         align-items: center;
         margin-left: $PICTURE_LEFT_MARGIN;
+
+        &.clickable {
+          cursor: pointer;
+        }
 
         &#c {
           margin-top: $PICTURE_VERTICAL_OFFSET_C;

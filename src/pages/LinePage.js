@@ -36,11 +36,19 @@ class LinePage extends React.Component {
       selectedLineIdx: currLineNumber - 1,
       showBackButton: true,
       curr_video: "hide",
+      /**
+       * Keep track of which photo we are showing for each line photo
+       */
+      a: 0,
+      b: 0,
+      c: 0,
+      d: 0,
     };
 
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
     this.handlerVideoLoad = this.handlerVideoLoad.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+    this.slidingImage = this.slidingImage.bind(this);
 
     // We need to trigger this to tell the App to allow transitions to happen on the main page
     this.props.handlePageLoad();
@@ -68,17 +76,35 @@ class LinePage extends React.Component {
     }
   }
 
-  slidingImage(image, id) {
+  slidingImage(images, id) {
+    let background_image;
+
+    if (images.length > 1) {
+      background_image = images[this.state[id]];
+    } else {
+      background_image = images[0];
+    }
+
     return (
-      <div className="pictures" id={id} key={`${this.state.selectedLineIdx} ${id}`}>
+      <div
+        className={`pictures ${images.length > 1 ? 'clickable': ''}`}
+        id={id}
+        key={`${this.state.selectedLineIdx} ${id}`}
+        onClick={() => {
+          if (this.state[id] == 0) {
+            this.setState({ [id]: 1 });
+          } else {
+            this.setState({ [id]: 0 });
+          }
+        }}
+      >
         <div
           style={{
-            backgroundImage: `url(${image})`,
+            backgroundImage: `url(${background_image})`,
           }}
-          className={`image`}
+          className="image primary"
           id={id}
-        >
-        </div>
+        />
         <div className="image-border" id={id} />
       </div>
     );
@@ -98,15 +124,15 @@ class LinePage extends React.Component {
     let bot_img_right;
 
     if (line_info.post_show_img.length > 2) {
-      top_img_left = line_info.post_show_img[0][0];
-      top_img_right = line_info.post_show_img[1][0];
-      bot_img_left = line_info.post_show_img[2][0];
-      bot_img_right = line_info.post_show_img[3][0];
+      top_img_left = line_info.post_show_img[0];
+      top_img_right = line_info.post_show_img[1];
+      bot_img_left = line_info.post_show_img[2];
+      bot_img_right = line_info.post_show_img[3];
     } else {
-      top_img_left = line_info.img_1;
-      top_img_right = line_info.img_2;
-      bot_img_left = line_info.post_show_img[0][0];
-      bot_img_right = line_info.post_show_img[1][0];
+      top_img_left = [line_info.img_1];
+      top_img_right = [line_info.img_2];
+      bot_img_left = line_info.post_show_img[0];
+      bot_img_right = line_info.post_show_img[1];
     }
 
     // TODO: The video player currently has a play button temporarily when it is not loaded
@@ -219,7 +245,7 @@ class LinePage extends React.Component {
           </div>
         </div>
         <div id="right-bar-wrapper">
-          <div id="right-bar-fill"/>
+          <div id="right-bar-fill" />
           <div
             id="right-bar"
             className={
@@ -251,7 +277,7 @@ class LinePage extends React.Component {
             <div className="line" />
             <div className="dot-basic" />
           </div>
-          <div id="left-bar-fill"/>
+          <div id="left-bar-fill" />
         </div>
         <div id="navbar-wrapper">
           <NavbarLinePage
