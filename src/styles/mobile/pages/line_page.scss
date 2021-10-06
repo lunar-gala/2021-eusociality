@@ -8,8 +8,10 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
 
 $SLIDE_IMG_WIDTH: 41.3vw;
 $SLIDE_IMG_HEIGHT: 61vw;
-$SLIDE_AMOUNT_A: 9.86vw;
-$SLIDE_AMOUNT_B: -14.38vw;
+$SLIDE_AMOUNT_A: 24px;
+$SLIDE_AMOUNT_B: -24px;
+$SLIDE_AMOUNT_C: 24px;
+$SLIDE_AMOUNT_D: -24px;
 
 // Animations
 @keyframes slide-image-a {
@@ -32,9 +34,35 @@ $SLIDE_AMOUNT_B: -14.38vw;
   }
 }
 
+@keyframes slide-image-c {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY($SLIDE_AMOUNT_C);
+  }
+}
+
+@keyframes slide-image-d {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY($SLIDE_AMOUNT_D);
+  }
+}
+
 #line-page {
   width: 100vw;
   overflow-x: hidden;
+
+  .pictures {
+    .image {
+      transition: background-image 0.5s ease-in-out;
+    }
+  }
 
   // Desktop elements that should be none
   #left-bar {
@@ -239,7 +267,7 @@ $SLIDE_AMOUNT_B: -14.38vw;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      margin-top: 24px;
+      margin-top: 60px;
 
       .pictures {
         height: 30vh;
@@ -257,6 +285,20 @@ $SLIDE_AMOUNT_B: -14.38vw;
           width: calc(40vw - 1.5px);
           height: calc(30vh - 1.5px);
           position: absolute;
+        }
+
+        &#a {
+          .image {
+            animation: slide-image-a 500ms forwards;
+            animation-delay: 1s;
+          }
+        }
+
+        &#b {
+          .image {
+            animation: slide-image-b 500ms forwards;
+            animation-delay: 1s;
+          }
         }
       }
     }
@@ -291,8 +333,20 @@ $SLIDE_AMOUNT_B: -14.38vw;
           position: absolute;
         }
 
+        &#c {
+          .image {
+            animation: slide-image-c 500ms forwards;
+            animation-delay: 1s;
+          }
+        }
+
         &#d {
-          margin-top: 24px;
+          margin-top: 96px;
+
+          .image {
+            animation: slide-image-d 500ms forwards;
+            animation-delay: 1s;
+          }
         }
       }
     }
@@ -323,6 +377,7 @@ $SLIDE_AMOUNT_B: -14.38vw;
   }
 
   #video-content {
+    margin-top: 48px;
     width: 100vw;
 
     #player-line {
