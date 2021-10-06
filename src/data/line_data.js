@@ -3,6 +3,8 @@
  */
 
 export const GITHUB_BASE_URL = 'https://github.com/lunar-gala/2021-eusociality-videos/raw/master/';
+
+/*** PRE SHOW PHOTOS ***/
 import GOSSAMERIDLE_1 from "../../assets/img/lines/GossamerIdle_1.jpg";
 import GOSSAMERIDLE_2 from "../../assets/img/lines/GossamerIdle_2.jpg";
 import NEXUS_1 from "../../assets/img/lines/Nexus_1.jpg";
@@ -36,6 +38,16 @@ import ICARUS_2 from "../../assets/img/lines/Icarus_2.jpg";
 // import ALUM_1 from "../../assets/img/lines/Alum_1.jpg";
 // import ALUM_2 from "../../assets/img/lines/Alum_2.jpg";
 
+/*** POST SHOW PHOTOS ***/
+import GOSSAMERIDLE_POST_11 from "../../assets/img/line_shoots/gossamer_idle/blue flowers (1).png";
+import GOSSAMERIDLE_POST_21 from "../../assets/img/line_shoots/gossamer_idle/blue flowers (2).jpg";
+import GOSSAMERIDLE_POST_12 from "../../assets/img/line_shoots/gossamer_idle/blue flowers (3).jpg";
+import GOSSAMERIDLE_POST_22 from "../../assets/img/line_shoots/gossamer_idle/blue flowers (4).jpg";
+import GOSSAMERIDLE_POST_31 from "../../assets/img/line_shoots/gossamer_idle/green dress (1).jpg";
+import GOSSAMERIDLE_POST_32 from "../../assets/img/line_shoots/gossamer_idle/green dress (6).jpg";
+import GOSSAMERIDLE_POST_41 from "../../assets/img/line_shoots/gossamer_idle/green dress (4).jpg";
+import GOSSAMERIDLE_POST_42 from "../../assets/img/line_shoots/gossamer_idle/green dress (5).jpg";
+
 /** @brief Line names in order, with their respective designers */
 export const LINE_INFO = [
   {
@@ -48,6 +60,24 @@ export const LINE_INFO = [
     description: 'Gossamer Idle is a combination between the grandeur of the Renaissance and modern day elegance. This idea stems from our luna moth motif — representing the renewal of body and spirit regeneration and ties in to our intent to create a new version of an old trend. With flowy and translucent material paired with harsher metals and leather, we create a sense of duality between femininity and masculinity in each look. Instead of following the distinct binary roles from old Europe, we believe that fashion is not a performance but performative, and we can use fashion to undermine gender stereotypes.',
     img_1: GOSSAMERIDLE_1,
     img_2: GOSSAMERIDLE_2,
+    post_show_img: [
+      [
+        GOSSAMERIDLE_POST_11,
+        GOSSAMERIDLE_POST_12,
+      ],
+      [
+        GOSSAMERIDLE_POST_21,
+        GOSSAMERIDLE_POST_22,
+      ],
+      [
+        GOSSAMERIDLE_POST_31,
+        GOSSAMERIDLE_POST_32,
+      ],
+      [
+        GOSSAMERIDLE_POST_41,
+        GOSSAMERIDLE_POST_42,
+      ]
+    ]
   },
   {
     name: 'Nexus',
