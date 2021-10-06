@@ -8,14 +8,18 @@ $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
 
 $SLIDE_IMG_WIDTH: 41.3vw;
 $SLIDE_IMG_HEIGHT: 61vw;
-$SLIDE_AMOUNT_A: 9.86vw;
-$SLIDE_AMOUNT_B: -14.38vw;
+$SLIDE_AMOUNT_A: 24px;
+$SLIDE_AMOUNT_B: -24px;
+$SLIDE_AMOUNT_C: 24px;
+$SLIDE_AMOUNT_D: -24px;
 
 // Animations
 @keyframes slide-image-a {
   from {
     transform: translateY(0);
-  } to {
+  }
+
+  to {
     transform: translateY($SLIDE_AMOUNT_A);
   }
 }
@@ -23,14 +27,51 @@ $SLIDE_AMOUNT_B: -14.38vw;
 @keyframes slide-image-b {
   from {
     transform: translateY(0);
-  } to {
+  }
+
+  to {
     transform: translateY($SLIDE_AMOUNT_B);
+  }
+}
+
+@keyframes slide-image-c {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY($SLIDE_AMOUNT_C);
+  }
+}
+
+@keyframes slide-image-d {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY($SLIDE_AMOUNT_D);
   }
 }
 
 #line-page {
   width: 100vw;
   overflow-x: hidden;
+
+  .pictures {
+    .image {
+      transition: background-image 0.5s ease-in-out;
+    }
+  }
+
+  // Desktop elements that should be none
+  #left-bar {
+    display: none;
+  }
+
+  #right-bar {
+    display: none;
+  }
 
   #background {
     display: flex;
@@ -49,9 +90,11 @@ $SLIDE_AMOUNT_B: -14.38vw;
       overflow: hidden;
 
       transition-duration: 1s;
+
       &.hide {
         opacity: 0;
       }
+
       &.show {
         opacity: 0.5;
       }
@@ -62,9 +105,11 @@ $SLIDE_AMOUNT_B: -14.38vw;
       align-items: center;
       justify-content: center;
       height: 100% !important;
-      width: 177.77777778vh !important; /* 100 * 16 / 9 */
+      width: 177.77777778vh !important;
+      /* 100 * 16 / 9 */
       min-width: 100% !important;
-      min-height: 56.25vw !important; /* 100 * 9 / 16 */
+      min-height: 56.25vw !important;
+      /* 100 * 9 / 16 */
       margin-left: -50vw; // For some reason mobile videos iframe displays weird
     }
 
@@ -73,10 +118,6 @@ $SLIDE_AMOUNT_B: -14.38vw;
       opacity: 0.9;
       height: 100%;
       width: 100%;
-    }
-
-    #second {
-      display: none;
     }
   }
 
@@ -92,6 +133,7 @@ $SLIDE_AMOUNT_B: -14.38vw;
       display: flex;
       flex-direction: row;
       align-items: center;
+
       span {
         font-family: $FONT_DISPLAY;
         font-size: $FONT_SIZE_TITLE;
@@ -113,7 +155,7 @@ $SLIDE_AMOUNT_B: -14.38vw;
     }
   }
 
-  .main-content {
+  #main-content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -144,10 +186,6 @@ $SLIDE_AMOUNT_B: -14.38vw;
         letter-spacing: -0.05em;
         text-transform: uppercase;
       }
-
-      #right-bar {
-        display: none;
-      }
     }
 
     #pictures-top {
@@ -161,12 +199,12 @@ $SLIDE_AMOUNT_B: -14.38vw;
         width: $SLIDE_IMG_WIDTH;
         height: $SLIDE_IMG_HEIGHT;
 
-        &#c{
-          display: none;
+        &#c {
+          height: 50vh;
         }
 
-        &#d{
-          display: none;
+        &#d {
+          height: 50vh;
         }
 
         .frame {
@@ -187,11 +225,11 @@ $SLIDE_AMOUNT_B: -14.38vw;
           animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
           animation-fill-mode: forwards;
 
-          &#a{
+          &#a {
             animation-name: slide-image-a;
           }
 
-          &#b{
+          &#b {
             animation-name: slide-image-b;
           }
         }
@@ -204,10 +242,6 @@ $SLIDE_AMOUNT_B: -14.38vw;
       font-family: $FONT_BODY;
       font-weight: $FONT_WEIGHT_LIGHT;
       font-size: $FONT_SIZE_BODY;
-    }
-
-    #left-bar {
-      display: none;
     }
 
     #pictures-bottom {
@@ -224,6 +258,96 @@ $SLIDE_AMOUNT_B: -14.38vw;
       #left {
         margin-right: 3.61vw;
         object-fit: cover;
+      }
+    }
+  }
+
+  #main-content {
+    #models {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 60px;
+
+      .pictures {
+        height: 30vh;
+        width: 40vw;
+
+        .image {
+          height: 30vh;
+          width: 40vw;
+          background-size: cover;
+          position: absolute;
+        }
+
+        .image-border {
+          border: 1px solid white;
+          width: calc(40vw - 1.5px);
+          height: calc(30vh - 1.5px);
+          position: absolute;
+        }
+
+        &#a {
+          .image {
+            animation: slide-image-a 500ms forwards;
+            animation-delay: 1s;
+          }
+        }
+
+        &#b {
+          .image {
+            animation: slide-image-b 500ms forwards;
+            animation-delay: 1s;
+          }
+        }
+      }
+    }
+  }
+
+  #middle-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 48px;
+
+    #models {
+      height: 110vh;
+      display: flex;
+      flex-direction: column;
+
+      .pictures {
+        height: 50vh;
+        width: 90vw;
+
+        .image {
+          height: 50vh;
+          width: 90vw;
+          background-size: cover;
+          position: absolute;
+        }
+
+        .image-border {
+          border: 1px solid white;
+          width: calc(90vw - 1.5px);
+          height: calc(50vh - 1.5px);
+          position: absolute;
+        }
+
+        &#c {
+          .image {
+            animation: slide-image-c 500ms forwards;
+            animation-delay: 1s;
+          }
+        }
+
+        &#d {
+          margin-top: 96px;
+
+          .image {
+            animation: slide-image-d 500ms forwards;
+            animation-delay: 1s;
+          }
+        }
       }
     }
   }
@@ -249,6 +373,15 @@ $SLIDE_AMOUNT_B: -14.38vw;
       &.show {
         opacity: 1;
       }
+    }
+  }
+
+  #video-content {
+    margin-top: 48px;
+    width: 100vw;
+
+    #player-line {
+      height: 30vh !important;
     }
   }
 }

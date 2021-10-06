@@ -1,7 +1,7 @@
 {
   "name": "2021-eusociality",
   "version": "1.0.0",
-  "description": "Theme site for LG 2021",
+  "description": "Theme site for Lunar Gala 2021: Eusociality",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
@@ -29,7 +29,7 @@
     "type": "git",
     "url": "git+https://github.com/lunar-gala/2021-eusociality.git"
   },
-  "author": "",
+  "author": "lunargala",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/lunar-gala/2021-eusociality/issues"

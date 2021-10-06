@@ -5,27 +5,64 @@
 $LEFT_MARGIN: 20vw;
 $TITLE_MARGIN_TOP: 15vh;
 
-$SLIDE_AMOUNT_IMAGE: 40px;
+$SLIDE_AMOUNT_IMAGE_A: 30px;
+$SLIDE_AMOUNT_IMAGE_B: -30px;
+$SLIDE_AMOUNT_IMAGE_C: 30px;
+$SLIDE_AMOUNT_IMAGE_D: -30px;
 $BACK_BUTTON_SIZE: 24px;
 $BACK_BUTTON_STROKE_WIDTH: 3px;
 $LOGO_SIZE: $FONT_SIZE_TITLE - 8px;
 
 $PICTURE_WIDTH: 16vw;
-$PICTURE_HEIGHT: 35vh;
+$PICTURE_WIDTH_C: 43vw;
+$PICTURE_WIDTH_D: 35vw;
+$PICTURE_HEIGHT: 40vh;
+$PICTURE_HEIGHT_C: 72vh;
+$PICTURE_HEIGHT_D: 72vh;
 $PICTURE_LEFT_MARGIN: 3vw;
-$PICTURE_FRAME_MARGIN_TOP: -48px;
-$PICTURE_VERTICAL_FRAME_OFFSET: 30px;
-$PICTURE_VERTICAL_OFFSET_A: -55px;
-$PICTURE_VERTICAL_OFFSET_B: 60px;
+$PICTURE_VERTICAL_OFFSET_A: 5vh;
+$PICTURE_VERTICAL_OFFSET_B: calc(#{$PICTURE_VERTICAL_OFFSET_A} + 60px);
+$PICTURE_VERTICAL_OFFSET_C: -30px;
+$PICTURE_VERTICAL_OFFSET_D: 30px;
 
 // Animations
-@keyframes slide-image {
+@keyframes slide-image-a {
   from {
     transform: translateY(0);
   }
 
   to {
-    transform: translateY($SLIDE_AMOUNT_IMAGE);
+    transform: translateY($SLIDE_AMOUNT_IMAGE_A);
+  }
+}
+
+@keyframes slide-image-b {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY($SLIDE_AMOUNT_IMAGE_B);
+  }
+}
+
+@keyframes slide-image-c {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY($SLIDE_AMOUNT_IMAGE_C);
+  }
+}
+
+@keyframes slide-image-d {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY($SLIDE_AMOUNT_IMAGE_D);
   }
 }
 
@@ -37,7 +74,16 @@ $PICTURE_VERTICAL_OFFSET_B: 60px;
 
 #line-page {
   width: 100vw;
-  height: 100vh;
+
+  .pictures {
+    .image {
+      transition: background-image 0.5s ease-in-out;
+    }
+  }
+
+  .section {
+    height: 100vh;
+  }
 
   #background {
     display: flex;
@@ -51,13 +97,15 @@ $PICTURE_VERTICAL_OFFSET_B: 60px;
     height: 100%;
 
     #player-wrapper {
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
 
       transition-duration: 500ms;
+
       &.hide {
         opacity: 0;
       }
+
       &.show {
         transition-delay: 1s;
         opacity: 0.5;
@@ -69,9 +117,11 @@ $PICTURE_VERTICAL_OFFSET_B: 60px;
       align-items: center;
       justify-content: center;
       height: 100% !important;
-      width: 177.77777778vh !important; /* 100 * 16 / 9 */
+      width: 177.77777778vh !important;
+      /* 100 * 16 / 9 */
       min-width: 100% !important;
-      min-height: 56.25vw !important; /* 100 * 9 / 16 */
+      min-height: 56.25vw !important;
+      /* 100 * 9 / 16 */
     }
   }
 
@@ -122,6 +172,7 @@ $PICTURE_VERTICAL_OFFSET_B: 60px;
       display: flex;
       flex-direction: row;
       align-items: center;
+
       span {
         font-family: $FONT_DISPLAY;
         font-size: $FONT_SIZE_TITLE;
@@ -143,12 +194,11 @@ $PICTURE_VERTICAL_OFFSET_B: 60px;
     }
   }
 
-  .main-content {
+  #main-content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-left: $LEFT_MARGIN;
-    pointer-events: none;
 
     #name {
       // TODO: this is really bad style for font sizes and letter spacing. Not
@@ -217,7 +267,6 @@ $PICTURE_VERTICAL_OFFSET_B: 60px;
         flex-direction: row;
         justify-content: flex-end;
         justify-items: flex-end;
-        align-items: center;
         position: absolute;
         right: 0;
 
@@ -231,28 +280,39 @@ $PICTURE_VERTICAL_OFFSET_B: 60px;
           height: $PICTURE_HEIGHT;
           margin-left: $PICTURE_LEFT_MARGIN;
 
+          &.clickable {
+            cursor: pointer;
+          }
+
           &#a {
-            margin-top: $PICTURE_FRAME_MARGIN_TOP - $PICTURE_VERTICAL_OFFSET_A;
+            margin-top: $PICTURE_VERTICAL_OFFSET_A;
+
+            .image {
+              animation: slide-image-a 500ms forwards;
+              animation-delay: 1s;
+            }
           }
 
           &#b {
-            margin-top: $PICTURE_FRAME_MARGIN_TOP - $PICTURE_VERTICAL_OFFSET_B;
+            margin-top: $PICTURE_VERTICAL_OFFSET_B;
+
+            .image {
+              animation: slide-image-b 500ms forwards;
+              animation-delay: 1s;
+            }
           }
 
           .image {
             width: $PICTURE_WIDTH;
             height: $PICTURE_HEIGHT;
             background-size: cover;
-            margin-top: - 2*$SLIDE_AMOUNT_IMAGE;
-            animation: slide-image 500ms forwards;
-            animation-delay: 1s;
           }
 
           .image-border {
             border: 1px solid white;
             width: calc(#{$PICTURE_WIDTH} - 1.5px);
             height: $PICTURE_HEIGHT;
-            margin-top: $PICTURE_VERTICAL_FRAME_OFFSET;
+            position: absolute;
           }
         }
       }
@@ -279,6 +339,135 @@ $PICTURE_VERTICAL_OFFSET_B: 60px;
         height: 1px;
       }
     }
+  }
 
+  #middle-content {
+    #models {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      justify-items: flex-end;
+      position: absolute;
+      right: 0;
+
+      .pictures {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        justify-items: flex-end;
+        align-items: center;
+        margin-left: $PICTURE_LEFT_MARGIN;
+
+        &.clickable {
+          cursor: pointer;
+        }
+
+        &#c {
+          margin-top: $PICTURE_VERTICAL_OFFSET_C;
+          width: $PICTURE_WIDTH_C;
+          height: $PICTURE_HEIGHT_C;
+
+          .image {
+            width: $PICTURE_WIDTH_C;
+            height: $PICTURE_HEIGHT_C;
+            animation: slide-image-c 500ms forwards;
+            animation-delay: 1s;
+          }
+
+          .image-border {
+            width: calc(#{$PICTURE_WIDTH_C} - 1.5px);
+            height: $PICTURE_HEIGHT_C;
+          }
+        }
+
+        &#d {
+          margin-top: $PICTURE_VERTICAL_OFFSET_D;
+          width: $PICTURE_WIDTH_D;
+          height: $PICTURE_HEIGHT_D;
+
+          .image {
+            width: $PICTURE_WIDTH_D;
+            height: $PICTURE_HEIGHT_D;
+            animation: slide-image-d 500ms forwards;
+            animation-delay: 1s;
+          }
+
+          .image-border {
+            width: calc(#{$PICTURE_WIDTH_D} - 1.5px);
+            height: $PICTURE_HEIGHT_D;
+          }
+        }
+
+        .image {
+          width: $PICTURE_WIDTH;
+          height: $PICTURE_HEIGHT;
+          background-size: cover;
+        }
+
+        .image-border {
+          border: 1px solid white;
+          position: absolute;
+        }
+      }
+    }
+  }
+
+  #right-bar-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    #right-bar-fill {
+      width: 45vw;
+    }
+
+    #right-bar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-grow: 1;
+      margin-left: 12px;
+      margin-bottom: 4px;
+
+      .line {
+        flex-grow: 1;
+        background-color: white;
+        height: 1px;
+      }
+    }
+  }
+
+  #video-content {
+    margin-top: 42px;
+    margin-bottom: 42px;
+  }
+
+  #left-bar-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    #left-bar-fill {
+      width: 45vw;
+    }
+
+    #left-bar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-grow: 1;
+      margin-right: 12px;
+      margin-bottom: 4px;
+
+      .line {
+        flex-grow: 1;
+        background-color: white;
+        height: 1px;
+      }
+    }
+  }
+
+  #navbar-wrapper {
+    margin-top: 147px;
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
   }
 }
