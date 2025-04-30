@@ -14,7 +14,7 @@ class Logo extends React.Component {
       <a
         target="_blank"
         rel="noreferrer"
-        href="https://lunargala.org/"
+        href="https://www.lunargala.org/"
         className={`logo ${this.props.landing_page_state} ${this.props.landing_page_animations_header}`}
       >
         <LG_LOGO />
