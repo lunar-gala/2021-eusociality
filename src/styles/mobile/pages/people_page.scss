@@ -160,6 +160,9 @@ $HEADSHOT_WIDTH: (100vw - 3*$SIDE_MARGIN)/2;
     }
 
     .tab-header {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
       font-family: $FONT_DISPLAY;
       font-weight: $FONT_SPRAT_WEIGHT;
       padding: 0;
