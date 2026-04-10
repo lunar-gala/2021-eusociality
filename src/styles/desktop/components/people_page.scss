@@ -161,15 +161,13 @@
     }
 
     .tab-header {
-      // MUI's AccordionSummary provided an internal flex container —
-      // replicate that so .display_circle and .display_line lay out in a row.
       display: flex;
       align-items: center;
+      width: 100%;
       cursor: pointer;
       font-family: $FONT_DISPLAY;
       font-weight: $FONT_SPRAT_WEIGHT;
       padding: 0;
-      flex: 1;
       box-shadow: none;
       border: none;
 
