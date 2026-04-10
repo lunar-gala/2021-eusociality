@@ -178,16 +178,20 @@ class LinePage extends React.Component {
       <div id="line-page">
         <div id="background">
           <div id="player-wrapper" className={`${this.state.curr_video}`}>
-            <ReactPlayer
+            {/*
+              Use a direct Streamable embed iframe instead of ReactPlayer.
+              ReactPlayer's Streamable handler doesn't pass autoplay/muted
+              params to the iframe URL, so the video never autoplays.
+              The embed URL format ?autoplay=1&muted=1 works reliably.
+            */}
+            <iframe
               id="player"
-              url={line_info.video_ready}
-              playing={true}
-              volume={0}
-              muted={true}
-              loop={true}
-              controls={false}
-              playIcon={<button></button>}
-              onReady={this.handlerVideoLoad}
+              src={`https://streamable.com/e/${line_info.video_ready.split('/').pop()}?autoplay=1&muted=1&loop=1&nocontrols=1`}
+              frameBorder="0"
+              allow="autoplay; fullscreen"
+              allowFullScreen
+              title="Background video"
+              onLoad={this.handlerVideoLoad}
             />
           </div>
         </div>

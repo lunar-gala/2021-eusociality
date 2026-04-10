@@ -99,6 +99,9 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
     #player-wrapper {
       width: 100vw;
       height: 100vh;
+      overflow: hidden;
+      // Prevent interaction with Streamable's embedded controls.
+      pointer-events: none;
 
       transition-duration: 500ms;
 
@@ -116,12 +119,14 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100% !important;
+      // Scale slightly to push Streamable's control bar off the bottom edge.
+      height: 110% !important;
       width: 177.77777778vh !important;
       /* 100 * 16 / 9 */
       min-width: 100% !important;
       min-height: 56.25vw !important;
       /* 100 * 9 / 16 */
+      margin-top: -5%;
     }
   }
 

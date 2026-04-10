@@ -88,6 +88,7 @@ $SLIDE_AMOUNT_D: -24px;
       width: 100%;
       height: 100%;
       overflow: hidden;
+      pointer-events: none;
 
       transition-duration: 1s;
 
@@ -104,13 +105,14 @@ $SLIDE_AMOUNT_D: -24px;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100% !important;
+      height: 110% !important;
       width: 177.77777778vh !important;
       /* 100 * 16 / 9 */
       min-width: 100% !important;
       min-height: 56.25vw !important;
       /* 100 * 9 / 16 */
-      margin-left: -50vw; // For some reason mobile videos iframe displays weird
+      margin-left: -50vw;
+      margin-top: -5%;
     }
 
     // TODO: did we want to do a gradual opacity fade for the background?
