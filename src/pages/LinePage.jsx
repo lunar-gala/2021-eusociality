@@ -58,10 +58,20 @@ class LinePage extends React.Component {
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
+
+    // Fallback: if the ReactPlayer onReady callback never fires (common
+    // with Streamable embeds in react-player 2.16+), fade in the
+    // background video after a few seconds anyway.
+    this._videoFallbackTimer = setTimeout(() => {
+      if (this.state.curr_video === "hide") {
+        this.handlerVideoLoad();
+      }
+    }, 3000);
   }
 
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
+    clearTimeout(this._videoFallbackTimer);
   }
 
   handleScroll() {
