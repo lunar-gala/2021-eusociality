@@ -40,15 +40,21 @@ class App extends React.Component {
     return (
       <Router>
         <ScrollToTop />
-        <Route
-          render={({ location }) => (
-            <TransitionGroup id="transition-group">
-              <CSSTransition
-                timeout={1000}
-                classNames="fade"
-                key={location.pathname.includes("lines/")}
-              >
-                <Suspense fallback={<div id="app-loading" />}>
+        {/*
+          Suspense wraps the TransitionGroup (not the other way around): if a
+          lazy chunk suspends inside a CSSTransition, the transition gets a
+          promise-throwing child and the whole subtree can end up stuck in a
+          half-rendered state on a direct-URL load like /#/lines/7.
+        */}
+        <Suspense fallback={<div id="app-loading" />}>
+          <Route
+            render={({ location }) => (
+              <TransitionGroup id="transition-group">
+                <CSSTransition
+                  timeout={1000}
+                  classNames="fade"
+                  key={location.pathname.includes("lines/")}
+                >
                   <Switch location={location}>
                     <Route
                       exact
@@ -71,11 +77,11 @@ class App extends React.Component {
                       )}
                     />
                   </Switch>
-                </Suspense>
-              </CSSTransition>
-            </TransitionGroup>
-          )}
-        />
+                </CSSTransition>
+              </TransitionGroup>
+            )}
+          />
+        </Suspense>
       </Router>
     );
   }

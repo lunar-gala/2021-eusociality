@@ -191,6 +191,21 @@ if (clickEnter) {
   await new Promise((r) => setTimeout(r, postClickWaitMs));
 }
 
+// Optional hash-route follow-up: navigate to an in-app route without a full
+// reload (e.g. to verify `/#/lines/7` works after the landing page has
+// booted). Simulates the user clicking a Link rather than hard-loading.
+if (process.argv.includes("--then-goto")) {
+  const gotoIdx = process.argv.indexOf("--then-goto");
+  const hash = process.argv[gotoIdx + 1];
+  console.log(`→ Follow-up navigation to ${hash}`);
+  await rpc(
+    "Runtime.evaluate",
+    { expression: `location.hash = ${JSON.stringify(hash)}` },
+    sessionId
+  );
+  await new Promise((r) => setTimeout(r, 4000));
+}
+
 // ---- DOM snapshot ---------------------------------------------------------
 const snap = await rpc(
   "Runtime.evaluate",
