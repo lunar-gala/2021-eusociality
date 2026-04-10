@@ -36,7 +36,57 @@
   </head>
   <body style="margin:0;background:#000;color:#fff">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+      <!--
+        Pre-React loading indicator. Renders instantly from raw HTML before
+        any JS bundle arrives. React's createRoot().render() replaces the
+        innerHTML of #root, so this disappears automatically — no cleanup.
+      -->
+      <style>
+        @keyframes pre-pulse {
+          0%, 100% { opacity: 0.25; }
+          50% { opacity: 1; }
+        }
+        @keyframes pre-grow {
+          from { width: 0; }
+          to { width: 100%; }
+        }
+        #pre-loader {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          width: 100vw;
+          font-family: 'Sprat Type Condensed', Georgia, serif;
+          color: #fff;
+          user-select: none;
+        }
+        #pre-loader .pre-title {
+          font-size: clamp(32px, 10vw, 120px);
+          font-weight: 100;
+          letter-spacing: -0.12em;
+          animation: pre-pulse 2.5s ease-in-out infinite;
+        }
+        #pre-loader .pre-bar {
+          margin-top: 24px;
+          width: min(200px, 40vw);
+          height: 1px;
+          background: rgba(255,255,255,0.15);
+          border-radius: 1px;
+          overflow: hidden;
+        }
+        #pre-loader .pre-bar-fill {
+          height: 100%;
+          background: #fff;
+          animation: pre-grow 3s ease-in-out infinite;
+        }
+      </style>
+      <div id="pre-loader">
+        <div class="pre-title">COLLECTIVA</div>
+        <div class="pre-bar"><div class="pre-bar-fill"></div></div>
+      </div>
+    </div>
     <script type="module" src="/src/index.jsx"></script>
   </body>
 </html>
