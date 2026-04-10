@@ -746,6 +746,17 @@ class LandingPage extends React.Component {
     // If we already have loaded, just trigger the startup sequence
     if (this.props.page_has_loaded) {
       this.startupWrapper();
+    } else if (document.readyState === "complete") {
+      // With Vite's ESM module loading, React mounts *after* the browser's
+      // `load` / `pageshow` events have already fired, so the pageshow
+      // listener above would never catch the initial fire and the intro
+      // animation would never trigger (leaving the page visually blank).
+      // Kick off the startup sequence ourselves in that case.
+      this.pageShow();
+    } else {
+      // The document is still loading — fall back to a one-shot `load`
+      // listener so we fire exactly once whether or not `pageshow` is late.
+      window.addEventListener("load", this.pageShow, { once: true });
     }
 
     this.props.history.listen((loc, action) => {
@@ -1001,10 +1012,13 @@ class LandingPage extends React.Component {
           );
         });
 
-        // rotate the cube while the animation is playing
-        let cube_rotation_animation = new TWEEN.Tween(
-          this.state.object.rotation
-        )
+        // rotate the cube while the animation is playing.
+        // We read `object.scene.rotation` directly here rather than
+        // `this.state.object.rotation`: in React 18 the `setState({ object:
+        // object.scene })` above is batched, so `this.state.object` is still
+        // `null` when this runs — and reading `.rotation` off null is what
+        // broke the whole intro animation after the React 18 upgrade.
+        let cube_rotation_animation = new TWEEN.Tween(object.scene.rotation)
           .to(
             {
               x: 0,

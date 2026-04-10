@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
     react(),
     // Lets `import Foo from './foo.svg?react'` give you a React component.
@@ -27,7 +27,6 @@ export default defineConfig({
   build: {
     outDir: "build",
     sourcemap: true,
-    // Drop console.* and debugger from production bundles.
     minify: "esbuild",
     target: "es2018",
     rollupOptions: {
@@ -42,7 +41,10 @@ export default defineConfig({
     },
   },
   esbuild: {
-    drop: ["console", "debugger"],
+    // Only drop console.* / debugger in production builds. During `vite dev`
+    // we want those logs around for debugging — silencing them in dev
+    // previously masked a gltf-loading race condition on the landing page.
+    drop: command === "build" ? ["console", "debugger"] : [],
   },
   // The legacy Sass JS API is louder than useful here — the project still
   // relies on `@import` and slash-division, which are deprecated but not yet
@@ -65,4 +67,4 @@ export default defineConfig({
     setupFiles: ["./src/test/setup.js"],
     css: false,
   },
-});
+}));
