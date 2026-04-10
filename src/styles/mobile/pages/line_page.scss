@@ -105,16 +105,16 @@ $SLIDE_AMOUNT_D: -24px;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      // Stretch beyond the container to push Streamable controls below
-      // the overflow:hidden edge, but keep top flush (no black sliver).
-      height: 115% !important;
+      // Oversized to crop Streamable's title bar (top) and control bar
+      // (bottom) via the parent's overflow:hidden.
+      height: 130% !important;
       width: 177.77777778vh !important;
       /* 100 * 16 / 9 */
       min-width: 100% !important;
       min-height: 56.25vw !important;
       /* 100 * 9 / 16 */
       margin-left: -50vw;
-      margin-top: 0;
+      margin-top: -15%;
     }
 
     // TODO: did we want to do a gradual opacity fade for the background?

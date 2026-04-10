@@ -121,14 +121,15 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      // Scale slightly to push Streamable's control bar off the bottom edge.
-      height: 110% !important;
+      // Oversized to crop Streamable's title bar (top) and control bar
+      // (bottom) via the parent's overflow:hidden.
+      height: 130% !important;
       width: 177.77777778vh !important;
       /* 100 * 16 / 9 */
       min-width: 100% !important;
       min-height: 56.25vw !important;
       /* 100 * 9 / 16 */
-      margin-top: -5%;
+      margin-top: -15%;
     }
   }
 
