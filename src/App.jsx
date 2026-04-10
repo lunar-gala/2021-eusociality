@@ -1,14 +1,17 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./lib/ScrollToTop";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-// Code-split the landing and line pages. The landing page pulls in three.js,
-// GLTF loaders, and all the line imagery; the line page is only reached via
-// a route hit. Splitting lets the initial paint skip anything the user isn't
-// actively viewing. See the perf notes in vite.config.js.
-const LandingPage = lazy(() => import("./pages/LandingPage"));
-const LinePage = lazy(() => import("./pages/LinePage"));
+// Static imports — not lazy-loaded.
+// We originally used React.lazy here, but CSSTransition + Suspense are
+// fundamentally incompatible: the transition enters on Suspense's blank
+// fallback <div> instead of the real component, so clicking "See More"
+// on the landing page or navigating to /#/lines/N would show a black
+// screen. Both chunks are small enough (~7 kB LinePage, ~126 kB
+// LandingPage gzipped) that the code-split complexity wasn't worth it.
+import LandingPage from "./pages/LandingPage";
+import LinePage from "./pages/LinePage";
 
 /**
  * This is the highest level of the web app.
@@ -40,48 +43,40 @@ class App extends React.Component {
     return (
       <Router>
         <ScrollToTop />
-        {/*
-          Suspense wraps the TransitionGroup (not the other way around): if a
-          lazy chunk suspends inside a CSSTransition, the transition gets a
-          promise-throwing child and the whole subtree can end up stuck in a
-          half-rendered state on a direct-URL load like /#/lines/7.
-        */}
-        <Suspense fallback={<div id="app-loading" />}>
-          <Route
-            render={({ location }) => (
-              <TransitionGroup id="transition-group">
-                <CSSTransition
-                  timeout={1000}
-                  classNames="fade"
-                  key={location.pathname.includes("lines/")}
-                >
-                  <Switch location={location}>
-                    <Route
-                      exact
-                      path="/lines/([1-9]|10|11|12|13|14|15|16)"
-                      render={(props) => (
-                        <LinePage
-                          {...props}
-                          handlePageLoad={this.handlePageLoad}
-                        />
-                      )}
-                    />
-                    <Route
-                      path="/"
-                      render={(props) => (
-                        <LandingPage
-                          {...props}
-                          handlePageLoad={this.handlePageLoad}
-                          page_has_loaded={this.state.page_has_loaded}
-                        />
-                      )}
-                    />
-                  </Switch>
-                </CSSTransition>
-              </TransitionGroup>
-            )}
-          />
-        </Suspense>
+        <Route
+          render={({ location }) => (
+            <TransitionGroup id="transition-group">
+              <CSSTransition
+                timeout={1000}
+                classNames="fade"
+                key={location.pathname.includes("lines/")}
+              >
+                <Switch location={location}>
+                  <Route
+                    exact
+                    path="/lines/([1-9]|10|11|12|13|14|15|16)"
+                    render={(props) => (
+                      <LinePage
+                        {...props}
+                        handlePageLoad={this.handlePageLoad}
+                      />
+                    )}
+                  />
+                  <Route
+                    path="/"
+                    render={(props) => (
+                      <LandingPage
+                        {...props}
+                        handlePageLoad={this.handlePageLoad}
+                        page_has_loaded={this.state.page_has_loaded}
+                      />
+                    )}
+                  />
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
+          )}
+        />
       </Router>
     );
   }
