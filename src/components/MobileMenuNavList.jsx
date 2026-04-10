@@ -6,6 +6,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link, withRouter} from "react-router-dom";
 import * as CONSTANTS from '../constants';
+import { is_modified_click } from '../util';
 
 class MobileMenuNavList extends React.Component {
   constructor(props) {
@@ -18,6 +19,11 @@ class MobileMenuNavList extends React.Component {
   }
 
   handleClick (e, index, nav_link_info) {
+    // Let cmd/ctrl/shift-click fall through to the browser default so a new
+    // tab opens without our custom navigation running in the current tab.
+    // See issue #41.
+    if (is_modified_click(e)) return;
+
     e.preventDefault();
 
     this.setState({

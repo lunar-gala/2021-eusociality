@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as LINE_DATA from "../data/line_data";
 import * as UTIL from "../util";
-import NavBall from "../../assets/img/navBall.svg";
+import NavBall from "../../assets/img/navBall.svg?react";
 
 /**
  * Navbar for selecting lines

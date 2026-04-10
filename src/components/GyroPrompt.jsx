@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import RotateIcon from "../../assets/img/rotate_icon_svg.svg";
+import RotateIcon from "../../assets/img/rotate_icon_svg.svg?react";
 
 /**
  * Prompt that pops up when you enable gyroscope data access by the web app.

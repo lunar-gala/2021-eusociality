@@ -26,13 +26,14 @@ export default function TeamTab(props) {
         parity = !parity;
 
         return (
-          <Fade>
+          // `key` must live on the element returned from `map`, not on the
+          // inner child, or React can't diff the list.
+          <Fade key={andrew_id}>
             <TeamBio
               imgSrc={entry.image}
               name={`${entry.first_name} ${entry.last_name}`}
               parity={parity}
               title={entry.position}
-              key={andrew_id}
             />
           </Fade>
         );

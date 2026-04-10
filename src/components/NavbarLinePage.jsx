@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import * as LINE_DATA from "../data/line_data";
 import * as UTIL from "../util";
+import { is_modified_click } from "../util";
 
 /**
  * Navbar for navigating to different lines within the lines page
@@ -49,7 +50,11 @@ class NavLinePageItem extends React.Component {
         key={this.props.lineName}
         to={`/lines/${this.props.lineIdx + 1}`}
         replace={true}
-        onClick={() => {
+        onClick={(e) => {
+          // Let cmd/ctrl/shift-clicks behave as "open in new tab" — don't run
+          // our in-page state update or the current tab will desync from the
+          // new tab. See issue #41.
+          if (is_modified_click(e)) return;
           this.props.handlerSelectedLineIdx(this.props.lineIdx);
         }}
       >

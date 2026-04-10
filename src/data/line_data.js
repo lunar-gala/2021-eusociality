@@ -1,5 +1,14 @@
 /**
  * Contains data for all the lines.
+ *
+ * @typedef {Object} LineInfo
+ * @property {string} name — Display name of the line.
+ * @property {string[]} designers — List of designer names.
+ * @property {string} video_ready — URL to the pre-show teaser video.
+ * @property {string} description — Long-form marketing description.
+ * @property {string|null} img_1 — Primary pre-show hero image URL.
+ * @property {string|null} img_2 — Secondary pre-show hero image URL.
+ * @property {string[][]} post_show_img — Grouped post-show image URLs.
  */
 
 export const GITHUB_BASE_URL = 'https://github.com/lunar-gala/2021-eusociality-videos/raw/master/';
@@ -143,7 +152,37 @@ import ALUMNI_POST_32 from "../../assets/img/line_shoots/alumni/PNTX7000.jpg";
 import ALUMNI_POST_41 from "../../assets/img/line_shoots/alumni/white dress (4).jpg";
 import ALUMNI_POST_42 from "../../assets/img/line_shoots/alumni/white dress (5).jpg";
 
-/** @brief Line names in order, with their respective designers */
+/**
+ * @brief Start times (in seconds) for each line's segment within the full
+ * show video. Index matches LINE_INFO. Used by the line page's YouTube player
+ * to fast-forward straight to the line on load. See issue #78.
+ *
+ * TODO: Fill in the real timestamps by watching the show video. The default
+ * of 0 means "play from the beginning".
+ */
+export const LINE_SHOW_VIDEO_START_SECONDS = [
+  0, // 01 Gossamer Idle
+  0, // 02 Nexus
+  0, // 03 Chrysophyta
+  0, // 04 Mirror
+  0, // 05 The Marianas Trench
+  0, // 06 Obfuscate
+  0, // 07 Salvos
+  0, // 08 Bloom
+  0, // 09 Renasci
+  0, // 10 Bound
+  0, // 11 Invasion
+  0, // 12 Somatic
+  0, // 13 Relinquo
+  0, // 14 Digital Warfare
+  0, // 15 Icarus
+  0, // 16 Alumni
+];
+
+/**
+ * @brief Line names in order, with their respective designers.
+ * @type {LineInfo[]}
+ */
 export const LINE_INFO = [
   {
     name: 'Gossamer Idle',

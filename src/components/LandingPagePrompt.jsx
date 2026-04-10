@@ -5,7 +5,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as CONSTANTS from "../constants";
-import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
+import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg?react";
 
 class LandingPagePrompt extends React.Component {
   constructor(props) {

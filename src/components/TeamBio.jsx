@@ -21,11 +21,12 @@ export default function TeamBio(props) {
 }
 
 TeamBio.propTypes = {
-  /** @brief Shows if the tab is expanded or not */
+  /** @brief Background-image URL for the headshot. */
   imgSrc: PropTypes.string,
-  /** @brief Shows if the tab is expanded or not */
+  /** @brief Full name displayed under the headshot. */
   name: PropTypes.string.isRequired,
+  /** @brief Role title displayed under the name. */
   title: PropTypes.string.isRequired,
+  /** @brief Alternating layout flag used by the grid. */
   parity: PropTypes.bool.isRequired,
-  isMobile: PropTypes.string.isRequired,
 };

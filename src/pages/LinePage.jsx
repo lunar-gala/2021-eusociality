@@ -15,7 +15,7 @@ import DesktopSideNav from "../components/DesktopSideNav";
 import MODEL_2 from "../../assets/img/examples/girl1.jpg";
 import MODEL_4 from "../../assets/img/examples/girl3.jpg";
 import NavbarLinePage from "../components/NavbarLinePage";
-import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
+import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg?react";
 
 class LinePage extends React.Component {
   constructor(props) {
@@ -265,6 +265,18 @@ class LinePage extends React.Component {
             controls={true}
             width={"100vw"}
             height={"100vh"}
+            // Fast-forward to this line's segment within the full show video.
+            // See issue #78. Timings live in LINE_DATA.LINE_SHOW_VIDEO_START_SECONDS.
+            config={{
+              youtube: {
+                playerVars: {
+                  start:
+                    LINE_DATA.LINE_SHOW_VIDEO_START_SECONDS[
+                      this.state.selectedLineIdx
+                    ] || 0,
+                },
+              },
+            }}
           />
         </div>
         <div id="left-bar-wrapper">
@@ -289,6 +301,20 @@ class LinePage extends React.Component {
         <div className="fixed-overlay">
           <DesktopSideNav landing_page_state={this.state.landing_page_state} />
         </div>
+        {/*
+          Mobile-only nav button (diamond "+"). Mirrors the MobileOpenMenu on
+          the landing page so users on mobile always have a way to navigate
+          back to the line list / landing page. See issue #74.
+        */}
+        <Link
+          id="line-page-mobile-nav"
+          className="mobile"
+          to="/lines"
+          aria-label="Back to line list"
+        >
+          <div id="line-page-mobile-nav-sign">+</div>
+          <div id="line-page-mobile-nav-border" />
+        </Link>
       </div>
     );
   }

@@ -1,0 +1,7 @@
+build/
+node_modules/
+package-lock.json
+assets/
+public/
+src/lib/IridescentMaterial.js
+src/lib/ThinFilmFresnelMap.js

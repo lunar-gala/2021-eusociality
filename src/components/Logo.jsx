@@ -6,7 +6,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import LG_LOGO from "../../assets/logo/LGLogo_white.svg";
+import LG_LOGO from "../../assets/logo/LGLogo_white.svg?react";
 
 class Logo extends React.Component {
   render() {

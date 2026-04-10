@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import * as CONSTANTS from "../constants";
 import * as LINE_DATA from "../data/line_data";
 import * as UTIL from "../util";
-import * as GESTURE from "../lib/Gesture";
 
 // Common Elements
 import TitleTheme from "../components/TitleTheme";
@@ -143,10 +142,6 @@ class LandingPage extends React.Component {
        * Used on the desktop landing page.
        */
       selectedLineIdx: selectedLineIdx,
-      /** @brief First touch recorded by `touchStart` handler */
-      first_touch: [],
-      /** @brief Current touch recorded by `touchMove` handler */
-      current_touch: [],
       /**
        * @brief We have an FSM-like organization for states. We do a Moore-type
        * machine, where we perform actions and change states based on which
@@ -237,9 +232,6 @@ class LandingPage extends React.Component {
     this.playCubeAnimation = this.playCubeAnimation.bind(this);
     this.playCubeExpand = this.playCubeExpand.bind(this);
     this.render_cube = this.render_cube.bind(this);
-    this.touchStart = this.touchStart.bind(this);
-    this.touchMove = this.touchMove.bind(this);
-    this.touchEnd = this.touchEnd.bind(this);
     this.updateCountdown = this.updateCountdown.bind(this);
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
@@ -380,108 +372,6 @@ class LandingPage extends React.Component {
         landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
       });
     }, 500);
-  }
-
-  touchStart(event) {
-    let touches = GESTURE.getTouchesList(event);
-
-    this.setState({
-      first_touch: GESTURE.getFingerPosition(touches, touches.length),
-      current_touch: GESTURE.getFingerPosition(touches, touches.length),
-    });
-  }
-
-  touchMove(event) {
-    let touches = GESTURE.getTouchesList(event);
-
-    this.setState({
-      current_touch: GESTURE.getFingerPosition(touches, touches.length),
-    });
-  }
-
-  touchEnd() {
-    return;
-
-    let gesture = GESTURE.getGesture(
-      this.state.first_touch[0].x,
-      this.state.current_touch[0].x,
-      this.state.first_touch[0].y,
-      this.state.current_touch[0].y
-    );
-
-    if (gesture === "Tap") {
-      console.log(
-        "[DEBUG] Tap (x, y):",
-        this.state.current_touch[0].x,
-        this.state.current_touch[0].y
-      );
-    } else if (
-      this.state.landing_page_state ===
-        CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN &&
-      gesture === "Up"
-    ) {
-      this.setState({
-        mobile_line_menu_y_offset:
-          this.state.mobile_line_menu_y_offset +
-          this.state.first_touch[0].y -
-          this.state.current_touch[0].y,
-      });
-    }
-
-    /**
-     * To prevent extra scrolling from touch, we are adding a timeout here to
-     * wait for the touch event to end. This is _very_ hacky and I'm not sure
-     * if this is a good idea at all...seems to work though and 25ms to be good
-     * enough to not be too noticeable for humans.
-     *
-     * TODO: I haven't figured out a good way to detect if the user touches
-     * "outside" of the nav and line menus. I'm hard coding rn, but I don't
-     * think this is good bc of different platforms and such
-     */
-    setTimeout(() => {
-      if (
-        this.state.landing_page_state ===
-        CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
-      ) {
-        if (
-          gesture === "Tap" &&
-          this.state.current_touch[0].y < 90 &&
-          this.state.current_touch[0].x < 80
-        ) {
-          this.handlerSetLandingPageState(this.state.landing_page_state_prev);
-        } else if (gesture === "Tap" && this.state.current_touch[0].y < 90) {
-          this.handlerSetLandingPageState(
-            CONSTANTS.LANDING_PAGE_STATES.DEFAULT
-          );
-        }
-      } else {
-        // Tapping the top of the default landing page opens the nav menu
-        if (
-          gesture === "Tap" &&
-          this.state.current_touch[0].y < 90 &&
-          this.state.current_touch[0].x < 270
-        ) {
-          this.handlerSetLandingPageState(
-            CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
-          );
-        }
-      }
-
-      // Happens after the delayed handle
-      console.log("[DEBUG] State:", this.state.landing_page_state);
-      if (
-        this.state.landing_page_state ===
-          CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN &&
-        gesture === "Down"
-      ) {
-        this.setState({
-          mobile_line_menu_y_offset:
-            this.state.mobile_line_menu_y_offset +
-            this.state.first_touch[0].y -
-            this.state.current_touch[0].y,
-        });
-      }
-    }, 25);
   }
 
   playCubeAnimation() {
@@ -1230,9 +1120,6 @@ class LandingPage extends React.Component {
       <div
         id="landing-page"
         className={`${this.state.landing_page_state}`}
-        onTouchStart={this.touchStart}
-        onTouchMove={this.touchMove}
-        onTouchEnd={this.touchEnd}
         onScroll={(e) => e.preventDefault()}
         onMouseMove={this.state.isMobile ? null : this._onMouseMove}
       >

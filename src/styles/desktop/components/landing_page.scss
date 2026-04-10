@@ -81,7 +81,11 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
     #curr-line {
       position: absolute;
       left: $X_MARGIN/2;
-      width: 100vw - $X_MARGIN/2;
+      // Keep the line name within the content column instead of the full
+      // viewport so long names wrap cleanly and the "See More" bar doesn't
+      // stretch off-screen. See issue #46.
+      width: 100vw - $X_MARGIN;
+      max-width: 80vw;
       bottom: 40vh;
       display: block;
       opacity: 0;
@@ -104,6 +108,9 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
           word-spacing: $HEADER_WORD_SPACING;
           text-transform: uppercase;
           pointer-events: none;
+          // Prevent long line names from stretching the row into the "See
+          // More" bar; wrap to the next line instead. See issue #46.
+          max-width: 60vw;
         }
 
         #see-more-wrapper {
