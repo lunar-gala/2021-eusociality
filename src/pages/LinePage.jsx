@@ -329,20 +329,6 @@ class LinePage extends React.Component {
         <div className="fixed-overlay">
           <DesktopSideNav landing_page_state={this.state.landing_page_state} />
         </div>
-        {/*
-          Mobile-only nav button (diamond "+"). Mirrors the MobileOpenMenu on
-          the landing page so users on mobile always have a way to navigate
-          back to the line list / landing page. See issue #74.
-        */}
-        <Link
-          id="line-page-mobile-nav"
-          className="mobile"
-          to="/lines"
-          aria-label="Back to line list"
-        >
-          <div id="line-page-mobile-nav-sign">+</div>
-          <div id="line-page-mobile-nav-border" />
-        </Link>
       </div>
     );
   }
