@@ -90,7 +90,9 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    // Fixed so the video stays behind the content as the user scrolls,
+    // matching mobile behavior. Previously absolute — scrolled away.
+    position: fixed;
     top: 0;
     z-index: -1;
     width: 100%;
