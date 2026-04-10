@@ -49,16 +49,18 @@ export function name_list_formatter(name_list) {
 
     for (let i = 0; i < len - 1; i++) {
       format.push(
-        <span>
-        <span className="unbreakable-name">{`${name_list[i]},`}</span>
-        <span className="preserve-whitespace">{" "}</span>
-        <wbr/>
+        <span key={`name-${i}`}>
+          <span className="unbreakable-name">{`${name_list[i]},`}</span>
+          <span className="preserve-whitespace">{" "}</span>
+          <wbr />
         </span>
       );
     }
 
     format.push(
-      <span className="unbreakable-name">{`${name_list[len - 1]}`}</span>
+      <span key={`name-${len - 1}`} className="unbreakable-name">
+        {`${name_list[len - 1]}`}
+      </span>
     );
 
     return format;
@@ -125,4 +127,25 @@ export function return_first_regex_match(regex, string) {
   } else {
     return currPathMatches[1];
   }
+}
+
+/**
+ * Returns true if the user held a modifier key (Cmd / Ctrl / Shift / Alt) or
+ * clicked with a non-primary mouse button. Used to detect
+ * "open-in-new-tab"-style clicks on <Link> elements so we can skip any
+ * custom onClick side effects that would otherwise run in the current tab
+ * while the browser opens a new one. See issue #41.
+ *
+ * @param {MouseEvent} event
+ * @returns {boolean}
+ */
+export function is_modified_click(event) {
+  if (!event) return false;
+  return (
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey ||
+    (typeof event.button === "number" && event.button !== 0)
+  );
 }

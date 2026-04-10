@@ -88,6 +88,7 @@ $SLIDE_AMOUNT_D: -24px;
       width: 100%;
       height: 100%;
       overflow: hidden;
+      pointer-events: none;
 
       transition-duration: 1s;
 
@@ -101,16 +102,18 @@ $SLIDE_AMOUNT_D: -24px;
     }
 
     #player {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      // Cover the tall portrait viewport with a landscape video.
+      // Width is 16/9 of viewport height so the video always fills
+      // vertically; min-width/min-height handle the other axis.
+      width: 177.77777778vh !important;  /* 100 * 16/9 */
       height: 100% !important;
-      width: 177.77777778vh !important;
-      /* 100 * 16 / 9 */
       min-width: 100% !important;
-      min-height: 56.25vw !important;
-      /* 100 * 9 / 16 */
-      margin-left: -50vw; // For some reason mobile videos iframe displays weird
+      min-height: 56.25vw !important;    /* 100 * 9/16 */
+      margin-left: -50vw;
+      border: none;
+      // Scale up to crop Streamable's title bar + controls.
+      transform: scale(1.15);
+      transform-origin: center center;
     }
 
     // TODO: did we want to do a gradual opacity fade for the background?
@@ -382,6 +385,41 @@ $SLIDE_AMOUNT_D: -24px;
 
     #player-line {
       height: 30vh !important;
+    }
+  }
+
+  /*
+   * Mobile-only "diamond +" navigation button, rendered at the top-left so
+   * users can always get back to the line list. See issue #74.
+   */
+  #line-page-mobile-nav {
+    $SIZE: 30px;
+    position: fixed;
+    top: $TOP_MARGIN_MOBILE;
+    left: $X_MARGIN / 2;
+    width: $SIZE;
+    height: $SIZE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: $Z_INDEX_HEADER + 1;
+    text-decoration: none;
+    color: white;
+
+    #line-page-mobile-nav-sign {
+      font-size: 40px;
+      margin-bottom: 10px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    #line-page-mobile-nav-border {
+      position: absolute;
+      border: 1px solid white;
+      transform: rotate(45deg);
+      width: $SIZE;
+      height: $SIZE;
+      pointer-events: none;
     }
   }
 }

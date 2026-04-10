@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import * as CONSTANTS from "../constants";
 import * as LINE_DATA from "../data/line_data";
 import * as UTIL from "../util";
-import * as GESTURE from "../lib/Gesture";
 
 // Common Elements
 import TitleTheme from "../components/TitleTheme";
@@ -143,10 +142,6 @@ class LandingPage extends React.Component {
        * Used on the desktop landing page.
        */
       selectedLineIdx: selectedLineIdx,
-      /** @brief First touch recorded by `touchStart` handler */
-      first_touch: [],
-      /** @brief Current touch recorded by `touchMove` handler */
-      current_touch: [],
       /**
        * @brief We have an FSM-like organization for states. We do a Moore-type
        * machine, where we perform actions and change states based on which
@@ -189,6 +184,8 @@ class LandingPage extends React.Component {
       landing_page_animations_middleTitle: "",
       mobile_show_gyro_prompt: "",
       has_seen_gyro_prompt: false,
+      /** @brief 0-100 progress of the GLTF asset download. */
+      loadProgress: 0,
       /** @brief Mouse position x */
       x: 0,
       /** @brief Mouse position y */
@@ -237,9 +234,6 @@ class LandingPage extends React.Component {
     this.playCubeAnimation = this.playCubeAnimation.bind(this);
     this.playCubeExpand = this.playCubeExpand.bind(this);
     this.render_cube = this.render_cube.bind(this);
-    this.touchStart = this.touchStart.bind(this);
-    this.touchMove = this.touchMove.bind(this);
-    this.touchEnd = this.touchEnd.bind(this);
     this.updateCountdown = this.updateCountdown.bind(this);
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
@@ -380,108 +374,6 @@ class LandingPage extends React.Component {
         landing_page_state: CONSTANTS.LANDING_PAGE_STATES.DEFAULT,
       });
     }, 500);
-  }
-
-  touchStart(event) {
-    let touches = GESTURE.getTouchesList(event);
-
-    this.setState({
-      first_touch: GESTURE.getFingerPosition(touches, touches.length),
-      current_touch: GESTURE.getFingerPosition(touches, touches.length),
-    });
-  }
-
-  touchMove(event) {
-    let touches = GESTURE.getTouchesList(event);
-
-    this.setState({
-      current_touch: GESTURE.getFingerPosition(touches, touches.length),
-    });
-  }
-
-  touchEnd() {
-    return;
-
-    let gesture = GESTURE.getGesture(
-      this.state.first_touch[0].x,
-      this.state.current_touch[0].x,
-      this.state.first_touch[0].y,
-      this.state.current_touch[0].y
-    );
-
-    if (gesture === "Tap") {
-      console.log(
-        "[DEBUG] Tap (x, y):",
-        this.state.current_touch[0].x,
-        this.state.current_touch[0].y
-      );
-    } else if (
-      this.state.landing_page_state ===
-        CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN &&
-      gesture === "Up"
-    ) {
-      this.setState({
-        mobile_line_menu_y_offset:
-          this.state.mobile_line_menu_y_offset +
-          this.state.first_touch[0].y -
-          this.state.current_touch[0].y,
-      });
-    }
-
-    /**
-     * To prevent extra scrolling from touch, we are adding a timeout here to
-     * wait for the touch event to end. This is _very_ hacky and I'm not sure
-     * if this is a good idea at all...seems to work though and 25ms to be good
-     * enough to not be too noticeable for humans.
-     *
-     * TODO: I haven't figured out a good way to detect if the user touches
-     * "outside" of the nav and line menus. I'm hard coding rn, but I don't
-     * think this is good bc of different platforms and such
-     */
-    setTimeout(() => {
-      if (
-        this.state.landing_page_state ===
-        CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
-      ) {
-        if (
-          gesture === "Tap" &&
-          this.state.current_touch[0].y < 90 &&
-          this.state.current_touch[0].x < 80
-        ) {
-          this.handlerSetLandingPageState(this.state.landing_page_state_prev);
-        } else if (gesture === "Tap" && this.state.current_touch[0].y < 90) {
-          this.handlerSetLandingPageState(
-            CONSTANTS.LANDING_PAGE_STATES.DEFAULT
-          );
-        }
-      } else {
-        // Tapping the top of the default landing page opens the nav menu
-        if (
-          gesture === "Tap" &&
-          this.state.current_touch[0].y < 90 &&
-          this.state.current_touch[0].x < 270
-        ) {
-          this.handlerSetLandingPageState(
-            CONSTANTS.LANDING_PAGE_STATES.MOBILE_NAV_MENU_OPEN
-          );
-        }
-      }
-
-      // Happens after the delayed handle
-      console.log("[DEBUG] State:", this.state.landing_page_state);
-      if (
-        this.state.landing_page_state ===
-          CONSTANTS.LANDING_PAGE_STATES.MOBILE_LINE_MENU_OPEN &&
-        gesture === "Down"
-      ) {
-        this.setState({
-          mobile_line_menu_y_offset:
-            this.state.mobile_line_menu_y_offset +
-            this.state.first_touch[0].y -
-            this.state.current_touch[0].y,
-        });
-      }
-    }, 25);
   }
 
   playCubeAnimation() {
@@ -856,6 +748,17 @@ class LandingPage extends React.Component {
     // If we already have loaded, just trigger the startup sequence
     if (this.props.page_has_loaded) {
       this.startupWrapper();
+    } else if (document.readyState === "complete") {
+      // With Vite's ESM module loading, React mounts *after* the browser's
+      // `load` / `pageshow` events have already fired, so the pageshow
+      // listener above would never catch the initial fire and the intro
+      // animation would never trigger (leaving the page visually blank).
+      // Kick off the startup sequence ourselves in that case.
+      this.pageShow();
+    } else {
+      // The document is still loading — fall back to a one-shot `load`
+      // listener so we fire exactly once whether or not `pageshow` is late.
+      window.addEventListener("load", this.pageShow, { once: true });
     }
 
     this.props.history.listen((loc, action) => {
@@ -1111,10 +1014,13 @@ class LandingPage extends React.Component {
           );
         });
 
-        // rotate the cube while the animation is playing
-        let cube_rotation_animation = new TWEEN.Tween(
-          this.state.object.rotation
-        )
+        // rotate the cube while the animation is playing.
+        // We read `object.scene.rotation` directly here rather than
+        // `this.state.object.rotation`: in React 18 the `setState({ object:
+        // object.scene })` above is batched, so `this.state.object` is still
+        // `null` when this runs — and reading `.rotation` off null is what
+        // broke the whole intro animation after the React 18 upgrade.
+        let cube_rotation_animation = new TWEEN.Tween(object.scene.rotation)
           .to(
             {
               x: 0,
@@ -1136,9 +1042,12 @@ class LandingPage extends React.Component {
           assetHasLoaded: true,
         });
       },
-      // called when loading is in progresses
+      // called when loading is in progress — feed into loadProgress state
+      // so the landing page prompt shows a real progress bar.
       (xhr) => {
-        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+        const pct = xhr.total ? (xhr.loaded / xhr.total) * 100 : 0;
+        console.log(pct + "% loaded");
+        this.setState({ loadProgress: pct });
       },
       // called when loading has errors
       (error) => {
@@ -1230,9 +1139,6 @@ class LandingPage extends React.Component {
       <div
         id="landing-page"
         className={`${this.state.landing_page_state}`}
-        onTouchStart={this.touchStart}
-        onTouchMove={this.touchMove}
-        onTouchEnd={this.touchEnd}
         onScroll={(e) => e.preventDefault()}
         onMouseMove={this.state.isMobile ? null : this._onMouseMove}
       >
@@ -1311,6 +1217,8 @@ class LandingPage extends React.Component {
             this.state.landing_page_animations_middleTitle
           }
           landing_page_state={this.state.landing_page_state}
+          loadProgress={this.state.loadProgress}
+          assetHasLoaded={this.state.assetHasLoaded}
         />
         <div
           id="main-screen"

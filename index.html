@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff8a01" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Lunar Gala 2021: COLLECTIVA — a fashion show theme site exploring interdependence and eusociality."
+    />
+    <title>LG 2021: COLLECTIVA</title>
+
+    <!--
+      Google Analytics (GA4).
+      Replace `G-XXXXXXXXXX` with your Measurement ID to enable tracking.
+      Leave as-is (or delete) to disable analytics.
+    -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+  </head>
+  <body style="margin:0;background:#000;color:#fff">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <!--
+        Pre-React loading indicator. Renders instantly from raw HTML before
+        any JS bundle arrives. React's createRoot().render() replaces the
+        innerHTML of #root, so this disappears automatically — no cleanup.
+      -->
+      <style>
+        @keyframes pre-pulse {
+          0%, 100% { opacity: 0.15; }
+          50% { opacity: 0.6; }
+        }
+        #pre-loader {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          width: 100vw;
+        }
+        #pre-loader svg {
+          width: min(48px, 10vw);
+          height: min(48px, 10vw);
+          animation: pre-pulse 2s ease-in-out infinite;
+        }
+      </style>
+      <div id="pre-loader">
+        <svg viewBox="0 0 151 151" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M149.48 75.525L148.573 73.8929L131.737 44.8138L92.5801 67.4823L89.144 65.5237L86.6236 64.0729L85.2183 61.661L83.2328 58.2335L105.898 19.0263L76.7957 2.26977L75.1729 1.36304L73.541 2.26977L44.5289 19.0172L67.1946 58.2245L65.209 61.6519L63.8219 64.0639L61.3015 65.5146L57.82 67.5548L18.6447 44.8864L1.83583 73.9019L0.929199 75.5341L1.83583 77.1662L18.5994 106.182L57.811 83.5587L61.2471 85.5444L63.7131 86.968L65.1547 89.4706L67.1311 92.9434L44.402 132.06L73.541 148.907L75.1457 149.814H75.2545L76.8592 148.907L105.989 132.06L83.2509 92.9434L85.2274 89.5159L86.6689 87.0134L89.1349 85.5898L92.5801 83.5587L131.792 106.227L148.555 77.2115L149.48 75.525ZM3.51309 74.8631C6.09199 70.8419 9.135 67.1381 12.5794 63.8281C14.8808 61.6106 17.8028 60.1463 20.9566 59.6299C23.274 59.3856 25.614 59.784 27.72 60.7815C28.5854 61.1645 29.4217 61.6099 30.2223 62.1144L48.1554 73.095L52.199 75.5703L48.2189 78.0095L30.1951 88.9991C29.3814 89.508 28.5332 89.9594 27.6566 90.3501C25.5438 91.336 23.2033 91.7308 20.8841 91.4926C17.7461 90.9798 14.8394 89.5215 12.5522 87.3126C9.83228 84.9188 6.85854 81.2374 3.48589 76.2957L3.35896 76.1597L2.95098 75.5885L3.42242 74.9628L3.51309 74.8631ZM61.7548 30.569C61.2425 29.7572 60.791 28.9086 60.4039 28.0302C59.4117 25.9383 59.0104 23.6148 59.2434 21.3112C59.7771 18.1752 61.2357 15.2702 63.4321 12.9693C66.7389 9.53142 70.4358 6.49141 74.4476 3.91097L75.1638 3.36692L75.8801 3.91097C79.8989 6.47553 83.6049 9.5003 86.9228 12.9239C89.1228 15.2223 90.582 18.1285 91.1114 21.2659C91.3585 23.5828 90.9633 25.923 89.969 28.0302C89.582 28.9086 89.1305 29.7572 88.6182 30.569L77.648 48.5677L75.2001 52.5755L72.7522 48.5677L61.7548 30.569ZM88.6635 120.581C89.1758 121.396 89.6274 122.247 90.0144 123.129C91.0086 125.236 91.4039 127.576 91.1567 129.893C90.631 133.029 89.1711 135.933 86.9681 138.226C83.6553 141.671 79.949 144.714 75.9254 147.293L75.8619 147.348L75.2091 147.837L74.5382 147.348L74.4748 147.293C70.4529 144.712 66.7468 141.669 63.4321 138.226C61.229 135.933 59.7692 133.029 59.2434 129.893C58.9963 127.576 59.3915 125.236 60.3858 123.129C60.7787 122.247 61.2362 121.395 61.7548 120.581L72.7341 102.6L75.2001 98.5742L77.7205 102.6L88.6635 120.581ZM75.2454 87.1856H75.191L75.1366 87.24L63.5681 75.5703L75.1457 63.9278L86.8502 75.5703L75.2454 87.1856ZM146.923 74.9447L147.395 75.5703L146.987 76.1416L146.86 76.3139C143.523 81.2556 140.513 84.9369 137.794 87.3307C135.506 89.5396 132.6 90.9979 129.462 91.5108C127.142 91.7489 124.802 91.3541 122.689 90.3683C121.813 89.9776 120.964 89.5261 120.151 89.0172L102.181 78.0095L98.2012 75.5703L102.245 73.095L120.196 62.1144C121.011 61.6049 121.862 61.1563 122.744 60.7724C124.85 59.7749 127.19 59.3765 129.507 59.6208C132.645 60.1443 135.551 61.6082 137.839 63.819C141.283 67.1294 144.326 70.8332 146.905 74.854L146.923 74.9447Z" fill="white" stroke="white" stroke-width="0.3"/></svg>
+      </div>
+    </div>
+    <script type="module" src="/src/index.jsx"></script>
+  </body>
+</html>

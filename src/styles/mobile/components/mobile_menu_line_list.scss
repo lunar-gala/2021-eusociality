@@ -5,14 +5,18 @@
 #mobile-menu-line-list {
   position: absolute;
   top: $LANDING_PAGE_HEADER_HEIGHT;
-  transition-duration: 500ms;
-  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  // Fast close: the menu fades out quickly when the `mobile-line-menu-open`
+  // class is removed. See issue #64 — the previous 500ms felt laggy.
+  transition: opacity 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
   opacity: 0;
   width: 100vw;
+  // Drop below other content when hidden so it can't catch touches.
+  pointer-events: none;
 
   &.mobile-line-menu-open {
     z-index: 3;
     opacity: 1;
+    pointer-events: auto;
   }
 
   .line-element {

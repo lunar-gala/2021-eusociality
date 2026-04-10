@@ -6,6 +6,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as CONSTANTS from "../constants";
+import { is_modified_click } from "../util";
 
 class DesktopSideNav extends React.Component {
   render() {
@@ -30,14 +31,14 @@ class DesktopSideNav extends React.Component {
           <Link
             className="link"
             to="/"
-            onClick={() => {
-              this.props.handlerSetLandingPageState
-                ? select_line
-                  ? null
-                  : this.props.handlerSetLandingPageState(
-                      CONSTANTS.LANDING_PAGE_STATES.DEFAULT
-                    )
-                : null;
+            onClick={(e) => {
+              // Let cmd/ctrl-click open in a new tab without changing the
+              // current tab's state. See issue #41.
+              if (is_modified_click(e)) return;
+              if (!this.props.handlerSetLandingPageState || select_line) return;
+              this.props.handlerSetLandingPageState(
+                CONSTANTS.LANDING_PAGE_STATES.DEFAULT
+              );
             }}
           >
             Lines
@@ -58,12 +59,12 @@ class DesktopSideNav extends React.Component {
           <Link
             className="link"
             to="/about"
-            onClick={() => {
-              this.props.handlerSetLandingPageState
-                ? this.props.handlerSetLandingPageState(
-                    CONSTANTS.LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN
-                  )
-                : null;
+            onClick={(e) => {
+              if (is_modified_click(e)) return;
+              if (!this.props.handlerSetLandingPageState) return;
+              this.props.handlerSetLandingPageState(
+                CONSTANTS.LANDING_PAGE_STATES.DESKTOP_ABOUT_PAGE_OPEN
+              );
             }}
           >
             About
@@ -84,12 +85,12 @@ class DesktopSideNav extends React.Component {
           <Link
             className="link"
             to="/people"
-            onClick={() => {
-              this.props.handlerSetLandingPageState
-                ? this.props.handlerSetLandingPageState(
-                    CONSTANTS.LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_OPEN
-                  )
-                : null;
+            onClick={(e) => {
+              if (is_modified_click(e)) return;
+              if (!this.props.handlerSetLandingPageState) return;
+              this.props.handlerSetLandingPageState(
+                CONSTANTS.LANDING_PAGE_STATES.DESKTOP_PEOPLE_PAGE_OPEN
+              );
             }}
           >
             People
@@ -110,12 +111,12 @@ class DesktopSideNav extends React.Component {
           <Link
             className="link"
             to="/watch"
-            onClick={() => {
-              this.props.handlerSetLandingPageState
-                ? this.props.handlerSetLandingPageState(
-                    CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN
-                  )
-                : null;
+            onClick={(e) => {
+              if (is_modified_click(e)) return;
+              if (!this.props.handlerSetLandingPageState) return;
+              this.props.handlerSetLandingPageState(
+                CONSTANTS.LANDING_PAGE_STATES.DESKTOP_WATCH_PAGE_OPEN
+              );
             }}
           >
             Watch

@@ -89,6 +89,8 @@
   #team-accordion {
     position: absolute;
     left: $X_MARGIN/2;
+    // MUI's Accordion was a full-width block — replicate that.
+    width: calc(100vw - #{$X_MARGIN / 2});
     display: block;
     top: 25%;
     background: none;
@@ -161,11 +163,13 @@
     }
 
     .tab-header {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      cursor: pointer;
       font-family: $FONT_DISPLAY;
       font-weight: $FONT_SPRAT_WEIGHT;
-      // font-size: 20vh;
       padding: 0;
-      flex: 1;
       box-shadow: none;
       border: none;
 

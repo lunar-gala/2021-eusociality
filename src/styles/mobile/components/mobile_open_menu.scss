@@ -45,7 +45,9 @@ $LOGO_SIZE: $HEADER_FONT_SIZE - 5px;
     width: 100vw;
     position: absolute;
     opacity: 0;
-    transition-duration: 1s;
+    // Shorter duration so the title reappears snappily when the line menu
+    // closes. See issue #64.
+    transition: opacity 300ms ease-out;
 
     #mobile-open-menu-header {
       display: flex;

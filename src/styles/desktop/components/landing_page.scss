@@ -104,6 +104,9 @@ $SEE_MORE_BOTTOM_MARGIN: 12px;
           word-spacing: $HEADER_WORD_SPACING;
           text-transform: uppercase;
           pointer-events: none;
+          // Prevent long line names from stretching the row into the "See
+          // More" bar; wrap to the next line instead. See issue #46.
+          max-width: 60vw;
         }
 
         #see-more-wrapper {

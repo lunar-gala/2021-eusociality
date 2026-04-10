@@ -15,7 +15,7 @@ import DesktopSideNav from "../components/DesktopSideNav";
 import MODEL_2 from "../../assets/img/examples/girl1.jpg";
 import MODEL_4 from "../../assets/img/examples/girl3.jpg";
 import NavbarLinePage from "../components/NavbarLinePage";
-import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
+import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg?react";
 
 class LinePage extends React.Component {
   constructor(props) {
@@ -43,6 +43,8 @@ class LinePage extends React.Component {
       b: 0,
       c: 0,
       d: 0,
+      /** Track which images have finished downloading for fade-in. */
+      loadedImages: {},
     };
 
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
@@ -56,10 +58,20 @@ class LinePage extends React.Component {
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
+
+    // Fallback: if the ReactPlayer onReady callback never fires (common
+    // with Streamable embeds in react-player 2.16+), fade in the
+    // background video after a few seconds anyway.
+    this._videoFallbackTimer = setTimeout(() => {
+      if (this.state.curr_video === "hide") {
+        this.handlerVideoLoad();
+      }
+    }, 3000);
   }
 
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
+    clearTimeout(this._videoFallbackTimer);
   }
 
   handleScroll() {
@@ -76,6 +88,26 @@ class LinePage extends React.Component {
     }
   }
 
+  /**
+   * Preloads a background-image URL and marks it loaded in state so the
+   * element can fade in smoothly instead of popping in mid-download.
+   */
+  preloadImage(url) {
+    if (!url || this.state.loadedImages[url]) return;
+    const img = new window.Image();
+    img.onload = () => {
+      this.setState((prev) => ({
+        loadedImages: { ...prev.loadedImages, [url]: true },
+      }));
+    };
+    img.src = url;
+    if (img.complete) {
+      this.setState((prev) => ({
+        loadedImages: { ...prev.loadedImages, [url]: true },
+      }));
+    }
+  }
+
   slidingImage(images, id) {
     let background_image;
 
@@ -84,6 +116,10 @@ class LinePage extends React.Component {
     } else {
       background_image = images[0];
     }
+
+    // Kick off preload if we haven't already.
+    this.preloadImage(background_image);
+    const isLoaded = !!this.state.loadedImages[background_image];
 
     return (
       <div
@@ -100,7 +136,9 @@ class LinePage extends React.Component {
       >
         <div
           style={{
-            backgroundImage: `url(${background_image})`,
+            backgroundImage: `url("${background_image}")`,
+            opacity: isLoaded ? 1 : 0,
+            transition: "opacity 0.5s ease-in",
           }}
           className="image primary"
           id={id}
@@ -140,16 +178,20 @@ class LinePage extends React.Component {
       <div id="line-page">
         <div id="background">
           <div id="player-wrapper" className={`${this.state.curr_video}`}>
-            <ReactPlayer
+            {/*
+              Use a direct Streamable embed iframe instead of ReactPlayer.
+              ReactPlayer's Streamable handler doesn't pass autoplay/muted
+              params to the iframe URL, so the video never autoplays.
+              The embed URL format ?autoplay=1&muted=1 works reliably.
+            */}
+            <iframe
               id="player"
-              url={line_info.video_ready}
-              playing={true}
-              volume={0}
-              muted={true}
-              loop={true}
-              controls={false}
-              playIcon={<button></button>}
-              onStart={this.handlerVideoLoad}
+              src={`https://streamable.com/e/${line_info.video_ready.split('/').pop()}?autoplay=1&muted=1&loop=1&nocontrols=1`}
+              frameBorder="0"
+              allow="autoplay; fullscreen"
+              allowFullScreen
+              title="Background video"
+              onLoad={this.handlerVideoLoad}
             />
           </div>
         </div>
@@ -265,6 +307,18 @@ class LinePage extends React.Component {
             controls={true}
             width={"100vw"}
             height={"100vh"}
+            // Fast-forward to this line's segment within the full show video.
+            // See issue #78. Timings live in LINE_DATA.LINE_SHOW_VIDEO_START_SECONDS.
+            config={{
+              youtube: {
+                playerVars: {
+                  start:
+                    LINE_DATA.LINE_SHOW_VIDEO_START_SECONDS[
+                      this.state.selectedLineIdx
+                    ] || 0,
+                },
+              },
+            }}
           />
         </div>
         <div id="left-bar-wrapper">

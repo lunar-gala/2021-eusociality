@@ -5,8 +5,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as CONSTANTS from "../constants";
-import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg";
-import RotateIcon from "../../assets/img/rotate_icon_svg.svg";
+import COLLECTIVA_LOGO from "../../assets/logo/CollectivaLogo_white.svg?react";
+import RotateIcon from "../../assets/img/rotate_icon_svg.svg?react";
 
 class MobileOpenMenu extends React.Component {
   render() {

@@ -90,7 +90,9 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    // Fixed so the video stays behind the content as the user scrolls,
+    // matching mobile behavior. Previously absolute — scrolled away.
+    position: fixed;
     top: 0;
     z-index: -1;
     width: 100%;
@@ -99,6 +101,9 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
     #player-wrapper {
       width: 100vw;
       height: 100vh;
+      overflow: hidden;
+      // Prevent interaction with Streamable's embedded controls.
+      pointer-events: none;
 
       transition-duration: 500ms;
 
@@ -116,12 +121,15 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      // Cover the landscape viewport with the video.
       height: 100% !important;
-      width: 177.77777778vh !important;
-      /* 100 * 16 / 9 */
+      width: 177.77777778vh !important;  /* 100 * 16/9 */
       min-width: 100% !important;
-      min-height: 56.25vw !important;
-      /* 100 * 9 / 16 */
+      min-height: 56.25vw !important;    /* 100 * 9/16 */
+      border: none;
+      // Scale up slightly to crop Streamable's title bar + controls.
+      transform: scale(1.15);
+      transform-origin: center center;
     }
   }
 
@@ -167,6 +175,7 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
     width: 100vw;
     margin-top: $TOP_MARGIN;
     text-decoration: none;
+    z-index: 1;
 
     #top-title-wrapper {
       display: flex;

@@ -83,7 +83,7 @@ class PeopleBackground extends React.Component {
         <div
           className="headshotImg"
           style={{
-            backgroundImage: `url(${filter}), url(${imgSrc})`,
+            backgroundImage: `url("${filter}"), url("${imgSrc}")`,
             ...style.img,
             ...imgPlacements[index],
           }}

@@ -30,8 +30,19 @@ npm start
 ```
 
 to show the website on your local machine. The website should be available at
-`localhost:8080` by default, and open it in your default browser tab. If not,
+`localhost:3000` by default, and open it in your default browser tab. If not,
 just navigate to that web address by typing it into your browser.
+
+### Testing
+
+```sh
+npm test        # vitest unit tests
+npm run e2e     # headless Chrome smoke check against the dev server
+```
+
+See [`docs/testing.md`](docs/testing.md) for the full story — in particular,
+the `npm run e2e` harness is what you want when something on the landing
+page isn't rendering, since unit tests can't cover the three.js code path.
 
 ## Deploying
 
@@ -47,11 +58,15 @@ npm run deploy
 - `public/`: any file we want copied to our final webpage
 - `src/`: all of the code lives here
   - `components/`: js components used by the page
+  - `pages/`: top-level route components
   - `styles/`: where all the css (we are using SASS) lives
-  - `App.js`: the main js entrypoint (besides `index.js`)
+  - `test/`: vitest unit tests
+  - `App.jsx`: the main js entrypoint (besides `index.jsx`)
   - `constants.js`: constants for the project
-  - `index.js`: don't touch this unless you have a good reason to
-- `.babelrc`: transpiling definitions
+  - `index.jsx`: don't touch this unless you have a good reason to
+- `scripts/`: repo-level tooling (e.g. the headless Chrome e2e harness)
+- `docs/`: internal docs, including the [testing guide](docs/testing.md)
+- `vite.config.js`: build + dev-server configuration
 - `.eslintrc`: styling definitions
 
 ## Best Practices
@@ -97,6 +112,31 @@ This is because `git` doesn't want to override your changes. What you want to do
 2. Update your repo: `git pull`
 3. Reapply your "stashed away" changes: `git stash pop`
 4. You might get some merge conflicts, so make sure to fix those before you commit.
+
+## Videos
+
+Each line page plays a background teaser video hosted on Streamable. The full show video is on YouTube. If these ever go down, re-upload and update the URLs in `src/data/line_data.js` (`video_ready` field) and `src/constants.js` (`SHOW_VIDEO_LINK`).
+
+| # | Line | Streamable | YouTube |
+|---|------|------------|---------|
+| 01 | Gossamer Idle | https://streamable.com/9z91c9 | https://youtu.be/newKhCF9Vng |
+| 02 | Nexus | https://streamable.com/9furjq | https://youtu.be/Lx7waET0DCU |
+| 03 | Chrysophyta | https://streamable.com/vn4mnz | https://youtu.be/usNTOPi-bWU |
+| 04 | Mirror | https://streamable.com/zaclht | https://youtu.be/I5BKdrY8iak |
+| 05 | The Marianas Trench | https://streamable.com/zq5rhe | https://youtu.be/O_sJ9HdtwEI |
+| 06 | Obfuscate | https://streamable.com/79rktz | https://youtu.be/qKsM1SIwDrY |
+| 07 | Salvos | https://streamable.com/fjsba8 | https://youtu.be/o3gCLjYl3Ts |
+| 08 | Bloom | https://streamable.com/rxr4gk | https://youtu.be/44rF--_lJaA |
+| 09 | Renasci | https://streamable.com/hgs89l | https://youtu.be/t62gTT5JWiE |
+| 10 | Bound | https://streamable.com/bnk0lt | https://youtu.be/_BnqnDTrrzA |
+| 11 | Invasion | https://streamable.com/6gtby0 | https://youtu.be/MBxJDWqypWw |
+| 12 | Somatic | https://streamable.com/ssifa5 | https://youtu.be/TpHLdJEn9Hk |
+| 13 | Relinquo | https://streamable.com/6oyxs4 | https://youtu.be/Vy1AglwTjRY |
+| 14 | Digital Warfare | https://streamable.com/4l78dp | https://youtu.be/9z2i3-Vgna4 |
+| 15 | Icarus | https://streamable.com/op8qo6 | https://youtu.be/530XfjYNlKs |
+| 16 | Alumni | https://streamable.com/3z2z9z | https://youtu.be/RFtPwHP12L4 |
+
+**Show video:** https://www.youtube.com/watch?v=dEj6rc5ifhg
 
 ## Acknowledgments
 
