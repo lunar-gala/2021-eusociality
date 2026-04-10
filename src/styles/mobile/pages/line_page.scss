@@ -102,12 +102,17 @@ $SLIDE_AMOUNT_D: -24px;
     }
 
     #player {
-      // Fill the container, then scale up to crop Streamable's title bar
-      // and controls evenly on all sides via overflow:hidden.
-      width: 100% !important;
+      // Cover the tall portrait viewport with a landscape video.
+      // Width is 16/9 of viewport height so the video always fills
+      // vertically; min-width/min-height handle the other axis.
+      width: 177.77777778vh !important;  /* 100 * 16/9 */
       height: 100% !important;
+      min-width: 100% !important;
+      min-height: 56.25vw !important;    /* 100 * 9/16 */
+      margin-left: -50vw;
       border: none;
-      transform: scale(1.25);
+      // Scale up to crop Streamable's title bar + controls.
+      transform: scale(1.15);
       transform-origin: center center;
     }
 

@@ -121,12 +121,14 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      // Fill the container, then scale up to crop Streamable's title bar
-      // and controls evenly on all sides via overflow:hidden.
-      width: 100% !important;
+      // Cover the landscape viewport with the video.
       height: 100% !important;
+      width: 177.77777778vh !important;  /* 100 * 16/9 */
+      min-width: 100% !important;
+      min-height: 56.25vw !important;    /* 100 * 9/16 */
       border: none;
-      transform: scale(1.25);
+      // Scale up slightly to crop Streamable's title bar + controls.
+      transform: scale(1.15);
       transform-origin: center center;
     }
   }
