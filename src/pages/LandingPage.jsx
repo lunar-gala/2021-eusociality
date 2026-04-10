@@ -184,6 +184,8 @@ class LandingPage extends React.Component {
       landing_page_animations_middleTitle: "",
       mobile_show_gyro_prompt: "",
       has_seen_gyro_prompt: false,
+      /** @brief 0-100 progress of the GLTF asset download. */
+      loadProgress: 0,
       /** @brief Mouse position x */
       x: 0,
       /** @brief Mouse position y */
@@ -1040,9 +1042,12 @@ class LandingPage extends React.Component {
           assetHasLoaded: true,
         });
       },
-      // called when loading is in progresses
+      // called when loading is in progress — feed into loadProgress state
+      // so the landing page prompt shows a real progress bar.
       (xhr) => {
-        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+        const pct = xhr.total ? (xhr.loaded / xhr.total) * 100 : 0;
+        console.log(pct + "% loaded");
+        this.setState({ loadProgress: pct });
       },
       // called when loading has errors
       (error) => {
@@ -1212,6 +1217,8 @@ class LandingPage extends React.Component {
             this.state.landing_page_animations_middleTitle
           }
           landing_page_state={this.state.landing_page_state}
+          loadProgress={this.state.loadProgress}
+          assetHasLoaded={this.state.assetHasLoaded}
         />
         <div
           id="main-screen"

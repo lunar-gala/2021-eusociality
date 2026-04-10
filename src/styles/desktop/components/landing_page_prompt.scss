@@ -69,10 +69,60 @@ $LOGO_SIZE: $TITLE_FONT_SIZE - 3vh;
     }
   }
 
-  #enter-site {
+  #enter-area {
     margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #enter-site {
     font-family: $FONT_SUBHEAD;
     font-size: 24px;
     cursor: pointer;
+    animation: blur-in 500ms linear forwards;
+  }
+
+  #load-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20vw;
+
+    #load-bar-track {
+      position: relative;
+      width: 100%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.15);
+
+      #load-bar-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: white;
+        transition: width 300ms ease-out;
+      }
+
+      #load-bar-dot {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 8px;
+        height: 8px;
+        background: white;
+        border-radius: 50%;
+        transition: left 300ms ease-out;
+      }
+    }
+
+    #load-label {
+      margin-top: 10px;
+      font-family: $FONT_SUBHEAD;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
   }
 }
