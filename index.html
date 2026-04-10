@@ -43,10 +43,6 @@
         innerHTML of #root, so this disappears automatically — no cleanup.
       -->
       <style>
-        @keyframes pre-pulse {
-          0%, 100% { opacity: 0.25; }
-          50% { opacity: 1; }
-        }
         @keyframes pre-grow {
           from { width: 0; }
           to { width: 100%; }
@@ -58,32 +54,20 @@
           justify-content: center;
           height: 100vh;
           width: 100vw;
-          font-family: 'Sprat Type Condensed', Georgia, serif;
-          color: #fff;
-          user-select: none;
-        }
-        #pre-loader .pre-title {
-          font-size: clamp(32px, 10vw, 120px);
-          font-weight: 100;
-          letter-spacing: -0.12em;
-          animation: pre-pulse 2.5s ease-in-out infinite;
         }
         #pre-loader .pre-bar {
-          margin-top: 24px;
-          width: min(200px, 40vw);
+          width: min(160px, 30vw);
           height: 1px;
-          background: rgba(255,255,255,0.15);
-          border-radius: 1px;
+          background: rgba(255,255,255,0.12);
           overflow: hidden;
         }
         #pre-loader .pre-bar-fill {
           height: 100%;
-          background: #fff;
-          animation: pre-grow 3s ease-in-out infinite;
+          background: rgba(255,255,255,0.4);
+          animation: pre-grow 2.5s ease-in-out infinite;
         }
       </style>
       <div id="pre-loader">
-        <div class="pre-title">COLLECTIVA</div>
         <div class="pre-bar"><div class="pre-bar-fill"></div></div>
       </div>
     </div>
