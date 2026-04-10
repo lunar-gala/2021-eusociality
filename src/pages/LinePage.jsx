@@ -36,6 +36,9 @@ class LinePage extends React.Component {
       selectedLineIdx: currLineNumber - 1,
       showBackButton: true,
       curr_video: "hide",
+      // Cache-bust key forces a fresh iframe on each mount so mobile
+      // browsers re-trigger autoplay after navigating away and back.
+      videoKey: Date.now(),
       /**
        * Keep track of which photo we are showing for each line photo
        */
@@ -186,7 +189,8 @@ class LinePage extends React.Component {
             */}
             <iframe
               id="player"
-              src={`https://streamable.com/e/${line_info.video_ready.split('/').pop()}?autoplay=1&muted=1&loop=1&nocontrols=1`}
+              key={this.state.videoKey}
+              src={`https://streamable.com/e/${line_info.video_ready.split('/').pop()}?autoplay=1&muted=1&loop=1&nocontrols=1&t=${this.state.videoKey}`}
               frameBorder="0"
               allow="autoplay; fullscreen"
               allowFullScreen
