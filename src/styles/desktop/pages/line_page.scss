@@ -174,8 +174,10 @@ $PICTURE_VERTICAL_OFFSET_D: 30px;
     width: 100vw;
     margin-top: $TOP_MARGIN;
     text-decoration: none;
-    // Above the video so it's clickable (navigates home).
-    z-index: 1;
+    // Visually behind the video (z-index -1), but still clickable
+    // because #player-wrapper has pointer-events: none — clicks pass
+    // through the video layer to the title underneath.
+    z-index: -2;
 
     #top-title-wrapper {
       display: flex;
