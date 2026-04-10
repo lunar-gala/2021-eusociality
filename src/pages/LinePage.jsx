@@ -177,7 +177,7 @@ class LinePage extends React.Component {
               loop={true}
               controls={false}
               playIcon={<button></button>}
-              onStart={this.handlerVideoLoad}
+              onReady={this.handlerVideoLoad}
             />
           </div>
         </div>
