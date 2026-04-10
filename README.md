@@ -119,15 +119,15 @@ Each line page plays a background teaser video hosted on Streamable. The full sh
 
 | # | Line | Streamable | YouTube |
 |---|------|------------|---------|
-| 01 | Gossamer Idle | https://streamable.com/9z91c9 | |
-| 02 | Nexus | https://streamable.com/9furjq | |
-| 03 | Chrysophyta | https://streamable.com/vn4mnz | |
-| 04 | Mirror | https://streamable.com/zaclht | |
+| 01 | Gossamer Idle | https://streamable.com/9z91c9 | https://youtu.be/newKhCF9Vng |
+| 02 | Nexus | https://streamable.com/9furjq | https://youtu.be/Lx7waET0DCU |
+| 03 | Chrysophyta | https://streamable.com/vn4mnz | https://youtu.be/usNTOPi-bWU |
+| 04 | Mirror | https://streamable.com/zaclht | https://youtu.be/I5BKdrY8iak |
 | 05 | The Marianas Trench | https://streamable.com/zq5rhe | https://youtu.be/O_sJ9HdtwEI |
 | 06 | Obfuscate | https://streamable.com/79rktz | https://youtu.be/qKsM1SIwDrY |
-| 07 | Salvos | https://streamable.com/fjsba8 | |
+| 07 | Salvos | https://streamable.com/fjsba8 | https://youtu.be/o3gCLjYl3Ts |
 | 08 | Bloom | https://streamable.com/rxr4gk | https://youtu.be/44rF--_lJaA |
-| 09 | Renasci | https://streamable.com/hgs89l | |
+| 09 | Renasci | https://streamable.com/hgs89l | https://youtu.be/t62gTT5JWiE |
 | 10 | Bound | https://streamable.com/bnk0lt | https://youtu.be/_BnqnDTrrzA |
 | 11 | Invasion | https://streamable.com/6gtby0 | https://youtu.be/MBxJDWqypWw |
 | 12 | Somatic | https://streamable.com/ssifa5 | https://youtu.be/TpHLdJEn9Hk |
