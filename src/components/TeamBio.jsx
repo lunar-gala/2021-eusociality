@@ -10,7 +10,7 @@ export default function TeamBio(props) {
       <div
         className="headshot"
         style={{
-          backgroundImage: `url(${filter}), url(${imgSrc})`,
+          backgroundImage: `url("${filter}"), url("${imgSrc}")`,
         }}
         key={`${name}-headshot`}
       />

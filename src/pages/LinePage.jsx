@@ -100,7 +100,7 @@ class LinePage extends React.Component {
       >
         <div
           style={{
-            backgroundImage: `url(${background_image})`,
+            backgroundImage: `url("${background_image}")`,
           }}
           className="image primary"
           id={id}
