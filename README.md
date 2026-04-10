@@ -117,24 +117,24 @@ This is because `git` doesn't want to override your changes. What you want to do
 
 Each line page plays a background teaser video hosted on Streamable. The full show video is on YouTube. If these ever go down, re-upload and update the URLs in `src/data/line_data.js` (`video_ready` field) and `src/constants.js` (`SHOW_VIDEO_LINK`).
 
-| # | Line | URL |
-|---|------|-----|
-| 01 | Gossamer Idle | https://streamable.com/9z91c9 |
-| 02 | Nexus | https://streamable.com/9furjq |
-| 03 | Chrysophyta | https://streamable.com/vn4mnz |
-| 04 | Mirror | https://streamable.com/zaclht |
-| 05 | The Marianas Trench | https://streamable.com/zq5rhe |
-| 06 | Obfuscate | https://streamable.com/79rktz |
-| 07 | Salvos | https://streamable.com/fjsba8 |
-| 08 | Bloom | https://streamable.com/rxr4gk |
-| 09 | Renasci | https://streamable.com/hgs89l |
-| 10 | Bound | https://streamable.com/bnk0lt |
-| 11 | Invasion | https://streamable.com/6gtby0 |
-| 12 | Somatic | https://streamable.com/ssifa5 |
-| 13 | Relinquo | https://streamable.com/6oyxs4 |
-| 14 | Digital Warfare | https://streamable.com/4l78dp |
-| 15 | Icarus | https://streamable.com/op8qo6 |
-| 16 | Alumni | https://streamable.com/3z2z9z |
+| # | Line | Streamable | YouTube |
+|---|------|------------|---------|
+| 01 | Gossamer Idle | https://streamable.com/9z91c9 | |
+| 02 | Nexus | https://streamable.com/9furjq | |
+| 03 | Chrysophyta | https://streamable.com/vn4mnz | |
+| 04 | Mirror | https://streamable.com/zaclht | |
+| 05 | The Marianas Trench | https://streamable.com/zq5rhe | https://youtu.be/O_sJ9HdtwEI |
+| 06 | Obfuscate | https://streamable.com/79rktz | https://youtu.be/qKsM1SIwDrY |
+| 07 | Salvos | https://streamable.com/fjsba8 | |
+| 08 | Bloom | https://streamable.com/rxr4gk | https://youtu.be/44rF--_lJaA |
+| 09 | Renasci | https://streamable.com/hgs89l | |
+| 10 | Bound | https://streamable.com/bnk0lt | https://youtu.be/_BnqnDTrrzA |
+| 11 | Invasion | https://streamable.com/6gtby0 | https://youtu.be/MBxJDWqypWw |
+| 12 | Somatic | https://streamable.com/ssifa5 | https://youtu.be/TpHLdJEn9Hk |
+| 13 | Relinquo | https://streamable.com/6oyxs4 | https://youtu.be/Vy1AglwTjRY |
+| 14 | Digital Warfare | https://streamable.com/4l78dp | https://youtu.be/9z2i3-Vgna4 |
+| 15 | Icarus | https://streamable.com/op8qo6 | https://youtu.be/530XfjYNlKs |
+| 16 | Alumni | https://streamable.com/3z2z9z | https://youtu.be/RFtPwHP12L4 |
 
 **Show video:** https://www.youtube.com/watch?v=dEj6rc5ifhg
 
