@@ -1,32 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import filter from '../../assets/img/filter_blurred.jpg';
+import filter from "../../assets/img/filter_blurred.jpg";
 
-export default function TeamBio(props) {
-  const { imgSrc, name, title, parity } = props;
+export default function TeamBio({ imgSrc, name, title, parity }) {
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!imgSrc) return;
+    const img = new Image();
+    img.onload = () => setLoaded(true);
+    img.src = imgSrc;
+    // If already cached, onload fires synchronously in some browsers.
+    if (img.complete) setLoaded(true);
+  }, [imgSrc]);
 
   return (
-    <div className={`teamBio ${parity ? "right" : "left"}`} key={`${name}-teamBio`}>
+    <div className={`teamBio ${parity ? "right" : "left"}`}>
       <div
         className="headshot"
         style={{
           backgroundImage: `url("${filter}"), url("${imgSrc}")`,
+          opacity: loaded ? 1 : 0,
+          transition: "opacity 0.6s ease-in",
         }}
-        key={`${name}-headshot`}
       />
-      <p className="name" key={`${name}-name`}>{name}</p>
-      <p className="title" key={`${name}-title`}>{title}</p>
+      <p className="name">{name}</p>
+      <p className="title">{title}</p>
     </div>
   );
 }
 
 TeamBio.propTypes = {
-  /** @brief Background-image URL for the headshot. */
   imgSrc: PropTypes.string,
-  /** @brief Full name displayed under the headshot. */
   name: PropTypes.string.isRequired,
-  /** @brief Role title displayed under the name. */
   title: PropTypes.string.isRequired,
-  /** @brief Alternating layout flag used by the grid. */
   parity: PropTypes.bool.isRequired,
 };

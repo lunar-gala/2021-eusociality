@@ -43,6 +43,8 @@ class LinePage extends React.Component {
       b: 0,
       c: 0,
       d: 0,
+      /** Track which images have finished downloading for fade-in. */
+      loadedImages: {},
     };
 
     this.handlerSelectedLineIdx = this.handlerSelectedLineIdx.bind(this);
@@ -76,6 +78,26 @@ class LinePage extends React.Component {
     }
   }
 
+  /**
+   * Preloads a background-image URL and marks it loaded in state so the
+   * element can fade in smoothly instead of popping in mid-download.
+   */
+  preloadImage(url) {
+    if (!url || this.state.loadedImages[url]) return;
+    const img = new window.Image();
+    img.onload = () => {
+      this.setState((prev) => ({
+        loadedImages: { ...prev.loadedImages, [url]: true },
+      }));
+    };
+    img.src = url;
+    if (img.complete) {
+      this.setState((prev) => ({
+        loadedImages: { ...prev.loadedImages, [url]: true },
+      }));
+    }
+  }
+
   slidingImage(images, id) {
     let background_image;
 
@@ -84,6 +106,10 @@ class LinePage extends React.Component {
     } else {
       background_image = images[0];
     }
+
+    // Kick off preload if we haven't already.
+    this.preloadImage(background_image);
+    const isLoaded = !!this.state.loadedImages[background_image];
 
     return (
       <div
@@ -101,6 +127,8 @@ class LinePage extends React.Component {
         <div
           style={{
             backgroundImage: `url("${background_image}")`,
+            opacity: isLoaded ? 1 : 0,
+            transition: "opacity 0.5s ease-in",
           }}
           className="image primary"
           id={id}
